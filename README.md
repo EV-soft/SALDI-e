@@ -23,8 +23,11 @@ Målsætningen med denne udvikling er:
 <li>  Afskaffe Layout-styring med tabeller, som er forældet metode.
 <li>  Afskaffe afhængighed af: PDFTK som sjældent er installeret.
 <li>  Ændre: BODY onLoad=javascript:alert() til CSS/jquery: msg_Dialog
+<li>  Separere branche-funktionalitet, fra de almene regnskabs funktioner (samles i separate "add-on filer").
 </ol>
-Det er jo meget omfattende, og betyder i praksis, en omskrivning af næsten al kode.<br>
-Derfor er det velkomment, at nogle der kan forstå den nuværende kode, vil deltage i projektet.<br>
+Det er jo en meget omfattende målsætning, og betyder i praksis, en omskrivning af næsten al kode.<br>
+Derfor er det velkomment, at nogle der kan forstå den nuværende kode, (ftp://saldi.dk/saldi/seneste/) vil deltage i projektet.<br>
 <br>
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
+
+En live demo af SALDI-e (-euro) kan du se her: http://ev-soft.dk/saldi-e/_base/page_LayoutModuler.php?sprog=da
