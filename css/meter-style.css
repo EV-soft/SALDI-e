@@ -1,0 +1,48 @@
+/* meter-style.css */
+
+section {
+	margin: 0em auto 0;
+	width: 100%;
+	max-width: 320px;
+}
+
+input:hover, input:focus {
+	outline: 0;
+	-webkit-transition: all .5s linear;
+	transition: all .5s linear;
+	box-shadow: inset 0px 0px 6px #ccc;
+}
+
+meter {
+	margin: 0.4em auto 0.4em;
+	width: 100%;
+	height: .6em;
+    
+  /* Applicable only to Firefox */
+	background: none;
+	background-color: rgba(0,0,0,0.1);
+}
+
+meter::-webkit-meter-bar {
+	background: none;
+	background-color: rgba(0,0,0,0.1);
+}
+
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
+
+feedback {
+	padding: 5px;
+	margin: 6px;
+	display: block;
+	background: #EEEEEE;;
+	font-family: Arial, cursive;
+	width: 94%;
+}
