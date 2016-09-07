@@ -30,4 +30,4 @@ Derfor er det velkomment, at nogle der kan forstå den nuværende kode, (ftp://s
 <br>
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
-En live demo af SALDI-e (-euro) kan du se her: http://ev-soft.dk/saldi-e/_base/page_LayoutModuler.php?sprog=da
+En live demo af SALDI-€ kan du se her: http://ev-soft.dk/saldi-e/_base/page_LayoutModuler.php?sprog=da
