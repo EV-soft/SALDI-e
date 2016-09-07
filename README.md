@@ -1,4 +1,4 @@
-# SALDI-e
+# SALDI-€
 Moderniseret udgave af SALDI: <i>Responsive, CSS-baseret, PHP7-klar, blok-struktureret, øget sikkerhed og med sprogvalg.</i>
 
 Målsætningen med denne udvikling er:
