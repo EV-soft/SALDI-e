@@ -1,11 +1,13 @@
 																																																									<?php	# Struktur for SALDI-e kildefilers indledning: ?>
-<?php			 $DocFil= '../includes/out_base.php';	 	$DocVer='5.0.0';		 $DocRev='2016-08-00';		 	$modulnr=0;						# Informationer om aktuelt php-dokument
+<?php			 $DocFil1= '../includes/out_base.php';	 	$DocVer1='5.0.0';		 $DocRev1='2016-09-00';		 	$modulnr1=0;				# Informationer om aktuelt php-dokument
 // Kontruktion af grundmoduler.                                                                                         # Oplysning om filens hovedformål
 //						 ___   _   _    ___  _	                                                                                  #
 //						/ __| /_\ | |  |   \| |   ___                                                                             # Text2ASCII Art - "LOGO"
 //						\__ \/ _ \| |__| |) | |__/ -_)                                                                            #
 //						|___/_/ \_|____|___/|_|  \___|                                                                            #
 //                                                                                                                      #
+// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+//
 // LICENS:                                                                                                              # Licens note:       
 // Dette program er fri software. Du kan gendistribuere det og / eller modificere det under                             # (indføjes først når filen er "færdig" og anvendelig i SALDI-systemet.)
 // betingelserne i GNU General Public License (GPL), som er udgivet af The Free Software Foundation;                    #
@@ -20,7 +22,7 @@
 // Copyright (c) 2004-2016 DANOSOFT ApS                                                                                 #
 // ----------------------------------------------------------------------                                               #
                                                                                                                         #
-// Afhængig af: base_init.php og out_style.css.php                                                                          # Afhængigheds-noter:
+// Afhængig af: base_init.php og out_style.css.php                                                                      # Afhængigheds-noter:
 //                                                                                                                      #
 // htm_*.php  - Grundmoduler (htm_*) egnet for adaptive skærm-output.                                                   #
 // out_*.php  - Modulerne benyttes KUN i out_ruder.php, hvor system-paneler (ruder) opbygges.                           #
@@ -29,40 +31,46 @@
 //                                                                                                                      #
 // Disse filer er redigeret med tabulator sat til 2 tegn, og ses bedst med det.                                         # Praktiske noter:
 // VIGTIGT: Kilde-filer skal gemmes i UTF-8 format uden BOM!  (for ikke konstant at konververe fra ANSI til UTF-8)      #
+// class="lablInput" er et format, der kombinerer forskellige INPUT-felter med LABEL og Popup-TIP på lysblå baggrund.		#
 //                                                                                                                      #
 // 2016.08.00 ev - EV-soft : 1. udgave af filen                                                                         # Revisions-"Stamp" : med rev-note
                                                                                                                         #
 // ***** Grundlæggende Rutiner for layout og visning af data ***************************************                    # Header-beskrivelse
                                                                                                                         #
-include_once("base_init.php");	// Skal kaldes forinden.                                                                # Includes
+#	include("../_base/base_init.php");	// Skal kaldes forinden. (sker i htm_pageHead.php)                           			# Includes
+if ($GLOBALS["debug"]) debug_log($DocVer1,$DocRev1,$modulnr1,$DocFil1,'');
+
 if (!function_exists('msg_Dialog')) {
-	include('../includes/msg_lib.php');};                                              #
+	include('../includes/msg_lib.php');};  
                                                                                                                         # Filens kildetekster:
 if ($programSprog== NULL) {$programSprog= 'da';}
 #	$programSprog= 'en';	#	da:Dansk	en:English 	de:Deutsch 	fr:Français 	tr:Türkçe 	es:Español
 
+# BASISGRANUL:
+function Lbl_Tip($lbl,$tip) {	return '<div class="tooltip">'.tolk($lbl).'<span class="tooltiptext">'.tolk($tip).'</span></div>';;}
+
 # BASISMODUL for data-visning, label, titelTip og input:
-function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$rows='2',$width='',$step='',$supp='') {global $lysBlaa;	# Inputfelt kombineret med label
-	$labl= Tolk($labl);		$titl= Tolk($titl);		$LablTip= '<div class="tooltip">'.$labl.'<span class="tooltiptext">'.$titl.'</span></div>';	#	$LablTip= '<div class="tooltip">'.$labl.'<span class="tooltiptext">'.$titl.'</span></div>';
+function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$rows='2',$width='',$step='',$more='') {global $lysBlaa;	# Inputfelt kombineret med label
+	$LablTip= Lbl_Tip($labl,$titl); 
 	$eventInvalid= 'oninvalid="this.setCustomValidity(\''.tolk('@Angiv ').$labl.'! '.'\')"';
 	if (gettype($valu)== 'Float') $type= 'number' ;	
 	if ($revi==true) $aktiv= ''; else $aktiv='disabled';
-	if ($type== 'date')	
-		echo '<div class="lablInput">	<input type= "date" '.$supp.' id="'.$name.'" name="'.$name.'" style="line-height: 100%" value="'.$valu.'"	 '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+	if ($type== 'date')	//	Firefox: supporterer ikke picker!
+		echo '<div class="lablInput">	<input type= "date" '.$more.' id="'.$name.'" name="'.$name.'" style="line-height:100%; font-size:smaller;" value="'.$valu.'"	 placeholder="åååå-mm-dd"  '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 	if (($name=='posi') or ($name=='antal')) {$align= 'style="text-align:center";';} else $align= '';
 
 	if ($type== 'text')	
-		echo '<div class="lablInput">	<input type= "text" '.$supp.' width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
-//	echo '<div class="lablInput">	<input type= "text" width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%" value="'.$valu.'"	 '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div> <script> $(this).addClass("filled"); </script>';
+		echo '<div class="lablInput">	<input type= "text" '.$more.' width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%; padding:12px 2px 1px;" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+//	echo '<div class="lablInput">	<input type= "text" width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%;" value="'.$valu.'"	 '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div> <script> $(this).addClass("filled"); </script>';
 			
 	if ($type== 'tal1d')	#	Antal
-		echo '<div class="lablInput">	<input type= "text" '.$supp.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu,1,',','.').'";	'.$eventInvalid.' '.$aktiv.'  pattern="^\d*(\.|\,\d{2}$)?" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+		echo '<div class="lablInput">	<input type= "text" '.$more.' style="text-align:right; line-height:100%; padding:12px 2px 1px;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu,1,',','.').'";	'.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 	
 	if ($type== 'tal2d')	# Beløb og %
-		echo '<div class="lablInput">	<input type= "text" '.$supp.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu,2,',','.').'";	'.$eventInvalid.' '.$aktiv.'  pattern="^\d*(\.|\,\d{2}$)?" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+		echo '<div class="lablInput">	<input type= "text" '.$more.' style="text-align:right; line-height:100%; padding:12px 2px 1px;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu,2,',','.').'";	'.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 	
 	if ($type== 'number')		/* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
-		echo '<div class="lablInput">	<input type= "number" '.$supp.' lang="en" style="text-align: right; line-height:100%;" width="'.$width.'" step="'.$step.'" id="'.$name.'" name="'.$name.'" value:'.$valu.';"	'.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+		echo '<div class="lablInput">	<input type= "number" '.$more.' lang="en" style="text-align: right; line-height:100%; padding:12px 2px 1px;" width="'.$width.'" step="'.$step.'" id="'.$name.'" name="'.$name.'" value:'.$valu.';"	'.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 		
 	if ($type== 'radio')	// Skræddersyet !
 		echo '<form action=""><div>&nbsp; <small>'.
@@ -73,12 +81,12 @@ function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$r
 		'</small></div> </form>';
 
 	if ($type== 'password')	
-		echo '<div class="lablInput">	<input type= "password" '.$supp.' width="'.$width.'" id="'.$name.'" name="'.$name.'" style="line-height:100%" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+		echo '<div class="lablInput">	<input type= "password" '.$more.' width="'.$width.'" id="'.$name.'" name="'.$name.'" style="line-height:100%" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 	
 	if ($type== 'passwordpower')	{		# PW med styrke måling:
 		echo '<section><div class="lablInput">	'.
 //		'<fieldset class="js-password-fieldset">'.
-			'<input type= "password" '.$supp.' width="'.$width.'" id= "password-strength-code" name="'.$name.'" style="line-height:100%" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />'.
+			'<input type= "password" '.$more.' width="'.$width.'" id= "password-strength-code" name="'.$name.'" style="line-height:100%" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />'.
 //			'</fieldset>'.
 			'	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 		echo '<meter max="4" id="password-strength-meter" title="Password Styrke måler: 5 niveauer"></meter>'.
@@ -86,7 +94,7 @@ function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$r
 		}
 		
 	if ($type== 'mail')	
-		echo '<div class="lablInput">	<input type= "email" '.$supp.' id="'.$name.'" name="'.$name.'" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
+		echo '<div class="lablInput">	<input type= "email" '.$more.' id="'.$name.'" name="'.$name.'" value="'.$valu.'"	'.$eventInvalid.' '.$aktiv.' />	<label for="'.$name.'">'.$LablTip.'</label>	</div>';
 	
 	if ($type== 'hidden')	
 		echo '<input type= "hidden" id="'.$name.'" name="'.$name.'" value="'.$valu.'" />';
@@ -96,21 +104,19 @@ function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$r
 }
 
 # BASISMODUL for checkbox:
-function htm_CheckFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$supp='') {
-	$labl= Tolk($labl);		$titl= Tolk($titl);	$LablTip= '<div class="tooltip">'.$labl.'<span class="tooltiptext">'.$titl.'</span></div>';
+function htm_CheckFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$more='') {
 	if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv='disabled'; $colr='#_$888888';};
-	echo '&nbsp;<input type= "checkbox" name="'.$name.'" value="'.$valu.'"  '.$aktiv.' '.$supp.'> 	<label for="'.$name.'" style="color:'.$colr.';"  ><bluelabl>'.$LablTip.'</bluelabl> </label>	<br/>';
+	echo '&nbsp;<input type= "checkbox" name="'.$name.'" value="'.$valu.'"  '.$aktiv.' '.$more.'> 	<label for="'.$name.'" style="color:'.$colr.';"  ><bluelabl>'.Lbl_Tip($labl,$titl).'</bluelabl> </label>	<br/>';
 }
 
 # BASISMODUL for option:
 function htm_OptioFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$optlist=array(),$action='',$events='') {global $lysBlaa;
-	$labl= Tolk($labl);		$titl= Tolk($titl);	$LablTip= '<div class="tooltip">'.$labl.':<span class="tooltiptext">'.$titl.'</span></div>';
 	$eventInvalid= 'oninvalid="this.setCustomValidity(\''.tolk('@Vælg '.$labl.' på listen!').'\')"';
 	if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv='disabled'; $colr='#_$888888';};
 	#$array= array(['Fil i pdf-format','pdf','PDF-fil'],['Elektronisk forsendelse','email','email'],['Elektronisk fakturering','ioubl','OIOUBL'],['PBS faktura','pbs','PBS']);
 	echo '<div class="lablInput">';
 /*		echo ' <form action="'.$action.'">'; /* */		# required
-		echo '<label style="color:'.$lysBlaa.'; font-weight:400; font-size:smaller"><bluelabl>'.$LablTip.'</bluelabl>'.
+		echo '<label style="color:'.$lysBlaa.'; font-weight:400; font-size:smaller"><bluelabl>'.Lbl_Tip($labl,$titl).'</bluelabl>'.
 		' <select class="styled-select" name='.$name.'  '.$events.' '.$eventInvalid.'> <option value="'.$valu.'" >'.Tolk('@Vælg !');	# title="'.$titl.'" 		selected="'.$valu.'"
 			foreach ($optlist as $rec) {
 				echo '<option value="'.$rec[1].'" '.$rec[3];
@@ -119,7 +125,6 @@ function htm_OptioFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=
 				}
 		echo '</select>&nbsp;&nbsp;&nbsp;</label>';
 		//	$rec[3] kan indeholde hændelse
-	#	$LablTip= '<div class="tooltip">'.tolk('@Benyt').'<span class="tooltiptext">"@Aktiver valget"</span></div>';
 //		if ($action)
 //		echo '<input type= "submit" id="Button1" name="submit" value="'.tolk('@Benyt').'"  title= "@Aktiver valget" style="position:absolute;left:70%;top:5px;width:50px;height:22px;z-index:6;">';
 /*		echo '</form>'; /* */
@@ -143,8 +148,7 @@ HTML:
 
 # BASISMODUL for radio-group:
 function htm_RadioGrp($type='vert',$name='',$titl='',$labl='',$optlist=array(),$action='') {global $lysBlaa;
-	$LablTip= '<div class="tooltip">'.Tolk($labl).':<span class="tooltiptext">'.$titl.'</span></div>';
-	echo '<form action=""><div style="font-weight:400"><label style="color:'.$lysBlaa.'; font-size:small">'.$LablTip.'	</label>';
+	echo '<form action=""><div style="font-weight:400"><label style="color:'.$lysBlaa.'; font-size:small">'.Lbl_Tip($labl,$titl).'	</label>';
 		foreach ($optlist as $rec) {if ($type=='vert') echo '<br>';	
 			echo '<input type= "radio" name="'.$name.'" value="'.$valu=$rec[0].'">'.
 						$lbl= Tolk($rec[1]).' &nbsp; <font style="color:'.$lysBlaa.'">'.
@@ -166,84 +170,110 @@ function htm_RadioGrp($type='vert',$name='',$titl='',$labl='',$optlist=array(),$
  */
  
  
-# BASISMODUL for tabel:
-function htm_Tabel ($Titles=array(['@Kol0','7%'],['@Kol1','10%'],['@Kol2','30%']), $DataArr=array() ) {
+# BASISMODUL for tabel:											#	 [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust,	5:ColTip, 6:placeholder]
+function htm_Tabel($RowLabl='',$ColStyle=array(['@Kol0','7%','D','text','left',''],['@Kol1','10%','UD','date','left',''],['@Kol2','30%','UD','date','left','']), $TablData=array(), $FilterOn=true, $SortOn=false ) {
+$Saldiblue= '#003366';
 	$Capt1= '<b>'.tolk('@FILTER').'</b>: '.tolk('@Begræns visning i tabellen nedenfor, ved at angive søge-/visnings-kriterier i disse felter:');
-	$Capt2= '<b><u>'.tolk('@SLET').':</u></b> '.tolk('@Slet indhold i alle filter-felter');
-	# Tabel med Filter-input:
-	echo '<div class="fixed-table-container">  <div class="header-background"> </div>';
-	echo '<table cellspacing="0"><tc>&nbsp;&nbsp;&nbsp;'.$Capt1.'&nbsp;&nbsp;&nbsp;'.$Capt2.'</tc>';
-	echo '<thead> <tr>';
-	foreach ($Titles as $Titel) {
-		echo '<th style="width:'.$Titel[1].'"> <div class="extra-wrap"><div class="th-inner">'.tolk($Titel[0]).'</div></div> </th>';
+	$Capt2= '<b><u>'.tolk('@SLET').':</u></b> '.tolk('@Slet indhold i alle filter-felter (= Vis alt ! )');
+
+### inputTabel med Filter:
+	if ($FilterOn) {	### Vis filter-felter:
+		echo '<div class="fixed-table-container">  <div class="header-background"> </div>';
+		echo '<table cellspacing="0"><tc>&nbsp;&nbsp;&nbsp;'.$Capt1.'&nbsp;&nbsp;&nbsp;'.$Capt2.'</tc>';
+		echo '<thead> <tr>';
+			foreach ($ColStyle as $Specf) {	echo '<th style="width:'.$Specf[1].'"> <div class="extra-wrap"><div class="th-inner">'.tolk($Specf[0]).'</div></div> </th>';	}
+		echo '</tr> <tr class="row"> ';
+		for ($x= 0; $x < count($ColStyle); $x++) {echo '<td><input type= "text" name="Kol'.$x.'" title="'.tolk('@Søg efter...').'" placeholder="...'.tolk('@Søg').'..." style="width:100%" /></td> ';}
+		echo '</tr></tbody></thead> </table> </div>';
 	}
-	echo '</thead> </tr> <thead> <tbody> <tr class="row"> ';
-	for ($x= 0; $x < count($Titles); $x++) {echo '<td><input type= "text" name="Kol'.$x.'" title="'.tolk('@Søg efter...').'" placeholder="...'.tolk('@Søg').'..." size="7" /></td> ';}
-	echo '</tr></tbody></thead> </table> </div>';
-	# Tabel med data:
+### inputTabel med data:
 	echo '<div class="fixed-table-container"> <div class="header-background"> </div>';
 	echo '<div class="fixed-table-container-inner extrawrap">';
-	echo '<table cellspacing="0"> <thead> <tr>';
-	foreach ($Titles as $Titel) {
-		echo '<th style="width:'.$Titel[1].'"> <div class="extra-wrap"><div class="th-inner">'.tolk($Titel[0]).'</div></div> </th>';
+	echo '<table cellspacing="0"> ';
+		foreach ($ColStyle as $Specf) { echo '<col style="width:'.$Specf[1].'">'; }
+	echo '<thead> <tr>';
+### inputTabel med sortering?: 
+	$SeltRow= '<div1 class="tooltip">⇒<span class="tooltiptext" style="bottom: -12px; left: 65px">'.tolk('@Klik her for vælge denne ').tolk($RowLabl).'.</span></div1>';
+	$LablTip= '<div0 class="tooltip"><span class="tooltiptext">'.tolk('@Klik her for at ændre sortering af listen. - Kun dit sidste valg har virkning.').' </span></div0>';
+	$Up= '↑&nbsp;';	$Dw= '&nbsp;↓';	$UpDw= '↑↓';	
+	if (!$SortOn) {$sortUp=''; $sortDw=''; $sortUpDw='';}
+	else {$sortUp= 	 '<sorter onclick="this.style.color= \'red\'" '.$LablTip.$Up.	'</sorter>'; 		#	ToDo: relevant onclick javascript skal udvikles!
+				$sortDw= 	 '<sorter onclick="this.style.color= \'red\'" '.$LablTip.$Dw.	'</sorter> '; 
+				$sortUpDw= '<sorter onclick="this.style.color= \'red\'" '.$LablTip.$UpDw.'</sorter> ';} 
+### Sorterings-valg:
+	foreach ($ColStyle as $Specf) { echo '<th> <div class="extra-wrap"><div class="th-inner">';
+		if ($Specf[2]=='D') echo $sortDw; else if ($Specf[2]=='U') echo $sortUp; else echo $sortUpDw;
+		echo tolk($Specf[0]).'</div></div> </th>';
 	}
 	echo '</tr> </thead>  <tbody>';
-	foreach ($DataArr as $Row) {echo '<tr class="row">';
-			foreach ($Row as $Col) {echo '<td>'.$Col.'</td>';}
+### Vis Data:  
+	foreach ($TablData as $Row) {echo '<tr class="row">';	$x= 0;
+			foreach ($Row as $Col) {$x++;	
+			if ($x==1) echo '<td> '.$SeltRow.' '.$Col.' </td>';	
+			else echo '<td style="text-align:'.$xxx.'">'.$Col.'</td>';	}
 		echo '</tr>';	}
+### Opret ny record:
+		echo '<td><div1 class="tooltip" style="background:'.$Saldiblue.'; color:white;">'.tolk('Opret ny:').'<span class="tooltiptext" style="bottom: -12px; left: 65px">'.
+		tolk('@Klik her når du har udfyldt data-felterne på denne række.').'</span></div1></td>';	
+		$x= 0;	foreach ($ColStyle as $Specf) { $x++; if ($x==1) $index= '9999'; else
+			echo '<td style="padding:0;"> <div style="margin-right: 2px;"> <input type= "'.$Specf[3].'" name="Kol'.$x.'" placeholder="'.$Specf[6].'" style="text-align:left; width:98%;" /></div></td> ';
+		}
 	echo '</tbody>  </table> </div> </div>';
 }
 
-# BASISMODUL for tabelInput (kassekladde):
-function htm_TabelInp ($Capt1='Kladde notat:', $Capt2='', $Titles=array(['@Kol0','7%','Tip'],['@Kol1','10%','Tip'],['@Kol2','30%','Tip']), 
+# BASISMODUL for tabelInput (kassekladde):								#	[0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+function htm_TabelInp ($Capt1='Kladde notat:', $Capt2='', $ColStyle=array(['@Kol0','7%','Tip','','',''],['@Kol1','10%','Tip','','',''],['@Kol2','30%','Tip','','','']), 
 												$RowPref=array(['Capt'],['Label'],['Tip'],['width']), $RowSuff=array(array(['tdContent'],['Value']))) {
 global $lysBlaa;
 	echo '<div class="fixed-table-container">  <div class="header-background" style="color:'.$lysBlaa.';"> &nbsp;'.tolk($Capt1).' <input type= "text" name="note" title="" placeholder="'.tolk('@Angiv din tekst...').'" style="width:60%" />&nbsp;&nbsp;'.tolk($Capt2).' <input type= "text" name="note" title="" placeholder="'.tolk('@Afstem').'..." style="width:5em" /></div>';
 	echo '<table class="formnavi" cellspacing="0">';
-#	Kolonne-LABELS:		Title	Label	Tip
-	echo '<thead><tr> ';	
-	if ($RowPref) echo '<th style="width:'.$RowPref[0][3].'">'.$RowPref[0][0].'</th>';
-	foreach ($Titles as $Titel) {
-		$LablTip= '<div class="tooltip">'.tolk($Titel[0]).'<span class="tooltiptext">'.tolk($Titel[2]).'</span></div>';
-		echo '<th style="width:'.$Titel[1].'"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.$LablTip.'</div></div> </th>';
-	} 
+	
+###	Kolonne-LABELS:
+	echo '<thead><tbody><tr> ';	
+	if ($RowPref) {
+		echo '<th style="width:'.$RowPref[3][0].' align:center"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($RowPref[0][0],$RowPref[2][0]).'</div></div> </th>';
+	}
+	foreach ($ColStyle as $Specf) {
+		echo '<th style="width:'.$Specf[1].'"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Specf[0],$Specf[4]).'</div></div> </th>';
+	}
 	if ($RowSuff) {
-		$LablTip= '<div class="tooltip">'.tolk('@um.').'<span class="tooltiptext">'.tolk('@um. (uden moms) kan benyttes til at bogføre beløb uden moms på konti, selvom kontoen har en momssats tilknyttet.').'</span></div>';
-		echo '<th>'.$LablTip.'</th>';
+		echo '<th style="width:5%">'.Lbl_Tip('@um.','@um. (uden moms) kan benyttes til at bogføre beløb uden moms på konti, selvom kontoen har en momssats tilknyttet.').'</th>';
 		if ($Capt1!= '@Nota:') $LablTip= '<div class="tooltip">'.tolk('@Konto-saldo').'<span class="tooltiptext">'.
 							tolk('@Bevægelser og saldo for den konto, som er angivet ovenfor i Felt: Konto-kontrol. Er velegnet til afstemning med bank- og girokonti. ').'</span></div>';
 		else 		$LablTip= '<div class="tooltip">'.tolk('@Linie ialt').'<span class="tooltiptext">'.
 							tolk('@Beregnet felt med summen af de samlede beløb').'</span></div>';
-		echo '<th>'.$LablTip.'</th>';
+		echo '<th style="width:5%">'.$LablTip.'</th>';
 		}
-	echo '</thead> </tr> ';
-#	Kolonne-DATA-INPUT:		Content	
+	echo '</tbody></thead> </tr> ';
+	
+###	Kolonne-DATA-INPUT:		
 	echo'<thead> <tbody>  ';
-	for ($y= 0; $y < 10; $y++) { $x=0;	echo '<tr class="row">';
+	for ($y= 0; $y < 30; $y++) { $x=0;	echo '<tr class="row">';
 		if ($RowPref) echo '<td>'.$RowPref[0][0]. '</td>';
-		foreach ($Titles as $Titel) { if ($Titel[0]=='@Bilagstekst') {$algn='left';} else if (($Titel[0]=='@D/K') or ($Titel[0]=='@Dato')) {$algn='center';} else $algn='right'; 
-			echo '<td style="padding:0px;"> <div style="margin-right: 6px;"> <input type= "text" name="Kol'.$x++.'" placeholder="" style="text-align:'.$algn.'; width:100%" /></div></td> ';
+		foreach ($ColStyle as $Specf) {								#	[0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+		if ($Specf[3]=='date') $smaller= 'text-align="left" width="70%" font-size="x-small" '; else $smaller= '';
+//			echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$x++.'" '.$smaller.'placeholder="'.$Specf[5].'" style="text-align:'.$Specf[2].'; background-color: transparent;" /></div></td> ';
+		echo '<td> <div style="margin-right:0;"> <input type= "text" name="Kol'.$x++.'" '.$smaller.'placeholder="'.$Specf[5].'" style="text-align:'.$Specf[2].'; background-color: transparent; width:100%;" /></div></td> ';
 		}
-		#RowSuff:
-		echo '<td><input type= "checkbox" name="udenmoms" value="" ></td>';
-		echo '<td><div type= "text" name="saldo" value="" width="5%"></td>';
+	#RowSuff:
+		echo '<td style="text-align:center"><input type= "checkbox" name="udenmoms" value="" ></td>';
+	//	echo '<td><div type= "text" name="saldo" value="" width="8%">00.000,00</td>';
 		echo '</tr>';
 	}
 	echo '</tbody></thead> </table> </div>';
 }
 
 
-#	$labl ændres til:	$LablTip= '<div class="tooltip">'.$labl.'<span class="tooltiptext">'.$titl.'</span></div>';
 
 # LAYOUT moduler:
 function htm_Rude_Top($name='',$capt='',$parms='',$icon='',$klasse='panelWmax',$func='Udefineret') {	# SKAL efterfølges af htm_RudeBund !
 	global $debug;
-#	if ($klasse=='panelWmax') {echo '<div class="clearWrap"/>';};
+	if ($capt=='') $Ph= 'height:0;';
 	echo '<form name="'.$name.'" id="'.$name.'" action="'.$parms.'" method="post">';
 	if ($debug) {$fn= '&nbsp; <small><small><small>f:'.$func.'()</small></small></small>';} else $fn='';
-	echo '<div class="'.$klasse.'"> <div class="panelTitl" max-width:400>'.
+	echo '<div class="'.$klasse.'"> <div class="panelTitl" style="'.$Ph.'" max-width:400;>'.
 		'<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic> &nbsp;'.ucfirst(Tolk($capt)).$fn.'</div>';
-	if ($capt) echo '<hr class="style13"/>';
+	if ($capt!='') echo '<hr class="style13"/>';
 }	# Boxens </div> og </form> er placeret i htm_RudeBund som skal kaldes til slut!
 
 function htm_RudeBund($pmpt='',$revi=false,$title='') {	# SKAL følge efter htm_Rude_Top !
@@ -264,13 +294,19 @@ function htm_FrstFelt($wth,$bord=0) {echo '<TABLE BORDER="'.$bord.'" 	border-col
 function htm_NextFelt($wth) {echo '</TD>	<TD style="width:'.$wth.';"> ';}
 function htm_LastFelt() 		{echo '</TD>	</TR>	</TABLE>';}
 
-function knap ($faicon='',$title='',$link='') {
-		$LablTip= '<div0 class="tooltip"><span class="tooltiptext">'.$title.'</span></div0>';
-		echo '<span>&nbsp;&nbsp;&nbsp;';
+function iconKnap ($faicon='',$title='',$link='') {
+		$LablTip= '<div0 class="tooltip" style="margin: 1px 5px;"><span class="tooltiptext">'.$title.'</span></div0>';
+		echo '<span>';
 		echo '<a href="'.$link.'" '.$LablTip.' ';
 		echo '	<ic class="fa '.$faicon.'" style="font-size:32px; color:'.$color='#003366'.';"></ic>';
-		echo '</a></span>';	}
+		echo '</a></span>';	
+}
 		
+function textKnap ($label='',$title='',$link='') {
+		$LablTip= '<div0 class="tooltip" style="color:'.$color='#003366'.'; padding:5px;"><span class="tooltiptext">'.tolk($title).'</span></div0>';
+		echo '<span style="margin:6px; padding:6px; font-size:0.8em; color:'.$color='#003366'.';"><a href="'.$link.'" '.$LablTip.' '.tolk($label).'</a></span>';	
+}
+
 function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $goFind, $goNew, $goNext) { # Genvejsknapper på siders top.
 	$sideObjekt= tolk($sideObjekt);
 	echo '<PanlHead>';
@@ -278,37 +314,41 @@ function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $g
 	echo '<div style="text-align: center"><img src= "../images/SALDIe50x150.png" alt="Saldi Logo" style="width:150px;height:50px;"></div>';
 	echo '<p align="center"><b>'.tolk('@Navigation:').'<b></p>';
 	echo '<p align="center">';	#<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
-	if ($goPrev)	knap($faicon='fa-caret-square-o-left',	$title= tolk('@Vis forrige') 	.' '.$sideObjekt	,$link='x');
-	if ($goHome)	knap($faicon='fa-home',									$title= tolk('@Luk og gå til hoved-menu')				,$link='../test/page_LayoutModuler.php'.$goBack);
-	if ($goUp	 )	knap($faicon='fa-caret-square-o-up',		$title= tolk('@Luk og gå et niveau op')					,$link='x');
-	if ($goFind)	knap($faicon='fa-search',								$title= tolk('@Søg en anden')	.' '.$sideObjekt	,$link='x');
-	if ($goNew )	knap($faicon='fa-plus-square-o',				$title= tolk('@Opret ny')			.' '.$sideObjekt	,$link='x');
-	if ($goNext)	knap($faicon='fa-caret-square-o-right',	$title= tolk('@Vis næste')		.' '.$sideObjekt	,$link='x');
+	if ($goPrev)	iconKnap($faicon='fa-caret-square-o-left',	$title= tolk('@Vis forrige') 	.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+	if ($goHome)	iconKnap($faicon='fa-home',									$title= tolk('@Luk vinduet og gå til hoved-menu')				,$link='../_base/page_GitterMenu.php'.$goBack);
+	if ($goUp	 )	iconKnap($faicon='fa-caret-square-o-up',		$title= tolk('@Luk vinduet og gå et niveau op')					,$link= $goBack);
+	if ($goFind)	iconKnap($faicon='fa-search',								$title= tolk('@Søg en anden')	.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+	if ($goNew )	iconKnap($faicon='fa-plus-square-o',				$title= tolk('@Opret ny')			.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+	if ($goNext)	iconKnap($faicon='fa-caret-square-o-right',	$title= tolk('@Vis næste')		.' '.$sideObjekt	,$link='../_base/blindgyden.php');
 	echo '</p>';
-	if ($status) $status= '<x1 style="font-weight:300; font-size:smaller"> - Status:<bluelabl> '.$status.'</bluelabl></x1>';
-	echo '<p align="center">'.ucfirst($sideObjekt).$status.'</p> ';
+	if ($status) {
+		$status= '<x1 style="font-weight:300; font-size:smaller"> - Status:<bluelabl> '.$status.'</bluelabl></x1>';
+		echo '<p align="center">'.ucfirst($sideObjekt).$status.'</p> ';
+	}
 	htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
 	echo '</PanlHead>';
 }
 
-function Foot_Links ($arg='', $doPrint, $doErase=true, $doLookUp, $doAccept, $doExport, $doImport) { global $programSprog;
-	htm_Rude_Top($name='linkform',$capt=''.' ',$parms='',$icon='','panelWmax',__FUNCTION__);
-		echo '<p align="center"><b>'.tolk('@Handling:').'<b></p>';
+function Foot_Links ($maxi=false, $arg='', $doPrint, $doErase, $doLookUp, $doAccept, $doExport, $doImport,$OpslLabl='') { global $programSprog;
+	htm_Rude_Top($name='linkform',$capt='',$parms='',$icon='','panelWmax',__FUNCTION__);
+		if (($maxi) and ($OpslLabl>'')) echo '<p align="center"><b>'.tolk('@Handling:').'<b></p>';
 		echo '<p align="center">';	#<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
-		if ($doPrint)		knap($faicon='fa-print',								$title= tolk('@Udskriv') 	.' '.$sideObjekt	,$link='x');
-		if ($doErase)		knap($faicon='fa-minus-square-o',				$title= tolk('@Slet posten')										,$link='x'.$goBack);
-		if ($doLookUp)	knap($faicon='fa-search-plus',					$title= tolk('@Vareopslag')					,$link='x');
-		if ($doAccept)	knap($faicon='fa-check-square-o',				$title= tolk('@Godkend alt')	.' '.$sideObjekt	,$link='x');
-		if ($doExport)	knap($faicon='fa-upload',								$title= tolk('@CSV-Export')			.' '.$sideObjekt	,$link='x');
-		if ($doImport)	knap($faicon='fa-download',							$title= tolk('@Fil import')		.' '.$sideObjekt	,$link='x');
-		echo '</p>';			
-		htm_FrstFelt('10%',0);	
-		htm_NextFelt('30%');		echo '<div style="display:inline-block; margin-left:1em; align:center">'.SprogValg($programSprog).'</div> ';
-		htm_NextFelt('25%');		echo '<div style="display:inline-block; margin-left:1em; align:center">'.$arg.'</div> ';
-		htm_NextFelt('30%');		echo '<div style="display:inline-block; margin-left:1em>'.htm_accept('@Log ud','@Forlad SALDI').'</div> ';
-		htm_NextFelt('05%');		# Vare-opslag, Udskriv, Fakturer, Slet vist post, 
-		htm_LastFelt();
-		echo '<tc><divline style="margin-left:0.5em"><small><b>'.tolk('@TIP:').'</b> '.tolk('@Hold musen over').' <bluelabl>'.tolk('@Blå tekster med skyggeramme, ').'</bluelabl>'.tolk('@så får du hjælpetekster og tips.').'</small></divline></tc>';
+		if ($doPrint)		iconKnap($faicon='fa-print',								$title= tolk('@Udskriv') 	.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+		if ($doErase)		iconKnap($faicon='fa-minus-square-o',				$title= tolk('@Slet posten')								,$link='../_base/blindgyden.php'.$goBack);
+		if ($doLookUp)	iconKnap($faicon='fa-search-plus',					$title= tolk($OpslLabl)					,$link='../_base/blindgyden.php');
+		if ($doAccept)	iconKnap($faicon='fa-check-square-o',				$title= tolk('@Godkend alt')	.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+		if ($doExport)	iconKnap($faicon='fa-upload',								$title= tolk('@CSV-Export')		.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+		if ($doImport)	iconKnap($faicon='fa-download',							$title= tolk('@Fil import')		.' '.$sideObjekt	,$link='../_base/blindgyden.php');
+		echo '</p>';
+		if ($maxi) {		
+			htm_FrstFelt('10%',0);	
+			htm_NextFelt('30%');		echo '<div style="display:inline-block; margin-left:1em; align:center">'.SprogValg($programSprog).'</div> ';
+			htm_NextFelt('25%');		echo '<div style="display:inline-block; margin-left:1em; align:center">'.$arg.'</div> ';
+			htm_NextFelt('30%');		echo '<div style="display:inline-block; margin-left:1em>'.htm_accept('@Log ud','@Forlad SALDI').'</div> ';
+			htm_NextFelt('05%');		# Vare-opslag, Udskriv, Fakturer, Slet vist post, 
+			htm_LastFelt();
+			echo '<tc><divline style="margin-left:0.5em"><small><b>'.tolk('@TIP:').'</b> '.tolk('@Hold musen over').' <bluelabl>'.tolk('@Blå tekster med skyggeramme, ').'</bluelabl>'.tolk('@så får du hjælpetekster og tips.').'</small></divline></tc>';
+		}
 	htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
 }
 
@@ -317,7 +357,7 @@ function NextSpalte()  {echo '</column> <column id="spaltex">'; }
 function EndSpalter()  {echo '</column> </div> </PanlHead><div class="clearWrap">' ; }
 function panelStart () {echo '<PanlFoot>';}
 function panelSlut () {echo '</PanlFoot>';}
-function greenLine () { echo '<hr size="10" color="green">';}
+function skilleLin () { echo '<hr size="10" color="#AA4D00">';}
 
 function Win_Head ($title='') {		#	Ubenyttet! erstattet af ../_base/htm_pageHead.php
 	echo	'<!DOCTYPE html>';
@@ -327,7 +367,7 @@ function Win_Head ($title='') {		#	Ubenyttet! erstattet af ../_base/htm_pageHead
 	echo	'			<font face="Helvetica, Arial, sans-serif">';
 	echo	'			<title>'.$title.'</title>';
 	echo	'			<link rel="stylesheet" href= "../css/out_style.php">';
-	echo	'			<link rel="stylesheet" href= "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" emne="ICON-system">';
+	echo	'			<link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" emne="ICON-system">';
 	echo	'			<link rel="stylesheet" href= "../js/1.12.0/themes/base/jquery-ui.css" emne="jquery Dialog">';
 	echo	'			<link rel="stylesheet" href= "../css/meter-style.css">';						// PassWord-styrke måler
 	echo	'			<link rel="stylesheet" href= "../css/out_style.css" emne="out-style">';
