@@ -48,10 +48,10 @@ Kilde-koden er ustruktureret og det er meget vanskelig at få overblik. Endvider
 <ol>
 <li>Konsistent modul-opbygget Code-design, så vedligeholdelse/udvikling bliver nemmere.</li>
 <li>Fjernelse af inaktiv kode.</li>
-<li>Hastigheds forøgelse, med fokus på repeterende rutiner.</li>
-<li>Indførelse af Responsivt design, med mere moderne/fleksibelt layout.</li>
+<li>Hastigheds forøgelse, hvor der er flaskehalse.</li>
+<li>Indførelse af Responsivt design, med mere moderne/fleksibelt layout, brugbart på mobile enheder.</li>
 <li>CSS-design, så central ændring af udseende gøres mulig.</li>
-<li>Udnyttelse af HTML5 forbedringer.</li>
+<li>Udnyttelse af HTML5 forbedringer, f.eks. INPUT med validering.</li>
 <li>Al output til skærm baseres på et nyt bibliotek: out_base.php</li>
 <li>Sprogvalg for program-fladen, med halv-automatisk vedligeholdelse.</li>
 <li>Forøge sikkerheden omkring password. Opbevaring og styrkemåler.
@@ -60,23 +60,22 @@ Kilde-koden er ustruktureret og det er meget vanskelig at få overblik. Endvider
 <li>Sikre kompatibilitet med PHP7. udgår:{func:Split(), func:ereg_<em>(), ext:mysql_</em>}
 Mere her: [ <a href="https://php.net/manual/en/migration70.php">https://php.net/manual/en/migration70.php</a> ]
 Og her: [ <a href="https://www.digitalocean.com/company/blog/getting-ready-for-php-7/">https://www.digitalocean.com/company/blog/getting-ready-for-php-7/</a> ]</li>
-<li>Indførelse af WYSIWYG formular-design.</li>
-<li>Layout af source-code forbedres, så strukturen forstås hurtigere, 
-og sjuskefejl afsløres.</li>
+<li>Indførelse af WYSIWYG formular-design, som foregår i LibreOffice.</li>
+<li>Layout af source-code forbedres, så strukturen forstås hurtigere, og sjuskefejl afsløres.</li>
 <li>Bedre program-dokumentation ved øget anvendelse af kommentarer.</li>
 <li>Anvende prefix på funktionsnavne, så det afspejler kildefilen. (htm_<em>, out_</em>,...)</li>
 <li>Afskaffe alle:  PRINT "xxx" - Benyt/opret rutiner i out_*.php</li>
 <li>Afskaffe Layout-styring med tabeller, som er forældet metode.</li>
 <li>Afskaffe afhængighed af: PDFTK som sjældent er installeret.</li>
-<li>Ændre: BODY onLoad=javascript:alert() til CSS/jquery: msg_Dialog</li>
+<li>Ændre: BODY onLoad=javascript:alert() m.fl. til CSS/jquery: msg_Dialog</li>
 </ol>
 </li>
 </ol>
 
-<p>Ad. 1. samt 4.-8. : Sker med de nye biblioteker: out_*.php
-    HUSK: Benyt subRutiner (Block-struktur) i stedet for Copy-Paste! 
-      Det øger forståelsen og reducerer begrebsforvirring, 
-      med velvalgte navne og det letter vedligeholdelsen!</p>
+<p>Ad. 1. samt 4.-8. : Sker med de nye biblioteker: out_*.php</p>
+
+<p>HUSK: Benyt subRutiner (Block-struktur) i stedet for Copy-Paste! 
+      Det øger forståelsen og reducerer begrebsforvirring, med velvalgte navne og det letter vedligeholdelsen!</p>
         </section>
 
         <footer>
