@@ -5,6 +5,8 @@
 //						\__ \/ _ \| |__| |) | |__/ -_)
 //						|___/_/ \_|____|___/|_|  \___|
 //
+// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+//
 // 2016.08.00 ev - EV-soft
 //
 

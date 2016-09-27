@@ -1,5 +1,6 @@
-<?php $DocFil= '../css/out_style.css';	 	$DocVer='5.0.0';		 $DocRev='2016-08-00';		 	$modulnr=0;
-			header("Content-type: text/css"); 
+<?php $DocFil= '../css/out_style.css';	 	$DocVer='5.0.0';		 $DocRev='2016-09-00';		 	$modulnr=0;
+	header("Content-type: text/css"); 
+	if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
 ?>
 /*	
 //						 ___   _   _    ___  _	       
@@ -7,6 +8,8 @@
 //						\__ \/ _ \| |__| |) | |__/ -_)
 //						|___/_/ \_|____|___/|_|  \___|
 //						                               
+// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+//
 // Design af out_* elementers udseende.
 //
 // CSS-Layout af checkbox,textarea,input,label samt submit :
@@ -65,7 +68,8 @@ div#container
 }
 body {
   font-family: sans-serif;
-  margin: 5px 5px;
+ /*  margin: 5px 5px; */
+  margin: 0 auto 0 auto;
   width: 100%;
   max-width: 1200px;
 	font-size: 15px;
@@ -84,28 +88,28 @@ body {
 
 /* for 960px or greater */
 @media screen and (min-width: 960px) {
-#wrapper	{width: 1030px;	padding: 0px;			margin: 5px 5px;}
-#spalte1 	{width: 320px;	padding: 5px 5px;	float: left}
-/* #spalte2 	{width: 320px;	padding: 5px 5px;	float: left;	margin: 0px 5px 5px 5px;} */
-#spaltex 	{width: 320px;	padding: 5px 5px;	float: left;}
-PanlHead	{clear: both;		padding: 0 5px;}
-PanlFoot	{clear: both;		padding: 0 5px;}
+	#wrapper	{width: 1030px;	padding: 0px;			margin: 5px 5px;}
+	#spalte1 	{width: 320px;	padding: 5px 5px;	float: left}
+/*#spalte2 	{width: 320px;	padding: 5px 5px;	float: left;	margin: 0px 5px 5px 5px;} */
+	#spaltex 	{width: 320px;	padding: 5px 5px;	margin-left: 5px;	float: left;}
+	PanlHead	{clear: both;		padding: 0 5px;}
+	PanlFoot	{clear: both;		padding: 0 5px;}
 }
 
 /* for 960px or less */
 @media screen and (max-width: 960px) {
 	#wrapper	{width: 99%;	}
   #spalte1	{width: 41%;	padding: 5px 5px;		margin: 0px 0px 5px 5px;}
-/* 	#spalte2	{width: 41%;	padding: 5px 5px;		margin: 0px 0px 5px 5px;	float: right;	} */
-	#spaltex	{width: auto;	padding: 5px 5px;		clear: both;							float: none;	}
-	PanlHead, PanlFoot {clear: both;			padding: 1px 5px;	}
+/*#spalte2	{width: 41%;	padding: 5px 5px;		margin: 0px 0px 5px 5px;	float: right;	} */
+	#spaltex	{width: auto;	padding: 5px 5px;		margin-left: 5px;		clear: both;		float: none;	}
+	PanlHead, PanlFoot {padding: 1px 5px;		clear: both;}
 }
 	
 /* for 600px or less */
 @media screen and (max-width: 640px) {
-	#spalte1 {width: auto;	float: none;		margin-left: 5px;	}
-/* 	#spalte2 {width: auto;	float: none;		margin-left: 5px;	} */
-	#spaltex {width: auto;	float: none;	}
+	#spalte1 {width: auto;	float: none;	margin-left: 5px;	}
+/*#spalte2 {width: auto;	float: none;		margin-left: 5px;	} */
+	#spaltex {width: auto;	float: none;	margin-left: 5px;	}
 }
 
 /* for 480px or less */
@@ -120,8 +124,8 @@ PanlFoot	{clear: both;		padding: 0 5px;}
     border: 1px solid black;
     background: var(--PanelBgrd);
 		border-radius: 0.40em;
-		margin: 0.4em 0.2em;
-		padding: 0.3em 0.5%;
+		margin: 0.4em 0.2em 0.4em 0.2em;
+		padding: 0.3em 0.3em 0.3em 0.3em;
 }
 .panelWmax { width: 100%;		}
 .panelW960 { width: 960px;	}
@@ -164,7 +168,7 @@ form {
 
 .lablInput {
   height: 2.2em;
-  margin: 0.1em 0.2em;
+  margin: 0.05em 0.05em;
   position: relative;
   /* width: 100%; */
 }
@@ -178,9 +182,9 @@ form {
 	margin: 0.0em 0.0em;
 /* 	width: 200px; */
   cursor: text;
-  font-size: 0.95em;
-	font-weight: 550;
-  padding: 0.8em 1% 0.1em 1%;	/*	top	right	bottom	left	*/
+  font-size: 0.850em;
+	font-weight: 500;
+  padding: 0.8em 1% 0.05em 1%;	/*	top	right	bottom	left	*/
   position: absolute;
   transition: all 0.15s ease;
   width: 98%;
@@ -192,7 +196,7 @@ form {
   padding: 0.2em 1%;
   cursor: text;
   font-size: 0.95em;
-	font-weight: 550;
+	font-weight: 500;
   padding: 0.8em 1% 0.1em 1%;	/*	top	right	bottom	left	*/
   position: absolute;
   transition: all 0.15s ease;
@@ -283,6 +287,79 @@ input[type="submit"]:active {
   margin-top: 0.15em;
 }
 
+input[type="date"]::-webkit-inner-spin-button { -webkit-appearance: none;	}
+input[type="date"]::-webkit-calendar-picker-indicator { background: orange; width: 7px;}
+
+input[type="date"]::-webkit-inner-clear-button { -webkit-appearance: none;	}
+input::-ms-clear {
+    color: red;				/* This sets the cross color as red. */
+		/* display: none;    The cross can be hidden by setting the display attribute as "none" */
+}
+input[type="date"] {
+		display: -webkit-inline-flex;
+		font-family: monospace;
+		overflow: hidden;
+		/* padding: 0; */
+/*		padding: 0.8em 1% 0.05em 1%;	/*	top	right	bottom	left	*/
+  /* 	 	width: 100px; */
+		-webkit-padding-start: 1px;
+		/* 
+		-webkit-box-align-items: left;
+		-webkit-inner-spin-button: display: none; */
+}
+
+input::-webkit-datetime-edit {
+    -webkit-flex: 1;
+    -webkit-user-modify: read-only !important;
+    display: inline-block;
+    min-width: 0;
+    overflow: hidden;
+}
+
+input::-webkit-datetime-edit-fields-wrapper {
+    -webkit-user-modify: read-only !important;
+    display: inline-block;
+    padding: 1px 0;
+    white-space: pre;
+}
+
+input:not([type]), input[type="number" i], input[type="password" i], input[type="tel" i], input[type="url" i] {
+    padding: 1px 2px;
+}
+/* 
+Default:
+input[type="date"] {
+     -webkit-align-items: center;
+     display: -webkit-inline-flex;
+     font-family: monospace;
+     overflow: hidden;
+     padding: 0;
+     -webkit-padding-start: 1px;
+}
+
+input::-webkit-datetime-edit {
+    -webkit-flex: 1;
+    -webkit-user-modify: read-only !important;
+    display: inline-block;
+    min-width: 0;
+    overflow: hidden;
+}
+
+input::-webkit-datetime-edit-fields-wrapper {
+    -webkit-user-modify: read-only !important;
+    display: inline-block;
+    padding: 1px 0;
+    white-space: pre;
+}
+
+input[type="date"] {
+	text-align: left;
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
+	::-webkit-inner-spin-button { display: none; }
+	width: 90px;
+}
+ */
 .fa-paragraph:before { font-weight: bold;	content: '§'; }
 
 .styled-select select {
@@ -373,7 +450,7 @@ menuBg {
     text-align: center;
     border-radius: 6px;
 		border: 1px solid #555555;
-    padding: 5px 0;
+    padding: 5px 3px;
  /* Position the tooltip: */
     position: absolute;
 		bottom: 30px;    /* top: -70px; */
@@ -390,9 +467,10 @@ menuBg {
 .mytip:hover .tooltiptext,
 .tooltip:hover .tooltiptext
 {
-    box-shadow: 3px 3px 5px var(--grColrLgt);
-		transition-delay: 0.1s;
-		visibility: visible;
+  box-shadow: 3px 3px 5px var(--grColrLgt);
+	transition-delay: 0.1s;
+	opacity: 0.99;
+	visibility: visible;
 }
 
 x-a 			{ color: #900; text-decoration: none;}
@@ -437,7 +515,7 @@ x-a[title]:hover:after {
 .fixed-table-container-inner {
 	overflow-x: hidden;
 	overflow-y: auto;
-	max-height: 200px;
+	max-height: 150px;
 }
 
 .header-background {
@@ -469,7 +547,7 @@ table {
 } 
 .fixed-table-container td {
 	border-left: 1px dotted #343434;
-	padding-left: 6px;
+	padding-left: 2px;
 }
 tc {
 	font-weight:400;
@@ -535,12 +613,12 @@ hr.style10 { border-top: 1px dotted #8c8b8b;
 }
 hr.style11 {
 	height: 6px;
-	background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
+	background: url(https://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
     border: 0;
 }
 hr.style12 {
 	height: 6px;
-	background: url(http://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
+	background: url(https://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
     border: 0;
 }
 hr.style13 {
