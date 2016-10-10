@@ -30,8 +30,8 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
 
 //	msg_Dialog('warn','Fortsæt','$(this).dialog("close")',$Knap2_title='','','','','Saldi Dialog',$messg='');
 function msg_Dialog ($BgColr= 'error',	
-	$Knap1_title='Godkend',	$Knap1_function='$jQ112(this).dialog("close")',	/* Uløste Problemer: */
-	$Knap2_title='Fortryd',	$Knap2_function='$jQ112(this).dialog("close")',	/* Funktion virker ikke ved kald fra SALDI-vinduer */
+	$Knap1_title='Godkend',	$Knap1_function='$jQ112(this).dialog("close")',
+	$Knap2_title='Fortryd',	$Knap2_function='$jQ112(this).dialog("close")',
 	$Knap3_title='',				$Knap3_function='$jQ112(this).dialog("close")',      	
 	$title='Saldi Dialog',	$messg='') 
 {
@@ -65,7 +65,7 @@ switch (strtolower($BgColr)) {	# TEMA-farver og Titel-prefix:
 	echo '	.ui-dialog .ui-dialog-titlebar 		{ background: '.$headcolr.'}';
 	echo '	.ui-dialog .ui-dialog-buttonpane 	{ background: '.$headcolr.'}';
 # Hvis 3 knapper: Forøg bredden fra standard 300px til 360px:
-	echo '	.ui-dialog	{ width: 320px; margin: auto; position: fixed; top: 20%;	left: 0px; right: 0px; }';
+	echo '	.ui-dialog	{ width: 320px; margin: auto; position: fixed; top: 20%;	left: 0px; right: 0px; -moz-box-shadow: 0px 0px 8px #000000; -webkit-box-shadow: 0px 0px 8px #000000; box-shadow: 0px 0px 8px #000000;}';
 	echo '	ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close	{ title: "Luk";}';
 	echo '  .ui-button	{padding: 2px 8px};}';
 /* 	
