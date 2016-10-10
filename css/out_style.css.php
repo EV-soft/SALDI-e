@@ -408,7 +408,7 @@ menuBg {
   top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
+  color: 333;
   padding: .01em;  
   border: none;  
   border-radius: 4px;
