@@ -30,4 +30,8 @@ Derfor er det velkomment, at nogle der kan forstå den nuværende kode, (ftp://s
 <br>
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
+En introduktion finder du her: https://ev-soft.github.io/SALDI-e/
 En live demo af SALDI-€ kan du se her: http://ev-soft.dk/saldi-e/_base/page_LayoutModuler.php?sprog=da
+
+En praktisk note: Kildefiler er redigeret med tabulator sat til 2. Fremover bliver tabulator erstattet med SPACE.
+Ser du på en ældre fil indeholdende tabulator, ser du den bedst, ved at tilføje ?ts=2 i adresselinien. 
