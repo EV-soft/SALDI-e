@@ -4,6 +4,7 @@ var passwrd = document.getElementById('password-strength-code');
 var meter = document.getElementById('password-strength-meter');
 var text = document.getElementById('password-strength-text');
 
+if (passwrd) {
 passwrd.addEventListener('input', function()
 {   var val = passwrd.value;
     var result = zxcvbn(val);
@@ -12,5 +13,5 @@ passwrd.addEventListener('input', function()
         text.innerHTML = "PW-Styrke: " + "<strong>" + strength[result.score] + "</strong>" + 
 				"<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span"; 
     }  else { text.innerHTML = ""; }
-});
+})};
 //	https://css-tricks.com/password-strength-meter/
