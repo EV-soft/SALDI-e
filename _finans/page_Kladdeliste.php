@@ -9,8 +9,8 @@
 //
 // 2016.08.00 ev - EV-soft
 
-if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
-  $pageTitl='Kladdelister';
+if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
+  $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
 ## Forberedelse ikke taget i brug endnu:
@@ -39,8 +39,9 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   $tidspkt=date("U");
   #$query = db_select("select * from kladdeliste where bogfort = '-' $user order by $sort $rf",__FILE__ . " linje " . __LINE__);
 
-## Her starter demo:   
-  Rude_Kladderedigering(); 
+## Her starter output:   
+  Rude_Kladderedigering();
+  
 /* 
 Luk     Kladdeliste     Ny
           Vis alle

@@ -1,4 +1,4 @@
-<?php   $DocFil1= '../includes/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2016-11-00';     $modulnr1=0; 
+<?php   $DocFil1= '../includes/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2016-12-00';     $modulnr1=0; 
 ## FORMÅL: Kontruktion af grundmoduler, angående udskrivning til skærm. 
 //             ___   _   _    ___  _         
 //            / __| /_\ | |  |   \| |   ___  
@@ -46,7 +46,7 @@
 // ***** Grundlæggende Rutiner for layout og visning af data ***************************************
 
 ## include("../_base/base_init.php");  // Skal kaldes forinden. (sker i htm_pageHead.php)
-if ($GLOBALS["debug"]) debug_log($DocVer1,$DocRev1,$modulnr1,$DocFil1,'');
+//if ($GLOBALS["Ødebug"]) debug_log($DocVer1,$DocRev1,$modulnr1,$DocFil1,'');
 
 if (!function_exists('msg_Dialog')) {
   include('../includes/msg_lib.php');};  
@@ -58,39 +58,50 @@ if ($programSprog== NULL) {$programSprog= 'da';}
 function Lbl_Tip($lbl,$tip) { if ($lbl=='') return ''; else return '<div class="tooltip">'.ucfirst(tolk($lbl)).'<span class="tooltiptext">'.tolk($tip).'</span></div>';}
 
 # BASISMODUL for data-visning, label, titelTip og input:
-function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$rows='2',$width='',$step='',$more='') {global $lysBlaa;  # Inputfelt kombineret med label
+function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$rows='2',$width='',$step='',$more='') {global $ØblueColor;  # Inputfelt kombineret med label
   $LablTip= Lbl_Tip($labl,$titl); 
   $eventInvalid= 'oninvalid="this.setCustomValidity(\''.tolk('@Angiv ').$labl.'! '.'\')"';
   if (gettype($valu)== 'Float') $type= 'number' ; 
   if ($revi==true) $aktiv= ''; else $aktiv='disabled';
-  if ($type== 'date') //  Firefox: supporterer ikke picker!
-    echo '<div class="lablInput"> <input type= "date" '.$more.' id="'.$name.'" name="'.$name.'" style="line-height:100%; font-size:smaller;" value="'.$valu.'"   placeholder="åååå-mm-dd"  '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
-  if (($name=='posi') or ($name=='antal')) {$align= 'style="text-align:center";';} else $align= '';
+  if ($type== 'date') //  Firefox: supporterer ikke picker! men disse gør: Opera, Vivaldi, Chrome... (dec.2016)
+    echo '<div class="lablInput"> <input type= "date" '.$more.' id="'.$name.'" name="'.$name.'" style="line-height:100%; font-size:smaller; height:14px;" value="'.$valu.
+    '" placeholder="åååå-mm/dd"  '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
+  if (($name=='posi') or ($name=='antal')) {$align= 'style="text-align:center";';} else $align= ''; //  smaller fordi browser input, er voldsomt bredt!
 
   if ($type== 'text') 
-    echo '<div class="lablInput"> <input type= "text" '.$more.' width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%;" value="'.$valu.'" '.$eventInvalid.' '.$aktiv.' /> <label for="'.$name.'">'.$LablTip.'</label> </div>';
-//  echo '<div class="lablInput"> <input type= "text" width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%;" value="'.$valu.'"  '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div> <script> $(this).addClass("filled"); </script>';
+    echo '<div class="lablInput"> <input type= "text" '.$more.' width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%;" value="'.$valu.
+    '" '.$eventInvalid.' '.$aktiv.' /> <label for="'.$name.'">'.$LablTip.'</label> </div>';
+//  echo '<div class="lablInput"> <input type= "text" width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="line-height:100%;" value="'.$valu.
+//  '"  '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div> <script> $(this).addClass("filled"); </script>';
       
   if ($type== 'tal1d')  # Antal
-    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu*1,1,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.
+    '" value="'.number_format($valu*1,1,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.
+    '">'.$LablTip.'</label> </div>';
   
   if ($type== 'tal2d')  # Beløb og %
-    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu*1,2,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:right; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.
+    '" value="'.number_format($valu*1,2,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.
+    '">'.$LablTip.'</label> </div>';
   
   if ($type== 'tal2dc')  # Beløb og % - centerplaceret
-    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:center; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format($valu*1,2,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "text" '.$more.' style="text-align:center; line-height:100%;" width="'.$width.'" id="'.$name.'" name="'.$name.
+    '" value="'.number_format($valu*1,2,',','.').'";  '.$eventInvalid.' '.$aktiv.'  pattern="^\d*\.?((25)|(50)|(5)|(75)|(0)|(00))?$" /> <label for="'.$name.
+    '">'.$LablTip.'</label> </div>';
   
   if ($type== 'number')   /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
-    echo '<div class="lablInput"> <input type= "number" '.$more.' lang="en" style="text-align: right; line-height:100%;" width="'.$width.'" step="'.$step.'" id="'.$name.'" name="'.$name.'" value="'.$valu.'"; '.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "number" '.$more.' lang="en" style="text-align: right; line-height:100%;" width="'.$width.'" step="'.$step.'" id="'.$name.
+    '" name="'.$name.'" value="'.$valu.'"; '.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
     
   if ($type== 'numberL')   /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
-    echo '<div class="lablInput"> <input type= "number" '.$more.' lang="en" style="text-align: left; line-height:100%;" width="'.$width.'" step="'.$step.'" id="'.$name.'" name="'.$name.'" value="'.$valu.'"; '.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "number" '.$more.' lang="en" style="text-align: left; line-height:100%;" width="'.$width.'" step="'.$step.'" id="'.$name.
+    '" name="'.$name.'" value="'.$valu.'"; '.$eventInvalid.' '.$aktiv.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
     
   if ($type== 'radio')  // Skræddersyet !
     echo '<form action=""><div>&nbsp; <small>'.
-    '<bluelabl>'.$LablTip.':</bluelabl >  '.
+    '<colrlabl>'.$LablTip.':</colrlabl >  '.
     '<input type= "radio" name="'.$name.'" value="privat"> '.   tolk('@Privat').
-    ' &nbsp; <font style="color:'.$lysBlaa.'">'.                tolk('@eller').':</font>'.
+    ' &nbsp; <font style="color:'.$ØblueColor.'">'.                tolk('@eller').':</font>'.
     '<input type= "radio" name="'.$name.'" value="erhverv"> '.  tolk('@Erhverv').
     '</small></div> </form>';
 
@@ -117,25 +128,30 @@ function htm_CombFelt($type='',$name='',$valu='',$titl='',$labl='',$revi=true,$r
     echo '<div class="lablInput"> <textarea rows="'.$rows.'" id="'.$name.'" style="line-height:100%" '.$eventInvalid.' '.$aktiv.$more.' >'.$valu.'</textarea>   <label for="'.$name.'">'.$LablTip.'</label> </div>  <br/>';
 }
 
+function htm_CombList($valu='',$titl='',$labl='',$liste) {global $ØblueColor;
+  echo '<label style="color:'.$ØblueColor.'; font-weight:400; font-size:smaller"><colrlabl>'.Lbl_Tip($labl,$titl).'</colrlabl>'.  htm_SelectStr($valu,$liste); 
+}
+
+
 # BASISMODUL for checkbox:
 function htm_CheckFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$more='') {
   if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv='disabled'; $colr='#_$888888';};
-  echo '&nbsp;<input type= "checkbox" name="'.$name.'" value="'.$valu.'"  '.$aktiv.' '.$more.'>   <label for="'.$name.'" style="color:'.$colr.';"  ><bluelabl>'.Lbl_Tip($labl,$titl).'</bluelabl> </label>  <br/>';
+  echo '&nbsp;<input type= "checkbox" name="'.$name.'" value="'.$valu.'"  '.$aktiv.' '.$more.'>   <label for="'.$name.'" style="color:'.$colr.';"  ><colrlabl>'.Lbl_Tip($labl,$titl).'</colrlabl> </label>  <br/>';
 }
 
-# BASISMODUL for option:
-function htm_OptioFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$optlist=array(),$action='',$events='') {global $lysBlaa;
+# BASISMODUL for <select> Element (option):
+function htm_OptioFlt($type='NotUsed',$name='',$valu='',$titl='',$labl='',$revi=true,$optlist=array(),$action='',$events='') {global $ØblueColor;
   $eventInvalid= 'oninvalid="this.setCustomValidity(\''.tolk('@Vælg '.$labl.' på listen!').'\')"';
   if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv='disabled'; $colr='#_$888888';};
   #$array= array(['Fil i pdf-format','pdf','PDF-fil'],['Elektronisk forsendelse','email','email'],['Elektronisk fakturering','ioubl','OIOUBL'],['PBS faktura','pbs','PBS']);
   echo '<div class="lablInput">';
 /*    echo ' <form action="'.$action.'">'; /* */    # required
-    echo '<label style="color:'.$lysBlaa.'; font-weight:400; font-size:smaller"><bluelabl>'.Lbl_Tip($labl,$titl).'</bluelabl>'.
-    ' <select class="styled-select" name='.$name.'  '.$events.' '.$eventInvalid.'> <option value="'.$valu.'" >'.Tolk('@Vælg !');  # title="'.$titl.'"     selected="'.$valu.'"
-      foreach ($optlist as $rec) {
+    echo '<label style="color:'.$ØblueColor.'; font-weight:400; font-size:smaller"><colrlabl>'.Lbl_Tip($labl,$titl).'</colrlabl>'.
+    ' <select class="styled-select" name='.$name.'  '.$events.' '.$eventInvalid.'> <option value="'.$valu.'" >'.Tolk('@Vælg!');  # title="'.$titl.'"     selected="'.$valu.'"
+      foreach ($optlist as $rec) {    # $optlist= [0:Tip, 1:value, 2:Label, 3:Action]
         echo '<option value="'.$rec[1].'" title="'.tolk($rec[0]).'"'.$rec[3];
         if ($rec[1]==$valu) echo ' selected';
-        echo '>'.$lbl=Tolk($rec[2]).'</option> '; # "'.$tip=$rec[0].'"
+        echo '>'.$lbl=Tolk($rec[2]).'</option> ';
         }
     echo '</select>&nbsp;&nbsp;&nbsp;</label>';
     //  $rec[3] kan indeholde hændelse
@@ -161,11 +177,11 @@ HTML:
 */
 
 # BASISMODUL for radio-group:
-function htm_RadioGrp($type='vert',$name='',$titl='',$labl='',$optlist=array(),$action='') {global $lysBlaa;
-  echo '<form action=""><div style="font-weight:400"><label style="color:'.$lysBlaa.'; font-size:small">'.Lbl_Tip($labl,$titl).'  </label>';
+function htm_RadioGrp($type='vert',$name='',$titl='',$labl='',$optlist=array(),$action='') {global $ØblueColor;
+  echo '<form action=""><div style="font-weight:400"><label style="color:'.$ØblueColor.'; font-size:small">'.Lbl_Tip($labl,$titl).'  </label>';
     foreach ($optlist as $rec) {if ($type=='vert') echo '<br>'; 
       echo '<input type= "radio" name="'.$name.'" value="'.$valu=$rec[0].'">'.
-            $lbl= Tolk($rec[1]).' &nbsp; <font style="color:'.$lysBlaa.'">'.
+            $lbl= Tolk($rec[1]).' &nbsp; <font style="color:'.$ØblueColor.'">'.
             $suff=Tolk($rec[2]).'</font>&nbsp;';        # " title="'.$tip=$rec[3].'"
   } 
   echo '</small></div> </form>';
@@ -183,44 +199,64 @@ function htm_RadioGrp($type='vert',$name='',$titl='',$labl='',$optlist=array(),$
 </div>
  */
  
+function iconKnap ($faicon='',$title='',$link='') { global $ØButtnBgrd;
+  $LablTip= '<div0 class="tooltip" style="margin: 1px 5px;"><span class="tooltiptext">'.$title.'</span></div0>';
+  echo '<span>';
+  echo '<a href="'.$link.'" '.$LablTip.' ';
+  echo '  <ic class="fa '.$faicon.'" style="font-size:32px; color:'.$color=$ØButtnBgrd.';"></ic>';
+  echo '</a></span>'; 
+}
+    
+function textKnap ($label='',$title='',$link='') { global $ØButtnBgrd, $ØSaldiblue;
+  if ($link=='../_base/page_Blindgyden.php') {$clr= '#AAAAAA'; $note=' <br> (En blindgyde endnu!)';} else {$clr= $ØSaldiblue; $note='';};
+  $LablTip= '<div0 class="tooltip" style="color:'.$color= $clr.'; padding:5px; border:1px solid gray; box-shadow: 2px 2px 4px #888888;"><span class="tooltiptext">'.tolk($title).$note.'</span></div0>';
+  echo '<span style="margin:6px; padding:6px; font-size:0.85em; color:'.$color=$ØSaldiblue.';"><a href="'.$link.'" '.$LablTip.' '.ucfirst(tolk($label)).'</a></span>';  
+}
+
  
 # BASISMODUL for tabel: 
-# Visning af data - ingen redigering, udover oprettelse af ny record.
-# "RulleTabel" mellem fastlåst TabelTop og Bund, hvis tabellen er højere end $maxheight
+# Visning af data - ingen redigering, udover oprettelse af ny record, og angivelse af filter.
+# "RulleTabel" mellem fastlåst TabelTop og Bund, hvis tabellen er højere end $ViewHeight
 # Mulighed for: Filtrering / Sortering / Recordvalg / NyRecord
-# NyRecord, når ($RowLabl!='@vælge denne post')
+# NyRecord, når $CreateRec=true
 function htm_Tabel($RowLabl='',      # htm_TabelInp:  array([0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder])
-                   $ColStyle=array(['@Kol0','7%','D','text','left',''],['@Kol1','10%','UD','date','left',''],['@Kol2','30%','UD','date','left','']), 
-                   $TablData=array(), 
-                   $FilterOn=true, 
-                   $SorterOn=false, 
-                   $maxheight='200px')  
-{ $Saldiblue= '#003366';
-  $Capt1= '<b>'.tolk('@FILTER').'</b>: '.tolk('@Begræns visning i tabellen nedenfor, ved at angive søge-/visnings-kriterier i disse felter:');
-  $Capt2= '<b><u>'.tolk('@SLET').':</u></b> '.tolk('@Slet indhold i alle filter-felter (= Vis alt ! )');
-//  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
+                   $ColStyle=array(['@Kol0','7%','D','text','left','Tip',''],['...']), # Default! Rec-eksempel erstattes med aktuel parameter!
+                   $TablData=array(),
+                   $FilterOn=true,      # Default!
+                   $SorterOn=false,     # Default!
+                   $CreateRec=true,     # Default!
+                   $ViewHeight='200px') # Default! erstattes af eventuel parameter.
+{ global $ØButtnBgrd;
+  $Capt1= '<b> '.tolk('@FILTER').'</b>: '.tolk('@Begræns visning i DATA-tabellen nedenfor, ved at angive søge-kriterier i felterne herunder:');
+  $Capt2= '<b> '.tolk('@DATA:').'</b>';
+//  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
 
 ### outputTabel med Filter:
   if ($FilterOn) {  ### Vis filter-felter:
-    echo '<div class="fixed-table-container" style= "max-height: '.$maxheight.';">';  //  <div class="header-background"> </div>';
-    echo '<table cellspacing="0"><tc>&nbsp;&nbsp;&nbsp;'.$Capt1.'&nbsp;&nbsp;&nbsp;'.$Capt2.'</tc>';
+    echo ' <tc>'.$Capt1.'</tc>';
+    echo textKnap($label='@Vis det valgte', $title='@Vis det der matcher filteret', $link='../_base/page_Blindgyden.php').
+         textKnap($label='@Vis alt',        $title='@Slet filter og vis alt',       $link='../_base/page_Blindgyden.php').  '<br>';
+    echo '<div class="fixed-table-container" style= "max-height: '.$ViewHeight.';">';  //  <div class="header-background"> </div>';
+    echo '<table cellspacing="0">';
     echo '<thead> <tr>';
       foreach ($ColStyle as $Specf) { echo '<th style="width:'.$Specf[1].';" title="'.tolk($Specf[5]).'"> <div class="extra-wrap"><div class="th-inner">'.ucfirst(tolk($Specf[0])).'</div></div> </th>';  }
-    echo '</tr> <tr class="row"> ';
-    for ($x= 0; $x < count($ColStyle); $x++) {echo '<td><input type= "text" name="Kol'.$x.'" title="'.tolk('@Søg efter...').'" placeholder="...'.tolk('@Søg').'..." style="width:100%; background:#CCEDFE;" /></td> ';}
-    echo '</tr></tbody></thead> </table> </div>';
+    echo '</tr> <tr class="row">';
+      for ($x= 0; $x < count($ColStyle); $x++) 
+        {echo '<td><input type= "text" name="Kol'.$x.'" title="'.tolk('@Søg efter...').'" placeholder="...'.tolk('@Søg').'..." style="width:97%; padding-left:4px; background:#CCEDFE;" /></td> ';}
+     echo '</tr></thead> </table> </div>';
   }
 
 ### outputTabel med data:
-  echo '<div class="fixed-table-container" style= "max-height: '.$maxheight.';">';  //   <div class="header-background"> </div>';
-  echo '<div class="fixed-table-container-inner extrawrap" style= "max-height: '.$maxheight.';">';
+  if ($FilterOn) echo ' <tc>'.$Capt2.'</tc>';
+  echo '<div class="fixed-table-container" style= "max-height: '.$ViewHeight.';">';  //   <div class="header-background"> </div>';
+  echo '<div class="fixed-table-container-inner extrawrap" style= "max-height: '.$ViewHeight.';">';
   echo '<table cellspacing="0"> ';
   foreach ($ColStyle as $Specf) { echo '<col style="width:'.$Specf[1].'">'; }
 
   ### outputTabel Header med sortering?: 
   echo '<thead> <tr>';
-  $SeltRow= '<div1 class="tooltip">⇒<span class="tooltiptext" style="bottom: -12px; left: 65px">'.tolk('@Klik her for at ').tolk($RowLabl).'.</span></div1>';
-  $LablTip= '<div0 class="tooltip"><span class="tooltiptext">'.tolk('@Klik her for at ændre sortering af listen. - Kun dit sidste valg har virkning.').' </span></div0>';
+  $SeltRow= '<div1 class="tooltip">⇒<span class="tooltiptext" style="bottom: -12px; left: 65px">'.tolk('@DETALJER: Klik her for at ').tolk($RowLabl).'.</span></div1>';
+  $LablTip= '<div0 class="tooltip" style="padding:0;"><span class="tooltiptext">'.tolk('@Klik her for at ændre sortering af listen. - Kun dit sidste valg har virkning.').' </span></div0>';
   $Up= '↑&nbsp;'; $Dw= '&nbsp;↓'; $UpDw= '↑↓';  
   if (!$SorterOn) {$sortUp=''; $sortDw=''; $sortUpDw='';}
   else {$sortUp=   '<sorter onclick="this.style.color= \'red\'" '.$LablTip.$Up.  '</sorter>';    # ToDo: relevant onclick javascript skal udvikles!
@@ -246,14 +282,15 @@ function htm_Tabel($RowLabl='',      # htm_TabelInp:  array([0:ColLabl, 1:ColWid
     echo $genvej.'</tr>'; }
     
 ### Opret ny record:
-    if ($RowLabl!='@vælge denne post') { // Ikke Regnskab
+    if ($CreateRec) {
     $x= 0;  foreach ($ColStyle as $Specf) { $x++; 
       echo '<td style="padding:0; vertical-align: bottom;">';
       if ($x==1) { $index= '9998+1'; 
-      echo '<div1 class="tooltip" style="background:'.$Saldiblue.'; color:white;">'.tolk('@Opret ny:').'<span class="tooltiptext" style="bottom: -12px; left: 65px">'.
+      echo '<div1 class="tooltip" style="background:'.$ØButtnBgrd.'; color:white;">'.tolk('@Opret ny:').'<span class="tooltiptext" style="bottom: -12px; left: 65px">'.
         tolk('@Klik her, når du har udfyldt data-felterne på rækken herunder.').'</span></div1>'; 
       }  # else
-      echo '<div style="margin-right: 2px;"> <input type= "'.$Specf[3].'" name="Kol'.$x.'" title="'.tolk($Specf[5]).'" placeholder="'.tolk($Specf[6]).'" style="text-align:left; width:98%;" /></div></td> ';
+      echo '<div style="margin-right: 2px;"> <input type= "'.$Specf[3].'" name="Kol'.$x.'" title="'.tolk($Specf[5]).
+            '" placeholder="'.tolk($Specf[6]).'" style="text-align:left; width:98%; padding-left:4px; background-color:#fffa90;" /></div></td> ';
     }}
   echo '</tbody>  </table> </div> </div>';
 }
@@ -294,6 +331,18 @@ function MakeOptList($valu,$optliste=[]) { if ($valu='') $valu= tolk('?...');
       echo '>'.$lbl=$rec[2].'</option> ';
     }
   echo '</select></div></td> ';
+}}
+
+if (!function_exists('htmStrOptList')) {  # Optimering: Disse lister bør kunne oprettes 1 gang, kun ved opstart!
+function htm_SelectStr($valu,$optliste=[]) {
+  $Result= '<div style="margin-right:0; "> <select class="styled-select" name="liste"> <option value="'.$valu.'" title="'.tolk('@Vælg').'" >';
+  foreach ($optliste as $rec) {
+    $Result.= '<option value="'.$rec[1].'" title="'.$rec[0].'"'.$rec[3];
+      if ($rec[1]==$valu) $Result.= ' selected';
+    $Result.= '>'.$lbl=$rec[2].'</option> ';
+  }
+  $Result.= '</select></div> ';
+  return($Result);
 }}
 
 function PauseKlovn($mess='Indlæser. Hæng på!') {
@@ -338,71 +387,54 @@ table                         { background-color: white;        width: 100%;    
     </div>
  */
  
-# BASISMODUL for tabelInput (Redigerbare data i tabel-celler):
-# "RulleTabel" mellem fastlåst TabelTop og Bund, hvis tabellen er højere end $maxheight
-# Mulighed for: "TopLinie" med felter (Labl & Input) over tabellen. Ekstra felter foran og efter tabelrækker.
-function htm_TabelInpxx ( # $HeadLine= array([0:Labl, 1:Width, 2:Just, 3:InpType, 4:Tip, 5:placeholder])
-                        $HeadLine= array(['@Kladde notat:', '60%','left','text', '@Her kan skrives en bemærkning til kladden','@Angiv din tekst...']),
-                        $RowPref=array(['Capt','Label','Tip','width']), 
-                        $ColStyle=array(['@Kol0','7%','','','Tip',''],['@Kol1','10%','','','Tip','']), # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-                        $RowSuff=array(['tdContent','Value']),
-                        &$DATA=array(),
-                        $maxheight='400px',
-                        $KaldFra=''
-                        ) 
-{ global $lysBlaa;
-
-if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
-### "InfoLinie" over kolonne-labels:
-  if ($HeadLine[0][0]>'') 
-  {echo '<div class="header-background" style="color:'.$lysBlaa.';"> &nbsp;';
-      foreach ($HeadLine  as $Capt) {
-        if ($Capt[3]='show') $vis= ';" value="'.tolk($Capt[5]).'" disabled '; 
-                        else $vis= ';" placeholder="'.tolk($Capt[5]).'" ';
-        echo tolk($Capt[0]).' <input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).'" style="width:'.$Capt[1].$vis.' />&nbsp;&nbsp;';
-      }
-  echo '</div>';}
-  
-  echo '<div class="fixed-table-container-inner" style= "max-height: '.$maxheight.';">';  //  Se mere her: https://codepen.io/chiranjeeb/pen/LGsiv
-  echo '<table class="formnavi" cellspacing="0">';
-  
-### Kolonne-LABELS:   Problemer: Labels skal være statiske, ikke rulle med op i tabel-ruden! (som de ikke gør i htm_Tabel() ) Lbl_Tip/tooltiptext virker ikke.
-  echo '<tr> '; 
+# Special-udg af: htm_TabelInp
+function htm_TabelInp_Budget ( # $HeadLine= array([0:Labl, 1:Width, 2:Just, 3:InpType, 4:Tip, 5:placeholder])
+      $HeadLine= array(['@Kladde notat:', '60%','left','text', '@Her kan skrives en bemærkning til kladden','@Angiv din tekst...']),
+      $RowHead=  array(),      # Ubenyttet i denne funktion!
+      $ColStyle= array(['@Kol0','7%','','','Tip',''],['@Kol1','10%','','','Tip','']), # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+      $RowTail=  array(),      # Ubenyttet i denne funktion!
+      &$DATA=    array(),
+      $ViewHeight= '400px',
+      $KaldFra= ''
+      ) 
+{ global $ØblueColor;
+if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
+### "InfoFelter" over kolonne-labels:
+      htm_FrstFelt( '5%',0); 
+      htm_NextFelt('10%');  echo tolk('@Nyt budget:');  //  '@ +/- 0% OK', '@Pct. korrektion'
+      htm_NextFelt('8%');   htm_CombFelt($type='number',  $name='pct', $valu= 0,   $titl='@Angiv en +/- pct-sats, som der skal justeres op/ned med', $labl='@% Korrektion',  $revi=true, $rows='2',$width='44px',$step='1');
+      htm_NextFelt('75%');  echo textKnap($label='@Udfyld med korrektion af sidste års tal',  $title=tolk('@Automatisk budgetlægning på grundlag af sidste års regnskab!').
+                            '<br>'.tolk('@ADVARSEL: Alle nuværende beløb overskrives!  Gem ikke, hvis det er en fejl.'),$link='../_base/page_Blindgyden.php');
+      htm_LastFelt();    
+  echo '<div class="fixed-table-container-inner " style= "max-height: '.$ViewHeight.';">';  //  Se mere her: https://codepen.io/chiranjeeb/pen/LGsiv
+  echo '<table class="formnavi" cellspacing="0" style="border: 1px solid black;">';
   if (!function_exists('LblOut')) { function LblOut ($part1,$part2) {
     echo '<th style="font-size:small; width:'.$part1.'"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.ucfirst($part2).'</div></div> </th>';}}
-  foreach ($RowPref  as $Pref) LblOut($Pref[1].' align:'.$Pref[2],Lbl_Tip($Pref[0],$Pref[5]));
-  foreach ($ColStyle as $Spec) LblOut($Spec[1]                   ,Lbl_Tip($Spec[0],$Spec[5]));
-  foreach ($RowSuff  as $Suff) LblOut($Suff[1].' align:'.$Suff[2],Lbl_Tip($Suff[0],$Suff[5]));
-  echo '</tr>';
-  
+### Kolonne-LABELS:   FIXIT: Labels skal være statiske, ikke rulle med op i tabel-ruden! (som de ikke gør i htm_Tabel() ) Lbl_Tip/tooltiptext virker ikke (eller skjules?).
+  echo '<thead><th>'; 
+    foreach ($ColStyle as $Spec) LblOut($Spec[1], Lbl_Tip($Spec[0], $Spec[5]));
+  echo '</th></thead>';
 ### Kolonne-DATA-INPUT:   
-  echo'<thead> <tbody>  ';
+  echo'<tbody>  ';
   $optlist= FormVars(4); $ordlist= OrdrVars(4); $n= count($DATA); if ($n<1) $n= 20;
-//  if (!is_array($DATA[0])) {$DATA=array($DATA); }; //  $DATA er 1 dimension så $DATA gøres 2-dimensionel!
-  /* foreach ($DATA as $DatRecord) {  */    $DatRecord= $DATA;
-    $DatIx=-1;
-    if ($KaldFra=='Rude_Budget') $plh= 6; else $plh= 5; # Ix til PlaceHolder
-    foreach ($DatRecord as $Dat) { $DatIx++;
+  $DatIx=-1;
+    foreach ($DATA as $Dat) { $DatIx++;
       $rowBg= RowDesign($Dat,$RowLabl);
       echo '<tr class="row"; '.$rowBg.'>';
-
-### Kolonner til venste for tabellen:    
-      foreach ($RowPref  as $Pref) {echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[2].'; font-size:x-small">'.tolk($Pref[4]).' </td>';} 
-    
 ### Tabel-BODY:
-      $ColIx= -1;                              # htm_TabelInp:  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-      foreach ($ColStyle as $Specf) {$ColIx++;    # htm_Tabel:  [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+      $ColIx= -1;                            # htm_TabelInp:  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+      foreach ($ColStyle as $Specf) {$ColIx++;  # htm_Tabel:  [0:ColLabl, 1:ColWidth, 2:ColJust,        3:InpType,             4:ColTip, 5:placeholder]
         if (is_array($Dat[$ColIx])) $DatFelt= $Dat[$ColIx][$DatIx]; else $DatFelt= $Dat[$ColIx];   //  Afhængig af array i 1 eller 2 dimensioner!
-        if ($Specf[3]=='date') $smaller= 'text-align="left" width="70%" font-size="x-small" '; else $smaller= '';
-        if ($Specf[3]=='vlst') {  # VariabelLister
+        if ($Specf[4]=='date') $smaller= 'text-align="left" width="70%" font-size="x-small" '; else $smaller= '';
+        if ($Specf[4]=='vlst') {  # VariabelLister
           echo '<td> <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
             foreach ($optlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
           echo '</select></div></td> ';
         } 
-        else  if ($Specf[3]=='just') { MakeOptList($valu,$optliste1=[['Venstrejusteret','V','V'],['Centerplaceret','C','C'],['Højrejusteret','H','H']]);   } 
-        else  if ($Specf[3]=='side') { MakeOptList($valu,$optliste2=[['Alle sider','A','A'],['Kun første side','1','1'],['Ikke første side','!1','!1'],['Kun sidste side','S','S'],['Ikke sidste side','!S','!S']]); } 
-        else  if ($Specf[3]=='font') { MakeOptList($valu,$optliste3=[['sans-serif','Helvetica','Helvetica'],['serif','Times','Times'],['OptiskLæsbar','OCRbb12','OCRbb12']]); } 
-        else  if ($Specf[3]=='data') {   # VariabelListe
+        else  if ($Specf[4]=='just') { MakeOptList($valu,$optliste1=[['Venstrejusteret','V','V'],['Centerplaceret','C','C'],['Højrejusteret','H','H']]); } 
+        else  if ($Specf[4]=='side') { MakeOptList($valu,$optliste2=[['Alle sider','A','A'],['Kun første side','1','1'],['Ikke første side','!1','!1'],['Kun sidste side','S','S'],['Ikke sidste side','!S','!S']]); } 
+        else  if ($Specf[4]=='font') { MakeOptList($valu,$optliste3=[['sans-serif','Helvetica','Helvetica'],['serif','Times','Times'],['OptiskLæsbar','OCRbb12','OCRbb12']]); } 
+        else  if ($Specf[4]=='data') {  # VariabelListe
           if ($DatFelt=='Nyt felt') { echo '<td style="font-size:small"> '.tolk('@Nyt felt:').' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
                                         foreach ($ordlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
                                       echo '</select></div></td> ';
@@ -410,96 +442,92 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.'
           else echo '<td style= "text-align:'.$Specf[2].'; font-size:small;">'.tolk($DatFelt).'</td>';  }   //  Kun TEXT
         else  # I alle andre tilfælde Standard: text m.fl.
           if ($rowBg>'')  echo '<td style= "text-align:'.$Specf[2].';">'.tolk($DatFelt).'</td>';   //  Kun TEXT
-          else            echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$ColIx.'" '.'value="'. '" placeholder="'.tolk($Specf[$plh]).'" style="text-align:'.$Specf[2].'; background-color: transparent; width:100%;" /></div></td> ';
+          else            echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[4].'" name="Kol'.$ColIx.'" '.'value="'. '" placeholder="'.tolk($Specf[6]).'" style="text-align:'.$Specf[2].'; background-color: transparent; width:100%;" /></div></td> ';
       };
-
-### Kolonner til højre for tabellen:     RowSuff: [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      foreach ($RowSuff as $felt) {echo '<td style="font-size:small; width:'.$felt[1].'; text-align:'.$felt[2].'">'.$felt[4].'</td>';}
       echo '</tr>';
     }
-#  }
-
-### Ide: Mulighed for at vise kolonne-summer, eller andet, på en "footer-række" under tabellen.
-  echo '</tbody></thead> </table> </div>';
-}
+  echo '</tbody> </table> </div>';
+} // htm_TabelInp_Budget
 
 
 # BASISMODUL for tabelInput (Redigerbare data i tabel-celler):
-function htm_TabelInp ( #$Capt1='',
+function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
                         #$Capt2='',     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
                         $HeadLine= array('0','1','2','3','4','5'),
-                        $RowPref=array(['Capt','Label','Tip','width']), 
-                        $ColStyle=array(['@Kol0','7%','','','Tip',''],['@Kol1','10%','','','Tip',''],['@Kol2','30%','','','Tip','']), 
-                        $RowSuff=array(['tdContent','Value']),
-                        &$DATA=array() ) { global $lysBlaa;
-  echo '<div class="fixed-table-container">';
-  if ($HeadLine[0][0]>'') {
-    echo '<div class="header-background" style="color:'.$lysBlaa.';"> &nbsp;';
+                        $RowHead= array(['0:ColLabl', '1:ColWidth', '2:ColJust:U/D/UD', '3:disp!  ', '4:disp!   ', '5:ColTip', '6:disp!      '],['Næste record']), # Generel struktur!
+                        $ColStyle=array(['0:ColLabl', '1:ColWidth', '2:ColJust:U/D/UD', '3:InpType', '4:FeltJust', '5:ColTip', '6:placeholder'],['Næste record']), # Generel struktur! 
+                        $RowTail= array(['0:ColLabl', '1:ColWidth', '2:disp!         ', '3:InpType', '4:FeltJust', '5:ColTip', '6:value!     '],['Næste record']), # Generel struktur! 
+                        &$DATA=array(),
+                        $PadTop='26px'
+                      ) { global $ØblueColor;
+  echo '<div class="fixed-table-container" style="padding-top: '.$PadTop.'; ">';    # max-height: 150px;
+  if ($HeadLine[0][0]>'') { # [0:Label, 1:Width, 2:Just, 3:Type, 4:TitleTip, 5:Value]
+    echo '<div class="header-background" style="color:'.$ØblueColor.';"> &nbsp;';
       foreach ($HeadLine as $Capt) {
-        if ($Capt[3]='show')
-        echo tolk($Capt[0]).' <input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).'" value="'.tolk($Capt[5]).'" style="width:'.$Capt[1].'" disabled />&nbsp;&nbsp;';
-        else
-        echo tolk($Capt[0]).' <input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).'" placeholder="'.tolk($Capt[5]).'" style="width:'.$Capt[1].'" />&nbsp;&nbsp;';
-      }
+        if ($Capt[3]='show') $forskel= '" disabled value="'; else $forskel= '"    placeholder="';
+        echo tolk($Capt[0]).' <input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).$forskel.tolk($Capt[5]).'" style="width:'.$Capt[1].'; text-align:'.$Capt[2].';" />&nbsp;&nbsp;';
+       }
     echo '</div>';
   }
   echo '<table class="formnavi" cellspacing="0">';
   
 ### Kolonne-LABELS:
   echo '<thead><tbody><tr> '; 
-  foreach ($RowPref  as $Pref) {echo '<th style="width:'.$Pref[1].' align:'.$Pref[2].'"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Pref[0],$Pref[5]).'</div></div> </th>';}
-  foreach ($ColStyle as $Spec) {echo '<th style="width:'.$Spec[1].'"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Spec[0],$Spec[4]).'</div></div> </th>';  }
-  foreach ($RowSuff  as $Suff) {echo '<th style="width:'.$Suff[1].' align:'.$Suff[2].'">'.Lbl_Tip($Suff[0],$Suff[5]).'</th>';}
+  foreach ($RowHead  as $Pref) {echo '<th style="width:'.$Pref[1].' align:'.$Pref[2].';"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Pref[0],$Pref[5]).'</div></div> </th>';}
+  foreach ($ColStyle as $Spec) {echo '<th style="width:'.$Spec[1].';"> <div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Spec[0],$Spec[5]).'</div></div> </th>';  }
+  foreach ($RowTail  as $Suff) {echo '<th style="width:'.$Suff[1].' align:'.$Suff[4].';">'.Lbl_Tip($Suff[0],$Suff[5]).'</th>';}
   echo '</tbody></thead> </tr> ';
   
 ### Kolonne-DATA-INPUT:   
-  echo'<thead> <tbody>  ';
+  echo' <tbody>  ';
   $optlist= FormVars(4); $ordlist= OrdrVars(4); $n= count($DATA); if ($n<1) $n= 20;
 # for ($y= 0; $y < $n; $y++) { $x=0;  // DEMO-data. ToDo: Skal i stedet knyttes til &$DATA array()
   $DatIx=-1;
   foreach ($DATA as $Dat) { $DatIx++;
     echo '<tr class="row">';
-    foreach ($RowPref  as $Pref) {echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[2].'">'.tolk($Pref[4]).' </td>';} 
+    foreach ($RowHead  as $Pref) {echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[2].'">'.tolk($Pref[4]).' </td>';} 
 ### Tabel-BODY:
     $ColIx= -1;
     foreach ($ColStyle as $Specf) {$ColIx++;                # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-      if ($Specf[3]=='date') $smaller= 'text-align="left" width="70%" font-size="x-small" '; else $smaller= '';
-      if ($Specf[3]=='vlst') {  # VariabelListe
-        echo '<td> <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
-          foreach ($optlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
-        echo '</select></div></td> ';
-      } 
-      else  if ($Specf[3]=='just') { MakeOptList($valu,$optliste1=[['Venstre','V','V'],['Center','C','C'],['Højre','H','H']]);   } 
-      else  if ($Specf[3]=='side') { MakeOptList($valu,$optliste2=[['Alle','A','A'],['Første','1','1'],['IkkeFørste','!1','!1'],['Sidste','S','S'],['IkkeSidste','!S','!S']]); } 
-      else  if ($Specf[3]=='font') { MakeOptList($valu,$optliste3=[['sans-serif','Helvetica','Helvetica'],['serif','Times','Times'],['OptiskLæsbar','OCRbb12','OCRbb12']]); } 
-      else  if ($Specf[3]=='data') { if ($Dat[$ColIx][0]=='Nyt felt')  {  # VariabelListe
-        echo '<td> '.tolk('@Nyt felt:').' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
-          foreach ($ordlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
-        echo '</select></div></td> ';
-        } 
-        else echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$ColIx.'" '.'value="'.tolk($Dat[$ColIx][0]).
-                '" placeholder="'.$Specf[5].'" style="text-align:'.$Specf[2].'; background-color: transparent; width:100%;" /></div></td> ';
-      } 
-      else  # Standard: text m.fl.
-          echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$ColIx.'" '.'value="'.
-                '" placeholder="'.$Specf[5].'" style="text-align:'.$Specf[2].'; background-color: transparent; width:100%;" /></div></td> ';
+      if (($Specf[3])=='date') {$smaller= 'text-align="left" width="70%" font-size="x-small" ';} else $smaller= '';
+      switch ($Specf[3]) {  # Specielle InpTyper:
+        case "vlst" : echo '<td> <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
+                        foreach ($optlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
+                      echo '</select></div></td> ';   break;
+        case "moms" : echo '<td>'. htm_SelectStr($valu,MomsListe()).'</td>';  break;
+        case "just" : echo '<td>'. htm_SelectStr($valu,JustListe()).'</td>';  break;
+        case "side" : echo '<td>'. htm_SelectStr($valu,SideListe()).'</td>';  break;
+        case "font" : echo '<td>'. htm_SelectStr($valu,FontListe()).'</td>';  break;
+        case "kont" : echo '<td>'. htm_SelectStr($valu,KontListe()).'</td>';  break;
+        case "valu" : echo '<td>'. htm_SelectStr($valu,ValuListe()).'</td>';  break;
+        case "show" : echo '<td style="margin-right:0; text-align:'.$Specf[4].'; background-color: transparent;" />'.tolk($Dat[$ColIx]).'</td> ';  break;
+        case "data" : if ($Dat[$ColIx][0]=='Nyt felt')  {  # Opret ny record
+                        echo '<td> '.tolk('@Nyt felt:').' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
+                          foreach ($ordlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
+                        echo '</select></div></td> ';
+                      } else echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$ColIx.'" '.'value="'.tolk($Dat[$ColIx][0]).
+                                    '" placeholder="'.tolk($Specf[6]).'" style="text-align:'.$Specf[4].'; background-color: transparent; width:100%;" /></div></td> ';
+                      break;
+        default     : echo '<td> <div style="margin-right:0;"> <input type= "'.$Specf[3].'" name="Kol'.$ColIx.'" '.'value="" '.
+                          'placeholder="'.tolk($Specf[6]).   '" style="text-align:'.$Specf[4].'; background-color: transparent; width:100%;" /></div></td> ';
+      }
     };
-### RowSuff: [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-  foreach ($RowSuff as $felt) {echo '<td style="width:'.$felt[1].'; text-align:'.$felt[2].'">'.$felt[4].'</td>';}
+### RowTail: [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
+  foreach ($RowTail as $felt) {echo '<td style="text-align:'.$felt[4].'; width:'.$felt[1].'; title:'.$felt[5].'">'.$felt[6].'</td>';}
     echo '</tr>';
   } # Ide: Mulighed for at vise kolonne-summer, eller andet, på en "footer-række" under tabellen.
-  echo '</tbody></thead> </table> </div>';
+  echo '</tbody> </table> </div>';
 }
 
 # LAYOUT moduler:
 function htm_Rude_Top($name='',$capt='',$parms='',$icon='',$klasse='panelWmax',$func='Udefineret') {  # SKAL efterfølges af htm_RudeBund !
-  global $debug;
+  global $Ødebug, $ØSaldiblue;
   if ($capt=='') $Ph= 'height:0;';
   echo '<form name="'.$name.'" id="'.$name.'" action="'.$parms.'" method="post">';
-  if ($debug) {$fn= '&nbsp; <small><small><small>f:'.$func.'()</small></small></small>';} else $fn='';
+  if ($Ødebug) {$fn= '&nbsp; <small><small><small>f:'.$func.'()</small></small></small>';} else $fn='';
   echo '<div class="'.$klasse.'"> <div class="panelTitl" style="'.$Ph.'" max-width:400;>'.
-    '<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic> &nbsp;'.ucfirst(Tolk($capt)).$fn.'</div>';
-  if ($capt!='') echo '<hr class="style13"/>';
+    '<ic class="fa '.$icon.'" style="font-size:22px;color:'.$ØSaldiblue.'"></ic> &nbsp;'.ucfirst(Tolk($capt)).$fn.'</div>';
+  if ($capt!='') echo '<hr class="style13" style="margin-bottom: 0"/>';
 } # Boxens </div> og </form> er placeret i htm_RudeBund som skal kaldes til slut!
 
 function htm_RudeBund($pmpt='',$subm=false,$title='') { # SKAL følge efter htm_Rude_Top !
@@ -507,31 +535,16 @@ function htm_RudeBund($pmpt='',$subm=false,$title='') { # SKAL følge efter htm_
   echo '</div></form>';
 }
 
-function htm_accept($labl='',$title='',$width='') {
-  # $LablTip= '<div0 class="tooltip"><span0 class="tooltiptext">'.tolk($title).'</span0></div0>';
+function htm_accept($labl='',$title='',$width='') {global $ØButtnBgrd, $ØButtnText;
   if ($width) $width= ' width: '.$width.';';
-# echo '<input type= "submit" class="mytip" titletip="'.tolk($title).'" name="submit" value="'.ucfirst(tolk($labl)).
-  echo '<input type= "submit" class="tooltiptext" title="'.tolk($title).'" name="submit" value="'.ucfirst(tolk($labl)).
-  '" style="margin: 1px 1px; padding: 1px 3px;'.$width.'" />';  # '.$LablTip.'
+  echo '<button type= "submit" name="submit" class="tooltip" style="margin: 1px 1px; padding: 1px 3px; '.$width.' background:'.$ØButtnBgrd.'; color:'.$ØButtnText.';" >'.
+        ucfirst(tolk($labl)).'<span class="tooltiptext">'.tolk($title).'</span></button>';
 }
 
 # Felter i en horisontal række:
 function htm_FrstFelt($wth,$bord=0) {echo '<TABLE BORDER="'.$bord.'"  border-collapse: collapse; padding: 0px; width:100%;><TR><TD width="'.$wth.'"> ';}
 function htm_NextFelt($wth) {echo '</TD>  <TD style="width:'.$wth.';"> ';}
 function htm_LastFelt()     {echo '</TD>  </TR> </TABLE>';}
-
-function iconKnap ($faicon='',$title='',$link='') {
-    $LablTip= '<div0 class="tooltip" style="margin: 1px 5px;"><span class="tooltiptext">'.$title.'</span></div0>';
-    echo '<span>';
-    echo '<a href="'.$link.'" '.$LablTip.' ';
-    echo '  <ic class="fa '.$faicon.'" style="font-size:32px; color:'.$color='#003366'.';"></ic>';
-    echo '</a></span>'; 
-}
-    
-function textKnap ($label='',$title='',$link='') {
-    $LablTip= '<div0 class="tooltip" style="color:'.$color='#003366'.'; padding:5px;"><span class="tooltiptext">'.tolk($title).'</span></div0>';
-    echo '<span style="margin:6px; padding:6px; font-size:0.8em; color:'.$color='#003366'.';"><a href="'.$link.'" '.$LablTip.' '.ucfirst(tolk($label)).'</a></span>';  
-}
 
 function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $goFind, $goNew, $goNext) { # Genvejsknapper på siders top.
   $sideObjekt= tolk($sideObjekt);
@@ -540,15 +553,15 @@ function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $g
   echo '<div style="text-align: center"><img src= "../images/SALDIe50x150.png" alt="Saldi Logo" style="width:150px;height:50px;"></div>';
   echo '<p align="center"><b>'.tolk('@Navigation:').'<b></p>';
   echo '<p align="center">';  #<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
-  if ($goPrev)  iconKnap($faicon='fa-caret-square-o-left',  $title= tolk('@Vis forrige')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
+  if ($goPrev)  iconKnap($faicon='fa-caret-square-o-left',  $title= tolk('@Vis forrige')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
   if ($goHome)  iconKnap($faicon='fa-home',                 $title= tolk('@Luk vinduet og gå til hoved-menu')       ,$link='../_base/page_Gittermenu.php'.$goBack);
   if ($goUp  )  iconKnap($faicon='fa-caret-square-o-up',    $title= tolk('@Luk vinduet og gå et niveau op')         ,$link= $goBack);
-  if ($goFind)  iconKnap($faicon='fa-search',               $title= tolk('@Søg en anden') .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
-  if ($goNew )  iconKnap($faicon='fa-plus-square-o',        $title= tolk('@Opret ny')     .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
-  if ($goNext)  iconKnap($faicon='fa-caret-square-o-right', $title= tolk('@Vis næste')    .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
+  if ($goFind)  iconKnap($faicon='fa-search',               $title= tolk('@Søg en anden') .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
+  if ($goNew )  iconKnap($faicon='fa-plus-square-o',        $title= tolk('@Opret ny')     .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
+  if ($goNext)  iconKnap($faicon='fa-caret-square-o-right', $title= tolk('@Vis næste')    .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
   echo '</p>';
   if ($status) {
-    $status= '<x1 style="font-weight:300; font-size:smaller"> - Status:<bluelabl> '.$status.'</bluelabl></x1>';
+    $status= '<x1 style="font-weight:300; font-size:smaller"> - Status:<colrlabl> '.$status.'</colrlabl></x1>';
     echo '<p align="center">'.ucfirst($sideObjekt).$status.'</p> ';
   }
   htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
@@ -559,12 +572,12 @@ function Foot_Links ($maxi=false, $arg='', $doPrint, $doErase, $doLookUp, $doAcc
   htm_Rude_Top($name='linkform',$capt='',$parms='',$icon='','panelWmax',__FUNCTION__);
     if (($maxi) and ($OpslLabl>'')) echo '<p align="center"><b>'.tolk('@Handling:').'<b></p>';
     echo '<p align="center">';  #<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
-    if ($doPrint)   iconKnap($faicon='fa-print',                $title= tolk('@Udskriv')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
-    if ($doErase)   iconKnap($faicon='fa-minus-square-o',       $title= tolk('@Slet posten')                ,$link='../_base/page_Blindgyden'.$goBack);
-    if ($doLookUp)  iconKnap($faicon='fa-search-plus',          $title= tolk($OpslLabl)                     ,$link='../_base/page_Blindgyden');
-    if ($doAccept)  iconKnap($faicon='fa-check-square-o',       $title= tolk('@Godkend alt')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
-    if ($doExport)  iconKnap($faicon='fa-upload',               $title= tolk('@CSV-Export')   .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
-    if ($doImport)  iconKnap($faicon='fa-download',             $title= tolk('@Fil import')   .' '.$sideObjekt  ,$link='../_base/page_Blindgyden');
+    if ($doPrint)   iconKnap($faicon='fa-print',                $title= tolk('@Udskriv')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
+    if ($doErase)   iconKnap($faicon='fa-minus-square-o',       $title= tolk('@Slet posten')                ,$link='../_base/page_Blindgyden.php'.$goBack);
+    if ($doLookUp)  iconKnap($faicon='fa-search-plus',          $title= '? '.tolk($OpslLabl)                     ,$link='../_base/page_Blindgyden.php');
+    if ($doAccept)  iconKnap($faicon='fa-check-square-o',       $title= tolk('@Godkend alt')  .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
+    if ($doExport)  iconKnap($faicon='fa-upload',               $title= tolk('@CSV-Export')   .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
+    if ($doImport)  iconKnap($faicon='fa-download',             $title= tolk('@Fil import')   .' '.$sideObjekt  ,$link='../_base/page_Blindgyden.php');
     echo '</p>';
     if ($maxi) {    
       htm_FrstFelt('10%',0);  
@@ -573,7 +586,8 @@ function Foot_Links ($maxi=false, $arg='', $doPrint, $doErase, $doLookUp, $doAcc
       htm_NextFelt('30%');    echo '<div style="display:inline-block; margin-left:1em>'.htm_accept('@Log ud','@Forlad SALDI').'</div> ';
       htm_NextFelt('05%');    # Vare-opslag, Udskriv, Fakturer, Slet vist post, 
       htm_LastFelt();
-      echo '<tc><divline style="margin-left:0.5em"><small><b>'.tolk('@TIP:').'</b> '.tolk('@Hold musen over').' <bluelabl>'.tolk('@Blå tekster med skyggeramme, ').'</bluelabl>'.tolk('@så får du hjælpetekster og tips.').'</small></divline></tc>';
+      echo '<table><tr><td><tc><divline style="margin-left:0.5em"><small><b>'.tolk('@TIP:').'</b> '.tolk('@Hold musen over').' <colrlabl>'.tolk('@Blå tekster med skyggeramme, ').'</colrlabl>'.
+        tolk('@så får du hjælpetekster og tips.').'</small></tc></td><td style="text-align:right;"><small>Design: EV-soft </small></divline></td></tr></table>';
     }
   htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
@@ -633,7 +647,7 @@ function Tolk($FraseKey) {                              # Tolk() benyttes til sp
     case "tr" :$ix= 5;  break;                          # 5 Türkçe         sæt index for opslag
     case "es" :$ix= 6;  break;                          # 6 Español        sæt index for opslag
                                                         # 7 Grønlandsk       
-    default   : {$ix= 1; echo "<bluelabl>Sprog?:".$programSprog." </bluelabl>"; break;}
+    default   : {$ix= 1; echo "<colrlabl>Sprog?:".$programSprog." </colrlabl>"; break;}
   }
   $TblRow= found_index($languageTable, 0, $FraseKey);
   if (substr($FraseKey,0,2)=='@:') {};                                    # Er frasen med @:-prefix: (Angår blanketter/formularer)
@@ -646,6 +660,7 @@ function Tolk($FraseKey) {                              # Tolk() benyttes til sp
   return($result);
 } 
 // PLAN: Opdeling så fraser ang. blanketter, holdes adskilt fra programfladens fraser, f.eks. med prefix: @:
+//	eller de håndteres i DB-tabeller.
 
 # OBS!  Benyt konsekvent prefix: '@ ikke: "@ så alle fraser kan udtrækkes automatisk!
 # Oversættelsen sker automatisk i BASISMODULER med tolk(), når parametre behandles.
@@ -655,6 +670,18 @@ function Tolk($FraseKey) {                              # Tolk() benyttes til sp
 # Undgå SPACE+SPACE som vil blive ændret til SPACE, og bringe uorden i frasens længde.
 # Tegnet: " må ikke forekomme i fraser, det korrumperer csv-formatet. Benyt f.eks. ' i stedet.
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function htm_HiddVari($name='',$val='') {
+	if ($val=='') {$val= $name;	 global $$val; $valu= $$val; } else $valu= $val;
+	echo "\n<input type='hidden' name='$name' value='$valu'>";
+}
+
+
+  
+  
+global $Ø_MdrList;
+$Ø_MdrList= DanListe($mdr, ' '.tolk('@måned'));
 
 
 /*  

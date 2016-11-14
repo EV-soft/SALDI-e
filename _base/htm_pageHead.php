@@ -1,7 +1,7 @@
 <?php include("../_base/base_init.php");
   $DocFil= '../_base/htm_pageHead.php';   $DocVer='5.0.0';    $DocRev='2016-08-00';   $modulnr=0;
 //  Denne fil klargør en side med initiering af php-filer og indledende HTML-kode.
-  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   include_once("../includes/out_base.php");
   include_once("../includes/out_ruder.php");
   include_once("../includes/out_vinduer.php");

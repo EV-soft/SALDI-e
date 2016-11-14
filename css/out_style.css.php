@@ -1,6 +1,6 @@
-<?php $DocFil= '../css/out_style.css';    $DocVer='5.0.0';     $DocRev='2016-10-00';      $modulnr=0;
+<?php $DocFil= '../css/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2016-12-00';      $modulnr=0;
   header("Content-type: text/css"); 
-  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
 ?>
 /*  
 //             ___   _   _    ___  _         
@@ -22,6 +22,7 @@
   if ($PanelBgrd== '#D4FFFF') {$PanelBgrd= '#FFFFD4'; } # Æggeskal
   else                        {$PanelBgrd= '#D4FFFF';}  # Turkis
   $PanelBgrd= '#FFFFD4';    #              '#F9F8F8';   # Lysgrå
+  $PanelBgrd= '#FFFFFF';    #              '#F9F8F8';   # Lysgrå
 ?>
 /* PHP:
 highlight.comment #FF8000 Orange
@@ -35,7 +36,7 @@ highlight.string  #DD0000 Red
 :root{
     --roedColor: #FF0000;   /* Statiske farvenuancer    */
     --guulColor: #F3F033;
-    --grenColor: #336600;
+    --grenColor: #336600; 
     --grenColr1: #88DD00;
     --blueColor: #4479ff;
     --oranColor: #F37033;
@@ -48,19 +49,23 @@ highlight.string  #DD0000 Red
     --Saldiblue: #003366;
     --GradieTop: #eeeeee; 
     --GradiBott: #cccccc;
-/*    --PanelBgrd: #FFFFC4;   /* Panelers baggrund  (æggeskalsfarve)*/
-/*    --PanelBgrd: #D4FFFF;   /* Panelers baggrund  (turkis)*/
+/*  --PanelBgrd: #FFFFC4;   /* Panelers baggrund  (æggeskalsfarve)*/
+/*  --PanelBgrd: #D4FFFF;   /* Panelers baggrund  (turkis)*/
+    --PanelBgrd: #FFFFFF;
     --PanelBgrd: <?=$PanelBgrd?>;
+    --ButtnBgrd: #44BB44;   /*   LysGrøn   */
+    --ButtnText: #FFFFFF;   /*   Hvid   */
     --PageBcgrd: #888888;   /* Side baggrund (mørkgrå)  */
+    --PageBcgrd: #F4FFF4;   /* Side baggrund (lysblå)  */
     --fltBgColr: #FFFFFF;   /* Validerede input felters baggrund  #53a40 */
     --fltTxColr: #550000;   /* Validerede input felters tekster #53a40 */
     --tblRowDrk: #f0f0f0;   /* Tabellinie med mørk baggrund */
     --tblRowLgt: #f8f8f8;   /* Tabellinie med lys baggrund  */
-    --btnTxNorm: #000000;
-    --btnTxOver: #900000;
+    --btnTxNorm: #000000;   /* Standard tekst på knap */
+    --btnTxOver: #900000;   /* Tekst på knap, når musen er over knappen */
     
     /* Herudover forekommer green, blue, white, black og grånuancer, samt "importerede".  */
-    /* Således kaldes farvekonstanter:    var(--btnTxOver) */
+    /* Således kaldes farvekonstanter:    var(--ButtnBgrd) */
 }
 
 
@@ -97,6 +102,7 @@ body {
   #wrapper  {width: 1030px; padding: 0px;    /*  margin: 5px 5px; */}
   #spalt240  {width: 240px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt320  {width: 320px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
+  #spalt480  {width: 480px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spaltxxx  {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
   PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
 }
@@ -124,9 +130,10 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelWaut, .panelW960, .panelW640, .panelW320, .panelW240, .panelW160 {
-    border: 1px solid black;
+.panelWmax, .panelWaut, .panelW960, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
+    border: 1px solid gray;
     background: var(--PanelBgrd);
+    box-shadow: 3px 3px 5px #888888;
     border-radius: 0.40em;
     margin: 0.4em 0.2em 0.4em 0.2em;
     padding: 0.3em 0.3em 0.3em 0.3em;
@@ -135,6 +142,7 @@ body {
 .panelWaut { width: auto;   }
 .panelW960 { width: 960px;  }
 .panelW640 { width: 640px;  }
+.panelW480 { width: 480px;  }
 .panelW320 { width: 320px;  }
 .panelW240 { width: 240px;  }
 .panelW160 { width: 160px;  }
@@ -171,6 +179,13 @@ form {
   margin-right:15px;
   color: var(--roedColor);
   background-color: var(--xx11Color);
+}
+
+.nyInput input{
+  width:98%; 
+  padding-left:4px; 
+  background-color: var(--guulColor);
+  text-align: left;
 }
 
 .lablInput {
@@ -232,7 +247,7 @@ form {
   position: absolute;
   width: 99%;
   color: var(--blueColor);  /* LysBlå */
-  padding: 0.005em 0;
+  padding: 0.005em 0 0;
 }
 
 .lablInput checkbox.filled,
@@ -315,6 +330,7 @@ input[type="date"] {
     /* 
     -webkit-box-align-items: left;
     -webkit-inner-spin-button: display: none; */
+    height: 17px;
 }
 
 input::-webkit-datetime-edit {
@@ -335,6 +351,12 @@ input::-webkit-datetime-edit-fields-wrapper {
 input:not([type]), input[type="tel" i], input[type="url" i] { /* input[type="number" i], input[type="password" i],  */
     padding: 1px 2px;
 }
+
+option {
+  font-family: monospace;
+  /* font-style: italic; */
+}
+
 /* 
 Default:
 input[type="date"] {
@@ -375,6 +397,7 @@ input[type="date"] {
    background: transparent;
    width: 200px;
    padding: 5px;
+   /* font-family: "Andale Mono", "Monotype.com", monospace; */
    font-size: 16px;
    line-height: 1;
    border: 0;
@@ -382,7 +405,7 @@ input[type="date"] {
    height: 34px;
    -webkit-appearance: none;
 }
-bluelabl  { font-style: italic; font-weight: normal; font-size: 0.90em; color: blue;}
+colrlabl  { font-style: italic; font-weight: normal; font-size: 0.90em; color: blue;}
 a         { text-decoration: none;}
 i         { text-decoration: none;} 
 test      { display: inline;}
@@ -406,13 +429,13 @@ menuBg {
   transform: translate(-50%, -50%);
   color: black;
   padding: .5em 1em;  
-  border: none;  
+  border: 2px;  
   border-radius: 4px;
   letter-spacing: 0em;
   font-weight: 600;
 }
 
-.btn      { color: var(--btnTxNorm); text-decoration: none;}
+.btn       { color: var(--btnTxNorm); text-decoration: none;}
 .btn:hover { color: var(--btnTxOver); }
 .btn {
   font-size: 0.85em;
@@ -422,6 +445,7 @@ menuBg {
   transform: translate(-50%, -50%);
   color: var(--btnTxNorm);
   margin-top: 3;
+/*   max-width: 160px; */
   padding: .01em;  
   border: none;  
   border-radius: 4px;
@@ -429,18 +453,18 @@ menuBg {
   font-weight: 300;
 }
 
-inpxut[type="submit"][title],
+Deaktiv_input[type="submit"][title],
+
 .btn[tip]:hover:after { /* Tip på grå gradient baggrund*/
   content: attr(tip);
+  white-space: pre-wrap;
   min-width: 160px;
   padding: 4px 8px;
   color: #333;
   position: absolute;
   bottom: 25px;    /* top: -70px; */
   left: -25px;     /* right: -30%; */
-  z-index: 999;
-  white-space: nowrap;
-  z-index: 20px;
+  z-index: 9999;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -455,18 +479,29 @@ inpxut[type="submit"][title],
   background-image: -o-linear-gradient(top, #ffffff, #cccccc);
 }
 
+button {
+  background-color: var(--ButtnBgrd);
+  color: var(--ButtnText);
+  border-radius: 6px;
+  transition-duration: 0.4s;
+/*   min-width: 60px; */
+  
+  }
 
 /*************************************/
+/* 
+Tip-system:  Label [.tiptext], som kan vise popup-vindue [.tooltip*] med teksten [.tooltiptext], når musen holdes over label
+*/
 
 .titletip,
-.tooltip , .tooltipR
-{
+.tooltip, .tooltipR  {
     position: relative;
     display: inline-block;
     background: white;
     border-radius:4px;
-    box-shadow: 1px 1px 2px #BBB;
-    border-bottom: 1px dotted gray;
+    /* box-shadow: 1px 1px 2px #BBB; */
+    box-shadow: 2px 2px 4px #888888;
+ /*    border-bottom: 1px dotted gray; */
     padding: 0px 5px 0px 5px;
 }
 
@@ -476,9 +511,9 @@ inpxut[type="submit"][title],
 }
 
 .mytip,
-.tooltip .tooltiptext, 
+.tooltip .tooltiptext,
 .tooltipL, .tooltipR, .tooltipB, .tooltipT
-{ /* Tip tekst på blå baggrund plac over */
+{ /* Tip tekst på blå baggrund plac over label */
     visibility: hidden;
     min-width: 160px;
     background-color: var(--xx22Color);
@@ -591,11 +626,12 @@ table {
   padding-left: 2px;
 }
 tc {
+  font-size: 0.8em; 
   font-weight:400;
-  color: green;
+  color: var(--btnTxOver);
 }
 th {
-  color: var(--blueColor);  /* LysBlå */
+  color: var(--blueColor);  /* LysBlå text*/
 }
   
 .th-inner {
@@ -603,7 +639,7 @@ th {
   top: 0;
   line-height: 26px; /* header-height */
   text-align: left;
-  border-left: 1px solid black;
+  border-left: 1px solid #ccc;
   padding-left: 5px;
   margin-left: -1px;
 }

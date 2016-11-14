@@ -164,12 +164,12 @@ if (!function_exists('db_modify')) {
 }
 
 if (!function_exists('db_select')) {
-  function db_select($qtext,$spor) {  global $db_type, $brugernavn, $db, $custom_alerttekst, $connection; $debug;
+  function db_select($qtext,$spor) {  global $db_type, $brugernavn, $db, $custom_alerttekst, $connection; $Ødebug;
     if (!file_exists("../temp/$db")) mkdir("../temp/$db", 0775);
     if ($db_type=="mysql") $query="mysqli_query";   //    
     else $query="pg_query";
 
-    if (!$connection) { //  if ($debug) $spor= '<br><br>File: '. __FILE__ .'<br>Line: '. __LINE__;
+    if (!$connection) { //  if ($Ødebug) $spor= '<br><br>File: '. __FILE__ .'<br>Line: '. __LINE__;
       msg_Dialog ('error', tolk('@Retur'),'window.history.back();', '',   '', '',   '',
            tolk('@Database problem'), tolk('@Afbryder! - fordi der ikke er oprettet forbindelse til databasen!').'<br><br>Pos: '.$spor);
       exit; }
@@ -226,8 +226,10 @@ if (!function_exists('db_fetch_array')) {
   }
 }
 
-function db_lookup($what,$tabl,$krit,$fil,$lin) {
-  return db_fetch_array(db_select('select '.$what.' from '.$tabl.' where '.$krit.', '.$fil. ' linje '. $lin));
+if (!function_exists('db_lookup')) { 
+  function db_lookup($what,$tabl,$krit,$fil,$lin) {
+    return db_fetch_array(db_select('select '.$what.' from '.$tabl.' where '.$krit.', '.$fil. ' linje '. $lin));
+  }
 }
 //  GL: $r= db_fetch_array(db_select("select id from adresser where kontonr='$kontonr' and art = 'D'",__FILE__ . " linje " . __LINE__));
 //  NY: $r= db_lookup('id','adresser'," kontonr='$kontonr' and art = 'D'", __FILE__ , __LINE__);

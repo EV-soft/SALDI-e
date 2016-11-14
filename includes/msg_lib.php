@@ -26,7 +26,7 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
 //           '3. knap',   '$(this).dialog("close")',
 //           'Funktions problem',
 //           'Funktionen: dialog("close") virker i test, men når msg_Dialog kaldes inde fra SALDI, sker der intet!'.
-//           '<br>Du kan flytte og ændre størrelse på dette besked-vindue. Det tilpasser selv nødvendig størrelse, og det placeres centralt i vinduet.');
+//           '<br>Du kan flytte og ændre størrelse på dette besked-vindue. Det tilpasser selv nødvendig højde, og det placeres centralt i vinduet.');
 
 //  msg_Dialog('warn','Fortsæt','$(this).dialog("close")',$Knap2_title='','','','','Saldi Dialog',$messg='');
 function msg_Dialog ($BgColr= 'error',  
@@ -66,7 +66,7 @@ switch (strtolower($BgColr)) {  # TEMA-farver og Titel-prefix:
   echo '  .ui-dialog .ui-dialog-buttonpane  { background: '.$headcolr.'}';
 # Hvis 3 knapper: Forøg bredden fra standard 300px til 360px:
   echo '  .ui-dialog  { width: 320px; margin: auto; position: fixed; top: 20%;  left: 0px; right: 0px; -moz-box-shadow: 0px 0px 8px #000000; -webkit-box-shadow: 0px 0px 8px #000000; box-shadow: 0px 0px 8px #000000;}';
-  echo '  ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close  { title: "Luk";}';
+  echo '  ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close  {width: 20px; title: "Luk";}';
   echo '  .ui-button  {padding: 2px 8px};}';
 /*  
   <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

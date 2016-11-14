@@ -11,7 +11,10 @@
   $pageTitl='Kontoplan';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
-    Rude_Kontoplan(); 
+    SpalteTop(640);   Rude_Kontoplan();
+    NextSpalte();     Rude_KontoKort();
+    EndSpalter();
+    
 
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

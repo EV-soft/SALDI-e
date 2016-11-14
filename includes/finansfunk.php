@@ -88,7 +88,7 @@ if (!function_exists('periodeoverskrifter')) {
 #-      print "<td title=\"$periode_lang\" align=\"right\"><b>$periode_kort</b></td>\n";
 #-      $retur.="\"$periode_kort\";"; # 20150622
 #+ Næste 1 lin:    2016-10-18 EV - Tilpasning til SALDI-€
-        array_push($retur, ['@'.$periode_kort, '5%','','tal2d', 'right', '@'.$periode_lang,'']);
+        array_push($retur, ['@'.$periode_kort, '4.5%','','tal2d', 'right', '@'.$periode_lang,'']);
     }
     return $retur; # 20150622
   }

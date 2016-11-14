@@ -11,7 +11,9 @@
   $pageTitl='Regnskabsår';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
-    Rude_Blindgyde(); 
-
+    SpalteTop(320); Rude_AdminMenu(); 
+    NextSpalte();   Rude_Regnskabsaar();    Rude_Regnskabskort();
+    EndSpalter();  
+    
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  
