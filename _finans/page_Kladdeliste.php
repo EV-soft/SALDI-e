@@ -1,5 +1,5 @@
-<?php      $DocFil= '../_finans/page_Kladdeliste.php.php';   $DocVer='5.0.0';     $DocRev='2016-10-00';      $modulnr=0;
-// Formål:  Kald til ufærdigt link
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2016-10-00';   $modulnr=0;
+// Formål:  
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
@@ -39,22 +39,8 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   $tidspkt=date("U");
   #$query = db_select("select * from kladdeliste where bogfort = '-' $user order by $sort $rf",__FILE__ . " linje " . __LINE__);
 
-## Her starter demo:    
-  Head_Navigation(tolk('@Kassekladde'), $status='', $goPrev=false, $goHome=true, $goUp=true, $goFind=false, $goNew=false, $goNext=false); 
-  htm_Rude_Top($name= 'naviform',$capt= '@Kassekladde liste:',$parms='',$icon='','panelWmax',__FUNCTION__);
-  htm_Tabel($RecLabl='kassekladde', $ColStyle= array(  #   [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-            ['@Id','7%','D','','','',''],['@Dato','10%','','date','','','åååå-mm-dd'],['@Ejer','10%','','','','','Ejer...'],['@Bemærkning','48%','','','','','Bem...'],
-            ['@Bogført','14%','U','','','','Bogf...'],['@Af','8%','','','','','Af...']),
-            $DataArr= array(
-            ['1','Dato','Ejer','Bemærkning 1','Bogført','Af'],
-            ['2','Dato','Ejer','Bemærkning 2','Bogført','Af'],
-            ['3','Dato','Ejer','Bemærkning 3','Bogført','Af']
-            ), $FilterOn=true, $SortOn=true );
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
-  Rude_KasseRedigering($DataArr[2][0],$DataArr[2][2]);
-  Rude_FootMenu($doPrint=true, $doErase=true, $doLookUp=true, $doAccept=true, $doExport=true, $doImport=true, 
-    $OpslLabl='@Opslag: markørens placering bestemmer, hvilken tabel opslag skal foretages i');
-# Rude_Blindgyde(); 
+## Her starter demo:   
+  Rude_Kladderedigering(); 
 /* 
 Luk     Kladdeliste     Ny
           Vis alle

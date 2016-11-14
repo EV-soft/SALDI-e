@@ -1,4 +1,4 @@
-<?php      $DocFil= '../includes/out_vinduer.php';    $DocVer='5.0.0';     $DocRev='2016-10-00';      $modulnr=0;
+<?php   $DocFil= '../includes/out_vinduer.php';   $DocVer='5.0.0';    $DocRev='2016-11-00';   $modulnr=0;
 //             ___   _   _    ___  _         
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
@@ -6,17 +6,17 @@
 //                                           
 // LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
 //
-// Design af vinduers layout. 
+// Formål:  Design af vinduers layout. Her ser du hvorledes Ruder, sammensættes til Vinduer.
+//          Teknikken benyttes i page_***.php filer, som viser en html side ad gangen.
 //
 // Afhængig af: out_ruder.php
 // 
 // Styring af layout:
 //    Visning af vinduer bestående af relevante ruder.
 //    Ruder (= Emne-moduler), egnet for adaptive skærm-output.
-// Skærmbredde: >=320px..640px: Brugbar - "Telefon"
-//                640px..980px: Velegnet - "Tablet"
-//                980px..1200px: Udnyttes - "Computer"
-// HTML5 er benyttet i stor udstrækning.
+// Skærmbredde: >=320px..640px:   Brugbar - "Telefon"
+//                640px..980px:   Velegnet - "Tablet"
+//                980px..1200px:  Udnyttes - "Computer"
 // Filer skal gemmes i UTF-8 format uden BOM!
 // 2016.08.00 ev - EV-soft
 
@@ -31,42 +31,42 @@ if (!function_exists('msg_Dialog')) {include('../includes/msg_lib.php');};
 // ----------- Funktioner ang. vinduer:
 
 function vindue_Logind(&$regnskab,&$brugernavn,&$brugerkode,&$PrgVers,&$LnkHelp,&$OrgaName,&$Logo) {
-  FirstSpalte();  Rude_Login($regnskab,$brugernavn,$brugerkode,$PrgVers,$LnkHelp,$OrgaName,$Logo);    
+  SpalteTop(320); Rude_Login($regnskab,$brugernavn,$brugerkode,$PrgVers,$LnkHelp,$OrgaName,$Logo);    
   skilleLin();          
   EndSpalter();
 }
 
 function vindue_Install(&$db_type,&$db_encode,&$db_encode,&$db_bruger,&$db_pw,&$adm_navn,&$adm_pw,&$verify_adm_pw) {
-  FirstSpalte();  Rude_Install($db_type,$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password);
+  SpalteTop(320); Rude_Install($db_type,$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password);
   NextSpalte();   Rude_DBsetup($db_type,$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password);  
   NextSpalte();   Rude_Login($regnskab,$brugernavn,$brugerkode,$PrgVers,$LnkHelp,$OrgaName,$Logo='saldie.png');   
   EndSpalter();   skilleLin();
 }
 
 function vindue_InstallResult($db_navn,$adm_navn,$noskriv) {
-  FirstSpalte();  Rude_InstallFail($noskriv);
+  SpalteTop(320); Rude_InstallFail($noskriv);
   NextSpalte();   Rude_InstallSucces($db_navn='xxx',$adm_navn='xxx'); 
   EndSpalter();   skilleLin();
 }
 
 function vindue_InstallFail($noskriv) {
-  FirstSpalte();  Rude_InstallFail($noskriv);
+  SpalteTop(320); Rude_InstallFail($noskriv);
   EndSpalter();   skilleLin();
 }
 
 function vindue_InstallSucces($db_navn, $adm_navn) {
-  FirstSpalte();  Rude_InstallSucces($db_navn,$adm_navn);
+  SpalteTop(320); Rude_InstallSucces($db_navn,$adm_navn);
   EndSpalter();   skilleLin();
 }
 
 function vindue_Formaal() {
-  FirstSpalte();  Rude_Browsr();
+  SpalteTop(320); Rude_Browsr();
   NextSpalte();   Rude_Formaal();
   EndSpalter();   skilleLin();
 }
 
 function vindue_Connect() {global $progvers, $saldihost;
-  FirstSpalte();  Rude_Install($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='root',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
+  SpalteTop(320); Rude_Install($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='root',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
   NextSpalte();   Rude_DBsetup($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='root',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
   NextSpalte();   Rude_Login($regnskab='CSS-demo',$brugernavn='admin',$brugerkode,$PrgVers=' '.$progvers,$LnkHelp,$OrgaName=$saldihost,$Logo='SALDIe50x150.png');
   EndSpalter();   skilleLin();
@@ -74,29 +74,17 @@ function vindue_Connect() {global $progvers, $saldihost;
 
 function vindue_GitterMenu() { global $programSprog;
   Rude_HovedMenu($regnskab='CSS-demo', $vis_finans=true, $vis_debitor=true, $vis_kreditor=true, $vis_prodkt=false, $vis_lager=true, $programSprog); 
-//  SmallSpalte();  Rude_AdminMenu();
-//  NextSpalte();   Rude_DiverseMenu();
-//  EndSpalter();   skilleLin();
-//  SmallSpalte();  Rude_Formularer();
-//  NextSpalte();   Rude_FormRedigerText();
-//  EndSpalter();   skilleLin();
-//  SmallSpalte();  Rude_Formularer();
-//  NextSpalte();   Rude_FormRedigerGrafik();
-//  EndSpalter();   skilleLin();
-//  SmallSpalte();  Rude_Formularer();
-//  NextSpalte();   Rude_FormRedigerOrdrelin();
-//  EndSpalter();   skilleLin();
 }
 
 function vindue_setup () { global $programSprog;
-  FirstSpalte();  Rude_AdminMenu();
+  SpalteTop(320); Rude_AdminMenu();
   NextSpalte();   Rude_DiverseMenu();
 }
 
 function vindue_Ordreblanket($wide=false) {
   Head_Navigation(tolk('@Kunde ordre'), $status=tolk('@Ikke afsluttet. Kan stadig rettes.'), $goPrev=true, $goHome=true, $goUp=true, $goFind=true, $goNew=true, $goNext=true);  
   if ($wide==true) Rude_YdelserWide($fakt=false);
-  FirstSpalte();
+  SpalteTop(320);
     Rude_Kunden($kontonr, $kategori, $cvrnr, $eannr, $bankreg, $bankkto, $instit, $ansv, $formsprog, $homeweb);           
     Rude_Betingelser($debigrup, $betaling, $frist, $print2, $kunderef);     
     Rude_Kontakter();   
@@ -122,12 +110,12 @@ function vindue_DivDemo() {
   Rude_Tabel();       skilleLin();
   Rude_Debitorer();   skilleLin();
   Rude_Kreditorer();  skilleLin();
-  Rude_DbOrdrer();    skilleLin();
+  Rude_DebtOrdrer();  skilleLin();
   Rude_KredOrdrer();  skilleLin();
 }
 
 function vindue_RappDemo() {
-  FirstSpalte();  Rude_DebRapp();
+  SpalteTop(320); Rude_DebRapp();
   NextSpalte();   Rude_KredRapp();
   EndSpalter();   skilleLin();
 }

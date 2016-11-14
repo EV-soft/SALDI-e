@@ -88,7 +88,7 @@ if (!function_exists('db_connect')) {
 
 //+ if (!$connection) { $spor= "\nFil: ". __FILE__ .' Linie: '. __LINE__;
 //+   msg_Dialog ('error', tolk('@OK'),'$jQ112(this).dialog("close")', '',  '', '',   '',
-//+         tolk('@Database problem'), tolk('@Afbryder!  -  fordi der ikke er oprettet forbindelse til databasen!'.$spor));
+//+         tolk('@Database problem'), tolk('@Afbryder! - fordi der ikke er oprettet forbindelse til databasen!'.$spor));
 //+         exit; }
 
 if (!function_exists('db_error')) {
@@ -114,8 +114,8 @@ if (!function_exists('db_modify')) {
     else $db_query="pg_query";
     if (strpos($qtext,';')) { $tjek=1;
       for ($x=0;$x<strlen($qtext);$x++) {
-        if ($tjek==1 && substr($qtext,$x,1)=="'" && substr($qtext,$x-1,1)!="\\ ") $tjek=0;  # "\\" rettet til "\\ " pga. syntaksvisning!
-        elseif ($tjek==0 && substr($qtext,$x,1)=="'" && substr($qtext,$x-1,1)!="\\ ") $tjek=1;; # "\\" rettet til "\\ " pga. syntaksvisning!
+        if ($tjek==1 && substr($qtext,$x,1)=="'" && substr($qtext,$x-1,1)!="\\") $tjek=0;  # "\\" rettet til "\\ " pga. syntaksvisning!
+        elseif ($tjek==0 && substr($qtext,$x,1)=="'" && substr($qtext,$x-1,1)!="\\") $tjek=1;; # "\\" rettet til "\\ " pga. syntaksvisning!
         if ($tjek && substr($qtext,$x,1)==";") {  
           $s_id=session_id();
           $txt="SQL injection registreret!!! - Handling logget & afbrudt.";
@@ -171,7 +171,7 @@ if (!function_exists('db_select')) {
 
     if (!$connection) { //  if ($debug) $spor= '<br><br>File: '. __FILE__ .'<br>Line: '. __LINE__;
       msg_Dialog ('error', tolk('@Retur'),'window.history.back();', '',   '', '',   '',
-           tolk('@Database problem'), tolk('@Afbryder!  -  fordi der ikke er oprettet forbindelse til databasen!').'<br><br>Pos: '.$spor);
+           tolk('@Database problem'), tolk('@Afbryder! - fordi der ikke er oprettet forbindelse til databasen!').'<br><br>Pos: '.$spor);
       exit; }
     
     if (!$query==$query($qtext)) {

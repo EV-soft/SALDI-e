@@ -1,5 +1,5 @@
-<?php      $DocFil= '../_systemdata/page_Kontoplan.php';    $DocVer='5.0.0';     $DocRev='2016-08-00';
-// Formål:  Rediger Kontoplan
+<?php      $DocFil= '../_finans/page_Regnskab.php';   $DocVer='5.0.0';     $DocRev='2016-10-00';
+// Formål:  
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
@@ -8,10 +8,11 @@
 // 2016.08.00 ev - EV-soft
 //
 
-  $pageTitl='Kontoplan';
+  $pageTitl='Regnskab';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../includes/finansfunk.php");
+	
+    Rude_Regnskab();
     
-    Rude_Kontoplan(); 
-
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

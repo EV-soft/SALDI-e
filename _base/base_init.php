@@ -38,13 +38,19 @@
 #if (function_exists('debug_log')) break; # Filen er indlæst tidligere!
 
 #globale variabler:
-global $debug;    $debug= true;
+global $debug;    $debug= false;
 $lysBlaa= '#4479ff';    // Benyttes kun i out_base.php sv.t. --blueColor i out_style.css.php
 $MissingFrase= array();
 $languageTable= array();
 $regnskab= '@CSS-demo';
 $vis_finans= true;        $vis_debitor= true;       $vis_kreditor= true;        $vis_lager= true;       $produktion= false;
 $regnskab=''; $username=''; $userkode=''; 
+$kontoTypeListe= array(['H','Overskrift'],['D','Drift'],['S','Status'],['Z','Sum'],['R','Resultat'],['X','Sideskift'],['L','Lukket']);
+
+$momsKodeListe= array(['K','Købsmoms'],['S','Salgsmoms'],['Y','Ydelsesmoms'],['E','EU-varemoms']);
+
+$artsKodeListe= array(['VG','yyy'],['DG','yyy'],['KG','yyy'],['VPG','yyy'],['VTG','yyy'],['VRG','yyy'],['SM','SalgsMomskonto'],['VK','ValutaKoder'],['PRJ','yyy'],
+                      ['YM','YdelsesMomskonto'],['EM','yyy'],['KM','KøbsMomskonto'],['SD','SamlekontoDebitor'],['KD','KreditorSamlekonto'],['RA','yyy'],['PV','yyy'],['LG','LagerGrupper'],['S','yyy'],['xx','yyy'],['xx','yyy']);
 
 if (!function_exists('debug_log')) {
 function debug_log($arg1='',$arg2='',$arg3='',$arg4='',$arg5='') {  global $db;

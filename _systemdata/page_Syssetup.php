@@ -14,9 +14,10 @@
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
     
-    SmallSpalte();  Rude_AdminMenu();
+    SpalteTop(240); Rude_AdminMenu();
     NextSpalte();   Rude_MomsSetup();
-
+    EndSpalter();
+  
 //  Til sidst indlæses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

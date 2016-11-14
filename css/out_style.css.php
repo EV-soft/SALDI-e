@@ -43,6 +43,7 @@ highlight.string  #DD0000 Red
     --grayColor: #ACA9A8;
     --xx11Color: #3CBC8D;
     --xx22Color: #E6EEF7;   /*  Tip: Blå baggrund */
+    --xx33Color: #CCEDFE;   /*  Filter: Lys-Blå baggrund */
     --grColrLgt: #CCCCCC;
     --Saldiblue: #003366;
     --GradieTop: #eeeeee; 
@@ -93,29 +94,25 @@ body {
 /* PANELER i SPALTER: (Tilpasning til smalle skærme) */
 /* for 960px or greater */
 @media screen and (min-width: 960px) {
-  #wrapper  {width: 1030px; padding: 0px;     margin: 5px 5px;}
-  #spalte0  {width: 240px;  padding: 5px 5px; float: left}
-  #spalte1  {width: 320px;  padding: 5px 5px; float: left}
-/*#spalte2  {width: 320px;  padding: 5px 5px; float: left;  margin: 0px 5px 5px 5px;} */
-  #spaltex  {width: 320px;  padding: 5px 5px; margin-left: 5px; float: left;}
-  PanlHead  {clear: both;   padding: 0 5px;}
-  PanlFoot  {clear: both;   padding: 0 5px;}
+  #wrapper  {width: 1030px; padding: 0px;    /*  margin: 5px 5px; */}
+  #spalt240  {width: 240px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
+  #spalt320  {width: 320px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
+  #spaltxxx  {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
+  PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
 }
 
 /* for 960px or less */
 @media screen and (max-width: 960px) {
   #wrapper  {width: 99%;  }
-  #spalte1  {width: 41%;  padding: 5px 5px;   margin: 0px 0px 5px 5px;}
-/*#spalte2  {width: 41%;  padding: 5px 5px;   margin: 0px 0px 5px 5px;  float: right; } */
-  #spaltex  {width: auto; padding: 5px 5px;   margin-left: 5px;   clear: both;    float: none;  }
+  #spalt320  {width: 41%;  padding: 5px 5px;   margin: 0px 0px 5px 5px;}
+  #spaltxxx  {width: auto; padding: 5px 5px;   margin-left: 0px;   clear: both;    float: none;  }
   PanlHead, PanlFoot {padding: 1px 5px;   clear: both;}
 }
   
 /* for 600px or less */
 @media screen and (max-width: 640px) {
-  #spalte1 {width: auto;  float: none;  margin-left: 5px; }
-/*#spalte2 {width: auto;  float: none;    margin-left: 5px; } */
-  #spaltex {width: auto;  float: none;  margin-left: 5px; }
+  #spalt320 {width: auto;  float: none;  margin-left: 5px; }
+  #spaltxxx {width: auto;  float: none;  margin-left: 5px; }
 }
 
 /* for 480px or less */
@@ -127,7 +124,7 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelW960, .panelW640, .panelW320, .panelW240 {
+.panelWmax, .panelWaut, .panelW960, .panelW640, .panelW320, .panelW240, .panelW160 {
     border: 1px solid black;
     background: var(--PanelBgrd);
     border-radius: 0.40em;
@@ -135,10 +132,12 @@ body {
     padding: 0.3em 0.3em 0.3em 0.3em;
 }
 .panelWmax { width: 100%;   }
+.panelWaut { width: auto;   }
 .panelW960 { width: 960px;  }
 .panelW640 { width: 640px;  }
 .panelW320 { width: 320px;  }
 .panelW240 { width: 240px;  }
+.panelW160 { width: 160px;  }
 .panelTitl {
   font-size: 1.1em;
   font-weight: 600;
@@ -198,7 +197,7 @@ form {
   width: 98%;
   /* height: 95%; */
   padding: 12px 2px 1px;
-  height: 1.2em; 
+ /*  height: 1.2em;  */
 }
 
 .lablInput label {
@@ -227,13 +226,13 @@ form {
 .lablInput textarea ~ label,
 .lablInput input ~ label,
 .lablInput input:focus ~ label {
-  font-size: 0.7em;
+  font-size: 0.65em;
   font-weight: 400;
   text-align: right;
   position: absolute;
-  width: 98%;
+  width: 99%;
   color: var(--blueColor);  /* LysBlå */
-  padding: 0.005em 0%;
+  padding: 0.005em 0;
 }
 
 .lablInput checkbox.filled,
@@ -276,12 +275,12 @@ input[type="submit"] {
   border-radius: 0.20em;
   border-width: 0 0.0 0.15em;
   cursor: pointer;
-  font-size: 1.0em;
+  font-size: 0.9em;
 /*  display: table; */
   color: white;     /* Tekst farve */
   text-align: center;
-  margin: 0.25em 2% 0.05em 1%;  /*  top right bottom  left  */
-  padding: 0.25em 0.25em 0.02em 0.25em;
+  margin: 0.15em 2% 0.05em 1%;  /*  top right bottom  left  */
+  padding: 0.15em 0.15em 0.15em 0.15em;
   transition: all 0.15s ease;
 }
 
@@ -541,6 +540,7 @@ ax[title]:hover:after {
 /*************************************/
 
 /* Tabel med Fastlåst Header: */
+/* Se mere: https://codepen.io/chiranjeeb/pen/LGsiv */
 .fixed-table-container {
   width: 99%;
   table-layout: fixed;
@@ -556,13 +556,13 @@ ax[title]:hover:after {
 .fixed-table-container-inner {
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 150px;
+ /*  max-height: 150px; */
 }
 
 .header-background {
   background-color: #DDDDDD;
   height: 26px; /* header-height */
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   right: 0;
   left: 0;
@@ -587,7 +587,7 @@ table {
   background-color: var(--tblRowLgt);
 } 
 .fixed-table-container td {
-  border-left: 1px dotted #343434;
+  border-left: 1px dotted #2223;
   padding-left: 2px;
 }
 tc {
@@ -779,4 +779,22 @@ hr.style18:before {
 .my-notify-error {
     color: #D8000C;
     background-color: #FFBABA;
+}
+
+/* http://stackoverflow.com/questions/1964839/how-can-i-create-a-please-wait-loading-animation-using-jquery */
+.modal {
+    display:    none;
+    position:   fixed;    z-index:    1000;
+    top:        0;        left:       0;
+    height:     100%;     width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+}
+
+body.loading {      /* When the body has the loading class, we turn the scrollbar off with overflow:hidden */
+    overflow: hidden;   
+}
+
+body.loading .modal {/* Anytime the body has the loading class, our modal element will be visible */
+    display: block;
 }

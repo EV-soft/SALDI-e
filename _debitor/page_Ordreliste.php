@@ -13,6 +13,10 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
 
   $pageTitl='Salgs ordrer';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+
+  Head_Navigation(tolk('@Kunder'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
+  Rude_DebtOrdrer();  # Demo!
+  Rude_FootMenu();
   
 #ob_start();
 @session_start();

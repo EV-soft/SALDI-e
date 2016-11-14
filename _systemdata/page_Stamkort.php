@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_systemdata/page_Stamkort.php';    $DocVer='5.0.0';     $DocRev='2016-10-00';
+<?php   $DocFil= '../_systemdata/page_Stamkort.php';    $DocVer='5.0.0';    $DocRev='2016-10-00';     $modulnr=0; 
 // Formål:  Kald til ufærdigt link
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
@@ -12,7 +12,7 @@
 
 if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
 
-  $pageTitl='Brugerdata';
+  $pageTitl='Firmadata';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
 
   
@@ -32,8 +32,8 @@ if ($_POST) {
   if ($postnr && !$bynavn) $bynavn= bynavn($postnr);
   if ($id==0) {
     $query = db_modify("insert into adresser (kontonr,firmanavn,addr1,addr2,postnr,bynavn,tlf,fax,cvrnr,art,bank_navn,bank_reg,bank_konto,email,mailfakt,pbs_nr,pbs,bank_fi,gruppe) values ('$kontonr','$firmanavn','$addr1','$addr2','$postnr','$bynavn','$tlf','$fax','$cvrnr','S','$bank_navn','$bank_reg','$bank_konto','$ny_email','$mailfakt','$pbs_nr','$pbs','$fi_nr','$gruppe')",__FILE__ . " linje " . __LINE__);
-    $query = db_select("select id from adresser where art = 'S'",__FILE__ . " linje " . __LINE__);
-    $row = db_fetch_array($query);
+//+    $query = db_select("select id from adresser where art = 'S'",__FILE__ . " linje " . __LINE__);
+//+    $row = db_fetch_array($query);
     $id = $row['id'];
   } elseif ($id > 0) {
     $query = db_modify("update adresser set kontonr = '$kontonr', firmanavn = '$firmanavn', addr1 = '$addr1', addr2 = '$addr2', postnr = '$postnr', bynavn = '$bynavn', tlf = '$tlf', fax = '$fax', cvrnr = '$cvrnr', bank_navn='$bank_navn', bank_reg='$bank_reg', bank_konto='$bank_konto',email='$ny_email',mailfakt='$mailfakt', notes = '$notes', pbs_nr='$pbs_nr', pbs='$pbs', bank_fi='$fi_nr',gruppe='$gruppe' where art = 'S'",__FILE__ . " linje " . __LINE__);
@@ -53,8 +53,8 @@ if ($_POST) {
   }
 }
 
-$query = db_select("select * from adresser where art = 'S'",__FILE__ . " linje " . __LINE__);
-$row = db_fetch_array(db_select("select * from adresser where art = 'S'",__FILE__ . " linje " . __LINE__););
+//+ $query = db_select("select * from adresser where art = 'S'",__FILE__ . " linje " . __LINE__);
+//+ $row = db_fetch_array(db_select("select * from adresser where art = 'S'",__FILE__ . " linje " . __LINE__););
 //  $id=$row['id']*1;
 //  $kontonr=$row['kontonr'];
 //  $firmanavn=$row['firmanavn'];
@@ -80,9 +80,9 @@ $row = db_fetch_array(db_select("select * from adresser where art = 'S'",__FILE_
 //  while(strlen($gruppe)<5) $gruppe='0'.$gruppe; 
 //  # $id=0;
     
-    SmallSpalte();  Rude_AdminMenu();
-    NextSpalte();   Rude_Stamdata();
-    NextSpalte();   Rude_Ansatte();
+    SpalteTop(240);   Rude_AdminMenu();
+    NextSpalte();     Rude_Stamdata();
+    NextSpalte();     Rude_Ansatte();
     EndSpalter();
     
 

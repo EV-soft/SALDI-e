@@ -15,7 +15,7 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
   $pageTitl='Brugerdata';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
-    SmallSpalte();  Rude_Formularer();
+    SpalteTop(240); Rude_Formularer();
     NextSpalte();   Rude_FormRedigerOrdrelin();
 
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode

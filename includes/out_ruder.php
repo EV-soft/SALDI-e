@@ -1,4 +1,4 @@
-<?php      $DocFil= '../includes/out_ruder.php';    $DocVer='5.0.0';     $DocRev='2016-10-00';      $modulnr=0;
+<?php   $DocFil= '../includes/out_ruder.php';   $DocVer='5.0.0';    $DocRev='2016-10-00';   $modulnr=0;
 //             ___   _   _    ___  _         
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
@@ -25,7 +25,7 @@ function menuTitl ($label='') {
   echo '<menuBg><img src= "../images/menuShapeTitl.png" alt="" height="32" width="120" /><a href="'.$link.
   '" class="btnTit" notitle= "'.Tolk('@Kolonne Overskrift').'">'.ucfirst(str_replace(' ','&nbsp;',Tolk($label))).'</a></menuBg>'; }
 function menuKnap ($h='32',$w='120',$label='',$link='',$title='') { 
-  if (strpos($link,'_base/blindgyden.php')) { $flag0= ' style="color:gray" '; $mess= ' (En blindgyde endnu!)';}
+  if (strpos($link,'_base/page_Blindgyden')) { $flag0= ' style="color:gray" '; $mess= ' (En blindgyde endnu!)';}
 #  if (strpos($link,'page_syssetup.php')) $flag1= ' style="color:red" '; else $flag1= ' style="color:#900000" ';
   echo '<menuBg><img src= "../images/menuShapeButt.png" alt="" height="'.$h.'" width="'.$w.'" /><a href="'.$link.
   '" class="btn" tip="'.Tolk($title).$mess.'" '.$flag0.$flag1.'>'.ucfirst(str_replace(' ','&nbsp;',Tolk($label))).'</a></menuBg>'; }
@@ -33,7 +33,7 @@ function menuKnap ($h='32',$w='120',$label='',$link='',$title='') {
 # PROGRAM-MODUL;
 function Rude_HovedMenu (&$regnskab, &$vis_finans, &$vis_debitor, &$vis_kreditor, &$vis_prodkt, &$vis_lager, &$programSprog) {
 global $copydate, $copyright, $progvers;
-  $goBack= '?returside=../_base/menu.php';
+  $goBack= '';  # '?returside=../_base/menu.php';
   echo '<PanlHead>';        
   htm_Rude_Top($name='menuform',$capt='',$parms='',$icon='',$klasse='panelWmax',__FUNCTION__);
   echo '<div style="text-align: center"><img src= "../images/SALDIe50x150.png" alt="Saldi Logo" height="50" width="150" ></div>';
@@ -49,86 +49,84 @@ global $copydate, $copyright, $progvers;
   if ($vis_lager)   menuTitl($label='@LAGER');
                     menuTitl($label='@SYSTEM'); 
   echo '<br>';
-  if ($vis_finans)  menuKnap($h='32',$w='120' ,$label='@Kasse kladder'    ,$link='../_finans/page_Kladdeliste.php'.$goBack, $title='@Gå til menuen Kassekladder'    );
-  if ($vis_debitor) menuKnap($h='32',$w='120' ,$label='@Ordrer'           ,$link='../_debitor/page_Ordreliste.php'.$goBack,      $title='@Gå til menuen Debitor Ordrer'  );
-  if ($vis_kreditor)menuKnap($h='32',$w='120' ,$label='@Ordrer'           ,$link='../_kreditor/page_Ordreliste.php'.$goBack,     $title='@Gå til menuen Kreditor Ordrer' );
-  if ($vis_prodkt)  menuKnap($h='32',$w='120' ,$label='@Produktion'       ,$link='../_produktion/page_Ordreliste.php'.$goBack,   $title='@Gå til menuen Produktion'      );
-  if ($vis_lager)   menuKnap($h='32',$w='120' ,$label='@Varer'            ,$link='../_lager/page_Varer.php'.$goBack,             $title='@Gå til menuen Varer' );
-                    menuKnap($h='32',$w='120' ,$label='@Konto plan'       ,$link='../_systemdata/page_Kontoplan.php'.$goBack,    $title='@Gå til menuen Kontoplan' );
-  echo '<br>';
-  if ($vis_finans)  menuKnap($h='32',$w='120' ,$label='@Regnskab'         ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Regnskab'        );
-  if ($vis_debitor) menuKnap($h='32',$w='120' ,$label='@Konti'            ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Debitor Konti'   );
-  if ($vis_kreditor)menuKnap($h='32',$w='120' ,$label='@Konti'            ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Kreditor Konti'  );
-  if ($vis_prodkt)  menuKnap($h='32',$w='120' ,$label='@Produktion'       ,$link='../_produktion/page_Ordreliste.php'.$goBack,   $title='@Gå til menuen Produktion'      );
-  if ($vis_lager)   menuKnap($h='32',$w='120' ,$label='@Vare modtagelse'  ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Varemodtagelse'  );
-                    menuKnap($h='32',$w='120' ,$label='@Indstillinger'    ,$link='../_systemdata/page_Syssetup.php'.$goBack,$title='@Gå til menuen Indstillinger'   );
-  echo '<br>';
-  if ($vis_finans)  menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Finans Rapporter'  );
-  if ($vis_debitor) menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Debitor Rapporter' );
-  if ($vis_kreditor)menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Kreditor Rapporter');
-  if ($vis_prodkt)  menuKnap($h='32',$w='120',$label=''                   ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til ?'                        );
-  if ($vis_lager)   menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_lager/page_Beholdningsliste.php'.$goBack,  $title='@Gå til menuen Vare Rapporter'    );
-  #                 menuKnap($h='32',$w='120',$label='@Sikkerheds kopi'   ,$link='../_base/blindgyden.php'.$goBack,         $title='@Gå til menuen Sikkerhedskopi'    );
-                    menuKnap($h='32',$w='120' ,$label='DEMO'              ,$link='../_base/page_LayoutModuler.php'.$goBack,$title='@Demonstration af output-moduler');
+  if ($vis_finans)  menuKnap($h='32',$w='120' ,$label='@Kasse kladder'    ,$link='../_finans/page_Kladdeliste.php',     $title='@Gå til Kassekladder'    );
+  if ($vis_debitor) menuKnap($h='32',$w='120' ,$label='@Ordrer'           ,$link='../_debitor/page_Ordreliste.php',     $title='@Gå til Debitor Ordrer'  );
+  if ($vis_kreditor)menuKnap($h='32',$w='120' ,$label='@Ordrer'           ,$link='../_kreditor/page_Ordreliste.php',    $title='@Gå til Kreditor Ordrer' );
+  if ($vis_prodkt)  menuKnap($h='32',$w='120' ,$label='@Produktion'       ,$link='../_produktion/page_Ordreliste.php',  $title='@Gå til Produktion'      );
+  if ($vis_lager)   menuKnap($h='32',$w='120' ,$label='@Varer'            ,$link='../_lager/page_Varer.php'.$goBack,    $title='@Gå til Varer');
+                    menuKnap($h='32',$w='120' ,$label='@Konto plan'       ,$link='../_systemdata/page_Kontoplan.php',   $title='@Gå til Kontoplan' );
+  echo '<br>';  
+  if ($vis_finans)  menuKnap($h='32',$w='120' ,$label='@Regnskab'         ,$link='../_finans/page_Regnskab.php',        $title='@Gå til Regnskab'        );
+  if ($vis_debitor) menuKnap($h='32',$w='120' ,$label='@Konti'            ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Debitor Konti'   );
+  if ($vis_kreditor)menuKnap($h='32',$w='120' ,$label='@Konti'            ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Kreditor Konti'  );
+  if ($vis_prodkt)  menuKnap($h='32',$w='120' ,$label='@Produktion'       ,$link='../_produktion/page_Ordreliste.php',  $title='@Gå til Produktion'      );
+  if ($vis_lager)   menuKnap($h='32',$w='120' ,$label='@Vare modtagelse'  ,$link='../_lager/page_Varemodtagelse.php',   $title='@Gå til Varemodtagelse'  );
+                    menuKnap($h='32',$w='120' ,$label='@Indstillinger'    ,$link='../_systemdata/page_Syssetup.php',    $title='@Gå til menuen Indstillinger');
+  echo '<br>';  
+  if ($vis_finans)  menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Finans Rapporter'  );
+  if ($vis_debitor) menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Debitor Rapporter' );
+  if ($vis_kreditor)menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Kreditor Rapporter');
+  if ($vis_prodkt)  menuKnap($h='32',$w='120',$label=''                   ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til ?'                 );
+  if ($vis_lager)   menuKnap($h='32',$w='120',$label='@Rapporter'         ,$link='../_lager/page_Beholdningsliste.php', $title='@Gå til Vare Rapporter'    );
+  #                 menuKnap($h='32',$w='120',$label='@Sikkerheds kopi'   ,$link='../_base/page_Blindgyden.php'.$goBack,    $title='@Gå til Gem/Hent sikkerhedskopi');
+                    menuKnap($h='32',$w='120' ,$label='DEMO'              ,$link='../_base/page_Layoutdemo.php',        $title='@Demonstration af output-moduler');
   htm_FrstFelt('20%',0);          
   htm_NextFelt('20%');  echo '<small>SALDI - Ver '.$progvers.'</small>';              
-  htm_NextFelt('30%');  echo '<small><i>Copyright '.$copydate.' '.$copyright.'</i></small>';  #  "Copyright ©2003-2016 DANOSOFT ApS"
+  htm_NextFelt('30%');  echo '<small><i>Copyright '.$copydate.' '.$copyright.'</i></small>';
   htm_NextFelt('20%');  echo '<small>'.tolk('@Aktuelt sprog: ').$programSprog.'</small>';
   htm_NextFelt('20%');
   htm_LastFelt();
   echo '</p>';
-  htm_RudeBund($pmpt=Tolk('@Gem'),$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt=Tolk('@Gem'),$subm=false,$title='@Gem');
   Rude_FootMenu($doPrint=false, $doErase=false, $doLookUp=false, $doAccept=false, $doExport=false, $doImport=false, $OpslLabl='');
   echo '</PanlHead>';
 }
 
 # PROGRAM-MODUL;
 function Rude_AdminMenu () {
-  htm_Rude_Top($name='adminform',$capt='Indstillinger',$parms='',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
-  $goBack= '?returside=../_base/menu.php';
+  htm_Rude_Top($name='adminform',$capt='Indstillinger',$parms='../_base/page_Gittermenu.php',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
+  $goBack= '';  # '?returside=../_base/menu.php';
   echo '<div style="text-align:center;">';
-                menuKnap($h='22',$w='180',$label='@Moms',           $link='../_systemdata/page_Syssetup.php'.$goBack,    $title='@Indstillinger angående moms');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Debitor og Kreditor',$link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående grupper');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Afdelinger',     $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Afdelinger');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Projekter',      $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Projekter');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Lagre',          $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Lagre');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Varegrupper',    $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Varegrupper');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Rabatgrupper',   $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Rabatgrupper');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Valuta',         $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående valuta');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Brugere',        $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Brugere');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Regnskabsår',    $link='../_base/blindgyden.php'.$goBack,    $title='@Indstillinger angående Regnskabsår');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Stamdata',       $link='../_systemdata/page_Stamkort.php'.$goBack,    $title='@Indstillinger angående Stamdata');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Formularer',     $link='../_systemdata/page_FormText.php'.$goBack,    $title='@Indstillinger angående Formularer');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Enheder og matr.',$link='../_base/blindgyden.php'.$goBack,   $title='@Indstillinger angående registrede Enheder, beskrivelse og materiale');
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Diverse menu',   $link='../_systemdata/page_Divsetup.php'.$goBack,    $title='@Diverse indstillinger');
+                menuKnap($h='22',$w='180',$label='@Moms',               $link='../_systemdata/page_Syssetup.php'.$goBack,   $title='@Indstillinger angående moms');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Debitor og Kreditor',$link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående grupper');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Afdelinger',         $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Afdelinger');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Projekter',          $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Projekter');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Lagre',              $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Lagre');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Varegrupper',        $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Varegrupper');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Rabatgrupper',       $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Rabatgrupper');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Valuta',             $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående valuta');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Brugere',            $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Brugere');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Regnskabsår',        $link='../_base/page_Blindgyden.php'.$goBack,           $title='@Indstillinger angående Regnskabsår');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Stamdata',           $link='../_systemdata/page_Stamkort.php'.$goBack,   $title='@Indstillinger angående Stamdata');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Formularer',         $link='../_systemdata/page_FormText.php'.$goBack,   $title='@Indstillinger angående Formularer');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Enheder og matr.',   $link='../_systemdata/page_Enheder.php',   $title='@Indstillinger angående registrede Enheder, beskrivelse og materiale');
   echo '<br>';  
-  echo '<br>';  menuKnap($h='22',$w='180',$title='@Retur til hovedmenu',$link='../_base/page_Gittermenu.php'.$goBack,  $title='@Gå til SALDI´s gittermenu');
+  echo '<br>';  menuKnap($h='22',$w='180',$label='@Flere indstillinger',   $link='../_systemdata/page_Divsetup.php'.$goBack,$title='@Diverse indstillinger');
   echo '<br><br></div>';
-  htm_RudeBund($pmpt=Tolk('@Gem'),$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt=Tolk('@Retur til hovedmenu'),$subm=true,$title='@Retur til hovedmenu');
 };
 
 # PROGRAM-MODUL;
 function Rude_DiverseMenu () {
-  htm_Rude_Top($name='adminform',$capt='Diverse indstillinger',$parms='',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
+  htm_Rude_Top($name='adminform',$capt='Flere indstillinger',$parms='../_systemdata/page_Syssetup.php',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
   $goBack= '?returside=../_base/menu.php';
   echo '<div style="text-align:center;">';
-                menuKnap($h='22',$w='180' ,$label='@Kontoindstillinger',    $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående regnskabsnavn og mailserver for afsendelse af mail');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Provisionsberegning',   $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Provisionsberegning');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Personlige valg',       $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Farver og udseende m.v.');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Varerelateret',         $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Varerelateret f.eks. varianter');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Prislister',            $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Prislister');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Rykkerrelateret',       $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Rykkerrelaterede');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Diverse valg',          $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående aktivering af ekstra moduler m.v.');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Tjeklister',            $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Tjeklister');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Bilagshåndtering',      $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Bilagshåndtering');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Øredifferencer',        $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Øredifferencer');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Massefakturering',      $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Massefakturering');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Formular Sprog',        $link='../_base/blindgyden.php'.$goBack,$title='@Indstillinger angående Sprog på blanketter');
-  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Data import & eksport', $link='../_base/blindgyden.php'.$goBack,$title='@Importér / eksportér: Kontoplan, Formularer, Debitorer, Kreditorer, Varer, og Dataudtræk');
-  echo '<br>';  
-  echo '<br>';  menuKnap($h='22',$w='180',$label='@Retur til indstillingsmenu',$link='../_systemdata/page_Syssetup.php'.$goBack,$title='@Gå tilbag til indstillingsmenuen');
+                menuKnap($h='22',$w='180' ,$label='@Regnskabs navn m.v.',   $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående regnskabsnavn og mailserver for afsendelse af mail');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Provisionsberegning',   $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Provisionsberegning');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Personlige valg',       $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Farver og udseende m.v.');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Varerelateret',         $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Varerelateret f.eks. varianter');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Prislister',            $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Prislister');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Rykkerrelateret',       $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Rykkerrelaterede');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Aktivering af tilvalg', $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående aktivering af ekstra moduler m.v.');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Tjeklister',            $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Tjeklister');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Bilagshåndtering',      $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Bilagshåndtering');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Øredifferencer',        $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Øredifferencer');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Massefakturering',      $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Massefakturering');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Program Sprog',         $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående programmets Sprog');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Formular Sprog',        $link='../_base/page_Blindgyden.php',   $title='@Indstillinger angående Sprog på blanketter');
+  echo '<br>';  menuKnap($h='22',$w='180' ,$label='@Data import & eksport', $link='../_base/page_Blindgyden.php',   $title='@Importér / eksportér: Kontoplan, Formularer, Debitorer, Kreditorer, Varer, og Dataudtræk');
   echo '<br><br></div>';
-  htm_RudeBund($pmpt=Tolk('@Gem'),$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt=Tolk('@Retur til indstillinger'),$subm=true,$title='@Retur til indstillingsmenu');
 };
 
 # PROGRAM-MODUL;
@@ -184,7 +182,7 @@ function Rude_DBsetup (&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password
                $revi=true, $rows='2',$width='',$step='', $more=' required placeholder="'.tolk('@Udfyld...').'"');
   htm_CombFelt($type='password',  $name='db_password',  $valu= $db_password,  $titl='@Adgangskode for ovenstående bruger',                          $labl='@Adgangskode for databaseadministrator', 
                $revi=true, $rows='2',$width='',$step='', $more='required placeholder="'.tolk('@Password...').'"');
-  htm_CombFelt($type='text',  $name='adm_navn',     $valu= $adm_navn,     $titl='@Ønsket navn på din SALDI-administratorkonto til dit SALDI-system.  F.eks.: [saldi-admin]',  $labl='@SALDI-administratorens brugernavn', 
+  htm_CombFelt($type='text',  $name='adm_navn',     $valu= $adm_navn,     $titl='@Ønsket navn på din SALDI-administratorkonto til dit SALDI-system. F.eks.: [saldi-admin]',  $labl='@SALDI-administratorens brugernavn', 
                $revi=true, $rows='2',$width='',$step='', $more='required placeholder="'.tolk('@Udfyld...').'"');
   
 # echo '<form>';
@@ -203,7 +201,7 @@ function Rude_DBsetup (&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password
   echo '<b>'.tolk('@Tip:').'</b> '.tolk('@Hold musen over blå tekster, for at få hjælpetip.').'</small></div>';
   echo '<br><div style="text-align:left"><small><b>'.tolk('@HUSK:').'</b> '.tolk('@Skrivebeskyt alle mapper på serveren, på nær: ').
        '<br>../temp ../includes ../logolib og undermapper heri.<br>(../temp, ../_config og ../_export-import) </small></div>';
-  htm_RudeBund($pmpt=Tolk('@Installér'),$revi=true,$title='@Klik her for at oprette dit SALDI database-system');
+  htm_RudeBund($pmpt=Tolk('@Installér'),$subm=true,$title='@Klik her for at oprette dit SALDI database-system');
   echo '<script>';
   echo 'var password = document.getElementById("passwordpwr"), ';
   echo '  confirm_password = document.getElementById("confirm_password");';
@@ -268,7 +266,7 @@ function Rude_install (&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password
       tolk('@Oprettelse af regnskab, sker senere, når du 1. gang logger ind, som SALDI-administrator.').'<br><br>'.
       tolk('@På SALDI-wiki kan du læse opdaterede informationer.');
   echo '</small></div>';
-  htm_RudeBund($pmpt=Tolk('@Installér'),$revi=false,$title='@Klik her for at oprette dit SALDI database-system');
+  htm_RudeBund($pmpt=Tolk('@Installér'),$subm=false,$title='@Klik her for at oprette dit SALDI database-system');
 }
 
 function Rude_InstallFail($noskriv) {
@@ -280,7 +278,7 @@ function Rude_InstallFail($noskriv) {
     echo tolk('@hvor "connect.php" skal oprettes.').'<br><br>';
     echo tolk('@Sørg for at der er skriveadgang for Webbrugere, til katalogerne').': "includes", "temp", "logolib" <br><br>';
     echo tolk('@Se hvordan i installeringsvejledningen INSTALLATION.txt.').' <br><br>';
-  htm_RudeBund($pmpt= Tolk('@Installér'),$revi=false,$title='@Klik her for at oprette dit SALDI database-system');
+  htm_RudeBund($pmpt= Tolk('@Installér'),$subm=false,$title='@Klik her for at oprette dit SALDI database-system');
 }
 
 function Rude_InstallSucces(&$db_navn, &$adm_navn) {
@@ -294,7 +292,7 @@ function Rude_InstallSucces(&$db_navn, &$adm_navn) {
 //    echo '<p>&nbsp;</p><br>';
 //    echo '<p><a href="../_base/index.php" title="Til SALDI-administratorsiden hvor regnskaber administreres" <br>';
 //    echo ' style="text-decoration:none"><input type="button" value="Fortsæt"></a><br><br>';
-  htm_RudeBund($pmpt=Tolk('@Fortsæt'),$revi=true,$title='@Fortsæt til logind og oprettelse af 1. regnskab');
+  htm_RudeBund($pmpt=Tolk('@Fortsæt'),$subm=true,$title='@Fortsæt til logind og oprettelse af 1. regnskab');
 }
 
 # PROGRAM-MODUL;
@@ -317,7 +315,7 @@ function Rude_Login (&$regnskab,&$brugernavn,&$brugerkode,&$ProgVers,&$LnkHelp,&
   SprogValg($programSprog);
   echo '<hr>';
   echo '<p align="center"><a href="'.$link=''.'"><u title="'.tolk('@Få tilsendt mail angående resat password').'">'.  tolk('@Glemt adgangskode?').'</u></a></p>';
-  htm_RudeBund($pmpt=Tolk('@Log ind'),$revi=true,$title='@Gå videre til SALDI regnskabet');
+  htm_RudeBund($pmpt=Tolk('@Log ind'),$subm=true,$title='@Gå videre til SALDI regnskabet');
 }
 
 # PROGRAM-MODUL;
@@ -338,7 +336,7 @@ function Rude_Kunden (&$kontonr, &$kategori, &$cvrnr, &$eannr, &$bankreg, &$bank
   htm_CombFelt($type='text',  $name='ansv',   $valu= $ansv,     $titl='@Kundeansvarlig',          $labl='@Kundeansvarlig',  $revi=true);
   htm_CombFelt($type='text',  $name='sprog',  $valu= $formsprog,$titl='@Sproget som skal benyttes på faktura udskrifter',   $labl='@Faktureringssprog', $revi=true,'','','','placeholder="...'.tolk('@hvis sproget ikke er dansk').'..."');
   htm_CombFelt($type='text',  $name='homeweb',$valu= $homeweb,  $titl='@Kundens hjemmeside',      $labl='@Hjemmeside',      $revi=true,'','','',$Erhv);
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -373,7 +371,7 @@ function Rude_Betingelser (&$debigrup, &$betaling, &$frist, &$print2, &$kunderef
                     ['@Elektronisk fakturering','ioubl','@OIOUBL'],
                     ['@PBS faktura','pbs','@PBS']),$action='');
   htm_CombFelt($type='text',  $name='kunderef',   $valu= $kunderef, $titl='@f.eks. Rekvisitions NR',  $labl='@Kundens referance', $revi=true);
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -383,17 +381,17 @@ function Rude_Kontakter () {
   Kontakt($posi=2, $kontakt='Andersine', $telf, $mobil, $mail);
   echo '<hr>';
   echo '<div class="centrer">'; htm_accept('@Opret Ny','@Opret en ny kontakt'); echo '</div>';
-  htm_RudeBund($pmpt='@Gem rettelser',$revi=true,$title='@Gem evt. rettelser ovenfor');
+  htm_RudeBund($pmpt='@Gem rettelser',$subm=true,$title='@Gem evt. rettelser ovenfor');
 }
 
 function Kontakt (&$posi, &$kontakt, &$telf, &$mobil, &$mail) {
-  htm_FrstFelt('16%',0);
+  htm_FrstFelt('14%',0);
     htm_CombFelt($type='text',  $name='posi',   $valu= $posi,   $titl='@Angiv position',        $labl='@Pos.',    $revi=true, $rows='',$width='45',$step='0.5');
-  htm_NextFelt('34%');  
+  htm_NextFelt('40%');  
     htm_CombFelt($type='text',  $name='kontakt',$valu= $kontakt,$titl='@Angiv Kontakt person',  $labl='@Kontakt person',  $revi=true,$rows='',$width='45');
-  htm_NextFelt('25%');
+  htm_NextFelt('23%');
     htm_CombFelt($type='text',  $name='telf',   $valu= $telf,   $titl='@Angiv Telefon',         $labl='@Telefon', $revi=true, $rows='',$width='45');
-  htm_NextFelt('25%');        
+  htm_NextFelt('23%');        
     htm_CombFelt($type='text',  $name='mobil',  $valu= $mobil,  $titl='@Angiv Mobilnr.',        $labl='@Mobil',   $revi=true, $rows='',$width='45');
   htm_LastFelt();       
   htm_CombFelt(  $type='mail',  $name='mail',   $valu= $mail,   $titl='@Angiv E-mail',          $labl='@E-mail',  $revi=true, $rows='');
@@ -404,44 +402,42 @@ function Kontakt (&$posi, &$kontakt, &$telf, &$mobil, &$mail) {
 # PROGRAM-MODUL;
 function Rude_Fakturering (&$navn, &$addr, &$sted, &$ponr, &$by, &$land, &$noter, &$telf, &$att, &$email, &$usemail, &$faktdato) {
   htm_Rude_Top($name='faktform',$capt='@Kunde - Fakturering:',$parms='',$icon='fa-pencil-square-o','panelWmax',__FUNCTION__);
-  htm_CombFelt($type='text',$name='navn', $valu= $navn,   $titl='@Angiv Kunde Navn',            $labl='@Kunde navn',      $revi=true);
-  htm_CombFelt($type='text',$name='addr', $valu= $addr,   $titl='@Angiv Faktura Adresse',       $labl='@Faktura adresse', $revi=true);
-  htm_FrstFelt('25%');
-    htm_CombFelt($type='text',$name='ponr', $valu= $ponr, $titl='@Angiv Faktura Kunde postnr',  $labl='@Postnr',          $revi=true);
-  htm_NextFelt('75%');
-    htm_CombFelt($type='text',$name='by',   $valu= $by,   $titl='@Angiv Faktura Kunde Bynavn',  $labl='@Faktura By',      $revi=true);
-  htm_lastFelt();
-# htm_CombFelt($type='text',$name='ponr', $valu= $ponr,   $titl='@Angiv Faktura Kunde postnr',  $labl='@Faktura postnr',  $revi=true);
-# htm_CombFelt($type='text',$name='by',   $valu= $by,     $titl='@Angiv Faktura Kunde Bynavn',  $labl='@Faktura By',      $revi=true);
-  htm_CombFelt($type='text',$name='sted', $valu= $sted,   $titl='@Angiv Faktura Kunde Sted',    $labl='@Faktura Sted',    $revi=true);
-  htm_CombFelt($type='text',$name='land', $valu= $land,   $titl='@Angiv Faktura Kunde Land',    $labl='@Faktura Land',    $revi=true);
-  htm_CombFelt($type='area',$name='noter',$valu= $noter,  $titl='@Angiv Bemærkninger',          $labl='@Bemærkninger',    $revi=true, $rows='1');
-  htm_CombFelt($type='text',$name='telf', $valu= $telf,   $titl='@Angiv Kunde Telefon',         $labl='@Telefon(er)',     $revi=true);
-  htm_CombFelt($type='text',$name='att',  $valu= $att,    $titl='@Angiv Kunde Attention',       $labl='@Attention',       $revi=true);
-  htm_CombFelt($type='mail',$name='email',$valu= $email,  $titl='@Angiv Kunde Email adresse',   $labl='@Kundens Email adresse',$revi=true);
+  htm_CombFelt($type='text',    $name='navn', $valu= $navn,   $titl='@Angiv Kunde Navn',            $labl='@Kunde navn',      $revi=true);
+  htm_CombFelt($type='text',    $name='addr', $valu= $addr,   $titl='@Angiv Faktura Adresse',       $labl='@Faktura adresse', $revi=true);
+  htm_FrstFelt('25%');  
+    htm_CombFelt($type='text',  $name='ponr', $valu= $ponr, $titl='@Angiv Faktura Kunde postnr',  $labl='@Postnr',          $revi=true);
+  htm_NextFelt('75%');  
+    htm_CombFelt($type='text',  $name='by',   $valu= $by,   $titl='@Angiv Faktura Kunde Bynavn',  $labl='@Faktura By',      $revi=true);
+  htm_lastFelt(); 
+  htm_CombFelt($type='text',    $name='sted', $valu= $sted,   $titl='@Angiv Faktura Kunde Sted',    $labl='@Faktura Sted',    $revi=true);
+  htm_CombFelt($type='text',    $name='land', $valu= $land,   $titl='@Angiv Faktura Kunde Land',    $labl='@Faktura Land',    $revi=true);
+  htm_CombFelt($type='area',    $name='noter',$valu= $noter,  $titl='@Angiv Bemærkninger',          $labl='@Bemærkninger',    $revi=true, $rows='1');
+  htm_CombFelt($type='text',    $name='telf', $valu= $telf,   $titl='@Angiv Kunde Telefon',         $labl='@Telefon(er)',     $revi=true);
+  htm_CombFelt($type='text',    $name='att',  $valu= $att,    $titl='@Angiv Kunde Attention',       $labl='@Attention',       $revi=true);
+  htm_CombFelt($type='mail',    $name='email',$valu= $email,  $titl='@Angiv Kunde Email adresse',   $labl='@Kundens Email adresse',$revi=true);
   htm_FrstFelt('50%');  
-    htm_CheckFlt($type='checkbox',$name='useMail',  $valu= $usemail,  $titl='@Send faktura med mail', $labl='@Benyt mail',$revi=true);
+    htm_CheckFlt($type='checkbox',$name='useMail', $valu= $usemail,  $titl='@Send faktura med mail', $labl='@Benyt mail',$revi=true);
   htm_NextFelt('50%');  
-    htm_CombFelt($type='date',    $name='faktdato', $valu= $faktdato, $titl='@Fakturerings dato',     $labl='@Faktura Dato',$revi=true);
+    htm_CombFelt($type='date',  $name='faktdato',  $valu= $faktdato, $titl='@Fakturerings dato',     $labl='@Faktura Dato',$revi=true);
   htm_LastFelt();
-  htm_RudeBund($pmpt='@Fakturér',$revi=true,$title='@Fakturer og udskriv til den under {Betingelser}, valgte udskriver!');
+  htm_RudeBund($pmpt='@Fakturér',$subm=true,$title='@Fakturer og udskriv til den under {Betingelser}, valgte udskriver!');
 }
 
 # PROGRAM-MODUL;
 function Rude_Ordreinfo (&$valuta, &$vorref, &$afdel, &$ordrdato, &$genfdato, &$godkendt, &$optlist) {
 $optlist= array(['','DKK','DKK'],['','AED','AED'],['','EUR','EUR'],['','USD','USD']);
   htm_Rude_Top($name='ordrform',$capt='@Ordreinfo:',$parms='',$icon='fa-eur','panelWmax',__FUNCTION__);
-  htm_OptioFlt($type='text',  $name='valuta',   $valu= $valuta,   $titl='@Valuta som ordren skal benytte',  $labl='@Valuta',  $revi=true,
+  htm_OptioFlt($type='text',    $name='valuta',   $valu= $valuta,   $titl='@Valuta som ordren skal benytte',  $labl='@Valuta',  $revi=true,
                $optlist= array(['','DKK','DKK'],['','AED','AED'],['','EUR','EUR'],['','USD','USD']),  $action='');
-  htm_CombFelt($type='text',  $name='vorref',   $valu= $vorref,   $titl='@Sælgers referance',               $labl='@Vor referance', $revi=true);
-  htm_CombFelt($type='text',  $name='afdel',    $valu= $afdel,    $titl='@Sælgers afdeling',                $labl='@Afdeling',      $revi=true);
+  htm_CombFelt($type='text',    $name='vorref',   $valu= $vorref,   $titl='@Sælgers referance',               $labl='@Vor referance', $revi=true);
+  htm_CombFelt($type='text',    $name='afdel',    $valu= $afdel,    $titl='@Sælgers afdeling',                $labl='@Afdeling',      $revi=true);
   htm_FrstFelt('50%');        
-    htm_CombFelt($type='date',$name='ordrdato', $valu= $ordrdato, $titl='@Datoen hvor ordren indgik',       $labl='@Ordre Dato',    $revi=true);
+    htm_CombFelt($type='date',  $name='ordrdato', $valu= $ordrdato, $titl='@Datoen hvor ordren indgik',       $labl='@Ordre Dato',    $revi=true);
   htm_NextFelt('50%');  
-    htm_CombFelt($type='date',$name='genfdato', $valu= $genfdato, $titl='@Husk fremtidigt fakturerings tidspunkt',  $labl='@Genfakturerings Dato',$revi=true);
+    htm_CombFelt($type='date',  $name='genfdato', $valu= $genfdato, $titl='@Husk fremtidigt fakturerings tidspunkt',  $labl='@Genfakturerings Dato',$revi=true);
   htm_LastFelt();
   htm_CheckFlt($type='checkbox',$name='godkendt',$valu= $godkendt,$titl='@Ordren er godkendt hvis feltet er afmærket',$labl='@Godkendt',$revi=true);
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem data i denne rude.');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem data i denne rude.');
 }
 
 # PROGRAM-MODUL;
@@ -449,39 +445,37 @@ function Rude_Levering ($navn, $addr, $sted, $ponr, $by, $land, $telf, $kont, $e
   htm_Rude_Top($name='leveform',$capt='@Levering:',$parms='',$icon='fa-truck','panelWmax',__FUNCTION__);
   htm_CheckFlt($type='checkbox',$name='somfakt',  $valu= $somfakt,  $titl='@Afmærk her, hvis leverings adresse er den samme som faktura adresse', 
                                                                                                                         $labl='@Levering til faktura-adresse',$revi=true);
-  htm_CombFelt($type='text',$name='levnavn',      $valu= $navn,     $titl='@Angiv Modtager Navn',                       $labl='@Modtager navn',               $revi=true);
-  htm_CombFelt($type='text',$name='levaddr1',     $valu= $addr,     $titl='@Angiv Leverings Adresse',                   $labl='@Leverings adresse',           $revi=true);
-  htm_CombFelt($type='text',$name='sted',         $valu= $sted,     $titl='@Angiv Leverings Sted',                      $labl='@Sted',                        $revi=true);
-  htm_FrstFelt('25%');
-    htm_CombFelt($type='text',$name='levpostnr',  $valu= $ponr,     $titl='@Angiv Leverings Kunde postnr',              $labl='@Postnr',                      $revi=true);
-  htm_NextFelt('75%');
-    htm_CombFelt($type='text',$name='levby',      $valu= $by,       $titl='@Angiv Leveringsstedets Bynavn',             $labl='@Leverings by',                $revi=true);
-  htm_lastFelt();
-# htm_CombFelt($type='text',$name='levpostnr',    $valu= $ponr,     $titl='@Angiv Leverings Kunde postnr',              $labl='@Leverings postnr',            $revi=true);
-# htm_CombFelt($type='text',$name='levby',        $valu= $by,       $titl='@Angiv Leveringsstedets Bynavn',             $labl='@Leverings by',                $revi=true);
-  htm_CombFelt($type='text',$name='land',         $valu= $land,     $titl='@Angiv Leverings Land',                      $labl='@Leverings Land',              $revi=true);
-  htm_CombFelt($type='text',$name='levtelf',      $valu= $telf,     $titl='@Angiv Modtagers Telefon',                   $labl='@Telefon(er)',                 $revi=true);
-  htm_CombFelt($type='text',$name='levkont',      $valu= $kont,     $titl='@Angiv Kontaktpersons Navn',                 $labl='@Kontaktperson',               $revi=true);
-  htm_CombFelt($type='mail',$name='levemail',     $valu= $email,    $titl='@Angiv Modtagers Email adresse',             $labl='@Modtagerens Email adresse',   $revi=true);
-  htm_CombFelt($type='text',$name='forsendelse',  $valu= $forsend,  $titl='@Angiv Forsendelses oplysninger',            $labl='@Fragtmetode)',                $revi=true);
-  htm_CombFelt($type='area',$name='levnoter',     $valu= $noter,    $titl='@Angiv Noter til fragtmand',                 $labl='@Noter til fragtmand',         $revi=true, $rows='1');
+  htm_CombFelt($type='text',    $name='levnavn',      $valu= $navn,     $titl='@Angiv Modtager Navn',                   $labl='@Modtager navn',               $revi=true);
+  htm_CombFelt($type='text',    $name='levaddr1',     $valu= $addr,     $titl='@Angiv Leverings Adresse',               $labl='@Leverings adresse',           $revi=true);
+  htm_CombFelt($type='text',    $name='sted',         $valu= $sted,     $titl='@Angiv Leverings Sted',                  $labl='@Sted',                        $revi=true);
+  htm_FrstFelt('25%');                                                                                                  
+    htm_CombFelt($type='text',  $name='levpostnr',    $valu= $ponr,     $titl='@Angiv Leverings Kunde postnr',          $labl='@Postnr',                      $revi=true);
+  htm_NextFelt('75%');                                                                                                  
+    htm_CombFelt($type='text',  $name='levby',        $valu= $by,       $titl='@Angiv Leveringsstedets Bynavn',         $labl='@Leverings by',                $revi=true);
+  htm_lastFelt();                                                                                                       
+  htm_CombFelt($type='text',    $name='land',         $valu= $land,     $titl='@Angiv Leverings Land',                  $labl='@Leverings Land',              $revi=true);
+  htm_CombFelt($type='text',    $name='levtelf',      $valu= $telf,     $titl='@Angiv Modtagers Telefon',               $labl='@Telefon(er)',                 $revi=true);
+  htm_CombFelt($type='text',    $name='levkont',      $valu= $kont,     $titl='@Angiv Kontaktpersons Navn',             $labl='@Kontaktperson',               $revi=true);
+  htm_CombFelt($type='mail',    $name='levemail',     $valu= $email,    $titl='@Angiv Modtagers Email adresse',         $labl='@Modtagerens Email adresse',   $revi=true);
+  htm_CombFelt($type='text',    $name='forsendelse',  $valu= $forsend,  $titl='@Angiv Forsendelses oplysninger',        $labl='@Fragtmetode)',                $revi=true);
+  htm_CombFelt($type='area',    $name='levnoter',     $valu= $noter,    $titl='@Angiv Noter til fragtmand',             $labl='@Noter til fragtmand',         $revi=true, $rows='1');
   htm_FrstFelt('50%');
     htm_CheckFlt($type='checkbox',$name='afsendt',$valu= $afsendt,  $titl='@Afmærk her når varen/ydelsen er afsendt',   $labl='@Afsendt',                     $revi=true);
   htm_NextFelt('50%');  
     htm_CombFelt($type='date',$name='levdato',    $valu= $levdato,  $titl='@evt. forsendelses dato',                    $labl='@Leverings Dato',              $revi=true);
   htm_LastFelt();
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem data i denne rude.');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem data i denne rude.');
 }
 
 # PROGRAM-MODUL;
 function Rude_Ekstrafelter (&$felt1, &$felt2, &$felt3, &$felt4, &$felt5) {
   htm_Rude_Top($name='feltform',$capt='@Ekstrafelter:',$parms='',$icon='fa-plus','panelWmax',__FUNCTION__);
-  htm_CombFelt($type='text',$name='felt1',  $valu= $felt1,  $titl='@Udfyld Felt 1',     $labl='@Ordre Felt 1',    $revi=true);
-  htm_CombFelt($type='text',$name='felt2',  $valu= $felt2,  $titl='@Udfyld Felt 2',     $labl='@Ordre Felt 2',    $revi=true);
-  htm_CombFelt($type='text',$name='felt3',  $valu= $felt3,  $titl='@Udfyld Felt 3',     $labl='@Ordre Felt 3',    $revi=true);
-  htm_CombFelt($type='text',$name='felt4',  $valu= $felt4,  $titl='@Udfyld Felt 4',     $labl='@Ordre Felt 4',    $revi=true);
-  htm_CombFelt($type='text',$name='felt5',  $valu= $felt5,  $titl='@Udfyld Felt 5',     $labl='@Ordre Felt 5',    $revi=true);
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_CombFelt($type='text',$name='felt1',  $valu= $felt1,  $titl='@Udfyld Felt 1',       $labl='@Ordre Felt 1',  $revi=true);
+  htm_CombFelt($type='text',$name='felt2',  $valu= $felt2,  $titl='@Udfyld Felt 2',       $labl='@Ordre Felt 2',  $revi=true);
+  htm_CombFelt($type='text',$name='felt3',  $valu= $felt3,  $titl='@Udfyld Felt 3',       $labl='@Ordre Felt 3',  $revi=true);
+  htm_CombFelt($type='text',$name='felt4',  $valu= $felt4,  $titl='@Udfyld Felt 4',       $labl='@Ordre Felt 4',  $revi=true);
+  htm_CombFelt($type='text',$name='felt5',  $valu= $felt5,  $titl='@Udfyld Felt 5',       $labl='@Ordre Felt 5',  $revi=true);
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -490,29 +484,29 @@ function Rude_Mailfaktura (&$emne, &$text, &$vedhft) {
   htm_CombFelt($type='text',$name='emne',   $valu= $emne,   $titl='@Angiv Mail emne',     $labl='@Mail emne',   $revi=true);
   htm_CombFelt($type='area',$name='text',   $valu= $text,   $titl='@Angiv Mail tekst',    $labl='@Mail tekst',  $revi=true, $rows='2');
   htm_CombFelt($type='text',$name='vedhft', $valu= $vedhft, $titl='@Angiv Vedhæftet fil', $labl='@Mail bilag',  $revi=true);
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_Ydelser ($fakt) {
-  htm_Rude_Top($name='yderform',$capt='@Ydelser / Produkter: <small>(Smal-format)</small>',$parms='',$icon='fa-shopping-cart','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name='yderform',$capt=tolk('@Ydelser / Produkter:').' <small>(Smal-format)</small>',$parms='',$icon='fa-shopping-cart','panelWmax',__FUNCTION__);
   Varelinie($posi=1,$varenr="45-876",$antal=1,$enhed="stk",$beskriv="Redekasser",$momssats=25,$pris=235.50,$rabat=20, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);
   Varelinie($posi=2,$varenr="45-876",$antal=2,$enhed="stk",$beskriv="Redekasser",$momssats=25,$pris=235.50,$rabat=20, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);
   Varelinie($posi=3,$varenr="45-877",$antal=3,$enhed="stk",$beskriv="Redekasser",$momssats=25,$pris=245.00,$rabat=20, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);
   Varelinie($posi=4,$varenr="45-876",$antal=3,$enhed="stk",$beskriv="Redekasser",$momssats=25,$pris=235.50,$rabat=20, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);
     htm_CheckFlt($type='checkbox', $name='fakt', $valu= $fakt, $titl='@Når ordren er faktureret, afmærkes feltet automatisk',$labl='@Er Faktureret og låst',$revi=false);
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem data i denne rude.');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem data i denne rude.');
 }
 
 # PROGRAM-MODUL;
 function Rude_YdelserWide ($fakt) {
   echo '<div class="clearWrap"/>';  echo '<PanlFoot>';  
-  htm_Rude_Top($name='linkform',$capt=tolk('@Ydelser / Produkter på salgsordren. <small>(Bredformat)</small>').' ',$parms='',$icon='fa-shopping-cart','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name='linkform',$capt=tolk('@Ydelser / Produkter på salgsordren.').' <small>(Bredformat)</small>'.' ',$parms='',$icon='fa-shopping-cart','panelWmax',__FUNCTION__);
     VarelinieWide($posi=1, $varenr='45-876', $antal=3, $enhed='stk', $beskriv='Redekasser', $momssats=25, $pris=235.50, $rabat=8, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);     
     VarelinieWide($posi=2, $varenr='45-876', $antal=2, $enhed='stk', $beskriv='Redekasser', $momssats=25, $pris=235.50, $rabat=8, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);     
     VarelinieWide($posi=3, $varenr='45-876', $antal=3, $enhed='stk', $beskriv='Redekasser', $momssats=25, $pris=235.50, $rabat=12, $ialt=($antal*$pris)*(100-$rabat)/100*(100+$momssats)/100);
     #,"45-876","3","stk","Redekasser","25","235,50","8",(3*235.5)*92/100*125/100
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem data i denne rude.');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem data i denne rude.');
   echo '</PanlFoot>'; 
 }
 
@@ -526,8 +520,8 @@ function Varelinie (&$posi, &$varenr, &$antal, &$enhed, &$beskriv, &$momssats, &
                         htm_CombFelt($type='area',  $name='beskriv',  $valu= $beskriv,  $titl='@Angiv beskrivelse af ydelsen',  $labl='@Beskrivelse', $revi=true, $rows='2');
   htm_FrstFelt('20%');  htm_CombFelt($type='tal2d', $name='momssats', $valu= $momssats, $titl='@Momssats for ydelsen',      $labl='@Moms%',   $revi=true, $rows='', $width='45',$step='0.25');
   htm_NextFelt('25%');  htm_CombFelt($type='tal2d', $name='pris',     $valu= $pris,     $titl='@Angiv enhedspris',          $labl='@Pris',    $revi=true, $rows='', $width='45');
-  htm_NextFelt('25%');  htm_CombFelt($type='tal2d', $name='rabat',    $valu= $rabat,    $titl='@Angiv rabatbeløb',          $labl='@Rabat%',  $revi=true, $rows='', $width='45');
-  htm_NextFelt('30%');  htm_CombFelt($type='tal2d', $name='ialt',     $valu= $ialt,     $titl='@Beregnet felt: ialt',       $labl='@Ialt',    $revi=false,$rows='', $width='45');
+  htm_NextFelt('28%');  htm_CombFelt($type='tal2d', $name='rabat',    $valu= $rabat,    $titl='@Angiv rabatbeløb',          $labl='@Rabat%',  $revi=true, $rows='', $width='45');
+  htm_NextFelt('22%');  htm_CombFelt($type='tal2d', $name='ialt',     $valu= $ialt,     $titl='@Beregnet felt: ialt',       $labl='@Ialt',    $revi=false,$rows='', $width='45');
   htm_LastFelt();
   echo '<hr color="green">';
 }
@@ -548,11 +542,12 @@ function VarelinieWide ($posi, $varenr, $antal, $enhed, $beskriv, $momssats, $pr
 
 # PROGRAM-MODUL;
 function Rude_Tabel() {
-  htm_Rude_Top($name= 'naviform',$capt= '@DEMO: Tabel med fastlåst kolonne-header og "rulle-vindue"',$parms='',$icon='','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name= 'naviform',$capt= '@DEMO: Tabel med fastlåst kolonne-header og "rulle-vindue"',$parms='',$icon='fa-database','panelWmax',__FUNCTION__);
   htm_Tabel($RowLabl='ordre',$ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]  
-            ['@Lb.Nr.','4%','','','','',''],['@Ordre dato','7%','','date','left','','åååå-mm-dd'],['@Lev. dato','7%','','date','left','','åååå-mm-dd'],
-            ['@Konto nr.','6%','','text','center','',tolk('@Kont...')],['@Firma navn','24%','','','','',tolk('@Firm...')],['@Sælger','8%','','','','',tolk('@Sælg...')],['@Ordre sum','6%','','','','',tolk('@Beløb...')]),
-            $TablData= array(
+            ['@Lb.Nr.','6%','','','','','..auto..'],['@Ordre dato','7%','','date','left','','åååå-mm-dd'],['@Lev. dato','7%','','date','left','','åååå-mm-dd'],
+            ['@Konto nr.','6%','','text','center','',tolk('@Kont...')],['@Firma navn','24%','','','','',tolk('@Firm...')],
+            ['@Sælger','8%','','','','',tolk('@Sælg...')],['@Ordre sum','6%','','','','',tolk('@Beløb...')]),
+          $TablData= array( # DemoData:
             ['1025','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1026','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1027','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
@@ -569,77 +564,77 @@ function Rude_Tabel() {
             ['1026','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1027','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1028','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum']
-            ) , $doFilter=true, $doSort=true);
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+          ) , $doFilter=true, $doSort=true);
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_Debitorer() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Konti - Debitorer:',$parms='',$icon='','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name= 'naviform',$capt= '@Konti - Debitorer:',$parms='',$icon='fa-database','panelWmax',__FUNCTION__);
   htm_Tabel($RowLabl='debitor',$ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-            ['@Kontonr.','5%','','','','',''],['@Firmanavn','10%','','','','','Firm...'],['@Adresse','8%','','','','','Addr...'],
+            ['@Kontonr.','6%','','','','','..auto..'],['@Firmanavn','10%','','','','','Firm...'],['@Adresse','8%','','','','','Addr...'],
             ['@Sted','8%','','','','','Sted...'],['@Postnr','4%','','','','','Post...'],['@By','8%','','','','','By...'],
             ['@Kontakt','12%','','','','','Kont...'],['@Telefon','12%','','','','','Telf...'],['@Sælger','12%','','','','','Sælg...']),
-            $TablData= array(
+            $TablData= array( # DemoData:
             ['1025','Firmanavn','Adresse','Sted','Postnr','By','Kontakt','Telefon','Sælger'],
             ['1026','Firmanavn','Adresse','Sted','Postnr','By','Kontakt','Telefon','Sælger'],
             ['1027','Firmanavn','Adresse','Sted','Postnr','By','Kontakt','Telefon','Sælger'],
             ['1028','Firmanavn','Adresse','Sted','Postnr','By','Kontakt','Telefon','Sælger']
             ) );
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_Kreditorer() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Konti - Kreditorer:',$parms='',$icon='fa-snapchat-ghost ','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name= 'naviform',$capt= '@Konti - Kreditorer:',$parms='../_base/page_Gittermenu.php',$icon='fa-database ','panelWmax',__FUNCTION__);
   htm_Tabel($RowLabl='kreditor',$ColStyle= array(   #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-            ['@Kontonr.','4%','','','','',''],['@Leverandør Navn','10%','','','','',tolk('@Navn...')],['@Adresse','8%','','','','',tolk('@Addr...')],['@Sted','8%','','','','',tolk('@Sted...')],
-            ['@Post nr','4%','','','','',tolk('@Post...')],['@By','8%','','','','',tolk('@By...')],['@Kontakt person','12%','','','','',tolk('@Kont...')],['@Telefon','12%','','','','',tolk('@Telf...')]),
-            $TablData= array(
+            ['@Kontonr.','6%','','','','','..auto..'],['@Leverandør Navn','10%','','','','',tolk('@Navn...')],['@Adresse','8%','','','','',tolk('@Addr...')],['@Sted','8%','','','','',tolk('@Sted...')],
+            ['@Post','4%','','','','@Post nr',tolk('@Post...')],['@By','8%','','','','',tolk('@By...')],['@Kontakt person','12%','','','','',tolk('@Kont...')],['@Telefon','12%','','','','',tolk('@Telf...')]),
+            $TablData= array( # DemoData:
             ['1025','Navn','Adresse','Sted','Post nr','By','Kontakt person','Telefon'],
             ['1026','Navn','Adresse','Sted','Post nr','By','Kontakt person','Telefon'],
-            ['1027','Navn','Adresse','Sted','Post nr','By','Kontakt person','Telefon'],
+            ['1027','Navn','Adresse','Sted','Pnr',    'By','Kontakt person','Telefon'],
             ['1028','Navn','Adresse','Sted','Post nr','By','Kontakt person','Telefon']
             ) );
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
 }
 
 # PROGRAM-MODUL;
 function Rude_KredOrdrer() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Ordrer: Kreditorer - `Leverandørordrer`:',$parms='',$icon='','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name= 'naviform',$capt= '@Ordrer: Kreditorer - `Leverandørordrer`:',$parms='',$icon='fa-database','panelWmax',__FUNCTION__);
   htm_Tabel($RowLabl=tolk('@leverandørordre'),$ColStyle= array(#   [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-            ['@Ordre nr.','6%','','','','',''],['@Modt.nr.','5%','','','','','Modt...'],    ['@Fakt.nr.','6%','','','','','Fakt...'],['@Ordre dato','7%','','date','','','åååå-mm-dd'],
+            ['@Ordre nr.','6%','','','','','..auto..'],['@Modt.nr.','5%','','','','','Modt...'],    ['@Fakt.nr.','6%','','','','','Fakt...'],['@Ordre dato','7%','','date','','','åååå-mm-dd'],
             ['@Modt.dato','7%','','date','','','åååå-mm-dd'],['@Konto nr.','8%','','','','','Kont...'],['@Firma navn','30%','','','','','Navn...'],['@Telefon','6%','','','center','','Telf...'],
             ['@Leveres til','6%','','','left','','Lev...'],['@Vor ref.','5%','','','left','','Ref...'],['@Faktura sum','8%','','','right','','Beløb...']),
-            $TablData= array(
+            $TablData= array( # DemoData:
             ['1025','Modt.nr.','Fakt.nr.','Ordre dato','Modt.dato','Konto nr.','Firma navn','Telefon','Leveres til','Vor ref.','Faktura sum'],
             ['1026','Modt.nr.','Fakt.nr.','Ordre dato','Modt.dato','Konto nr.','Firma navn','Telefon','Leveres til','Vor ref.','Faktura sum'],
             ['1027','Modt.nr.','Fakt.nr.','Ordre dato','Modt.dato','Konto nr.','Firma navn','Telefon','Leveres til','Vor ref.','Faktura sum'],
             ['1028','Modt.nr.','Fakt.nr.','Ordre dato','Modt.dato','Konto nr.','Firma navn','Telefon','Leveres til','Vor ref.','Faktura sum']
             ) );
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
-function Rude_DbOrdrer() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Ordrer: Debitorer - `Kundeordrer`:',$parms='',$icon='','panelWmax',__FUNCTION__);
-  htm_Tabel($RowLabl=tolk('@kundeordre'),$ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-            ['@Ordre nr.','4%','','','','',''],['@Ordre dato','7%','','date','left','','åååå-mm-dd'],['@Lev. dato','7%','','date','left','','åååå-mm-dd'],
+function Rude_DebtOrdrer() {
+  htm_Rude_Top($name= 'naviform',$capt= '@Ordrer: Debitorer - `Kundeordrer`:',$parms='../_base/page_Gittermenu.php',$icon='fa-database','panelWmax',__FUNCTION__);
+  htm_Tabel($RowLabl='@kundeordre',$ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+            ['@Ordre nr.','6%','','','','','..auto..'],['@Ordre dato','7%','','date','left','','åååå-mm-dd'],['@Lev. dato','7%','','date','left','','åååå-mm-dd'],
             ['@Konto nr.','6%','','text','center','',tolk('@Kont...')],['@Firma navn','24%','','','','',tolk('@Firm...')],['@Sælger','8%','','','','',tolk('@Sælg...')],['@Ordre sum','6%','','','','',tolk('@Beløb...')]),
-            $TablData= array(
+            $TablData= array( # DemoData:
             ['1025','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1026','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1027','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],
             ['1028','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum']
             ) );
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
 }
 
 # PROGRAM-MODUL;
 function Rude_DebRapp() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Debitor-rapporter:',$parms='',$icon='','panelWmax',__FUNCTION__);
-    htm_FrstFelt('05%',0);  
-    htm_NextFelt('35%');  echo '<p align="center">'.tolk('@Angiv kriterier:').'</p> ';
+  htm_Rude_Top($name= 'naviform',$capt= '@Debitor-rapporter:',$parms='',$icon='fa-list','panelWmax',__FUNCTION__);
+    htm_FrstFelt('04%',0);  
+    htm_NextFelt('36%');  echo '<p align="center">'.tolk('@Angiv kriterier:').'</p> ';
     htm_NextFelt('02%');  
     htm_NextFelt('58%');  htm_CheckFlt($type='checkbox',$name='somfakt',$valu='somfakt',
                           $titl='@Afmærk her, hvis kriterier skal genbruges.',  $labl='@Husk dem',$revi=true);
@@ -648,22 +643,21 @@ function Rude_DebRapp() {
   htm_NextFelt('48%');  htm_CombFelt($type='text',$name='konto',  $valu='', $titl='@Angiv rapporterings Konto', $labl='@Konto', $revi=true);
   htm_NextFelt('47%');  htm_CombFelt($type='date',$name='dato',   $valu='', $titl='@Angiv periode start Dato',  $labl='@Fra Dato',  $revi=true);
   htm_LastFelt();
-  echo '<div style="margin-left:1em; display:block; font-weight: normal;" >Vælg: '; 
-    htm_accept('@Åbne poster',    '@Rapport for debitor åbne poster');
-    htm_accept('@Konto saldo',    '@Rapport for debitor konto saldo');    
-    htm_accept('@Konto kort',     '@Rapport for debitor konto kort');
-    htm_accept('@Salgs statistik','@Rapport for debitor Salgs statistik');
-    htm_accept('@Top 100',        '@Rapport for Top 100');
+  echo '<hr><div style="margin-left:1em; display:block; font-weight: normal;" >Vælg: '; 
+    textKnap($label='@Åbne poster',    $title='@Rapport for debitor åbne poster',$link='../_base/page_Blindgyden.php');
+    textKnap($label='@Konto saldo',    $title='@Rapport for debitor konto saldo',$link='../_base/page_Blindgyden.php');    
+    textKnap($label='@Konto kort',     $title='@Rapport for debitor konto kort',$link='../_base/page_Blindgyden.php');
+    textKnap($label='@Salgs statistik',$title='@Rapport for debitor Salgs statistik',$link='../_base/page_Blindgyden.php');
+    textKnap($label='@Top 100',        $title='@Rapport for Top 100',           $link='../_base/page_Blindgyden.php');
   echo '</div>';  
-    
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
 }
 
 # PROGRAM-MODUL;
 function Rude_KredRapp() {
-  htm_Rude_Top($name= 'naviform',$capt= '@Kreditor-rapporter:',$parms='',$icon='','panelWmax',__FUNCTION__);
-    htm_FrstFelt('05%',0);  
-    htm_NextFelt('35%');  echo '<p align="center">'.tolk('@Angiv kriterier:').'</p> ';
+  htm_Rude_Top($name= 'naviform',$capt= '@Kreditor-rapporter:',$parms='',$icon='fa-list','panelWmax',__FUNCTION__);
+    htm_FrstFelt('04%',0);  
+    htm_NextFelt('36%');  echo '<p align="center">'.tolk('@Angiv kriterier:').'</p> ';
     htm_NextFelt('02%');  
     htm_NextFelt('58%');  htm_CheckFlt($type='checkbox',$name='somfakt',$valu='somfakt',
                           $titl='@Afmærk her, hvis kriterier skal genbruges.',  $labl='@Husk dem',$revi=true);
@@ -673,19 +667,19 @@ function Rude_KredRapp() {
   htm_NextFelt('50%');  htm_CombFelt($type='text',$name='konto',  $valu='', $titl='@Angiv rapporterings Konto', $labl='@Konto', $revi=true);
   htm_NextFelt('50%');  htm_CombFelt($type='date',$name='dato',   $valu='', $titl='@Angiv periode start Dato',  $labl='@Fra Dato',  $revi=true);
   htm_LastFelt();
-  echo '<div style="margin-left:1em; display:block; font-weight: normal;" >Vælg: '; 
-    htm_accept('@Åbne poster',    '@Rapport for kreditor åbne poster');
-    htm_accept('@Konto saldo',    '@Rapport for kreditor konto saldo');
-    htm_accept('@Konto kort',     '@Rapport for kreditor konto kort');
-    htm_accept('@Købs statistik', '@Rapport for kreditor købs statistik');
+  echo '<hr><div style="margin-left:1em; display:block; font-weight: normal;" >Vælg: '; 
+    textKnap($label='@Åbne poster',    $title='@Rapport for kreditor åbne poster',    $link='../_base/page_Blindgyden.php');
+    textKnap($label='@Konto saldo',    $title='@Rapport for kreditor konto saldo',    $link='../_base/page_Blindgyden.php');
+    textKnap($label='@Konto kort',     $title='@Rapport for kreditor konto kort',     $link='../_base/page_Blindgyden.php');
+    textKnap($label='@Købs statistik', $title='@Rapport for kreditor købs statistik', $link='../_base/page_Blindgyden.php');
   echo '</div>';  
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
 }
 
 
 # PROGRAM-MODUL;
 function Rude_KasseRedigering($id='2',$dato='Dato',$ejer='Bogholder',$bemr='Bemærkning 2',$bogf='Bogført',$af='Af') {
-  $dktip=   tolk('@D/K/F  feltet benyttes i forbindelse med debitor- og kreditor posteringer. ').
+  $dktip=   tolk('@D/K/F feltet benyttes i forbindelse med debitor- og kreditor posteringer.').' '.
             tolk('@Er feltet tomt eller udfyldt med F, betragtes det efterfølgende kontonummer som et Finans konto-nummer.').
             tolk('@Skrives der `d` eller `k`, vil det efterfølgende nummer blive tolket som et Debitor konto-nummer eller et Kreditor konto-nummer.');
   $debkre=  tolk('@Debet Kt. og Kredit Kt.-felterne er til kontonummeret på den konto, posteringen skal ske på.').
@@ -701,9 +695,9 @@ function Rude_KasseRedigering($id='2',$dato='Dato',$ejer='Bogholder',$bemr='Bem�
           $link="../includes/bilag.php?kilde=kassekladde&bilag_id=$id[$y]&bilag=$bilag[$y]&ny=ja&kilde_id=$kladde_id&fokus=bila$y"; 
           $clip= 'clip.png'; 
   };
-  htm_Rude_Top($name= 'kasseform',$capt= '@Kassekladde: '.$id.', <small>'.$ejer.'</small>',$parms='',$icon='','panelWmax',__FUNCTION__);
-  htm_TabelInp(   # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-    $HeadLine= array(
+  htm_Rude_Top($name= 'kasseform',$capt= '@Kassekladde: '.$id.', <small>'.$ejer.'</small>',$parms='',$icon='fa-database','panelWmax',__FUNCTION__);
+  htm_TabelInp(
+    $HeadLine= array(   # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
       ['@Kladde notat:', '60%','left','text', '@Her kan skrives en bemærkning til kladden',                  '@Angiv din tekst...'], 
       ['@Konto-kontrol:','5em','left','text', '@Angiv kontonummer for den konto, hvis bevægelser skal kontrolleres',  '@Nummer...'], 
     ),
@@ -730,31 +724,77 @@ function Rude_KasseRedigering($id='2',$dato='Dato',$ejer='Bogholder',$bemr='Bem�
         ['@Konto saldo','8%','right','text','0.000,00<div type= "text" name="saldo" value="00.000,00" width="8%"/>',
           tolk('@Bevægelser og saldo for den konto, som er angivet ovenfor i Felt: Konto-kontrol.').' <br>'.
           tolk('@Er velegnet til afstemning med bank- og girokonti'),'.?.']),
-        $data= array(1,2,3,4,5,6,7,8,9,10)  # Antal rows ved DEMO
-      
+        $data= array(1,2,3,4,5,6,7,8,9,10,11,12,13),  # Antal rows ved DEMO
+      '300px'
   );
 ### PanelFooter:
   NaviTip();
 ### KnapPanel:
   echo '<div style="text-align:center;">'; 
-  echo  textKnap($label='@Gem',             $title='@Klik her for at gemme',$link='../_base/blindgyden.php').
-        textKnap($label='@Opslag',          $title='@Opslag - din markørs placering angiver hvilken tabel, opslag foretages i',$link='../_base/blindgyden.php').
-        textKnap($label='@Bogfør',          $title='@Bogfør - der foretages først en simulering, som du skal bekræfte',$link='../_base/blindgyden.php').
-        textKnap($label='@Simuler',         $title='@Simulering af bogføring viser bevægelser i kontoplanen',$link='../_base/blindgyden.php').
-        textKnap($label='@Annuller',        $title='@Annuller simulering',$link='../_base/blindgyden.php').
-        textKnap($label='@Kopier',          $title='@Kopier til ny',$link='../_base/blindgyden.php').
-        textKnap($label='@Tilbagefør',      $title='@Tilbagefør postering',$link='../_base/blindgyden.php').
-        textKnap($label='@Hent ordrer',     $title='@Henter afsluttede ordrer fra ordreliste',$link='../_base/blindgyden.php').
-        textKnap($label='@DocuBizz import', $title='@DocuBizz import',$link='../_base/blindgyden.php').
-        textKnap($label='@Import',          $title='@Importerer bankposteringer eller andre data fra .csv-fil (kommasepareret fil)',$link='../_base/blindgyden.php').
-        textKnap($label='@Udlign',          $title='@Finder åbne poster, som modsvarer beløb og fakturanummer',$link='../_base/blindgyden.php').
+  echo  textKnap($label='@Gem',             $title='@Klik her for at gemme',$link='../_base/page_Blindgyden').
+        textKnap($label='@Opslag',          $title='@Opslag - din markørs placering angiver hvilken tabel, opslag foretages i',$link='../_base/page_Blindgyden').
+        textKnap($label='@Bogfør',          $title='@Bogfør - der foretages først en simulering, som du skal bekræfte',$link='../_base/page_Blindgyden').
+        textKnap($label='@Simuler',         $title='@Simulering af bogføring viser bevægelser i kontoplanen',$link='../_base/page_Blindgyden').
+        textKnap($label='@Annuller',        $title='@Annuller simulering',$link='../_base/page_Blindgyden').
+        textKnap($label='@Kopier',          $title='@Kopier til ny',$link='../_base/page_Blindgyden').
+        textKnap($label='@Tilbagefør',      $title='@Tilbagefør postering',$link='../_base/page_Blindgyden').
+        textKnap($label='@Hent ordrer',     $title='@Henter afsluttede ordrer fra ordreliste',$link='../_base/page_Blindgyden').
+        textKnap($label='@DocuBizz import', $title='@DocuBizz import',$link='../_base/page_Blindgyden').
+        textKnap($label='@Import',          $title='@Importerer bankposteringer eller andre data fra .csv-fil (kommasepareret fil)',$link='../_base/page_Blindgyden').
+        textKnap($label='@Udlign',          $title='@Finder åbne poster, som modsvarer beløb og fakturanummer',$link='../_base/page_Blindgyden').
   '</div>';
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
+}
+
+function Rude_Kladderedigering() {
+  Head_Navigation(tolk('@Kassekladde'), $status='', $goPrev=false, $goHome=true, $goUp=true, $goFind=false, $goNew=false, $goNext=false); 
+  htm_Rude_Top($name= 'naviform',$capt= '@Kassekladde liste:',$parms='',$icon='fa-list','panelWmax',__FUNCTION__);
+  htm_Tabel($RecLabl='kassekladde', $ColStyle= array(  #   [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+            ['@Id','7%','D','','','',''],['@Dato','10%','','date','','','åååå-mm-dd'],['@Ejer','10%','','','','','Ejer...'],['@Bemærkning','48%','','','','','Bem...'],
+            ['@Bogført','14%','U','','','','Bogf...'],['@Af','8%','','','','','Af...']),
+            $DataArr= array(
+            ['1','Dato','Ejer','Bemærkning 1','Bogført','Af'],
+            ['2','Dato','Ejer','Bemærkning 2','Bogført','Af'],
+            ['3','Dato','Bogholder','Bemærkning 3','Bogført','Af']
+            ), $FilterOn=true, $SortOn=true );
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
+  Rude_KasseRedigering($DataArr[2][0],$DataArr[2][2]);
+  Rude_FootMenu($doPrint=true, $doErase=true, $doLookUp=true, $doAccept=true, $doExport=true, $doImport=true, 
+    $OpslLabl='@Opslag: markørens placering bestemmer, hvilken tabel opslag skal foretages i');
+}
+
+function Rude_Budget() {
+  $MdTitles= periodeoverskrifter($maanedantal=12, $startaar=2016, $startmaaned=1, 1, "regnskabsmaaned", $regnskabsaar='2016');  //  periodeoverskrifter benytter: ['@'.$periode_kort, '5%','','tal2d', 'right', '@'.$periode_lang,'']
+  $ColStyle= array();  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+  array_push($ColStyle, 
+              ['@Konto',     '4%','','data',  'right',  '@Kontonummer. Entydig nummerkode, som benyttes til sortering, summering mv.','@Konto...'],
+              ['@Kontonavn','22%','','data',  'left',   '@Kontonavn - beskrivende tekst','']
+            );
+  foreach ($MdTitles as $Md) array_push($ColStyle, $Md);
+  array_push($ColStyle, ['@I alt',  '5%','','tal2d', 'right', '@Aktuelle beløb. (Årets ultimo beløb)','']);
+  htm_Rude_Top($name= 'budgform',$capt= '@Budget '.($regnskabsaar+0).':',$parms='',$icon='fa-list','panelWmax',__FUNCTION__);
+  htm_TabelInpxx(
+    $HeadLine= array(['@Udfyld med sidste års tal:', '60%','left','show', '@ +/- 0% OK', '@Automatisk budgetlægning på grundlag af sidste års regnskab!']),
+    $RowPref= array(),
+    $ColStyle,
+    $RowSuff= array(),
+    $DATA= KontoTabFile('../_export-import/kontoplan.tab'),  // Indlæs data fra TAB-fil
+    $maxheight='550px', __FUNCTION__
+  );
+### PanelFooter:
+  NaviTip();
+#### KnapPanel:
+  echo '<div style="text-align:center;">';
+  echo  textKnap($label='@Gem',             $title='@Klik her for at gemme',$link='../_base/page_Blindgyden').
+        textKnap($label='@Retur til Regnskab',  $title='@Vend tilbage til regnskab',$link='../_finans/page_Regnskab.php').
+        textKnap($label='@Retur til Hovedmenu',  $title='@Vend tilbage til programmets hovedmenu',$link='../_base/page_Gittermenu.php').
+        '</div>';
+   htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_OrdrePostering() {
-  htm_Rude_Top($name= 'ordreform',$capt= '@Indtastning af salgs ordre poster - `Varelinier`:',$parms='',$icon='','panelWmax',__FUNCTION__);
+  htm_Rude_Top($name= 'ordreform',$capt= '@Indtastning af salgs ordre poster - `Varelinier`:',$parms='',$icon='fa-database','panelWmax',__FUNCTION__);
   htm_TabelInp(
     $HeadLine= array(
       ['@Status:', '60%','left','text', '@Her kan skrives en bemærkning til ordren', '@Ny ordre, endnu uden kundetilknytning!'], 
@@ -782,12 +822,60 @@ function Rude_OrdrePostering() {
   NaviTip();
 ### KnapPanel:
   echo '<div style="text-align:center;">';
-  echo  textKnap($label='@Gem',             $title='@Klik her for at gemme',$link='../_base/blindgyden.php').
-        textKnap($label='@Opslag',          $title='@Opslag - din markørs placering angiver hvilken tabel, opslag foretages i',$link='../_base/blindgyden.php').
-        textKnap($label='@Slet alt',        $title='@Klik her for at nulstille alle data i tabellen.',$link='../_base/blindgyden.php').
+  echo  textKnap($label='@Gem',             $title='@Klik her for at gemme',$link='../_base/page_Blindgyden').
+        textKnap($label='@Opslag',          $title='@Opslag - din markørs placering angiver hvilken tabel, opslag foretages i',$link='../_base/page_Blindgyden').
+        textKnap($label='@Slet alt',        $title='@Klik her for at nulstille alle data i tabellen.',$link='../_base/page_Blindgyden').
         '</div>';
- htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+ htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
+
+# PROGRAM-MODUL;
+function Rude_Kontoplan() {
+  htm_Rude_Top($name= 'kontoform',$capt= '@Kontoplan:',$parms='../_base/page_Gittermenu.php',$icon='fa-database','panelW960',__FUNCTION__);
+  htm_Tabel($RowLabl='@redigere denne konto',
+            $ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+              ['@Kontonr.',       '8%','','text',  'left',   '@Kontonummer. Entydig nummerkode, som benyttes til sortering, summering mv.','@Konto...'],
+              ['@Kontonavn',     '50%','','text',  'left',   '@Kontonavn - beskrivende tekst','@Navn...'],
+              ['@Type',           '6%','','text',  'left',   '@Kontotype: D=Drift, S=Status, Z=Sum, H=Overskrift, R=Resultat, X=Sideskift, L=Lukket','@Type...'],
+              ['@Moms',           '6%','','text',  'center', '@Momskode: K_:Købs... S_:Salgs... Y_:Ydelser, E_:, ','@Moms...'],
+              ['@Σ Fra-Til Kt.', '10%','','text',  'center', '@Summér fra_konto. Angiv laveste kontonummer, som skal med i sammentællingen.','@Fra...'],
+              ['@Saldo',          '7%','','tal2d', 'right',  '@Konto saldo. Beløbet på kontoen lige nu.','@Saldo...'],
+              ['@Valuta',         '6%','','text',  'center', '@Kontoens valuta (DKK= kurs 100)','@Valuta...'],
+              ['@Genvej',         '6%','','text',  'center', '@Genvejstast: Bogstav-kode, som kan benyttes som forkortelse af kontonummeret','']),
+            $TablData= KontoTabFile('../_export-import/kontoplan.tab'),  // Indlæs kontoplan fra TAB-fil
+            $FilterOn=true, $SorterOn=false, $maxheight='500px' );
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
+}
+
+
+# PROGRAM-MODUL;
+function Rude_Regnskab() {
+  htm_Rude_Top($name= 'kontoform',$capt= '@Regnskab:',$parms='../_base/page_Gittermenu.php',$icon='fa-database','panelWmax',__FUNCTION__);
+  $MdTitles= periodeoverskrifter($maanedantal=12, $startaar=2016, $startmaaned=1, 1, "regnskabsmaaned", $regnskabsaar='2016');
+  //  periodeoverskrifter benytter: ['@'.$periode_kort,    '5%','','tal2d', 'right', '@'.$periode_lang,'']
+  $ColStyle= array();  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+  array_push($ColStyle, 
+              ['@Konto',     '4%','','text',  'right',  '@Kontonummer. Entydig nummerkode, som benyttes til sortering, summering mv.','@Konto...'],
+              ['@Kontonavn','22%','','text',  'left',   '@Kontonavn - beskrivende tekst',''],
+              ['@Type',      '3%','','text',  'left',   '@Kontotype: D=Drift, S=Status, Z=Sum, H=Overskrift, R=Resultat, X=Sideskift, L=Lukket','@Type...'],
+              ['@Valuta',    '4%','','text',  'center', '@Valutakode for kontoens beløb',''],
+              ['@Primo',     '5%','','tal2d', 'right', '@Året primo beløb, Sidste års ultimo','']);
+  foreach ($MdTitles as $Md) array_push($ColStyle, $Md);
+  array_push($ColStyle, ['@I alt', '8%','','tal2d', 'right', '@Aktuelle beløb. (Årets ultimo beløb)','']);
+  htm_Tabel($RowLabl='@vælge denne post',
+            $ColStyle,
+            $TablData= KontoTabFile('../_export-import/kontoplan-extra.tab'),  // Indlæs data fra TAB-fil
+            $FilterOn=false, $SorterOn=false, $maxheight='500px' );
+### PanelFooter:
+  NaviTip();
+### KnapPanel:
+  echo '<div style="text-align:center;">';
+  echo  textKnap($label='@Budget',              $title='@Klik her for komme til budgetlægning',   $link='../_finans/page_Budget.php').
+        textKnap($label='@Retur til hovedmenu', $title='@Opslag - din markørs placering angiver hvilken tabel, opslag foretages i', $link='../_base/page_Gittermenu.php').
+        '</div>';
+   htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=false,$title='@Retur til hovedmenu');
+}
+
 
 # SubRutine:
 #function getComboA(sel) { var value = sel.value; };
@@ -798,26 +886,26 @@ function Rude_Formularer($formtype,$formart,$formsprog) {
   htm_OptioFlt($type='text',  $name='formtype',   $valu= $formtype, 
                     $titl='@Vælg en Formular som du vil redigere',  
                     $labl='@Formular',      $revi=true, $optlist= array(
-                    ['','1',  '@Tilbud'],
-                    ['','9',  '@Plukliste'],
-                    ['','2',  '@Ordrebekræftelse'],
-                    ['','3',  '@Følgeseddel'],
-                    ['','4',  '@Faktura'],
-                    ['','5',  '@Kreditnota'],
-                    ['','6',  '@Rykker_1'],
-                    ['','7',  '@Rykker_2'],
-                    ['','8',  '@Rykker_3'],
-                    ['','11', '@Kontokort'],
-                    ['','12', '@Indkøbsforslag'],
-                    ['','13', '@Rekvisition'],
-                    ['','14', '@Købsfaktura'],
-                  # ['','10', '@Pos'],
+                    ['@Rediger Tilbuds blanket',              '1', '@Tilbud'],
+                    ['@Rediger Plukliste',                    '9', '@Plukliste'],
+                    ['@Rediger formular for ordrebekræftelse ','2', '@Ordrebekræftelse'],
+                    ['@Rediger følgeseddel blanket',          '3', '@Følgeseddel'],
+                    ['@Rediger faktura blanket',              '4', '@Faktura'],
+                    ['@Rediger blanket for kreditnota',       '5', '@Kreditnota'],
+                    ['@Rediger blanket for 1. rykker',        '6', '@Rykker 1'],
+                    ['@Rediger blanket for 2. rykker',        '7', '@Rykker 2'],
+                    ['@Rediger blanket for 3. rykker',        '8', '@Rykker 3'],
+                    ['@Rediger blanket for kontokort',       '11', '@Kontokort'],
+                    ['@Rediger blanket for indkøbsforslag',  '12', '@Indkøbsforslag'],
+                    ['@Rediger blanket for rekvisition',     '13', '@Rekvisition'],
+                    ['@Rediger blanket for købsfaktura',     '14', '@Købsfaktura'],
+                  # ['@Rediger ','10', '@Pos'],
                     ),$action='');
   htm_OptioFlt($type='text',  $name='formart',   $valu= $formart, 
                     $titl='@Vælg formularens Art (Objekt type)',  
                     $labl='@Formular Art',      $revi=true, $optlist= array(
-                    ['','1:Linjer',       '@Grafik'],
-                    ['','2:Tekster',      '@Tekster'],
+                    ['','1:Tekster',      '@Tekster'],
+                    ['','2:Linjer',       '@Grafik'],
                     ['','3:Ordrelinjer',  '@Ordrelinjer'],
               #     ['','4:Flyt center',  '@Flyt center'],
               #     ['','5:Mail tekst',   '@Mail tekst'],
@@ -834,19 +922,19 @@ function Rude_Formularer($formtype,$formart,$formsprog) {
                     ),$action='');
   echo  '<br>';
   echo '<div align="right">';
-  echo textKnap($label='@Rediger valgt formular', $title='@Rediger det du har valgt ovenfor',$link='../_base/blindgyden.php').'<hr>';
+  echo textKnap($label='@Rediger valgt formular', $title='@Rediger det du har valgt ovenfor',$link='../_base/page_Blindgyden').'<hr>';
   echo '</div>';
-  echo  textKnap($label='@Gem mine formularer',               $title='@Lav backup af det nugældende formularsæt.',$link='../_base/blindgyden.php').'<br><br>';
-  echo  textKnap($label='@Genindlæs mine formularer',         $title='@Tag backup i brug, ved at benytte den som nugældende formularsæt.',$link='../_base/blindgyden.php').'<br><br>';
-  echo  textKnap($label='@Importer formular(er) fra LO ',     $title='@Indlæs fra .fodg-fil dannet af LibreOffice',$link='../_base/blindgyden.php').'<br><br>';
-  echo  textKnap($label='@Overskriv formularer med standard', $title='@Overskriv formulardefination med standard',$link='../_base/blindgyden.php').'<br><br>';
-  echo  textKnap($label='@Håndtering af formularsprog',       $title='@Sproghåndtering: Opret, Nedlæg sprog',$link='../_base/blindgyden.php').'<br><br>';
-  echo  textKnap($label='@Upload/Download supportfiler',      $title='@Fil upload: Logo, Grafik, Billeder eller fodg-fil fra Libre Office',$link='../_base/blindgyden.php').'<br><br>';
-  htm_RudeBund($pmpt='@Gå til indstillinger',$revi=true,$title='@Retur til menuen indstillinger');
+  echo  textKnap($label='@Gem mine formularer',               $title='@Lav backup af det nugældende formularsæt.',    $link='../_base/page_Blindgyden').'<br><br>';
+  echo  textKnap($label='@Genindlæs mine formularer',         $title='@Tag backup i brug, ved at benytte den som nugældende formularsæt.',$link='../_base/page_Blindgyden').'<br><br>';
+  echo  textKnap($label='@Importer formular(er) fra LO ',     $title='@Indlæs fra .fodg-fil dannet af formularredigering i LibreOffice',   $link='../_base/page_Blindgyden').'<br><br>';
+  echo  textKnap($label='@Overskriv formularer med standard', $title='@Overskriv formulardefination med system standard',$link='../_base/page_Blindgyden').'<br><br>';
+  echo  textKnap($label='@Håndtering af formularsprog',       $title='@Sproghåndtering: Opret, Nedlæg sprog',         $link='../_base/page_Blindgyden').'<br><br>';
+  echo  textKnap($label='@Upload/Download supportfiler',      $title='@Fil upload: Logo, Grafik, Billeder eller fodg-fil fra Libre Office',$link='../_base/page_Blindgyden').'<br><br>';
+  htm_RudeBund($pmpt='@Retur til indstillinger',$subm=true,$title='@Gå til menuen indstillinger');
 }
 
 function SetHead ($x) {
-  return  array(
+  return  array(   # $HeadLine= array([0:Labl, 1:Width, 2:Just, 3:InpType, 4:Tip, 5:placeholder])
     ['@Formular:',  '10%','left','show', '', '@Faktura'],
     ['@Art:',       '10%','left','show', '', $x],
     ['@Sprog:',     '10%','left','show', '', '@Dansk'],
@@ -861,14 +949,14 @@ function Rude_FormRedigerText() {
       $HeadLine= SetHead('@Tekster'),
       $RowPref= array(),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
-        ['@$Variabel',  '10%','left', 'vlst',tolk('@Her kan du vælge mellem de variabler, som er relevante, for den aktuelle formular.'),''],
-        ['@Tekst/$variabel','35%','left', 'text',tolk('@Feltets tekst og/eller $Variabler kombineret'),'...Tekst...'],
+        ['@$Variabel',  '10%','left', 'vlst',tolk('@Her kan du vælge mellem de variabler, som er relevante, for den aktuelle formular. Variabler, som kan benyttes, har prefix: $'),''],
+        ['@Tekst/$variabel','35%','left', 'text',tolk('@Feltets tekst og/eller $Variabler kombineret'),'...'.tolk('@Tekst').'...'],
         ['@X',          '4%','right', 'text',tolk('@Feltets x-placering målt i mm fra venstre side-kant'),'.x.'],
         ['@Y',          '4%','right', 'text',tolk('@Feltets y-placering målt i mm fra side-bund'),'.y.'],
         ['@Højde',      '4%','right', 'text',tolk('@Felt højde målt i mm'),'.h.'],
         ['@Farve',      '7%','center','text',tolk('@Tekst farve. Se farve skema'),'#Kode.'],
-        ['@Just.',      '4%','center','just',tolk('@Justering i feltet: V:venstre, C:centreret, H:højre'),'?'],     //  '<SELECT class="inputbox" NAME=justering[$x]>     <option>$justering</option>     <option>V</option>      <option>C</option>      <option>H</option>      </SELECT>'
-        ['@Font',       '8%','center','font',tolk('@Skrift type navn: Helvetica, Times, OCRbb12'),'Font navn...'],  //  '<SELECT class="inputbox" NAME=form_font[$x]> if ($font) <option>$font</option> <option>Helvetica</option>  <option>Times</option>  <option>Ocrbb12</option>  </SELECT>'
+        ['@Just.',      '4%','center','just',tolk('@Justering i feltet: V:'.tolk('@venstre').', C:'.tolk('@centreret').', H:'.tolk('@højre').''),'?'],     //  '<SELECT class="inputbox" NAME=justering[$x]>     <option>$justering</option>     <option>V</option>      <option>C</option>      <option>H</option>      </SELECT>'
+        ['@Font',       '8%','center','font',tolk('@Skrift type navn: Helvetica, Times, OCRbb12').','.tolk('@Font navn').'...'],  //  '<SELECT class="inputbox" NAME=form_font[$x]> if ($font) <option>$font</option> <option>Helvetica</option>  <option>Times</option>  <option>Ocrbb12</option>  </SELECT>'
         ['@Side',       '4%','center','side',tolk('@Medtages på udskrifts side. A:alle, 1:første, !1:ikke første, S:sidste, !S:ikke sidste')],  //  '<SELECT class="inputbox" NAME=side[$x]>  if ($side) <option>$side</option> <option>A</option>  <option>1</option>  <option>!1</option> <option>S</option>  <option>!S</option> </SELECT>'
         ),
       $RowSuff= array(  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
@@ -879,11 +967,11 @@ function Rude_FormRedigerText() {
     forskydning();
     echo '<hr>';
     htm_FrstFelt('15%');  echo '<div style= "text-align:right">'.tolk('@Mail tekster:').'</div>';
-    htm_NextFelt('20%');  htm_CombFelt($type='area',  $name='emne',   $valu= '',  $titl='@Her kan du angive mailens emne-tekst.', $labl='@Emne',  $revi=true,$rows='2',$width='45',$step='',$more='placeholder="Vedrørende..."');
-    htm_NextFelt('45%');  htm_CombFelt($type='area',  $name='besked', $valu= '',  $titl='@Besked til modtageren.',  $labl='@Besked',  $revi=true, $rows='', $width='45',$step='',$more='placeholder="Vedhæftet følger..."');
-    htm_NextFelt('20%');  htm_CombFelt($type='area',  $name='bilag',  $valu= '',  $titl='@Angiv filnavne, på de filer der skal vedhæftes.', $labl='@Bilag', $revi=true, $rows='', $width='45',$step='',$more='placeholder="PDF-fil..."');
+    htm_NextFelt('20%');  htm_CombFelt($type='area',  $name='emne',   $valu= '',  $titl='@Her kan du angive mailens emne-tekst.', $labl='@Emne',  $revi=true,$rows='2',$width='45',$step='',$more='placeholder=" '.tolk('@Vedrørende...').'"');
+    htm_NextFelt('45%');  htm_CombFelt($type='area',  $name='besked', $valu= '',  $titl='@Besked til modtageren.',  $labl='@Besked',  $revi=true, $rows='', $width='45',$step='',$more='placeholder=" '.tolk('@Vedhæftet følger...').'"');
+    htm_NextFelt('20%');  htm_CombFelt($type='area',  $name='bilag',  $valu= '',  $titl='@Angiv navne, på de filer der skal vedhæftes.', $labl='@Bilag', $revi=true, $rows='', $width='45',$step='',$more='placeholder=" '.tolk('@PDF-fil...').'"');
     htm_LastFelt(); 
-    htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+    htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -898,7 +986,7 @@ function Rude_FormRedigerGrafik() {
         ['@X-venstre', '8%','right',  'text',tolk('@Stregens x-startpunkt målt i mm fra venstre side-kant'),'.x.'],
         ['@Y-bund',    '8%','right',  'text',tolk('@Stregens y-startpunkt målt i mm fra side-bund'),'.y.'],
         ['@Side',      '5%','center','side',tolk('@Medtages på udskrifts side. A:alle, 1:første, !1:ikke første, S:sidste, !S:ikke sidste')],
-        ['@Filnavn',  '30%','left','text',tolk('@Filnavn på grafik-fil')],
+        ['@Filnavn',  '30%','left','text',tolk('@Filnavn på grafik-fil'),tolk('@?.jpg')],
         ),
       $RowSuff= array(
         ['',        '22%','center','text','','','.?.'],
@@ -918,14 +1006,15 @@ function Rude_FormRedigerGrafik() {
         ['@Bredde',     '6%','right', 'text',tolk('@Felt højde målt i mm'),'.h.'],
         ['@Farve',      '8%','left',  'text',tolk('@Tekst farve. Se farve skema'),'#Kode.'],
         ['@Side',       '5%','center','side',tolk('@Medtages på udskrifts side. A:alle, 1:første, !1:ikke første, S:sidste, !S:ikke sidste')],
+        ['@Evt. Note', '20%','left',  'text',tolk('@Huske-tip for denne streg...'),' '.tolk('@Stregen angår...')],
         ),
       $RowSuff= array(
-        ['Evt. Note:',  '20%','center','text','','(Ikke implementeret endnu!)','.?.'],
+      //  ['Evt. Note:',  '20%','center','text','','(Ikke implementeret endnu!)','.?.'],
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
       $data= array(1,2,3,4,5,6,7,8,9,10)  # Antal rows ved DEMO
     );
     forskydning();
-    htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+    htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -953,7 +1042,7 @@ function Rude_FormRedigerOrdrelin() {
         ['ORDRELINIER:',  '15%','right','text','  ',tolk('@Tekst linier med ordrepostering.'),'.?.'],
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
-        ['@Feltnavn', '16%','left', 'data',   tolk('@Navnet på variablen'),'@navn...'],
+        ['@Feltnavn', '16%','left', 'data',   tolk('@Navnet på variablen. Variabler som benyttes i ordrelinier, her prefix: £'),'@navn...'],
         ['@X-pos',    '6%','right', 'number', tolk('@Tekstens x-startpunkt målt i mm fra venstre side-kant'),'.x.'],
         ['@Højde',    '6%','right', 'number', tolk('@Teksthøjde målt i [px]'),'.h.'],
         ['@Farve',    '6%','left',  'text',   tolk('@Tekst farve. Se farve skema'),'#...'],
@@ -965,15 +1054,22 @@ function Rude_FormRedigerOrdrelin() {
         ['@Skrå',       '4%','center','text','<a hrefxxx='.$link.' ><input type= "checkbox" name="italic" value="" ></a>',tolk('@Skrå skrift type, også kaldet italic'),'.?.'],
         ['Evt. Note:',  '20%','center','text','',tolk('@(Ikke implementeret endnu!)'),'.?.']
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      $data= array([['@ @posnr'],['X-pos'],['Højde'],['C'],['D']],[['@ @varenr'],['X-pos'],['Højde'],['C'],['D']],[['@ @beskrivelse'],['X-pos'],['Højde'],[''],['D']],[['@ @antal'],['X-pos'],['Højde'],['C'],['D']],[['@ @liniesum'],['X-pos'],['Højde'],['C'],['D']],[['Nyt felt'],['X-pos'],['Højde'],['C'],['D']])  # Antal rows ved DEMO
+      $data= array( [['£posnr'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']],
+                    [['£varenr'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']],
+                    [['£beskrivelse'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']],
+                    [['£antal'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']],
+                    [['£liniesum'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']],
+                    [['Nyt felt'],['X-pos'],['Højde'],['Farve'],['Just'],['Font'],['Fed'],['Skrå'],['Note']] ) 
     );  # [[0:Feltnavn],[1:X-pos],[2:Højde],[3:Farve],[4:Just.],[5:Font],[6:Fed],[7:Skrå],[8:Evt. Note:],[... ]]
+    msg_Dialog('warn',ucfirst(tolk('@Retur')),'JavaScript:window.history.back();',ucfirst(tolk('@Fortsæt')), $Knap2_function='$jQ112(this).dialog("close")','','',ucfirst(tolk('@Her er problemer!')), ucfirst(tolk('@Der er ikke styr på ordreliniers data!')));
     forskydning();
-    htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+    htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_MomsSetup() {
   htm_Rude_Top($name= 'moms',$capt= '@Moms indstillinger:',$parms='',$icon='fa-wrench','panelW960',__FUNCTION__);
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
   htm_TabelInp(     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
       $HeadLine= array( [' ', '8%','left','show', '', '@Indland'] ),
       $RowPref= array(
@@ -981,41 +1077,43 @@ function Rude_MomsSetup() {
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
         ['@Nr.',          '4%','center', 'data',tolk('@Positions nummer i gruppen'),'.Nr.'],
-        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst...'],
+        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst... (Opret ny konto)'],
         ['@Konto',        '6%','center', 'data',tolk('@Det nummer i kontoplanen, som salgsmomsen skal konteres på.'),'Konto...'],
         ['@%-Sats',       '6%','center', 'data',tolk('@Moms %-sats'),'25%...'],
         ),
       $RowSuff= array(
         ['',        '30%','center','text','','','.?.'],
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      $data= array([['1'],['@Salgsmoms'],['66100'],['25,00'],['']], [['2'],[''],[''],[''],[''] ] ) 
+      $data= array( [['1'],['@Salgsmoms'],['66100'],['25,00'],['']], [['2'],[''],[''],[''],['']] ) 
      );
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':2');
   htm_TabelInp(     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-      $HeadLine= array( ),
+      $HeadLine= array(['']),
       $RowPref= array(
         ['@Købsmoms (indgående moms): ',    '24%','right','text','@Køb: ','@Den moms du skal have retur fra SKAT','.?.'],
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
         ['@Nr.',          '4%','center', 'data',tolk('@Positions nummer i gruppen'),'.Nr.'],
-        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst...'],
+        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst... (Opret ny konto)'],
         ['@Konto',        '6%','center', 'data',tolk('@Det nummer i kontoplanen, som købsmomsen skal konteres på.'),'Konto...'],
         ['@%-Sats',       '6%','center', 'data',tolk('@Moms %-sats'),'25%...'],
         ),
       $RowSuff= array(
         ['',        '30%','center','text','','','.?.'],
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      $data= array([['1'],['@Købsmoms'],['66200'],['25,00'],['']], [['2'],[''],[''],[''],[''] ] ) 
+      $data= array( [['1'],['@Købsmoms'],['66200'],['25,00'],['']], [['2'],[''],[''],[''],[''] ] ) 
      );
    echo '<hr>';
 
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':3');
   htm_TabelInp(     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-      $HeadLine= array( [' ', '8%','left','show', '', '@Udland'] ),
+      $HeadLine= array( [' ', '8%','left','show', ' ', '@Udland'] ),
       $RowPref= array(
-        ['@Moms af ydelseskøb i udlandet: ',    '24%','right','text','@Ydel: ','@Ved ydelseskøb i udlandet, skal der betales dansk moms på vegne af sælgeren.  Samtidig kan købsmomsen trækkes fra så resultatet bliver 0','.?.'],
+        ['@Moms af ydelseskøb i udlandet: ',    '24%','right','text','@Ydel: ','@Ved ydelseskøb i udlandet, skal der betales dansk moms på vegne af sælgeren. Samtidig kan købsmomsen trækkes fra så resultatet bliver 0','.?.'],
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
         ['@Nr.',          '4%','center', 'data',tolk('@Positions nummer i gruppen'),'.Nr.'],
-        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst...'],
+        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst... (Opret ny konto)'],
         ['@Konto',        '6%','center', 'data',tolk('@Konto til postering af salgsmoms for ydelseskøb i udlandet'),'Konto...'],
         ['@%-Sats',       '6%','center', 'data',tolk('@Moms %-sats'),'25%...'],
         ['@Modkonto',     '6%','center', 'data',tolk('@Konto til postering af købsmoms for ydelseskøb i udlandet'),'Konto...'],
@@ -1024,16 +1122,18 @@ function Rude_MomsSetup() {
       $RowSuff= array(
         ['',        '22%','center','text','','','.?.'],
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      $data= array([['1'],['@Moms af ydelseskøb i udlandet'],['66155'],['25,00'],['66200']], [['2'],[''],[''],[''],[''] ] ) 
+      $data= array( [['1'],['@Moms af ydelseskøb i udlandet'],['66155'],['25,00'],['66200']], [['2'],[''],[''],[''],[''] ] ) 
      );
+
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':4');
   htm_TabelInp(     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
       $HeadLine= array( ),
       $RowPref= array(
-        ['@Moms af varekøb i udlandet: ',    '24%','right','text','@Vare: ','@Ved varekøb i udlandet, skal der betales dansk moms på vegne af sælgeren.  Samtidig kan købsmomsen trækkes fra så resultatet bliver 0','.?.'],
+        ['@Moms af varekøb i udlandet: ',    '24%','right','text','@Vare: ','@Ved varekøb i udlandet, skal der betales dansk moms på vegne af sælgeren. Samtidig kan købsmomsen trækkes fra så resultatet bliver 0','.?.'],
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
         ['@Nr.',          '4%','center', 'data',tolk('@Positions nummer i gruppen'),'.Nr.'],
-        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst...'],
+        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst... (Opret ny konto)'],
         ['@Konto',        '6%','center', 'data',tolk('@Konto til postering af salgsmoms for køb i udlandet'),'Konto...'],
         ['@%-Sats',       '6%','center', 'data',tolk('@Moms %-sats'),'25%...'],
         ['@Modkonto',     '6%','center', 'data',tolk('@Konto til postering af købsmoms for køb i udlandet'),'Konto...'],
@@ -1042,9 +1142,10 @@ function Rude_MomsSetup() {
       $RowSuff= array(
         ['',        '22%','center','text','','','.?.'],
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
-      $data= array([['1'],['@Moms af varekøb m.v. i udlandet'],['66150'],['25,00'],['66200']], [['2'],[''],[''],[''],[''] ] ) 
+      $data= array( [['1'],['@Moms af varekøb m.v. i udlandet'],['66150'],['25,00'],['66200']], [['2'],[''],[''],[''],[''] ] ) 
      );
 
+   echo '<hr>';
   htm_TabelInp(     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
       $HeadLine= array( [' ', '8%','left','show', '', '@Rapporter'] ),
       $RowPref= array(
@@ -1052,7 +1153,7 @@ function Rude_MomsSetup() {
       ),
       $ColStyle= array( # [ColLabl, ColWidth, ColJust, InpType, ColTip, placeholder]
         ['@Nr.',          '4%','center', 'data',tolk('@Positions nummer i gruppen'),'.Nr.'],
-        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst...'],
+        ['@Beskrivelse', '20%','left',   'data',tolk('@Kontobeskrivelse. En beskrivende tekst efter eget valg'),'Tekst... (Opret ny konto)'],
         ['@Fra',          '6%','center', 'data',tolk('@Første kontonummer som skal indgå i rapporten'),'Konto...'],
         ['@Til',          '6%','center', 'data',tolk('@Sidste kontonummer som skal indgå i rapporten'),'25%...'],
         ['@Rubrik A1',    '6%','center', 'data',tolk('@Kontonummer for samlet varekøb i EU'),'Konto...'],
@@ -1067,40 +1168,42 @@ function Rude_MomsSetup() {
       ),  # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:FltContent, 5:ColTip, 6:placeholder]
       $data= array([['1'],['@Momsrapport'],['66100'],['66200'],['2800'],['2700'],['1220'],['1200'],['1290'] ] ) 
      );
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
 function Rude_Stamdata () { 
   htm_Rude_Top($name='stamkort',$capt='@Stamdata:',$parms='',$icon='fa-user',$klasse='panelW320',__FUNCTION__);
   htm_CombFelt($type='text',  $name='firmanavn',  $valu= $firmanavn,  $titl='@Navnet på det firma, regnskabet angår',   $labl='@Firmanavn',   $revi=true);
-  htm_CombFelt($type='text',  $name='addr1',      $valu= $addr1,      $titl='@Firmaets adresse',                        $labl='@Adresse',     $revi=true);
-  htm_CombFelt($type='text',  $name='addr2',      $valu= $addr2,      $titl='@Supplerende stedsangivelse',              $labl='@Sted',        $revi=true);
+  htm_FrstFelt('50%');  htm_CombFelt($type='text',  $name='addr1',      $valu= $addr1,      $titl='@Firmaets adresse',                        $labl='@Adresse',     $revi=true);
+  htm_NextFelt('50%');  htm_CombFelt($type='text',  $name='addr2',      $valu= $addr2,      $titl='@Supplerende stedsangivelse',              $labl='@Sted',        $revi=true);
+  htm_LastFelt();
   htm_FrstFelt('25%');  htm_CombFelt($type='text',  $name='postnr', $valu= $postnr, $titl='@Postnr',                    $labl='@Postnr.',     $revi=true);
   htm_NextFelt('75%');  htm_CombFelt($type='text',  $name='bynavn', $valu= $bynavn, $titl='@Bynavn. firmaets hjemsted', $labl='@Bynavn',      $revi=true);
   htm_LastFelt();
-  htm_CombFelt($type='mail',  $name='ny_email',   $valu= $ny_email,   $titl='@Firmaets Mail-adresse',                   $labl='@Mail',        $revi=true);
-  htm_CombFelt($type='text',  $name='homepage',   $valu= $homepage,   $titl='@Firmaets hjemmeside-adresse',             $labl='@Hjemmeside',  $revi=true);
+  htm_FrstFelt('50%');  htm_CombFelt($type='mail',  $name='ny_email',   $valu= $ny_email,   $titl='@Firmaets Mail-adresse',                   $labl='@Mail',        $revi=true);
+  htm_NextFelt('50%');  htm_CombFelt($type='text',  $name='homepage',   $valu= $homepage,   $titl='@Firmaets hjemmeside-adresse',             $labl='@Hjemmeside',  $revi=true);
+  htm_LastFelt();
   htm_CombFelt($type='text',  $name='bank_navn',  $valu= $bank_navn,  $titl='@Bank forbindelse',                        $labl='@Bank',        $revi=true);
   htm_FrstFelt('25%');  htm_CombFelt($type='text',  $name='bank_reg',   $valu= $bank_reg,   $titl='@Bank reg.',         $labl='@Bank reg.',   $revi=true);
   htm_NextFelt('75%');  htm_CombFelt($type='text',  $name='bank_konto', $valu= $bank_konto, $titl='@Bank konto',        $labl='@Bank konto',  $revi=true);
   htm_LastFelt();
   htm_CombFelt($type='text',  $name='cvrnr',      $valu= $cvrnr,      $titl='@CVR - Virksomheds ID. Tast CVR-nr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)', $labl='@CVR',       $revi=true);
-  htm_CombFelt($type='text',  $name='tlf',        $valu= $tlf,        $titl='@Tlf - Tast telefonnr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)',              $labl='@Telefon.',  $revi=true);
-  htm_CombFelt($type='text',  $name='fax',        $valu= $fax,        $titl='@Firmaets fax',                            $labl='@Fax',         $revi=true);
-  if ($pbs_nr) {
+  htm_FrstFelt('50%');  htm_CombFelt($type='text',  $name='tlf',        $valu= $tlf,        $titl='@Tlf - Tast telefonnr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)',              $labl='@Telefon.',  $revi=true);
+  htm_NextFelt('50%');  htm_CombFelt($type='text',  $name='fax',        $valu= $fax,        $titl='@Firmaets fax',                            $labl='@Fax',         $revi=true);
+  htm_LastFelt();
+  if (!$pbs_nr) {
     htm_FrstFelt('40%');  htm_CombFelt($type='text',  $name='pbs_nr', $valu= $pbs_nr, $titl='@Firmaets pbsnr',  $labl='@PBS Kreditornr.', $revi=true);
-    htm_NextFelt('60%');  if ($pbs=='B')      htm_OptioFlt($type='text',  $name='pbs',    $valu= $pbs,  $titl='@Vælg den aftalte løsning',  $labl='@Aftale',  
-                                              $revi=true, $optlist= array( ['','B','@Basis løsning'], ['','', '@Total løsning'], ['','L','@Lev. Service']),$action='');
-                          elseif ($pbs=='L')  htm_OptioFlt($type='text',  $name='pbs',    $valu= $pbs,  $titl='@Vælg den aftalte løsning',  $labl='@Aftale',  
-                                              $revi=true, $optlist= array( ['','L','@Lev. Service'], ['','B','@Basis løsning'],['','', '@Total løsning'] ),$action='');
-                          else                htm_OptioFlt($type='text',  $name='pbs',    $valu= $pbs,  $titl='@Vælg den aftalte løsning', $labl='@Aftale',
-                                              $revi=true, $optlist= array( ['','', '@Total løsning'], ['','B','@Basis løsning'], ['','L','@Lev. Service']),$action='');
+    htm_NextFelt('60%');  {if      ($pbs=='B') $listen= array(['','B','@Basis løsning'], ['','', '@Total løsning'], ['','L','@Lev. Service']);
+                           elseif  ($pbs=='L') $listen= array(['','L','@Lev. Service'],  ['','B','@Basis løsning'], ['','', '@Total løsning']);
+                           else                $listen= array(['','', '@Total løsning'], ['','B','@Basis løsning'], ['','L','@Lev. Service']);
+                           htm_OptioFlt($type='text',  $name='pbs',    $valu= $pbs,  $titl='@Vælg den aftalte løsning',  $labl='@Aftale',  $revi=true, $optlist= $listen, $action='');
+                          }
     htm_LastFelt();
   } else  htm_CombFelt($type='text',  $name='pbs_nr', $valu= $pbs_nr, $titl='@Firmaets pbsnr',  $labl='@PBS Kreditornr.',   $revi=true);
   htm_CombFelt($type='text',  $name='gruppe', $valu= $gruppe, $titl='@Gruppe ',                 $labl='@PBS debitorgruppe', $revi=true);
   htm_CombFelt($type='text',  $name='fi_nr',  $valu= $fi_nr,  $titl='@Bankernes fælles indbetalingskort (FI-kort). Her angiver du dit FI Kreditornr.',    $labl='@FI Kreditornr.',    $revi=true);
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
 }
 
 # PROGRAM-MODUL;
@@ -1134,7 +1237,223 @@ function Rude_Ansatte () {
   htm_FrstFelt('50%');    htm_CombFelt($type='date',  $name='Tiltrådt',     $valu= $Tiltrådt,   $titl='@Tiltrådt',    $labl='@Tiltrådt',  $revi=true);
   htm_NextFelt('50%');    htm_CombFelt($type='date',  $name='Fratrådt',     $valu= $Fratrådt,   $titl='@Fratrådt',    $labl='@Fratrådt',  $revi=true);
   htm_lastFelt();
-  htm_RudeBund($pmpt='@Gem',$revi=true,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+}
+
+function Rude_Enheder () {
+  htm_Rude_Top($name= 'enhedform',$capt= '@Enheder og materialer: ',$parms='',$icon='','panelW320',__FUNCTION__);
+  htm_TabelInp(   # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+    $HeadLine= array( [' ', '50%','left','show', '', '@Enhedsbetegnelser'] ),
+    $RowPref= array(),
+    $ColStyle= array( # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+      ['@Enhed.',       '25%','left', 'text',tolk('@Enhedsbetegnelse').' ','Enh...'],
+      ['@Beskrivelse',  '75%','left', 'text',tolk('@Beskrivelse af enheden'),'Beskr...'],
+      ),
+    $RowSuff= array(),
+        $data= array(1,2,3)  # Antal rows ved DEMO
+      
+  );
+  htm_TabelInp(   # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+    $HeadLine= array( [' ', '50%','left','show', '', '@Materiale egenskaber'] ),
+    $RowPref= array(),
+    $ColStyle= array( # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
+      ['@Materiale.', '75%','left', 'text',tolk('@Materiale'),'Matr...'],
+      ['@Densitet',   '25%','left', 'text',tolk('@Materialets massefylde'),'Dens...'],
+      ),
+    $RowSuff= array(),
+        $data= array(1,2,3)  # Antal rows ved DEMO
+  );
+### PanelFooter:
+  NaviTip();
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+}
+
+# PROGRAM-MODUL;
+function Rude_Varer() {
+  htm_Rude_Top($name= 'vareform',$capt= '@Vareliste:',$parms='../_base/page_Gittermenu.php',$icon='fa-database','panelWmax',__FUNCTION__);
+  htm_Tabel($RowLabl='@vare',
+            $ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+              ['@Varenr.',    '7%','','text',  'left',   '@Varenummer. Entydig nummerkode, som benyttes til sortering, summering mv.','@Numr...'],
+              ['@Enhed',      '5%','','text',  'left',   '@Kontonavn - beskrivende tekst','@Enh...'],
+              ['@Beskrivelse','33%','','text',  'left',   '@Beskrivende tekst, som benyttes ved ordre/faktura','@Besk...'],
+              ['@Kostpris',   '6%','','text',  'right',   '@Tilknyttet note','@Kost...'],
+              ['@Salgspris',  '6%','','text',  'right',   '@Tilknyttet note','@Salgs...'],
+              ['@Vejl_pris',  '6%','','text',  'right',   '@Tilknyttet note','@Vejl...'],
+              ['@Note',      '10%','','text',  'left',   '@Tilknyttet note','@Note...'],
+              ['@Gruppe',     '5%','','text',  'left',   '@Varegruppe','@Grup...'],
+              ['@Beholdn.',   '6%','','text',  'center', '@Lagerbeholdning','@Beh...'],
+              ['@Lokation.',  '6%','','text',  'center', 'Hvor varen befinder sig','@Lok...'],
+              ),
+            $TablData= KontoTabFile('../_export-import/varer.tab'),  // Indlæs data fra TAB-fil
+            $FilterOn=true, $SorterOn=false, $maxheight='200px' );
+  echo '<div style="text-align:center;">'; 
+  echo  textKnap($label='@Indkøbsforslag',  $title='@Klik her for at lave et indkøbsforslag',$link='../_base/page_Blindgyden').
+        textKnap($label='@Ordrebeholdning', $title='@Opslag - Se oversigt over ordrebeholdning',$link='../_base/page_Blindgyden').
+        textKnap($label='@Visning',         $title='@Visning - Vælg hvad der skal vises',$link='../_base/page_Blindgyden').
+   '</div>';
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
+}
+
+
+# PROGRAM-MODUL;
+function Rude_Varekort() {
+  htm_Rude_Top($name= 'varekortform',$capt= '@Varekort:',$parms='',$icon='fa-pencil-square-o','panelW960',__FUNCTION__);
+    
+  SpalteTop(320);
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Generelt:',$parms='',$icon='fa-pencil-square-o','panelW320',__FUNCTION__);
+  htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Beskrivelse',  $revi=true, $rows='2',$width='',$step='', $more='required="required" placeholder="'.tolk('@Beskrivelse...').'"');
+  /* htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Jysk',  $revi=true, $rows='2',$width='',$step='' ); */
+  htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Varemærke',  $revi=true, $rows='2',$width='',$step='' );
+  htm_FrstFelt('50%');    htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst som skal benyttes som stregkode', $labl='@Stregkode',  $revi=true, $rows='2',$width='',$step='' );
+  htm_NextFelt('50%');    htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Her vises stregkoden', $labl='',  $revi=true, $rows='2',$width='',$step='' );
+  htm_lastFelt(); 
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  NextSpalte(320);
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Iøvrigt:',$parms='',$icon='fa-pencil-square-o','panelW320',__FUNCTION__);
+  htm_CombFelt($type='area',$name='noter',$valu= $noter,  $titl='@Angiv Bemærkninger',  $labl='@Bemærkning',    $revi=true, $rows='1');
+  htm_FrstFelt('30%');    htm_CheckFlt($type='checkbox',$name='ser', $valu= '',  $titl='@Serienr',  $labl='@Serienr',  $revi=false, $more=' '.$pg);
+  htm_NextFelt('40%');    htm_CheckFlt($type='checkbox',$name='saml', $valu= '',  $titl='@xxx',  $labl='@Samlevare',  $revi=false, $more=' '.$pg);
+  htm_NextFelt('30%');    htm_CheckFlt($type='checkbox',$name='udgaa', $valu= '',  $titl='@xxx',  $labl='@Udgået',  $revi=false, $more=' '.$pg);
+  htm_lastFelt(); 
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  EndSpalter();
+  
+  SpalteTop(240);
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Enheds Priser:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  /* echo 'Pr. Enhed:'; */
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Salgspris',  $revi=true, $rows='2',$width='',$step='');
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@B2B salgspris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Vejledende pris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Kostpris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Tilbud:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Salgspris',  $revi=true, $rows='2',$width='',$step='');
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Kostpris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='date',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Dato start',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='date',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Dato slut',  $revi=true, $rows='2',$width='',$step='' );
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+    
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Mængederabatter:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Rabat metode',         $revi=true, $optlist= array(
+                    ['','%','%'],
+                    ['','Kr.','Kr.']),$action='');
+  htm_FrstFelt('50%');    htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Antal...', $labl='Stk. rabat v. antal',  $revi=true, $rows='2',$width='',$step='', $more='placeholder="'.tolk('@Antal...').'"');
+  htm_NextFelt('50%');    htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Antal...', $labl='%- rabat v. antal',  $revi=true, $rows='2',$width='',$step='', $more='placeholder="'.tolk('@Antal...').'"');
+  htm_lastFelt(); 
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  NextSpalte(320);
+ 
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Enheder:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Enhed',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_OptioFlt($type='text',  $name='enhed1',    $valu= $enhed1,  
+                    $titl='@Vælg den alternative enhed du ønsker at bruge.',  
+                    $labl='@Alternativt',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Indhold/enhed',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Pris/enhed',  $revi=true, $rows='2',$width='',$step='' );
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+ 
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Beholdning:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Lokation',  $revi=true, $rows='2',$width='',$step='', $more='placeholder="'.tolk('@Lok...').'"');
+  htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Følgevare',  $revi=true, $rows='2',$width='',$step='', $more='placeholder="'.tolk('@Følg...').'"');
+  htm_FrstFelt('25%');    echo tolk('@Behold.:');
+  htm_NextFelt('25%');    htm_CombFelt($type='tal1d',  $name='regn', $valu= $regnskab,   $titl='@Angiv ', $labl='@Min.',  $revi=true, $rows='2',$width='',$step='' );
+  htm_NextFelt('25%');    htm_CombFelt($type='tal1d',  $name='regn', $valu= $regnskab,   $titl='@Angiv ', $labl='@Max.',  $revi=true, $rows='2',$width='',$step='' );
+  htm_NextFelt('25%');    htm_CombFelt($type='tal1d',  $name='regn', $valu= $regnskab,   $titl='@Angiv ', $labl='@Aktuel',  $revi=true, $rows='2',$width='',$step='' );
+  htm_lastFelt(); 
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Grupper:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Varegruppe',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Prisgruppe',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Tilbudsgruppe',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_OptioFlt($type='text',  $name='enhed0',    $valu= $enhed0,  
+                    $titl='@Vælg den enhed du ønsker at bruge.',  
+                    $labl='@Rabatgruppe',         $revi=true, $optlist= array(
+                    ['','Stk','Stk'],
+                    ['','Palle','Palle']),$action='');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+   NextSpalte(320);
+ 
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Colli:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Størrelse',  $revi=true, $rows='2',$width='',$step='');
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Ydre størrelse',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Anbruds kostpris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_CombFelt($type='tal2dc',  $name='regn', $valu= $regnskab,   $titl='@Angiv en tekst der beskriver produktet', $labl='@Kostpris',  $revi=true, $rows='2',$width='',$step='' );
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+  
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Kategorier:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  htm_CombFelt($type='text',  $name='regn', $valu= $regnskab,   $titl='@Her kan du oprette en ny kategori', $labl='Opret ny',  $revi=true, $rows='2',$width='',$step='', $more='placeholder="'.tolk('@Angiv evt. navn på en ny kategori...').'"');
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem');
+ 
+  htm_Rude_Top($name= 'varekortform1',$capt= '@Varianter:',$parms='',$icon='fa-pencil-square-o','panelW240',__FUNCTION__);
+  echo '<br>';
+  echo '<br>';
+  htm_RudeBund($pmpt='@Gem',$subm=true,$title='@Gem'); 
+  EndSpalter();
+  
+  
+  echo '<div style="text-align:center;">'; 
+  echo  textKnap($label='@Ny Modtageliste',  $title='@Klik her for at oprette en ny modtagelse',$link='../_lager/page_Varemodtagelse.php').
+        textKnap($label='@Leverandøropslag', $title='@Opslag - Se ...',$link='../_base/page_Blindgyden').
+   '</div>';
+  htm_RudeBund($pmpt='@Retur til vareliste',$subm=true,$title='@Retur til vareliste');
+}
+
+function Rude_Varemodtagelse() {
+  htm_Rude_Top($name= 'varemodtform',$capt= '@Varemodtagelse:',$parms='../_base/page_Gittermenu.php',$icon='fa-pencil-square-o','panelW960',__FUNCTION__);
+  htm_Tabel($RowLabl='@se listens indhold',
+            $ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+              ['@Id.',           '12%','','text',  'left',   '@Entydig nummerkode..','@Id...'],
+              ['@Dato',          '12%','','date',  'left',   '@Listens oprettelsesdato','@Dato...'],
+              ['@Oprettet af',   '33%','','text',  'left',   '@Initialer for den som har oprettet listen','@Opret...'],
+              ['@Bemærkning',    '16%','','text',  'left',   '@Tilknyttet note','@Bem...'],
+              ['@Modtaget af',   '16%','','text',  'left',   '@Initialer for den som har modtaget varerne','@Modt...'],
+              ['@Modtaget dato', '12%','','date',  'left',   '@Modtagelses datoen','@Dato...'],
+              ),
+            #$TablData= KontoTabFile('../_export-import/varer.tab'),  // Indlæs data fra TAB-fil
+            $TablData= [[1],[2],[3],[4],[5],[6],[7]], 
+            $FilterOn=true, $SorterOn=true, $maxheight='80px' );
+            
+  echo '<div style="text-align:center;">'; 
+  echo  textKnap($label='@Ny modtageliste',  $title='@Klik her for at oprette en vareregistrering',$link='../_base/page_Blindgyden').
+        textKnap($label='@Vis alle lister', $title='@Klik her for at se alle lister, (Filteret nulstilles)',$link='../_base/page_Blindgyden').
+   '</div>';
+
+  echo '<hr>';
+  echo '<div style="font-weight:600;">'.tolk('@Her vises liste Id: 4').'</div>'; 
+  htm_Tabel($RowLabl='@vælge denne post',
+            $ColStyle= array(  #  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+              ['@Varenr.',      '12%','','text',  'left',   '@Entydigt varenummer','@Vare...'],
+              ['@Antal',        '12%','','text',  'left',   '@Vare antallet','@Antal...'],
+              ['@Beskrivelse',  '33%','','text',  'left',   '@Vare beskrivelse','@Beskriv...'],
+              ['@Leveres',      '16%','','text',  'left',   '@Initial ?? er for den som har modtaget varerne','@Lev...'],
+              ['@Lager',        '12%','','text',  'left',   '@Lageret hvor varen indgår','@Lager...'],
+              ),
+            #$TablData= KontoTabFile('../_export-import/varer.tab'),  // Indlæs data fra TAB-fil
+            $TablData= [[1001],[1002],[1003],[1004]], 
+            $FilterOn=false, $SorterOn=false, $maxheight='100' );
+  htm_RudeBund($pmpt='@Retur til hovedmenu',$subm=true,$title='@Retur til hovedmenu');
 }
 
 # DEMO-MODUL;
@@ -1144,13 +1463,13 @@ function Rude_Intro() {global $languageTable;
   ' samt <b>sprogunderstøttelse</b> og forberedt for forøget <b>sikkerhed</b> omkring password.</big><br><br>';
   echo 'Herunder demonstreres output-modulerne {out_*.php} og deres benyttelse.<br><br>';
   echo 'Der mangler stadig funktionalitet, så vil du skifte sprog, skal der tilføjes  parameter i URL:<br>';
-  echo '&nbsp;&nbsp;&nbsp;<i>/saldi-e/base/page_LayoutModuler.php?sprog=en</i> - Vælger engelsk sprog';
-  echo '<br>I tabel for Sprog oversættelse er aktuelt indlæst '.count($languageTable).' fraser.'; echo '<br>';
+  echo '&nbsp;&nbsp;&nbsp;<i>/saldi-e/base/page_Layoutdemo.php?sprog=en</i> - Vælger engelsk sprog';
+  echo '<br>I tabel for Sprog oversættelse er aktuelt indlæst '.count($languageTable).' fraser, alle maskinoversat af Google Translate.'; echo '<br>';
   echo 'Er der prefix: @ på en dansk tekst, når du har valgt andet sprog, er det fordi der ikke findes en oversættelse endnu. <br>';
   echo '<br>Benytter du trykfølsom skærm uden mus, skal du benytte Chrome browseren, for at få hjælpetekster:'; echo '<br>';
   echo '"Hvil" fingeren eller musen over den blå tekst med skygge, så popper hjælpetekster op.';  echo '<br>';
   echo 'Der er stadig "skønhedsfejl" i forskellige browseres visning. </div>';
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # DEMO-MODUL;
@@ -1162,16 +1481,16 @@ function Rude_Test()  {
   echo 'Læg mærke til at der er særlige skift ved vinduesbredderne: 320px, 640px, 960px og max 1200px<br><br>';
   echo 'Hvor der findes skjulte hjælpetekster, er synliggjort med blå tekster i skyggerammer. <br><br>';
   echo '<b>Afprøv ændring af programfladens sprog.</b><br><br>';
-  echo '<bluelabl>/saldi-e/base/page_LayoutModuler.php?sprog=en</bluelabl> - Vælger engelsk<br>';
-  echo '<bluelabl>/saldi-e/base/page_LayoutModuler.php?sprog=de</bluelabl> - Vælger tysk<br>';
-  echo '<bluelabl>/saldi-e/base/page_LayoutModuler.php?sprog=fr</bluelabl> - Vælger fransk<br>';
-  echo 'Og de andre:&nbsp;<bluelabl>/saldi-e/base/page_LayoutModuler.php?sprog=es =tr =da</bluelabl> - Vælger spansk/tyrkisk/dansk';
+  echo '<bluelabl>/saldi-e/base/page_Layoutdemo.php?sprog=en</bluelabl> - Vælger engelsk<br>';
+  echo '<bluelabl>/saldi-e/base/page_Layoutdemo.php?sprog=de</bluelabl> - Vælger tysk<br>';
+  echo '<bluelabl>/saldi-e/base/page_Layoutdemo.php?sprog=fr</bluelabl> - Vælger fransk<br>';
+  echo 'Og de andre:&nbsp;<bluelabl>/saldi-e/base/page_Layoutdemo.php?sprog=es =tr =da</bluelabl> - Vælger spansk/tyrkisk/dansk';
   echo '<br><br><b>Afprøv HTML5 og andre forbedringer.</b><br><br>';
   echo 'Inddatering af datoer i chrome, opera, vivaldi (m.fl.?) : Browseren tilbyder date-picker.<br><br>';
   echo 'Validering af data i input-felter : mail-adresse, password, required, m.fl.<br><br>';
   echo 'Prøv at vælge et password for administrator (Database setup), og se password styrke måleren.</div><br>';
   # /da:Sprog/en:Language/de:Sprache/fr:Langue/tr:Dil/es:Lenguaje
-htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # DEMO-MODUL;
@@ -1206,7 +1525,7 @@ function Rude_Formaal() {
   echo 'HUSK: Benyt subRutiner (Block-struktur) i stedet for Copy-Paste! <br>';
   echo '      Det øger forståelsen og reducerer begrebsforvirring, <br>';
   echo '      med velvalgte navne og det letter vedligeholdelsen!<br></pre></small>';
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # DEMO-MODUL;
@@ -1235,7 +1554,7 @@ echo '  <hr>';
   echo 'Explorer 10 - ? <br>';
   echo 'Explorer  9 - ? <br>';
   echo '</div>';
-  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem');
 }
 
 # SUB-FUNCTION:
@@ -1246,15 +1565,8 @@ function NaviTip () {### NavigationsTip:
 }
 
 function Rude_Blindgyde() {
-  msg_Dialog('tip',tolk('@Retur'),'JavaScript:window.history.back();','','','','',tolk('@Du er havnet i en blindgyde'),
-            tolk('@Linket du benyttede er midlertidigt, fordi det rigtige ikke er færdigudviklet.'));
-//  htm_Rude_Top($name= 'blind',$capt= '@Blindgyde!',$parms='',$icon='fa-info','panelW320',__FUNCTION__);
-//  echo '<div style="text-align:center;"><small><big>Du er havnet i en blindgyde:</big><br><br>';
-//  echo 'Linket du benyttede er midlertidigt, <br>';
-//  echo 'fordi det rigtige ikke er færdigudviklet.<br>';   //  echo 'Gå tilbage ved at benytte browserens tilbageknap. <br><br>';
-//  echo  textKnap($label='@Retur', $title='@Gå tilbage til hvor du kom fra.',$link='JavaScript:window.history.back();');
-//  echo '</small></div>';
-//  htm_RudeBund($pmpt='@Gem',$revi=false,$title='@Gem');
+  msg_Dialog('tip',ucfirst(tolk('@Retur')),'JavaScript:window.history.back();','','','','',ucfirst(tolk('@Du er havnet i en blindgyde')),
+            ucfirst(tolk('@Linket du benyttede er midlertidigt, fordi det rigtige ikke er færdigudviklet.')));
 }
 
 # SUB-FUNCTION:
@@ -1295,17 +1607,26 @@ function OrdrVars ($form_nr) { # Returner alle de felter, som er relevante for e
 //  } else {$result= array_merge($result,  [dato, faktnr, beskrivelse, beløb] ) }
 
   $r= $result;  $result= array();
-  foreach ($r as $rec) {$result= array_merge($result, array([$rec,$rec,'@'.$rec]));}
+  foreach ($r as $rec) {$result= array_merge($result, array([$rec,$rec,'£'.$rec]));}
   # print_r($result);
   return $result;
 }
 
+function OmFormularer () {
+  echo '<div style="font-size:x-small">';
+  echo tolk('@Formularers største format er A4, hvilket vil sige at bredden er max 210 mm og højden max. 297 mm.').' ';
+  echo tolk('@Dertil svarer at værdier for X skal ligge i intervallet 1 - 210 mm, og for Y skal ligge i intervallet 1 - 297 mm').'<br>';
+  echo tolk('@Bredde-placeringer X måles fra papirets venste kant.').'<br>'.tolk('@Højde-placeringer Y, måles fra papirets bund.');
+  echo '</div>';
+}
+
 # SUB-FUNCTION:
 function forskydning () {
-  htm_FrstFelt('30%');  echo '<div style= "text-align:right">'.tolk('@Forskydning af alle placeringer:').'</div>';
+  htm_FrstFelt('25%');  echo '<div style= "text-align:right">'.tolk('@Forskydning af alle placeringer:').'</div>';
   htm_NextFelt('12%');  htm_CombFelt($type='numberL',  $name='xSkyd',  $valu= 0, $titl='@Vandret forskydning: Angiv positivt tal for at øge, negativt tal for at mindske alle x-placeringer',  $labl='@X-forskydning', $revi=true, $rows='', $width='45');
   htm_NextFelt('12%');  htm_CombFelt($type='numberL',  $name='ySkyd',  $valu= 0, $titl='@Lodret forskydning: Angiv positivt tal for at øge, negativt tal for at mindske alle y-placeringer', $labl='@Y-forskydning', $revi=true, $rows='', $width='45');
-  htm_NextFelt('46%');  htm_accept('@Forskyd formular','@Flyt hele formularens indhold med de angivne x/y-værdier.');
+  htm_NextFelt('16%');  htm_accept('@Forskyd formular','@Flyt hele formularens indhold med de angivne x/y-værdier.');
+  htm_NextFelt('35%');  OmFormularer();
   htm_LastFelt(); 
 }
 
