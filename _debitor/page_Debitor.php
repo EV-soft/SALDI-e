@@ -1,0 +1,22 @@
+<?php      $DocFil= '../_debitor/page_Debitor.php';   $DocVer='5.0.0';     $DocRev='2016-10-00';      $modulnr=5;
+// Formål:  Kald til ufærdigt link
+//             ___   _   _    ___  _
+//            / __| /_\ | |  |   \| |   ___ 
+//            \__ \/ _ \| |__| |) | |__/ -_)
+//            |___/_/ \_|____|___/|_|  \___|
+//
+// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+//
+// 2016.08.00 ev - EV-soft
+
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
+
+  $pageTitl='Salgs ordrer';
+  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+
+  Head_Navigation(tolk('@Debitorer'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
+  Rude_DebtDebitor();  # Demo!
+  Rude_FootMenu();
+  
+  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+?>  
