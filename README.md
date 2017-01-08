@@ -3,13 +3,13 @@ Moderniseret udgave af SALDI: <i>Responsive, CSS-baseret, PHP7-klar, blok-strukt
 
 Målsætningen med denne udvikling er:
 <ol type="1">
-<li>  Forbedret modul-opbygget Code-design, så vedligeholdelse/udvikling bliver nemmere.
+<li>  Forbedret modul-opbygget design af kildetekster, så vedligeholdelse/udvikling bliver nemmere.
 <li>  Fjernelse af inaktiv kode.
 <li>  Hastigheds forøgelse, med fokus på repeterende rutiner.
 <li>  Indførelse af Responsivt design, med mere moderne/fleksibelt layout.
-<li>  CSS-design, så central ændring af udseende gøres mulig.
+<li>  CSS-design, så central ændring af udseende gøres mulig, og der kan vælges temaer.
 <li>  Udnyttelse af HTML5 forbedringer (f.eks. validering af input).
-<li>  Al output til skærm baseres på et nyt bibliotek: out_base.php
+<li>  Al output til skærm baseres på et nyt bibliotek: out_base.php, samt out_ruder.php hvor aktuelle paneler sammensættes.
 <li>  Sprogvalg for program-fladen, med halv-automatisk vedligeholdelse.
 <li>  Forøge sikkerheden omkring password. Opbevaring og styrkemåler.
 <li>  Sikre kompatibilitet med PHP7. udgår:{func:Split(), func:ereg_*(), ext:mysql_*}<br> 
@@ -19,19 +19,20 @@ Målsætningen med denne udvikling er:
 <li>  Layout af source-code forbedres, så strukturen forstås hurtigere, og sjuskefejl afsløres.
 <li>  Bedre program-dokumentation ved øget anvendelse af kommentarer.
 <li>  Anvende prefix på funktionsnavne, så det afspejler kildefilen. (htm_*, out_*,...)
-<li>  Afskaffe alle:  PRINT "xxx" - Benyt/opret rutiner i out_*.php
+<li>  Afskaffe alle:  PRINT "xxx" - Benyt/opret istedet rutiner i out_*.php
 <li>  Afskaffe Layout-styring med tabeller, som er forældet metode.
 <li>  Afskaffe afhængighed af: PDFTK som sjældent er installeret.
-<li>  Ændre: BODY onLoad=javascript:alert() til CSS/jquery: msg_Dialog
+<li>  Ændre: BODY onLoad=javascript:alert() til CSS/jquery: msg_Dialog()
 <li>  Separere branche-funktionalitet, fra de almene regnskabs funktioner (samles i separate "add-on filer").
 </ol>
-Det er jo en meget omfattende målsætning, og betyder i praksis, en omskrivning af næsten al kode.<br>
-Derfor er det velkomment, at nogle der kan forstå den nuværende kode, (ftp://saldi.dk/saldi/seneste/) vil deltage i projektet.<br>
+Det er en meget omfattende målsætning, og det betyder i praksis, en omskrivning af næsten al kode.<br>
+Derfor er du velkommen, til at deltage i projektet, hvis du kan forstå den nuværende kode, (ftp://saldi.dk/saldi/seneste/).<br>
 <br>
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
 En introduktion finder du her: https://ev-soft.github.io/SALDI-e/<br>
-En live demo af SALDI-€ kan du se her: http://ev-soft.dk/saldi-e/_base/page_LayoutModuler.php?sprog=da<br>
+En live demo af SALDI-€ kan du se her: http://ev-soft.dk/saldi-e<br>
+Demoen kan være nyere end GitHub-coden, da den jævnligt opdateres! Kontakt mig, hvis du ønsker de seneste kildefiler.
 
 En praktisk note: Kildefiler er redigeret med tabulator sat til 2. Fremover bliver tabulator erstattet med SPACE.<br>
 Ser du på en ældre fil indeholdende tabulator, ser du den bedst, ved at tilføje ?ts=2 i adresselinien. 
