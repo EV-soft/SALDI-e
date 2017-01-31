@@ -32,7 +32,7 @@ Derfor er du velkommen, til at deltage i projektet, hvis du kan forstå den nuv�
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
 En introduktion finder du her: https://ev-soft.github.io/SALDI-e/<br>
-En live demo af SALDI-€ kan du se her: http://ev-soft.dk/saldi-e<br>
+En live demo af SALDI-€ kan du se her: https://ev-soft.dk/saldi-e - senest opdateret: 2017-01-31<br>
 Demoen kan være nyere end GitHub-coden, da den jævnligt opdateres! Kontakt mig, hvis du ønsker de seneste kildefiler.
 
 En praktisk note: Kildefiler er redigeret med tabulator sat til 2. Fremover bliver tabulator erstattet med SPACE.<br>
