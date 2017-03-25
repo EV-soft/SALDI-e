@@ -14,7 +14,7 @@
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
     #Rude_Blindgyde(); 
-    Head_Navigation(tolk('@Leverandører'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
+    # Head_Navigation(tolk('@Leverandører'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
     Rude_Kreditorer();  # Demo!
     Rude_FootMenu();
 

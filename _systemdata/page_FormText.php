@@ -14,18 +14,18 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
 
   $pageTitl='Formularredigering';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-    
-    SpalteTop(240); Rude_Formularer('4','1:Tekster','dansk');
+    $demo1= '4'; $demo2= '1:Tekster'; $demo3= 'dansk'; $demo4= '2:Linjer'; $demo5= '3:Ordrelinjer'; 
+    SpalteTop(240); Rude_Formularer($demo1,$demo2,$demo3);
     NextSpalte();   Rude_FormRedigerText();
     EndSpalter();
     skilleLin();
     
-    SpalteTop(240); Rude_Formularer('4','2:Linjer','dansk');
+    SpalteTop(240); Rude_Formularer($demo1,$demo4,$demo3);
     NextSpalte();   Rude_FormRedigerGrafik();
     EndSpalter();
     skilleLin();
     
-    SpalteTop(240); Rude_Formularer('4','3:Ordrelinjer','dansk');
+    SpalteTop(240); Rude_Formularer($demo1,$demo5,$demo3);
     NextSpalte();   Rude_FormRedigerOrdrelin();
     EndSpalter();
 

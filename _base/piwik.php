@@ -1,4 +1,3 @@
-<!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];  _paq.push(["setDomains", ["*.ev-soft.dk"]]);  _paq.push(['trackPageView']);  _paq.push(['enableLinkTracking']);
   (function() {
@@ -9,4 +8,3 @@
   })();
 </script>
 <noscript><p><img src="//www.sky-box.dk/piwik/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->

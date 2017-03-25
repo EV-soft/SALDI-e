@@ -20,15 +20,15 @@
 // Filer skal gemmes i UTF-8 format uden BOM!
 // 2016.08.00 ev - EV-soft
 
-# @session_start(); $s_id=session_id();
 
-  global $PanelBgrd, $debug;
+  global $ØPanelBgrd, $Ødebug;
   $laast=NULL;
-  $debug= true;
+  $Ødebug= true;
   $pageTitl='DEMO af SALDI-€';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include_once("../_base/out_vinduer.php");  # Sidens indledende html-kode
 # echo '<script LANGUAGE="JavaScript"><!--function MasseFakt(tekst){ var agree = confirm(tekst);  if (agree) return true ;  else return false ;} // --></script>';
-# if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$DocFil,$ModulNr,'Dette er DEMO-vinduet.');
+# if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,$ModulNr,'Dette er DEMO-vinduet.');
     
   msg_Dialog('info',
   ucfirst(tolk('@Fortsæt')),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk('@Velkommen til SALDI-DEMO')),

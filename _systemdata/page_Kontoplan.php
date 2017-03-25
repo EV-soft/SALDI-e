@@ -11,8 +11,11 @@
   $pageTitl='Kontoplan';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
-    SpalteTop(640);   Rude_Kontoplan();
-    NextSpalte();     Rude_KontoKort();
+    $TablData= ImportTabFile('../_export-import/kontoplan.tab');  // Indlæs kontoplan fra TAB-fil
+    SpalteTop(640);   Rude_Kontoplan($TablData);
+    
+    $data= array(['2001','VAREFORBRUG','D','K1','DKK',0.00,'G',true]);  // Demo
+    NextSpalte();     Rude_KontoKort($data);
     EndSpalter();
     
 

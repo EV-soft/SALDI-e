@@ -8,15 +8,19 @@
 // LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
 //
 
-  global $debug;
-  $debug= true;
+#  global $debug;  $debug= true;
   $pageTitl='Diverse indstillings menu';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
+  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
+    #Demo:
+    if (!$regnskabnavn) {
+      $regnskabnavn='CSS-demo';   $servport= '';    $usernavn= '';    $usercode= '********';    $protokol= 'tls';
+    }
     SpalteTop(240);    Rude_DiverseMenu();
-    NextSpalte();   //  Rude_MomsSetup();
+    NextSpalte();      Rude_Kontoindstilling($regnskabnavn, $servport, $usernavn, $usercode, $protokol);
+    
 
-//  Til sidst indlæses java-scripter:   
+//  Til sidst indlÃ¦ses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

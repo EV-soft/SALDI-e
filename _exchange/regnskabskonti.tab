@@ -1,0 +1,84 @@
+50800	Immaterielle anlægsaktiver primo	S		0	0	100
+50810	Forbedringer i året	S		0	0	100
+50820	Salg i året	S		0	0	100
+50830	Tilgang i året	S		0	0	100
+50840	Årets afskrivninger	S		0	0	100
+50850	IMMATERIELLE ANLÆGSAKTIVER I ALT	Z		50790	0	100
+50898	MATERIELLE ANLÆGSAKTIVER	H		0	0	100
+50899	(Inventar, bygninger, maskiner mv.)	H		0	0	100
+50900	Driftmiddelsaldo primo	S		0	0	100
+50910	Tilgang i året drift/inventar	S	K1	0	0	100
+50920	Afgang i året drift/inventar	S		0	0	100
+50930	Årets afskrivninger	S		0	0	100
+51995	Anlægsaktiver	Z		50000	0	100
+55099	OMSÆTNINGSAKTIVER:	H		0	0	100
+55100	Varebeholdning	S		0	0	100
+55995	Varebeholdning	Z		55000	0	100
+56099	TILGODEHAVENDER	H		0	0	100
+56100	Debitorer, ubetalte fakturaer	S		0	0	100
+56150	Efterposteringer	S		0	0	100
+56295	Tilgode for salg	Z		56000	0	100
+56300	Deposita	S		0	0	100
+56500	Forudbetalte omkostninger	S		0	0	100
+56995	Andre tilgodehavender	Z		56300	0	100
+56999	Tilgodehavender	Z		56000	0	100
+57999	LIKVIDEBEHOLDNINGER	H		0	0	100
+58000	Bank	S		0	0	100
+58100	Giro	S		0	0	100
+58200	Kasse	S		0	0	100
+58998	Likvide beholdninger i alt	Z		58000	0	100
+58999	OMSÆTNINGSAKTIVER I ALT	Z		55099	0	100
+59999	AKTIVER I ALT	Z		50000	0	100
+60498	PASSIVER	H		0	0	100
+60499	EGENKAPITAL	H		0	0	100
+60500	Egenkapitalkonto primo	S		0	0	100
+60800	Årets resultat	R		11000	0	100
+60900	Overført fra tidligere år	S		0	0	100
+62000	Mellemregning	S		0	0	100
+62010	B-skat	S		0	0	100
+62020	Restskat	S		0	0	100
+62100	Hævet kontant i virksomheden	S		0	0	100
+62200	Indskudt kontant i virksomheden	S		0	0	100
+62300	Ikke fradragsberettigede udgift.	S		0	0	100
+62400	Privat andel autodrift	S		0	0	100
+62500	Privat andel telefon	S		0	0	100
+62600	75% andel repræsentation	S		0	0	100
+62995	Egenkapital	Z		60000	0	100
+62999	LANGFRISTET GÆLD (over 1 år)	H		0	0	100
+63000	Banklån	S		0	0	100
+63099	LANGFRISTET GÆLD I ALT	Z		63000	0	100
+64097	KORTFRISTET GÆLD (under 1 år)	H		0	0	100
+64098	SKYLDIGE OMKOSTNINGER	H		0	0	100
+64099	Løn	H		0	0	100
+64100	Nettoløn	S		0	0	100
+64110	A conto-udbetaling af løn	S		0	0	100
+64150	Skyldig A-skat, personale	S		0	0	100
+64160	Skyldigt arbejdsmarkedsbidrag	S		0	0	100
+64165	Skyldig SP (særlig pension)	S		0	0	100
+64170	Skyldig ATP	S		0	0	100
+64190	Feriepenge hensat	S		0	0	100
+64195	Feriepenge udbetalt	S		0	0	100
+64200	Skyldig pension, gruppeliv	S		0	0	100
+64210	Skyldig SH (søgne-/helligdage)	S		0	0	100
+64300	Løn ialt	Z		64000	0	100
+65000	Forudbetalinger	H			0	100
+65050	Forudbetalt fra kunder	S		0	0	100
+65095	Forudbetalinger i alt	Z		65000	0	100
+65100	Kreditorer, ubetalte regninger	S		0	0	100
+65200	Kreditor efterpostering	S		0	0	100
+65995	Kreditorer	Z		65100	0	100
+65999	SKYLDIGE OMKOSTNINGER I ALT	Z		64098	0	100
+66099	SKYLDIG MOMS	H		0	0	100
+66100	Salgsmoms	S		0	0	100
+66150	Moms af varekøb i udlandet	S		0	0	100
+66155	Moms af ydelseskøb i udlandet med omvendt betalingspligt	S		0	0	100
+66160	Olieafgift	S		0	0	100
+66170	Elafgift	S		0	0	100
+66180	Vandafgift	S		0	0	100
+66200	Købsmoms	S		0	0	100
+66900	Momsafregning	S		0	0	100
+66950	Skyldig moms i alt	Z		66100	0	100
+67000	KORTFRISTET GÆLD I ALT	Z		64100	0	100
+72000	PASSIVER I ALT	Z		60500	0	100
+99995	Ukendte poster	S		0	0	100
+99999	Balancekontrol	Z		50000	0	100

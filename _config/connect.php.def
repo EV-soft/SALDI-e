@@ -1,0 +1,81 @@
+<?php   $DocFil= '../_config/connect.php';   $DocVer='5.0.0';     $DocRev='2017-02-00';
+/* ## Formål: Opkobling til Database - Default:'../_config/connect.php.def'
+ *             ___   _   _    ___  _
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *
+ * 2017.01.00 ev - EV-soft
+ *
+ * LICENS
+ *
+ * Dette program er fri software. Du kan gendistribuere det og / eller
+ * modificere det under betingelserne i GNU General Public License (GPL)
+ * som er udgivet af The Free Software Foundation; enten i version 2
+ * af denne licens eller en senere version efter eget valg
+ *
+ * Dette program er udgivet med haab om at det vil være til gavn,
+ * men UDEN NOGEN FORM FOR REKLAMATIONSRET ELLER GARANTI.
+ * Se GNU General Public Licensen for flere detaljer.
+ *
+ * En dansk oversaettelse af licensen kan læses her:
+ * http://www.fundanemt.com/gpl_da.html
+ *
+ * Copyright (c) 2003-2017 Saldi.dk ApS
+ * ----------------------------------------------------------------------
+ */
+ ### BEMÆRK: filen '../_config/connect.php' - - indeholder aktuelle tilkoblings-data, og må ikke overskrives ved opdatering!
+ ### BEMÆRK: filen '../_config/connect.php.def' er den dertil svarende systemfil, som kun danner skole for opsætningen!
+ 
+if (!isset($bg)) $bg= '';
+if (!isset($title)) $title= tolk('@Forbindelse til Database');
+$font= '<font face="Arial, Helvetica, sans-serif">';
+
+if (file_exists('../_base/dbi_func.php')) {
+  include('../_base/dbi_func.php');
+  include('../_base/version.php');
+  include('../_base/base_init.php');
+#  include('../_base/msg_lib.php');
+}
+
+if (!function_exists('msg_Dialog')) {include_once('../_base/msg_lib.php');};
+
+global $Ødb_Encode, $Ødb_Type, $Øsqdb, $Øconnection, $Ødb_Link, $Ødb_Problem;
+
+// Global use (db_func.php, ):
+$Ødb_Encode= 'UTF8'; 
+$Ødb_Type= strtolower('MySQL');
+$login= 'cookie';
+
+$sqhost= 'localhost';
+$squser= 'DB-username';
+$sqpass= 'DB-password';
+$Øsqdb = 'saldidata-DB';
+
+$Ødb_Link= dbi_connect($sqhost, $squser, $sqpass, $Øsqdb); // dbi_* funktioner universelle for postgres og mysql . Erstatter mysqli_connect:
+//  if (!$Ødb_Link) $Ødb_Link='SkjulFejl';
+if (!$Ødb_Link) {
+#    var_dump($Ødb_Link);
+#    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+#    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+#    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    $spor.= htm_Ihead('Function:').'dbi_connect()'.htm_Ihead('File:'). __FILE__ .htm_Ihead('Line:'). __LINE__.htm_Ihead('Info:').'[!$Ødb_Link]';
+      msg_Dialog('error', tolk('@Retur'),'window.history.back();', '', '', '', '', 
+            tolk('@Database tilkobling'), tolk('@STOP ! - fordi oprettelse af link til databasen mislykkes!').htm_nl(2).htm_hr().$spor);
+}
+//  else var_dump($Ødb_Link);
+    
+#+  $Øconnection= mysqli_connect($sqhost, $squser, $sqpass, $Øsqdb);
+//  Warning: mysqli_connect() [function.mysqli-connect]: (HY000/2002): No such file or directory in /var/www/advokatfirmaet-viuff.dk/saldi-e/_config/connect.php on line 52
+# $spor= 'Sted: '. __FILE__ .' &nbsp; Line: '. __LINE__.' <br>[$Øconnection==false]';
+# if (!$Øconnection) msg_Dialog('error', tolk('@Retur'),'window.history.back();', '', '', '', '', tolk('@Database tilkobling'), 
+#            tolk('@Afbryder! - fordi der ikke kan oprettes forbindelse til databasen!').'<br><br>'.'File: '. __FILE__ .' &nbsp; Line: '. __LINE__);
+
+#+  if (!isset($Øconnection)) die(tolk('@Unable to connect to database:').' >'.$Øsqdb.'< '.mysql_error());
+//  Fatal error: Uncaught Error: Call to undefined function mysql_error() in /var/www/advokatfirmaet-viuff.dk/saldi-e/_config/connect.php:58 Stack trace: #0 /var/www/advokatfirmaet-viuff.dk/saldi-e/_debitor/page_Ordreliste.php(41): include() #1 {main} thrown in /var/www/advokatfirmaet-viuff.dk/saldi-e/_config/connect.php on line 58
+#+  else mysql_query('SET storage_engine=INNODB');    //    var_dump($Øconnection);
+
+global $Øexec_path;                 // Global path til PHP-udvidelser på server - Standard: '/usr/bin' 
+define('SERVEREXEC', '/opt/bin');   // EV-soft: Initieringsværdi for @Øexec_path   Synology DSM: '/opt/bin'
+$Øexec_path= SERVEREXEC;
+?>

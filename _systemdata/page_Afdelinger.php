@@ -13,7 +13,7 @@
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Afdelinger');
     
     SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_Afdelinger();
+    NextSpalte();   Rude_Afdelinger($Nr, $Beskrivelse, $Afd);
     EndSpalter();
     
   

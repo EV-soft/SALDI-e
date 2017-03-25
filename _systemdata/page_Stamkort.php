@@ -79,10 +79,14 @@ if ($_POST) {
 //  if (!$gruppe) $gruppe=1;
 //  while(strlen($gruppe)<5) $gruppe='0'.$gruppe; 
 //  # $id=0;
-    
+
+    $firmanavn='DemoFirma'; $pbs='L';  # DEMO
+    $Navn='DemoAnsat';
+    //  Bemærk at hvis variabler ikke blot skal vises, men skal ændre værdi, skal de erklæres med prefix: & hvilket eksempelvis kan ses i erklæringen af Rude_Stamdata()
+    //  Det bevirker at data ikke overføres som værdier, men som en pointer til variablen. Det er samtidigt mindre ram-krævende, og hurtigere!
     SpalteTop(240);   Rude_AdminMenu();
-    NextSpalte();     Rude_Stamdata();
-    NextSpalte();     Rude_Ansatte();
+    NextSpalte();     Rude_Stamdata($firmanavn, $addr1, $addr2, $postnr, $bynavn, $ny_email, $homepage, $bank_navn, $bank_reg, $bank_konto, $cvrnr, $tlf, $fax, $pbs_nr, $pbs, $gruppe, $fi_nr);
+    NextSpalte();     Rude_Ansatte($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
     EndSpalter();
     
 

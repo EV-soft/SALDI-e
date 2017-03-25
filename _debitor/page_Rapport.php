@@ -5,14 +5,20 @@
 //            \__ \/ _ \| |__| |) | |__/ -_)
 //            |___/_/ \_|____|___/|_|  \___|
 //
-// 2016.08.00 ev - EV-soft
+// 2016-08-00 ev - EV-soft
 //
 
-  $pageTitl='Rapport';
+  $pageTitl='Debitor Rapport';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+### INDLÆS DATA:
+
+### VIS DATA:
+    SpalteTop(320);   Rude_DebRapp();
+    NextSpalte();     Rude_Rapportliste();  
+    SpalteBund();
     
-    SpalteTop(480);   Rude_DebRapp();
-    EndSpalter();
+### GEM DATA:
     
 
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode

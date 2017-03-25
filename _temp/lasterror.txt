@@ -1,0 +1,2 @@
+Table 'saldi.ordrer' doesn't exist_02:50--  2017-02-22 14:50:22: /volume1/web/saldi-e/_debitor/page_Ordreliste.php linje 317
+-- Fejl!! select count(id) as antal from ordrer where (art = 'DO' or art = 'DK' or (art = 'PO' and konto_id > '0')) and (status = 1 or status = 2)  | Table 'saldi.ordrer' doesn't exist;

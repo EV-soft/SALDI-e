@@ -1,0 +1,799 @@
++/- 0% OK
+- men ikke endnu!
+F.eks.
+Kontrolspor" = Find grundlaget for regnskabstallene.
+$Variabel
+% Korrektion
+%- rabat v. antal
+%-Sats
+(F.eks, hvis et kontoudtog fra bank bogføres som ét bilag)
+(F.eks, hvis et kontoudtog fra bank bogføres som ét bilag).
+(Ikke implementeret endnu!)
+(Ovenfor:Driftkonti - Herunder:Statuskonti)
+(eller anden server, som SALDI kører på). Hvis server porten ikke er 25, skrives port efter SMTP server-navnet adskilt med : F.eks. smtp.gmail.com:465
+(planlagt)
+(uden sum-beløb)
+- FTP-adgangskode hos ebConnect
+- FTP-brugernavn hos ebConnect
+- FTP-server hos ebConnect
+-
+--Alle--
+0. Alle
+0. Forretning
+1. Danske debitorer
+1. Lager 1
+1. Ydelser
+1. faktura nummer
+1. indstillinger
+1. modtagelses nummer
+14 dage
+2. Europæiske debitorer
+2. Handelsvarer
+2. Lager 2
+2. indstillinger
+3. Forbrugsvarer
+3. indstillinger: Tilvalg
+30 dage
+4. Fragt/Porto
+8 dage
+:
+'= saldi ='; 
+?...
+@Gem
+ADVARSEL: Alle nuværende beløb overskrives! Gem ikke, hvis det er en fejl.
+API Klient
+API Nøgle
+API nøglen er en unik nøgle til verificering af din adgang til regnskabet.
+Addr...
+Adgang til
+Adgangskode for databaseadministrator
+Adgangskode for ovenstående bruger
+Adgangskode til SMTP serveren, hvis dette kræves.
+Adgangskode
+Adgangskode.
+Admin
+Administrator
+Adresse 1
+Adresse 2
+Adresse Dato
+Adresse label
+Adresse
+Adresse.
+Adresse2
+Advar ved for lav lagerbeholdning
+Advarsel: 
+Af
+Afbryd
+Afbryder! - fordi der ikke er oprettet forbindelse til databasen!
+Afbryder! - fordi der ikke kan oprettes forbindelse til databasen!
+Afbryder! - fordi oprettelse af link til databasen mislykkes!
+Afd
+Afd.
+Afdeling
+Afdeling.
+Afdelinger
+Afdelinger:
+Afhængigt af koden i D/K vil der være tale om en debitor-, Kreditor- eller Finanskonto
+Afmærk de felter som skal eksporteres.
+Afmærk dette felt for at tillade negativ lagerbeholdning.
+Afmærk her for at benytte VVS-prislisten fra $beskrivelse'; 
+Afmærk her for at finansbogføre hver handel separat. Hvis der ikke er afmærket, foretages bogføring samlet ved kasseoptælling.
+Afmærk her for at for at udskrive bon automatisk. Hvis der ikke er afmærket, skal bon udskrives manuelt efter hver handel.
+Afmærk her for at undtrykke advarsel i kassekladden, hvis der anvendes samme bilagsnummer til flere bilag med forskellige datoer. 
+Afmærk her for at vise knappen [Indbetaling]. Bruges til kontokunder som indbetaler til konto
+Afmærk her for at vise knappen [Kontant på beløb]. Kan bruges ved kassesalg hvor der ikke skal beregnes returbeløb.
+Afmærk her for at vise knappen [Kontoopslag]. Bruges ved kassesalg til kontokunder
+Afmærk her hvis brugeren er skal have administratorrettigheder
+Afmærk her hvis brugeren er skal kunne oprette regnskaber og efterfølgende have adgang til disse
+Afmærk her hvis brugeren er skal kunne slette de regnskaber, denne har adgang til
+Afmærk her hvis din søgning skal huskes
+Afmærk her hvis du har en ftp-konto hos ebConnect og ønsker at kunne sende OIOUBL-fakturaer direkte til modtager.
+Afmærk her hvis du har en google konto. Så vil du kunne se næsten alle dokumentformater. Eller kan du kun se de formater din browser understøtter.
+Afmærk her hvis du vil ancende bilagsscanning og ikke selv vil etablere server til bilagsopbevaring. 
+Afmærk her hvis modtageren skal modtage tilbud, ordrer, fakturaer & rykker pr. mail'; 
+Afmærk her hvis varen er en samlevare. Feltet er låst, hvis beholdningen er forskellig fra 0 eller varen indgår i en uafsluttet ordre
+Afmærk her hvis varen indeholder denne type varianter.
+Afmærk her når varen/ydelsen er afsendt
+Afmærk her, hvis kasseoptællingen skal assisteres med formular til antal af mønter & sedler.
+Afmærk her, hvis kortet er et betalingskort som bruges med betalingsterminal (Kun til anvendelse med integreret betalingsterminal).
+Afmærk her, hvis kriterier skal genbruges.
+Afmærk her, hvis lagerbevægelser skal medtages.
+Afmærk her, hvis leverings adresse er den samme som faktura adresse
+Afmærk hvis det skal være muligt at sælge varer med omvendt betalingspligt
+Afmærkes dette felt bliver det muligt at ændre prisen på bundlinjen i en salgsordre 
+Afmærkes dette felt vil der komme en advarsel, hvis der indsættes varer, som ikke kan leveres, på en kundeordre.
+Afmærkes feltet anvendes HTML/CSS til formulargenerering
+Afmærkes feltet anvendes HTML/CSS til formulargenerering. 
+Afmærkes her, kommer et ekstra felt på kundeordrer til procentfakturering af vareværdien. Bruges f.eks ved udlejning af materiel.
+Afmærkes her, kommer et ekstra felt på salgsordrer til procentfakturering af vareværdien. Bruges f.eks ved udlejning af materiel.
+Afsendt
+Afstand mellem liniers grundlinie, målt i mm. 
+Aftale
+Agreement_id tildeles ved oprettelse af betalingsaftale hos Quickpay
+Agreement_id
+Aktiv databaseadministrator
+Aktiv
+Aktiv...
+Aktiver massefakturering
+Aktiver valget
+Aktivering af tilvalg
+Aktuel kurs...
+Aktuel
+Aktuelle beløb. (Årets ultimo beløb)
+Alle 
+Alle andre mapper skal være skrivebeskyttet!
+Alle sider viser nu en menu-bjælke i toppen, og data-visning er grupperet i mindre paneler.
+Alle sider
+Alle tabeller har stribet baggrund, som gør det lettere at læse sammenhørende data.
+Alle
+Alternativ SMTP-Server:Port
+Alternativ SMTP-server:port
+Alternativt
+Anbruds kostpris
+Andre kort
+Angiv 
+Angiv Adgangskoden svarende til Brugernavnet
+Angiv Adresse
+Angiv Antal
+Angiv Attention
+Angiv Bemærkninger
+Angiv Beskrivelse
+Angiv E-mail
+Angiv Email adresse
+Angiv Faktura Adresse
+Angiv Faktura Kunde Bynavn
+Angiv Faktura Kunde Land
+Angiv Faktura Kunde Sted
+Angiv Faktura Kunde postnr
+Angiv Forsendelses oplysninger
+Angiv Kontakt person
+Angiv Kontaktpersons Navn
+Angiv Kreditor Bynavn
+Angiv Kreditor Land
+Angiv Kreditor Navn
+Angiv Kreditor Sted
+Angiv Kreditor postnr
+Angiv Kunde Attention
+Angiv Kunde Email adresse
+Angiv Kunde Navn
+Angiv Kunde Telefon
+Angiv Leverings Adresse
+Angiv Leverings Kunde postnr
+Angiv Leverings Land
+Angiv Leverings Sted
+Angiv Leveringsstedets Bynavn
+Angiv Mail emne
+Angiv Mail tekst
+Angiv Mobilnr.
+Angiv Modtager Navn
+Angiv Modtagers Email adresse
+Angiv Modtagers Telefon
+Angiv Noter til fragtmand
+Angiv Telefon
+Angiv Vedhæftet fil
+Angiv beskrivelse af ydelsen
+Angiv din tekst...
+Angiv dit
+Angiv en +/- pct-sats, som der skal justeres op/ned med
+Angiv en dato eller angiv to adskilt af kolon (f.eks 010605:300605)
+Angiv en søgetekst. Der kan anvendes * før og efter teksten
+Angiv en tekst der beskriver de ydre dimensioner
+Angiv en tekst der beskriver dimensionerne
+Angiv en tekst der beskriver følgevare
+Angiv en tekst der beskriver indholdet pr. enhed
+Angiv en tekst der beskriver lokation for varen
+Angiv en tekst der beskriver produktet
+Angiv en tekst der beskriver varemærket
+Angiv en tekst, som skal benyttes som stregkode
+Angiv enheds Kostprisen
+Angiv enheds Salgsprisen
+Angiv enhedspris
+Angiv et beløb der beskriver anbruds kostprisen
+Angiv et beløb der beskriver kostprisen
+Angiv et beløb der beskriver prisen pr. enhde
+Angiv et beløb eller angiv to adskilt af kolon (f.eks 10000,00:14999,99)
+Angiv et bilagsnummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et fakturanummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et id-nummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et kassekladdenummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et kontonummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et projektnummer eller angiv to adskilt af kolon (f.eks 5:7)
+Angiv et tidspunkt (f.eks 17:35) 
+Angiv evt. navn på en ny vare kategori...
+Angiv her hvilken konto i kontoplanen procenttillægget skal konteres på.
+Angiv hvilke IP adresser der har adgang til at bruge API`et. Brug komma som separator. 
+Angiv hvilken konto betalingen skal konteres på ved kontantsalg. Hvis feltet er tomt oprettes en åben post på beløbet på kundens konto.
+Angiv hvilken konto betalingen skal konteres på ved salg på kreditkort. Hvis feltet er tomt oprettes en åben post på beløbet på kundens konto.
+Angiv kontonummer for den konto, hvis bevægelser skal kontrolleres
+Angiv kontonummer på kunden
+Angiv kriterier:
+Angiv navne, på de filer der skal vedhæftes.
+Angiv navnet på det Regnskab, som du har adgang til
+Angiv om bogføring er tilladt
+Angiv periode slut Måned
+Angiv periode slut År
+Angiv periode start Dato
+Angiv periode start Måned
+Angiv periode start År
+Angiv position
+Angiv rabatbeløb
+Angiv rabatsats
+Angiv rapporterings Konto
+Angiv slut-dato for tilbudsperioen (incl.)
+Angiv start-dato for tilbudsperioen (incl.)
+Angiv varenr
+Annuller simulering
+Annuller
+Annullér'; 
+Ansat:
+Anskaffelses pris
+Antal borde
+Antal dage betalingsfrist for rykker 1 skal være overskredet, før rykker 2 genereres.
+Antal dage betalingsfrist for rykker 2 skal være overskredet, før rykker 3 genereres.
+Antal dage betalingsfrist skal være overskredet, før rykker 1 genereres.
+Antal dage fra forfald til 1. rykker
+Antal dage fra forfald til 2. rykker
+Antal dage fra forfald til 3. rykker
+Antal dage...
+Antal kasser.
+Antal kreditkort
+Antal ordrelinier på en side.
+Antal sekunder siden med [Udskriv] og [Ny kunde] skal blive stående før der skifter til ny ordre. Hvis tallet er 0 skiftes aldrig.
+Antal
+Antal...
+Antl..
+Anvend FIFO på lagervarer
+Anvend en ensartet kulør som baggrundsfarve i vinduer.
+Anvend grafik som baggrund i vinduer.
+Anvend hurtigfakturering (ingen tilbud & automatisk levering ved fakturering)
+Anvend kostpris fra varekort.
+Anvend popup-vinduer
+Anvend popup-vinduer:
+Anvend procentfakturering
+Anvend rabat på samlet pris
+Anvend samlet pris
+Anvend sidemenu
+Anvend topmenu
+Anvend varens reelle indkøbspris som kostpris.
+Apr
+Art:
+Assistance til kasseoptælling
+Attention
+Aug
+Aut. regulering af kostpriser
+Auto nummerering:
+Auto...
+Automatisk budgetlægning på grundlag af sidste års regnskab, korrigeret med den angivne pct. sats!
+B2B salgspris
+B2B
+B2B-pris
+B2B..
+Backup / Restore af dit regnskab:
+Backup af filer (billeder, bilag, formularer, ændrede supportfiler, ...), skal udføres med et fil kopierings program, 
+Backup af supportfiler:
+Backuppen omfatter kun indholdet i database-tabeller med regnskabsindhold. 
+Baggrund i vinduer:
+Baggrundsbillede
+Baggrundsfarve
+Balance
+Bank forbindelse
+Bank konto
+Bank reg.
+Bank
+Bank.
+Bank_fi
+Bank_konto
+Bank_navn
+Bank_reg
+Bankernes fælles indbetalingskort (FI-kort). Her angiver du dit FI Kreditornr.
+Basis løsning
+Batch kontrol
+Batch kontrol. Afmærk her, hvis ..
+Begge
+Begræns visning i DATA-tabellen nedenfor, ved at angive søge-kriterier i felterne herunder:
+Beh..
+Beh...
+Behold.:
+Beholdn.
+Beholdning
+Beholdning:
+Beholdningsliste
+Beholdningsliste:
+Bekræft at du har læst og forstået betingelserne på https://www.inkassoadvokat.dk/betingelser
+Beløb indeholder det beløb, der skal bogføres. Hvis man ved simulering eller anden kontrol opdager, 
+Beløb
+Beløb...
+Beløbets forfalds dato
+Beløbets forfalds dato.
+Beløbsvisning:
+Bem...
+Bemærkning 1
+Bemærkning 2
+Bemærkning 3
+Bemærkning 4
+Bemærkning
+Bemærkning'; 
+Bemærkninger
+Bemærkt også, at
+Benyt Google Docs viewer
+Benyt betalingslister
+Benyt flere vinduer
+Benyt import fra DocuBizz - Det intelligente fakturasystem
+Benyt mail
+Benyt
+Benytter du 
+Benyttes Chrome-baserede browsere, kan dato-indtastninger, benytte en "date-picker
+Beregnet beløb.
+Beregnet felt med summen af de samlede beløb
+Beregnet felt: ialt
+Besk...
+Besked til modtageren.
+Besked
+Beskriv.
+Beskriv...
+Beskrivelse af bordene.
+Beskrivelse af enheden
+Beskrivelse af gruppen
+Beskrivelse af kategorien
+Beskrivelse af systemet:
+Beskrivelse af varen/ydelsen
+Beskrivelse af varianten
+Beskrivelse
+Beskrivelse.
+Beskrivelse...
+Beskrivende tekst for perioden
+Beskrivende tekst, som benyttes ved ordre/faktura
+Bestem hvilke felter der skal vises i listen
+Betalings frist
+Betalings metode
+Betalingsbet.
+Betalingsbetingelse
+Betalingsdage
+Betalingskort
+Betalingslister giver mulighed for at overføre betalinger til bank via ERH (bankernes erhvervesformater). 
+Betalingslister til bank, hvor betalingsID og dato er angivet ved bogføring
+Betalingslister
+Betalt
+Betingelser:
+Bevægelser og saldo for den konto, som er angivet ovenfor i Felt: Konto-kontrol.
+Bilag sendes til: 
+Bilag
+Bilag.
+Bilagets dato, som automatisk sættes til dags dato, men kan ændres.
+Bilags nummerering:
+Bilags tekst
+Bilagshåndtering
+Bilagshåndtering:
+Bilagsnummer tildeles automatisk og fortsættes fra sidst anvendte bilagsnummer fra samme bruger.
+Bilagstekst er frivillig, men det er nyttigt senere at kunne se, hvad de enkelte posteringer drejer sig om.
+Blå tekster med skyggeramme, 
+Blå
+Blå'; 
+Bogfør - der foretages først en simulering, som du skal bekræfte
+Bogfør hver handel.
+Bogfør
+Bogføringskonto ikke sat for varegruppe:
+Bogført
+Bold skrift type, også kaldet fed skrift
+Bordnavn
+Bordvalg
+Bravo:
+Bredde af beskrivelse
+Bredde
+Bredde-placeringer X måles fra papirets venste kant.
+Browser Menu
+Browsere:
+Brug Google Docs viewer
+Brug HTML/CSS til formulargenerering
+Brug betalingslister
+Brug faktura-nr.
+Brug fakturas nummerering
+Brug forvalgt fakturadato
+Brug jobkort
+Brug modtage nummerering
+Brug modtage-nr.
+Brug originalt ordrenummer
+Brugbare variabler:
+Bruger rettigheder
+Bruger rettigheder:
+Bruger
+Bruger...
+Brugeren skal være specielt oprettet til API, uden rettigheder og kan ikke logge ind direkte. 
+Brugernavn for "rykkeransvarlig" - Når brugeren logger ind, adviseres denne, hvis der skal rykkes - Hvis navn ikke angives adviseres alle.
+Brugernavn til SMTP serveren, hvis dette kræves.
+Brugernavn
+Brugernavn.
+Budget 
+Budget
+Budgetårets aktuelle ultimo beløb.
+Business to business! Afmærk her, hvis der skal anvendes b2b priser ved salg til denne kundegruppe.
+Business to business! Afmærk her, hvis der skal anvendes b2b priser ved salg til denne leverandørgruppe.
+By
+By...
+Bynavn
+Bynavn. firmaets hjemsted
+CSS-demo
+CSV-Export
+CSV-eksport
+CTRL Pil-taster
+CVR - Virksomheds ID
+CVR - Virksomheds ID. Tast CVR-nr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)
+CVR
+CVR-nr
+CVR-nr.
+Center justeret
+Colli:
+Cpr-nr
+Cvrnr.
+Cyan (lyseblå)'; 
+Cyan
+D/K
+D/K/F feltet benyttes i forbindelse med debitor- og kreditor posteringer.
+DANO* vil vise bevægelser for alle hvor navnet starter med DANO*aps vil vise '. 
+DATA:
+DEBITOR
+DEBITOR'; 
+DEMO: Tabel med fastlåst kolonne-header og "rulle-vindue
+DETALJER: Klik her for at 
+DETALJER:
+Dag:
+Dags dato anvendes som fakturadato
+Dansk sprog
+Dansk
+Danske kroner
+Data export/import:
+Data import & eksport
+Database problem
+Database setup
+Database tilkobling
+Databasen er installeret
+Databasenavn
+Databaseserver
+Dato hvorfra og med (i foregående måned) til (dato i indeværende måned) provisionsberegning foretages
+Dato slut
+Dato start
+Dato
+Dato...
+Datoen hvor ordren indgik
+Debet Kt. og Kredit Kt.-felterne er til kontonummeret på den konto, posteringen skal ske på.
+Debet Kt.
+Debet primosaldo
+Debet
+Debitor & Kreditor Grp.
+Debitor
+Debitor- & Kreditor-grupper:
+Debitor-rapporter:
+Debitorer
+Debitorer/Kreditorer:
+Debitorgruppe ikke valgt!
+Debitorgruppe
+Debitorgrupper
+Debitorkonti
+Debitorkort
+Debitorliste
+Debitorordrer
+Debitorrapport
+Debitorrapporter
+Dec
+Definer selv debitor-rabatgrupper
+Definer selv vare-rabatgrupper
+Den angivne server skal tillade videresendelse af mails fra ssl.saldi.dk. 
+Den dato kursen er gældende fra
+Den moms du skal betale til SKAT
+Den moms du skal have retur fra SKAT
+Den valuta som gruppen føres i
+Denne dialogbox er universal for: info-error-tip-warn-success beskeder. Du kan flytte den og ændre størrelse ved at trække i kanterne.
+Denne funktion gør følgende:udligner alle konti, hvor saldo er 0.opretter rykkere, '. 
+Denne løsning giver mulighed for at sende indscannede bilag pr. e-mail til serveren, og efterfølgende importere dem i kassekladden.
+Denne streng benyttes af systemet (javascript), når der åbnes et nyt vindue. 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 244 & 249.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 245 & 250.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 246 & 251.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 247 & 252.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 248 & 253.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 255 & 260.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 256 & 261.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 257 & 262.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 258 & 263.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 259 & 264.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 291 & 296.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 292 & 297.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 293 & 298.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 294 & 299.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 295 & 300.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 302 & 307.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 303 & 308.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 304 & 309.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 305 & 310.'; 
+Denne tekst kan rettes under Indstillinger -> Diverse -> SprogFind Id 306 & 311.'; 
+Densitet
+Der er benyttet farver, til at skelne mellem forskellige funktioner f.eks. GRØN: Navigation.
+Der er fuld understøttelse til at skifte sprog for program-fladen og i denne demo, kan der skiftes mellem dansk-engelsk-tysk-fransk-spansk-tyrkisk.
+Der er ikke angivet provisionssats for nogen ansatte.
+Der er ikke skriveadgang til kataloget:
+Der er ikke styr på ordreliniers data!
+Der er rykkere klar til udsendelse i SALDI.
+Der er rykkere klar til udsendelse.
+Der er udført en export af sprogtabellen, til filen: ../_exchange/SprogExport.csv
+Der findes allerede en debitor med Kontonr: $ny_kontonr
+Der genereres nyt ordrenummer
+Der kan også skrives et kontonavn,f.eksSkrives DANOSOFT aps vises kun bevægelser for DANOSOFT aps'. 
+Der skal være skriveadgang til 3 under-mapper:
+Dertil svarer at værdier for X skal ligge i intervallet 1 - 210 mm, og Y skal ligge i intervallet 1 - 297 mm
+Design: 
+Designet er adaptive, dvs. det tilpasser sig til smallere skærme.
+Det er blevet simplere for programmøren at tilpasse, rette og vedligeholde programmet. ¤
+Det gøres ved at loggge ind med: 
+Det kan kun udføres af en system administrator, hos hosting leverandøren.
+Det nummer i kontoplanen som salgsmomsen skal konteres på.'); 
+Det nummer i kontoplanen, som købsmomsen skal konteres på.
+Det nummer i kontoplanen, som salgsmomsen skal konteres på.
+Det sprog der skal anvendes ved fakturering
+Det sprog der skal anvendes ved kommunikation med kreditoren
+Diff. konto
+Difference konto eksisterer ikke'; 
+Difference konto for kassedifferencer dagsafslutning.
+Difference konto skal udfyldes for alle kasser
+Differencer:
+Diffkto
+Dine ændringer er ikke blevet gemt! Tryk OK for at forlade siden uden at gemme.
+Direkte telefonnummer eller lokalnummer
+Direkte/lokal
+Dit brugernavn
+Dit
+Diverse indstillinger
+Diverse valg
+Diverse valg:
+Diverse:
+DocuBizz import
+Docubizz er en aplikation til håndtering af indscannede dokumenter. Se mere om denne funktion på www.docubizz.dk
+Drift
+Drifts konto
+Du er havnet i en blindgyde
+Du kan formattere teksterne med html-koder
+Du kan kun benytte en af mulighederne ad gangen.
+Du kan nu se, hvilke tekster (Felter med skygge), der har hjælpetekster tilknyttet.
+Du kan også vælge selv at sætte en ftp-server op til formålet eller benytte en eksisterende. Det koster ikke noget, når du gør det selv.
+Du kan se eksempler på: 
+Du kan vælge at lade SALDI.dk opbevare dine scannede bilag for kr. 30,- pr. måned pr. GB. Enhedsprisen følger dags-prisen for 1 ekstra bruger.
+Du redigerer nu: 
+E-mail / brug mail
+E-mail
+E-mail/brug
+EAN - E-betalings ID
+EAN
+EAN-nr.
+EU-varemoms
+E_-moms?
+Ean
+Efterkrav
+Efternavn
+Egen FTP-server
+Ejer
+Eksportér Debitorer/Kreditorer
+Eksportér Formularer
+Eksportér Varer
+Eksportér Variantvarer
+Eksportér kontoplan
+Eksportér
+Eksportér: Den aktive kontoplan!
+Ekstern webshop
+Ekstrafelt 1
+Ekstrafelt 2
+Ekstrafelt 3
+Ekstrafelt 4
+Ekstrafelt 5
+Ekstrafelter
+Ekstrafelter:
+Elektronisk fakturering
+Elektronisk fakturering. Send og modtag e-faktura med ebconnect. Send direkte fra økonomisystemet og overfør til kassekladden - klar til bogføring
+Elektronisk forsendelse
+Email adresse
+Email
+Emne og tekst til brug ved udsendelse som e-mail
+Emne
+En Apatche webserver med PHP skal være i drift.
+En beskrivende tekst efter eget valg
+En blindgyde endnu!
+En komplet backup, skal omfatte den totale database, og samtlige filer i systemets mapper. 
+Engelsk pund
+Engelsk
+Engros salgspris
+Enh...
+Enh./mat.
+Enhed udfyldes automatisk
+Enhed
+Enhed.
+Enheder & materialer
+Enheder og materialer: 
+Enheder:
+Enheds Priser:
+Enheds betegnelse
+Enhedsbeskrivelse af mængden
+Enhedsbetegnelse
+Enhedsbetegnelser
+Enhedspris
+Entydig nummerkode..
+Entydig systemindex, som benyttes af systemet,
+Entydigt systemindex, som benyttes af systemet,
+Entydigt varenummer
+Er Faktureret og låst
+Er både DB-MySql og PHP-mysqli installeret?
+Er både DB-postgres og PHP-pgsql installeret?
+Er både MySql og php-mysqli installeret?
+Er både postgres og php-pgsql installeret?
+Er du bruger af Googles online-systemer... !)
+Er du helt sikker?
+Er feltet tomt eller udfyldt med F, betragtes det efterfølgende kontonummer som et Finans konto-nummer.
+Er velegnet til afstemning med bank- og girokonti
+Erh
+Erhverv
+Etage
+Euro
+Export - Import:
+Exporter til csv-fil
+Extra Felt
+FI Kreditornr.
+FILTER
+FINANS
+FINANS'; 
+Fakt.nr.
+Faktura By
+Faktura Dato
+Faktura Land
+Faktura Sted
+Faktura adresse
+Faktura nr.
+Faktura nummer for periodens første faktura
+Faktura sum
+Faktura
+Faktura...
+Fakturadato fra "Nextfakt"-felt anvendes
+Fakturaer kopieres til ny ordre og efterlades åbne.
+Fakturaer kopieres til ny ordre, bogføres og udskrives.
+Fakturaliste
+Fakturanr
+Fakturanr. benyttes i forbindelse med debitor- og kreditorposteringer.
+Fakturer og udskriv til den under {Betingelser}, valgte udskriver!
+Faktureret
+Fakturerings dato
+Faktureringssprog
+Fakturér
+Farve
+Farvekode
+Farvenuance
+Fastlæg 1. regnskabsår: 2016
+Fax
+Feb
+Fed
+Fejl i opsætning af kontonummer for øredifferencer!
+Fejl ved overførsel til FTP - Dokument ikke gemt!
+Fejl: 
+Felt 1
+Felt 10
+Felt 2
+Felt 3
+Felt 4
+Felt 5
+Felt 6
+Felt 7
+Felt 8
+Felt 9
+Felt højde målt i mm
+Feltets tekst og/eller $Variabler kombineret
+Feltets x-placering målt i mm fra venstre side-kant
+Feltets y-placering målt i mm fra side-bund
+Feltnavn
+Fil i pdf-format
+Fil import
+Fil upload: Logo, Grafik, Billeder eller fodg-fil fra Libre Office
+Filnavn på grafik-fil
+Filnavn
+Filter hjælp:
+Filtype
+Filtype...
+Finans
+Finansrapport
+Finansrapport:
+Finder åbne poster, som modsvarer beløb og fakturanummer
+Firm...
+Firma navn
+Firma stamdata
+Firmaets Mail-adresse
+Firmaets adresse
+Firmaets fax
+Firmaets hjemmeside-adresse
+Firmaets pbsnr
+Firmanavn
+Fjern denne kontakt person
+Flere indstillinger 2.
+Flyt center
+Flyt hele formularens indhold med de angivne x/y-værdier.
+Font navn
+Font
+For at kunne give rabat på kontantsalg, skal dette felt udfyldes med varenummeret for den vare som bruges til formålet.
+For at kunne håndtere delbetalinger, skal dette felt udfyldes med varenummeret for den vare som bruges til formålet.
+For at oprette en ny kategori skrives navnet på kategorien her. For at oprette en underkategori skrives id på den '. 
+For at oprette en underkategori skrives id på den overstående kategori foran navnet med | som adskillelse, f.eks 31|Herresokker.
+For at udnytte alle udskrivnings faciliteter, skal serveren understøtte ekstra PDF/Grafik-programmer.
+Forbindelse til Database
+Forbrugsvarer
+Forfald
+Formular Art
+Formular Sprog
+Formular tekster:
+Formular
+Formular-redigering, har fået mulighed for WYSIWYG design i LibreOffice. ¤
+Formular:
+Formularer:
+Formularers største papir format er A4, hvilket vil sige at bredden er max 210 mm og højden max. 297 mm.
+Formularstyring
+Formål:
+Fornavn
+Forskyd formular
+Forskydning af alle placeringer:
+Fortryd
+Fortsæt til logind og oprettelse af 1. regnskab
+Fortsæt
+Forud
+Fra Dato
+Fra konto
+Fra
+Fra...
+Fragt/Porto
+Fragtmetode)
+Frase
+Fratrådt
+Fravælg alle
+Fremhæv eksempelvis ordrefelter, hvor der mangler levering eller modtagelse, med den angivne baggrunds-farvenuance.
+Fremhæver eksempelvis ordre med den angivne farvenuance, hvor der mangler levering eller modtagelse'; 
+Fremhævning af felter:
+Fremhævning'; 
+Frist for dellevering (dage)
+Frist for rykker 1.
+Frist for rykker 2.
+Frist for rykker 3.
+Funktion til optælling og regulering af varelager
+Funktionstaster:
+Få tilsendt mail angående resat password
+Følg...
+Følgeseddel
+Følgevare
+Før installation
+Første kontonummer som skal indgå i rapporten
+Første ordrelines y-startpunkt målt i mm fra side-bund
+Første side
+Gade/vej og husnummer
+Gem / opdater
+Gem data i denne rude.
+Gem datafiler (billeder)
+Gem designfiler (formularer)
+Gem det du har rettet ovenfor
+Gem evt. rettelser ovenfor
+Gem hele budgettet.
+Gem hvad du har rettet ovenfor
+Gem mine formularer
+Gem og benyt rettelser
+Gem regnskabsbilag (pdf)
+Gem rettelser
+Gem sikkerhedskopi
+Gem som ny
+Gem
+Gem, hvis du har ændret noget ovenfor.
+Gem/Hent sikkerhedskopi
+Gem/opdatér
+Gem/opdatér'; 
+Genanskaffelsespris
+Generelt:
+Genfakturering
+Genfakturerings Dato
+Genfaktureringsdato bibeholdes på gammel faktura
+Genfaktureringsdato slettes fra gammel faktura
+Genindlæs mine formularer
+Gennemfør komplet fakturering
+Gennemsnitspris
+Gentag kode
+Gentag
+Gentag...
+Genv...
+Genvej

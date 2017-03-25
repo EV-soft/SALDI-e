@@ -1,17 +1,18 @@
-<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2016-10-00';   $modulnr=0;
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-02-00';   $modulnr=0;
 // Formål:  
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
 //            |___/_/ \_|____|___/|_|  \___|
 //
-// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+// LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
 //
 // 2016.08.00 ev - EV-soft
 
-if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+### INDLÆS DATA:
     
 ## Forberedelse ikke taget i brug endnu:
   $sort=isset($_GET['sort'])? $_GET['sort']:Null;
@@ -39,8 +40,9 @@ if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   $tidspkt=date("U");
   #$query = db_select("select * from kladdeliste where bogfort = '-' $user order by $sort $rf",__FILE__ . " linje " . __LINE__);
 
-## Her starter output:   
+### VIS DATA:
   Rude_Kladderedigering();
+### GEM DATA:
   
 /* 
 Luk     Kladdeliste     Ny

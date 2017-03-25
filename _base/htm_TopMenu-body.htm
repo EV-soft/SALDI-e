@@ -1,0 +1,40 @@
+UDGÅET - Erstattet af rutiner i out_base.php
+<!DOCTYPE html>
+  <div id="container">
+    <div id="wb_TopMenu" style="position:absolute;left:0px;top:0px;width:1200px;height:24px;z-index:99;">
+      <ul>
+        <li class="firstmain">    <a href="../_base/page_Gittermenu.php" target="_self" title="<?php echo tolk('@Gå til Hovedmenu'); ?>"><?php echo tolk('@MENU'); ?></a>        </li>
+        <li><a class="withsubmenu"   href="#" target="_self"><?php echo tolk('@FINANS'); ?></a>     <ul>
+            <li class="firstitem"><a href="../_finans/page_Kladdeliste.php" target="_self" title="TIP"><?php echo tolk('@Kasse kladder'); ?></a>  </li>
+            <li>                  <a href="../_finans/page_Regnskab.php"    target="_self"><?php echo tolk('@Regnskab'); ?></a>                   </li>
+            <li>                  <a href="../_finans/page_Budget.php"      target="_self"><?php echo tolk('@Budget'); ?></a>                     </li>
+            <li>                  <a href="../_finans/page_Rapport.php"     target="_self"><?php echo tolk('@Rapporter'); ?></a>                  </li>
+            <li class="lastitem"> <a href="../_finans/page_Kontrol.php"     target="_self"><?php echo tolk('@Kontrol sporing'); ?></a>            </li>     </ul>        </li>
+        <li><a class="withsubmenu"   href="#" target="_self"><?php echo tolk('@DEBITOR'); ?></a>    <ul>
+            <li class="firstitem"><a href="../_debitor/page_Ordreliste.php" target="_self"><?php echo tolk('@Salgs ordrer'); ?></a>               </li>
+            <li>                  <a href="../_debitor/page_Debitor.php" target="_self"><?php echo tolk('@Konti'); ?></a>                         </li>
+            <li class="lastitem"> <a href="../_debitor/page_Rapport.php" target="_self"><?php echo tolk('@Rapporter'); ?></a>                      </li>     </ul>        </li>
+        <li><a class="withsubmenu"   href="#" target="_self"><?php echo tolk('@KREDITOR'); ?></a>   <ul>
+            <li class="firstitem"><a href="../_kreditor/page_Ordreliste.php" target="_self"><?php echo tolk('@Købs ordrer'); ?></a>               </li>
+            <li>                  <a href="../_kreditor/page_Kreditor.php" target="_self"><?php echo tolk('@Konti'); ?></a>                                         </li>
+            <li class="lastitem"> <a href="../_kreditor/page_Rapport.php" target="_self"><?php echo tolk('@Rapporter'); ?></a>                     </li>     </ul>        </li>
+        <li><a class="withsubmenu"   href="#" target="_self"><?php echo tolk('@LAGER'); ?></a>      <ul>
+            <li class="firstitem"><a href="../_lager/page_Varer.php" target="_self"><?php echo tolk('@Vare lister'); ?></a> </li>
+            <li>                  <a href="../_lager/page_Varemodtagelse.php" target="_self"><?php echo tolk('@Vare modtagelse'); ?></a>                            </li>
+            <li class="lastitem"> <a href="../_lager/page_Beholdningsliste.php" target="_self"><?php echo tolk('@Rapporter'); ?></a>              </li>     </ul>     </li>
+<?php if ($vis_prodkt)  {  echo          
+           '<li><a href="#" target="_self"title="<?php echo '.tolk('@Tilvalgs modul: Ikke aktivt!').'; ?>" disabled><?php echo '.tolk('@PRODUKTION').'; ?></a>  </li>';
+} ?>
+        <li><a class="withsubmenu"  href="#" target="_self"><?php echo tolk('@SYSTEM'); ?></a>          <ul>
+              <li class="firstitem"><a href="../_system/page_Kontoplan.php"     target="_self"><?php echo tolk('@Kontoplan'); ?></a>               </li>
+              <li><a class="withsubmenu"  href="#" target="_self"><?php echo tolk('@Indstillinger').'...'; ?></a>                <ul>
+                    <li class="firstitem"><a href="../_system/page_Syssetup1.php"     target="_self"><?php echo tolk('@1. indstillinger'); ?></a>        </li>
+                    <li>                  <a href="../_system/page_Divsetup2.php"     target="_self"><?php echo tolk('@2. indstillinger'); ?></a>        </li>
+                    <li class="lastitem"> <a href="../_system/page_Tilvalgsetup3.php" target="_self"><?php echo tolk('@3. indstillinger: Tilvalg'); ?></a>  </li>     </ul>     </li>
+              <li class="lastitem"><a href="../_system/page_Backup.php" target="_self"><?php echo tolk('@Sikkerheds kopiering'); ?></a>                     </li>     </ul>     </li>
+      </ul>
+      <div style="text-align: center"><img src= "../_assets/images/saldi-e50x170.png" alt="Saldi Logo" height="40" width="150" ></div>
+      <br>
+    </div>
+  </div>
+<?php echo htm_nl(2); ?>

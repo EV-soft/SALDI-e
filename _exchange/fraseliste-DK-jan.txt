@@ -1,0 +1,1538 @@
++/- 0% OK
+F.eks.
+Kontrolspor" = Find grundlaget for regnskabstallene.
+$Variabel
+% Korrektion
+%- rabat v. antal
+%-Sats
+(Ikke implementeret endnu!)
+(Ovenfor:Driftkonti - Herunder:Statuskonti)
+(planlagt)
+(uden sum-beløb)
+----
+---- 
+1. Danske debitorer
+1. faktura nummer
+1. modtagelses nummer
+14 dage
+2. Europæiske debitorer
+30 dage
+8 dage
+:
+?...
+ADVARSEL: Alle nuværende beløb overskrives! Gem ikke, hvis det er en fejl.
+Addr...
+Adgangskode for databaseadministrator
+Adgangskode for ovenstående bruger
+Adgangskode til SMTP serveren, hvis dette kræves.
+Adgangskode
+Adresse
+Adresse.
+Adresse2
+Advar ved for lav lagerbeholdning
+Advarsel: 
+Af
+Afbryder! - fordi der ikke er oprettet forbindelse til databasen!
+Afbryder! - fordi der ikke kan oprettes forbindelse til databasen!
+Afd
+Afd.
+Afdeling
+Afdeling.
+Afdelinger
+Afdelinger:
+Afhængigt af koden i D/K vil der være tale om en debitor-, Kreditor- eller Finanskonto
+Afmærk dette felt for at tillade negativ lagerbeholdning.
+Afmærk her når varen/ydelsen er afsendt
+Afmærk her, hvis kriterier skal genbruges.
+Afmærk her, hvis lagerbevægelser skal medtages.
+Afmærk her, hvis leverings adresse er den samme som faktura adresse
+Afmærkes dette felt bliver det muligt at ændre prisen på bundlinjen i en salgsordre og der bliver givet en samlet rabat, som ved bogføring fordeles på de enkelte varer.
+Afmærkes dette felt vil der komme en advarsel, hvis der indsættes varer, som ikke kan leveres, på en kundeordre.
+Afmærkes her, kommer et ekstra felt på kundeordrer til procentfakturering af vareværdien. Bruges f.eks ved udlejning af materiel.
+Afsendt
+Afstand mellem liniers grundlinie, målt i mm. 
+Aftale
+Aktiv databaseadministrator
+Aktiv
+Aktiv...
+Aktiver valget
+Aktivering af tilvalg
+Aktuel kurs...
+Aktuel
+Aktuelle beløb. (Årets ultimo beløb)
+Aktuelt sprog: 
+Alle andre mapper skal være skrivebeskyttet!
+Alle sider
+Alle
+Alternativ SMTP-Server:Port
+Alternativt
+Anbruds kostpris
+Angiv 
+Angiv Adgangskoden svarende til Brugernavnet
+Angiv Antal
+Angiv Bemærkninger
+Angiv Beskrivelse
+Angiv E-mail
+Angiv Faktura Adresse
+Angiv Faktura Kunde Bynavn
+Angiv Faktura Kunde Land
+Angiv Faktura Kunde Sted
+Angiv Faktura Kunde postnr
+Angiv Forsendelses oplysninger
+Angiv Kontakt person
+Angiv Kontaktpersons Navn
+Angiv Kunde Attention
+Angiv Kunde Email adresse
+Angiv Kunde Navn
+Angiv Kunde Telefon
+Angiv Leverings Adresse
+Angiv Leverings Kunde postnr
+Angiv Leverings Land
+Angiv Leverings Sted
+Angiv Leveringsstedets Bynavn
+Angiv Mail emne
+Angiv Mail tekst
+Angiv Mobilnr.
+Angiv Modtager Navn
+Angiv Modtagers Email adresse
+Angiv Modtagers Telefon
+Angiv Noter til fragtmand
+Angiv Telefon
+Angiv Vedhæftet fil
+Angiv beskrivelse af ydelsen
+Angiv din tekst...
+Angiv dit
+Angiv en +/- pct-sats, som der skal justeres op/ned med
+Angiv en dato eller angiv to adskilt af kolon (f.eks 010605:300605)
+Angiv en søgetekst. Der kan anvendes * før og efter teksten
+Angiv en tekst der beskriver ...
+Angiv en tekst der beskriver produktet
+Angiv en tekst som skal benyttes som stregkode
+Angiv enhedspris
+Angiv et beløb eller angiv to adskilt af kolon (f.eks 10000,00:14999,99)
+Angiv et bilagsnummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et fakturanummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et id-nummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et kassekladdenummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et kontonummer eller angiv to adskilt af kolon (f.eks 345:350)
+Angiv et projektnummer eller angiv to adskilt af kolon (f.eks 5:7)
+Angiv et tidspunkt (f.eks 17:35) 
+Angiv evt. navn på en ny kategori...
+Angiv hvilken konto betalingen skal konteres på ved kontantsalg. Hvis feltet er tomt oprettes en åben post på beløbet på kundens konto.
+Angiv hvilken konto betalingen skal konteres på ved salg på kreditkort. Hvis feltet er tomt oprettes en åben post på beløbet på kundens konto.
+Angiv kontonummer for den konto, hvis bevægelser skal kontrolleres
+Angiv kontonummer på kunden
+Angiv kriterier:
+Angiv navne, på de filer der skal vedhæftes.
+Angiv navnet på det Regnskab, som du har adgang til
+Angiv om bogføring er tilladt
+Angiv periode slut Måned
+Angiv periode slut År
+Angiv periode start Dato
+Angiv periode start Måned
+Angiv periode start År
+Angiv position
+Angiv rabatbeløb
+Angiv rabatsats
+Angiv rapporterings Konto
+Angiv varenr
+Annuller simulering
+Annuller
+Ansatte:
+Antal ordrelinier på en side.
+Antal
+Antal...
+Antl..
+Anvend FIFO på lagervarer
+Anvend en ensartet kulør som baggrundsfarve i vinduer.
+Anvend grafik som baggrund i vinduer.
+Anvend hurtigfakturering (ingen tilbud & automatisk levering ved fakturering)
+Anvend kostpris fra varekort.
+Anvend popup-vinduer:
+Anvend procentfakturering
+Anvend rabat på samlet pris
+Anvend varens reelle indkøbspris som kostpris.
+Art:
+Attention
+Aut. regulering af kostpriser
+Auto nummerering:
+Automatisk budgetlægning på grundlag af sidste års regnskab, korrigeret med den angivne pct. sats!
+B2B salgspris
+B2B
+B2B-pris
+B2B..
+Baggrund i vinduer:
+Baggrundsbillede
+Balance
+Bank forbindelse
+Bank konto
+Bank reg.
+Bank
+Bank.
+Bankernes fælles indbetalingskort (FI-kort). Her angiver du dit FI Kreditornr.
+Basis løsning
+Batch kontrol
+Batch kontrol. Afmærk her, hvis ..
+Begge
+Begræns visning i DATA-tabellen nedenfor, ved at angive søge-kriterier i felterne herunder:
+Beh...
+Behold.:
+Beholdn.
+Beholdning:
+Beholdningsliste:
+Beløb indeholder det beløb, der skal bogføres. Hvis man ved simulering eller anden kontrol opdager, 
+Beløb
+Beløb...
+Beløbets forfalds dato
+Beløbsvisning:
+Bem...
+Bemærkning
+Bemærkninger
+Bemærkt også, at
+Benyt flere vinduer
+Benyt mail
+Benyt
+Beregnet beløb.
+Beregnet felt med summen af de samlede beløb
+Beregnet felt: ialt
+Besk...
+Besked til modtageren.
+Besked
+Beskriv...
+Beskrivelse af enheden
+Beskrivelse af gruppen
+Beskrivelse af varen/ydelsen
+Beskrivelse
+Beskrivelse.
+Beskrivelse...
+Beskrivende tekst for perioden
+Beskrivende tekst, som benyttes ved ordre/faktura
+Bestem hvilke felter der skal vises i listen
+Betalings frist
+Betalings metode
+Betalt
+Betingelser:
+Bevægelser og saldo for den konto, som er angivet ovenfor i Felt: Konto-kontrol.
+Bilag
+Bilag.
+Bilagets dato, som automatisk sættes til dags dato, men kan ændres.
+Bilags nummerering:
+Bilags tekst
+Bilagshåndtering
+Bilagsnummer tildeles automatisk og fortsættes fra sidst anvendte bilagsnummer fra samme bruger.
+Bilagstekst er frivillig, men det er nyttigt senere at kunne se, hvad de enkelte posteringer drejer sig om.
+Blå tekster med skyggeramme, 
+Blå
+Bogfør - der foretages først en simulering, som du skal bekræfte
+Bogfør
+Bogført
+Bold skrift type, også kaldet fed skrift
+Bravo:
+Bredde af beskrivelse
+Bredde
+Bredde-placeringer X måles fra papirets venste kant.
+Browsere:
+Brug faktura-nr.
+Brug fakturas nummerering
+Brug modtage nummerering
+Brug modtage-nr.
+Bruger rettigheder:
+Bruger
+Bruger...
+Brugere
+Brugernavn til SMTP serveren, hvis dette kræves.
+Brugernavn
+Budget 
+Budget
+Budgetårets aktuelle ultimo beløb.
+Business to business! Afmærk her, hvis der skal anvendes b2b priser ved salg til denne kundegruppe.
+Business to business! Afmærk her, hvis der skal anvendes b2b priser ved salg til denne leverandørgruppe.
+By
+By...
+Bynavn
+Bynavn. firmaets hjemsted
+CSS-demo
+CSV-Export
+CSV-eksport
+CTRL Pil-taster
+CVR - Virksomheds ID
+CVR - Virksomheds ID. Tast CVR-nr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)
+CVR
+Center justeret
+Colli:
+Cpr-nr
+Cyan (lysblå)
+D/K
+D/K/F feltet benyttes i forbindelse med debitor- og kreditor posteringer.
+DATA:
+DEBITOR
+DEMO: Tabel med fastlåst kolonne-header og "rulle-vindue
+DETALJER: Klik her for at 
+DETALJER:  ').t
+Dag:
+Dansk
+Danske kroner
+Data import & eksport
+Database problem
+Database setup
+Database tilkobling
+Databasen er installeret
+Databasenavn
+Databaseserver
+Dato hvorfra og med (i foregående måned) til (dato i indeværende måned) provisionsberegning foretages
+Dato slut
+Dato start
+Dato
+Dato...
+Datoen hvor ordren indgik
+Debet Kt. og Kredit Kt.-felterne er til kontonummeret på den konto, posteringen skal ske på.
+Debet Kt.
+Debet primosaldo
+Debet
+Debitor & Kreditor Grp.
+Debitor- & Kreditor-grupper:
+Debitor-rapporter:
+Debitorer
+Debitorgruppe
+Debitorgrupper
+Debitorkonti
+Debitorliste
+Debitorordrer
+Debitorrapport
+Definer selv debitor-rabatgrupper
+Definer selv vare-rabatgrupper
+Demonstration af output-moduler
+Den dato kursen er gældende fra
+Den moms du skal betale til SKAT
+Den moms du skal have retur fra SKAT
+Den valuta som gruppen føres i
+Denne dialogbox er universal for: info-error-tip-warn-success beskeder. Du kan flytte den og ændre størrelse ved at trække i kanterne.
+Denne streng benyttes af systemet (javascript), når der åbnes et nyt vindue.
+Densitet
+Der er fuld understøttelse til at skifte sprog for program-fladen og i denne demo, kan der skiftes mellem dansk-engelsk-tysk-fransk-spansk-tyrkisk.
+Der er ikke angivet provisionssats for nogen ansatte.
+Der er ikke skriveadgang til kataloget:
+Der er ikke styr på ordreliniers data!
+Der skal være skriveadgang til 3 under-mapper:
+Dertil svarer at værdier for X skal ligge i intervallet 1 - 210 mm, og Y skal ligge i intervallet 1 - 297 mm
+Det gøres ved at loggge ind med: 
+Det nummer i kontoplanen som salgsmomsen skal konteres på.'); 
+Det nummer i kontoplanen, som købsmomsen skal konteres på.
+Det nummer i kontoplanen, som salgsmomsen skal konteres på.
+Det sprog der skal anvendes ved fakturering
+Det sprog der skal anvendes ved kommunikation med kreditoren
+Diff. konto
+Dit brugernavn
+Dit
+Diverse indstillinger
+Diverse valg
+DocuBizz import
+Drift
+Drifts konto
+Du er havnet i en blindgyde
+Du kan kun benytte en af mulighederne ad gangen.
+Du redigerer
+E-mail
+EAN - E-betalings ID
+EAN
+EU-varemoms
+E_-moms?
+Efterkrav
+Ejer
+Ekstrafelter:
+Elektronisk fakturering
+Elektronisk forsendelse
+Emne
+En Apatche webserver med PHP skal være i drift.
+En beskrivende tekst efter eget valg
+En blindgyde endnu!
+Engelsk pund
+Engelsk
+Enh...
+Enhed udfyldes automatisk
+Enhed
+Enhed.
+Enheder & materialer
+Enheder og materialer: 
+Enheder:
+Enheds Priser:
+Enheds betegnelse
+Enhedsbeskrivelse af mængden
+Enhedsbetegnelse
+Enhedsbetegnelser
+Enhedspris
+Entydig nummerkode..
+Entydig systemindex, som benyttes af systemet,
+Entydigt systemindex, som benyttes af systemet,
+Entydigt varenummer
+Er Faktureret og låst
+Er både DB-MySql og PHP-mysqli installeret?
+Er både DB-postgres og PHP-pgsql installeret?
+Er både MySql og php-mysqli installeret?
+Er både postgres og php-pgsql installeret?
+Er du helt sikker?
+Er feltet tomt eller udfyldt med F, betragtes det efterfølgende kontonummer som et Finans konto-nummer.
+Er velegnet til afstemning med bank- og girokonti
+Erhverv
+Euro
+Exporter til csv-fil
+FI Kreditornr.
+FILTER
+FINANS
+Fakt.nr.
+Faktura By
+Faktura Dato
+Faktura Land
+Faktura Sted
+Faktura adresse
+Faktura nr.
+Faktura nummer for periodens første faktura
+Faktura sum
+Faktura
+Faktura...
+Fakturanr
+Fakturanr. benyttes i forbindelse med debitor- og kreditorposteringer.
+Fakturer og udskriv til den under {Betingelser}, valgte udskriver!
+Faktureret
+Fakturerings dato
+Faktureringssprog
+Fakturér
+Farve
+Farvekode
+Farvenuance
+Fastlæg 1. regnskabsår: 2016
+Fax
+Fed
+Fejl: 
+Felt højde målt i mm
+Feltets tekst og/eller $Variabler kombineret
+Feltets x-placering målt i mm fra venstre side-kant
+Feltets y-placering målt i mm fra side-bund
+Feltnavn
+Fil i pdf-format
+Fil import
+Fil upload: Logo, Grafik, Billeder eller fodg-fil fra Libre Office
+Filnavn på grafik-fil
+Filnavn
+Filtype
+Filtype...
+Finansrapport
+Finansrapport:
+Finder åbne poster, som modsvarer beløb og fakturanummer
+Firm...
+Firma navn
+Firmaets Mail-adresse
+Firmaets adresse
+Firmaets fax
+Firmaets hjemmeside-adresse
+Firmaets pbsnr
+Firmanavn
+Fjern denne kontakt person
+Flere indstillinger
+Flyt center
+Flyt hele formularens indhold med de angivne x/y-værdier.
+Font navn
+Font
+For at udnytte alle udskrivnings faciliteter, skal serveren understøtte ekstra PDF/Grafik-programmer.
+Forbindelse til Database
+Forfald
+Forlad
+Formular Art
+Formular Sprog
+Formular
+Formular:
+Formularer
+Formularers største papir format er A4, hvilket vil sige at bredden er max 210 mm og højden max. 297 mm.
+Formularstyring
+Formål:
+Forskyd formular
+Forskydning af alle placeringer:
+Fortryd
+Fortsæt til logind og oprettelse af 1. regnskab
+Fortsæt
+Forud
+Fra Dato
+Fra konto
+Fra
+Fra...
+Fragtmetode)
+Fratrådt
+Fremhæv eksempelvis ordrefelter, hvor der mangler levering eller modtagelse, med den angivne baggrunds-farvenuance.
+Fremhævning af felter:
+Få tilsendt mail angående resat password
+Følg...
+Følgeseddel
+Følgevare
+Før installation
+Første kontonummer som skal indgå i rapporten
+Første ordrelines y-startpunkt målt i mm fra side-bund
+Første side
+Gem / opdater
+Gem data i denne rude.
+Gem det du har rettet ovenfor
+Gem evt. rettelser ovenfor
+Gem hele budgettet.
+Gem hvad du har rettet ovenfor
+Gem mine formularer
+Gem rettelser
+Gem som ny
+Gem
+Gem, hvis du har ændret noget ovenfor.
+Gem/opdatér
+Genanskaffelsespris
+Generelt:
+Genfakturerings Dato
+Genindlæs mine formularer
+Gennemsnitspris
+Gentag kode
+Gentag
+Gentag...
+Genv...
+Genvej
+Genvejstast: Bogstav-kode, som kan benyttes som forkortelse af kontonummeret
+Glemt adgangskode?
+Godkend alt
+Godkend
+Godkendt
+Grafik
+Grundlag
+Grup...
+Gruppe 
+Gruppe nummer
+Gruppe
+Grupper:
+Grøn
+Gul
+Gå til ?
+Gå til Debitor Konti (Kunder)
+Gå til Debitor Ordrer (Bestillinger)
+Gå til Debitor Rapporter
+Gå til Finans Rapporter
+Gå til Gem/Hent sikkerhedskopi
+Gå til Kassekladder
+Gå til Kontoplan
+Gå til Kreditor Konti
+Gå til Kreditor Ordrer
+Gå til Kreditor Rapporter
+Gå til Produktion
+Gå til Regnskab
+Gå til Vare Rapporter
+Gå til Vare modtagelse
+Gå til Varerliste
+Gå til menuen Indstillinger
+Gå til menuen indstillinger
+Gå til vinduet finansrapport
+Gå videre til
+HTTPS er aktiv.
+HUSK:
+Handling:
+Hele kroner
+Hent ordrer
+Henter afsluttede ordrer fra ordreliste
+Her angives intervaller af konti, som skal danne grundlag for momsrapporter.
+Her angives primotal for:
+Her er lidt forklaring omkring brugen af grupper.
+Her er problemer!
+Her kan angives en alternativ SMTP-server for afsendelse af mail. 
+Her kan du angive mailens emne-tekst.
+Her kan du oprette en ny kategori
+Her kan du rette dit regnskabs navn
+Her kan du se en demonstration af et forslag til en modernisering af SALDI.
+Her kan du slå op, og se mulige valuta-koder
+Her kan du tilpasse forventede månedlige beløb. Hvis du vil ændre konti, gør du det her: Menu\SYSTEM\Kontoplan.
+Her kan du vælge mellem de variabler, som er relevante, for den aktuelle formular. Variabler, som kan benyttes, har prefix: $
+Her kan skrives en bemærkning til kladden
+Her kan skrives en bemærkning til ordren
+Her mangler der noget
+Her skriver du filnavnet for det ønskede baggrunds billede. Filen SKAL være placeret i mappen: ../images/
+Her skriver du hex-værdien for den ønskede RGB-baggrunds farve eksempelvis ff9933 for orange. Se flere værdier på www.saldi.dk/dokumentation/farver 
+Her vises liste Id: 2
+Her vises stregkoden
+Historik for
+Historik
+Hjemmeside
+Hold musen over blå tekster, for at få hjælpetip.
+Hold musen over
+Hurra: 
+Hurtigfakturering anvendes, hvis man ikke har behov for at skrive tilbud/følgesedler, og hvor lagerttræk skal ske ved fakturering
+Husk dem
+Husk fremtidigt fakturerings tidspunkt
+Huske-tip for denne streg...
+Hvilket sprog vil du benytte programmet med ?
+Hvilket sprog vil du redigere ? ') ,
+Hvis dette felt afmærkes vil der hverken fremkomme browser-menu i toppen eller siden og hele vinduet kan anvendes som arbejdsområde. Mange browsere skifter med F11-funktionstasten.
+Hvis dette felt afmærkes, medtages kommentarlinjer fra tilbud/ordrer på følgesedler.
+Hvis dette felt afmærkes, medtages kun de varer, som er med i den pågældende leverering på følgesedlen.
+Hvis dette felt er afmærket styres lager efter FIFO (first in first out) princippet og kostprisen reguleres automatisk efter sidste varekøb.
+Hvis dette felt ikke er afmærket, skal købs- og salgsfakturaer bogføres gennem kassekladden med [Hent ordrer]-funktionen.
+Hvis du afmærker dette felt, vil SALDI arbejde i popup-vinduer, hvilket gør at man kan have flere vinduer åbne samtidig.
+Hvis systemet ikke køres på lokalnet, bør det ske via en sikker krypteret forbindelse:
+Hvor lang frist er der til betaling
+Hvordan skal der betales
+Håndtering af formularsprog
+Højde
+Højde-placeringer Y, måles fra papirets bund.
+Højre justeret
+I alt nu
+I alt
+I denne kolonne håndterer du PDF-bilag, som er tilknyttet den enkelte postering.
+ID.
+IKKE Sidste side
+IKKE første side
+INFO
+Ialt
+Id
+Id.
+Id...
+Ikke afsluttet. Kan stadig rettes.
+Import
+Importer formular(er) fra LO 
+Importer fra csv-fil
+Importerer bankposteringer eller andre data fra .csv-fil (kommasepareret fil)
+Importér / eksportér: Kontoplan, Formularer, Debitorer, Kreditorer, Varer, og Dataudtræk
+Indeling i grupper er en praktisk metode, til at begrænse antallet af viste debi-/kreditorer (en slags filter), og til at tildele medlemmer af gruppen, relevante fælles parametre.
+Indhold/enhed
+Indkøbsforslag
+Indkøbspris
+Indland
+Indlæs fra .fodg-fil dannet af formularredigering i LibreOffice
+Indstillinger angående Afdelinger
+Indstillinger angående Bilagshåndtering
+Indstillinger angående Brugere
+Indstillinger angående Diverse valg
+Indstillinger angående Farver og udseende m.v.
+Indstillinger angående Formularer
+Indstillinger angående Labels
+Indstillinger angående Lagre
+Indstillinger angående Massefakturering
+Indstillinger angående Ordrerelaterede valg
+Indstillinger angående PoS-valg (Point-of-Sale), angår kasseapperat løsningen
+Indstillinger angående Prislister
+Indstillinger angående Projekter
+Indstillinger angående Provisionsberegning
+Indstillinger angående Rabatgrupper
+Indstillinger angående Regnskabsår
+Indstillinger angående Rykkerrelaterede
+Indstillinger angående Sprog på blanketter
+Indstillinger angående Stamdata
+Indstillinger angående Tjeklister
+Indstillinger angående Varegrupper
+Indstillinger angående Varerelateret f.eks. varianter
+Indstillinger angående WEB-Shop relaterede valg
+Indstillinger angående aktivering af ekstra moduler m.v.
+Indstillinger angående grupper
+Indstillinger angående moms
+Indstillinger angående programmets Sprog
+Indstillinger angående registrede Enheder, beskrivelse og materiale
+Indstillinger angående regnskabsnavn og mailserver for afsendelse af mail
+Indstillinger angående valuta
+Indstillinger angående Øredifferencer
+Indstillinger
+Indtast primotal for 1. regnskabsår:
+Indtastning af salgs ordre poster - `Varelinier`:
+Info: 
+Initial ?? er for den som har modtaget varerne
+Initialer for den som har modtaget varerne
+Initialer for den som har oprettet listen
+Initialer
+Initieringsstreng
+Installation fejler!
+Installér
+Institution
+Introduktion:
+Iøvrigt:
+Just.
+Justering i feltet: V:
+Justering i feltet: V:venstre, C:centreret, H:højre
+Jysk
+KREDITOR
+Kalkuleret beløb for den aktuelle postering. 
+Kasse kladder
+Kassekladde liste:
+Kassekladde
+Kassekladde: 
+Kategorier:
+Kilde for kostpris:
+Kilde for personinfo:
+Kilde
+Kladde notat:
+Kladde
+Klassisk udseende:
+Klik her for at eksportere valgte transaktioner til CSV-fil for import i andet program, f.eks. regneark.
+Klik her for at gemme dine korrektioner
+Klik her for at gemme evt. ændringer.
+Klik her for at gemme
+Klik her for at håndtere dine debitor rabatgrupper
+Klik her for at håndtere dine vare rabatgrupper
+Klik her for at lave et indkøbsforslag
+Klik her for at nulstille alle data i tabellen.
+Klik her for at oprette dit
+Klik her for at oprette en ny modtagelse
+Klik her for at oprette en vareregistrering
+Klik her for at oprette ny vare-rabatgruppe
+Klik her for at se alle lister, (Filteret nulstilles)
+Klik her for at se næste konto
+Klik her for at slette kontoen. Konti som er taget i brug, kan ikke slettes!
+Klik her for at ændre sortering af listen. - Kun dit sidste valg har virkning.
+Klik her for at...
+Klik her for gemme alle sprogdata i en fil
+Klik her for indlæse alle sprogdata fra fil
+Klik her for komme til budgetlægning
+Klik her, når du har udfyldt data-felterne på rækken herunder.
+Kol0
+Kol1
+Kolonne Overskrift
+Kont...
+Kontakt info:
+Kontakt person
+Kontakt
+Kontaktperson
+Kontant
+Konti - Debitorer:
+Konti - Kreditorer:
+Konti
+Konto for...
+Konto kort
+Konto nr.
+Konto plan
+Konto saldo
+Konto saldo. Beløbet på kontoen lige nu.
+Konto til postering af købsmoms for køb i udlandet
+Konto til postering af købsmoms for ydelseskøb i udlandet
+Konto til postering af salgsmoms for køb i udlandet
+Konto til postering af salgsmoms for ydelseskøb i udlandet
+Konto
+Konto-kontrol:
+Konto.
+Konto...
+Kontobeskrivelse. En beskrivende tekst efter eget valg
+Kontoens saldo
+Kontoens valuta (DKK= kurs 100)
+Kontoindstilling
+Kontoindstilling:
+Kontokort med moms
+Kontokort
+Kontokort:
+Kontonavn - beskrivende tekst
+Kontonavn
+Kontonr
+Kontonr.
+Kontonummer for kontantsalg.
+Kontonummer for salg på kreditkort.
+Kontonummer for samlet vare- og ydelsessalg uden for EU
+Kontonummer for samlet varekøb i EU
+Kontonummer for samlet varesalg i EU
+Kontonummer for samlet ydelseskøb i EU
+Kontonummer for samlet ydelsessalg i EU
+Kontonummer fra kontoplanen som skal bruges til valutakursdifferencer og øreafrunding...
+Kontonummer. Entydig nummerkode, som benyttes til sortering, summering mv.
+Kontoplan
+Kontoplan:
+Kontotype: D=Drift, S=Status, Z=Sum, H=Overskrift, R=Resultat, X=Sideskift, L=Lukket
+Kontrol sporing
+Kontrollèr Administrators Passwords
+Kontrolspor
+Kopier til ny
+Kopier
+Kost-pris
+Kost...
+Kostpris
+Kredit Kt.
+Kredit primosaldo
+Kredit
+Kreditkort
+Kreditnota
+Kreditor-rapporter:
+KreditorSamlekonto
+Kreditorer
+Kreditorgrupper
+Kreditorkonti
+Kreditorordrer
+Kreditorrapport
+Kroner,ører
+Krypteringsmetode for forbindelse til SMTP serveren, hvis dette kræves.
+Kun tusinder
+Kunde - Fakturering:
+Kunde kategori
+Kunde navn
+Kunde ordre
+Kundeansvarlig
+Kunden (debitor):
+Kundenavn
+Kundenr.
+Kundenr: Kan ikke rettes. Systemet styrer dette
+Kundens Email adresse
+Kundens hjemmeside
+Kundens referance
+Kundens
+Kunder
+Kundetilknytning:
+Kundetype
+Kurs
+Kurs...
+Køb i EU
+Køb uden for EU
+Køb..
+Køb: 
+Købs statistik
+Købs-moms
+KøbsMomskonto
+Købsfaktura
+Købsmoms (indgående moms): 
+Købsmoms
+LAGER
+Labels
+Lager ført
+Lager ført. Afmærk her, hvis ...
+Lager
+Lager-regulering
+Lager-tilgang
+Lager-træk
+Lager...
+LagerGrupper
+Lagerbeholdning
+Lageret hvor varen indgår
+Lagre
+Lagre:
+Lav backup af det nugældende formularsæt.
+Lb.Nr.
+Lev. Service
+Lev. dato
+Lev...
+Lev.rabat
+Lev.rabat...
+Leverance beskrivlse
+Leverancer på salgsordren.
+Leverancer:
+Leverandør Navn
+Leverandør
+Leverandør...
+Leverandører
+Leverandøropslag
+Leveres til
+Leveres
+Levering til faktura-adresse
+Levering:
+Leverings Dato
+Leverings Land
+Leverings adresse
+Leverings by
+Lidt omtale af grupper.
+Linie antal
+Linie ialt
+Linie
+Linieafstand
+Linier
+Linket du benyttede er midlertidigt, fordi det rigtige ikke er færdigudviklet.
+Listens oprettelsesdato
+Lodret forskydning: Angiv positivt tal for at øge, negativt tal for at mindske alle y-placeringer
+Log ind
+Log ud
+Log. dato
+Login
+Logind til
+Lok...
+Lokal fax
+Lokalnr.
+Lokation
+Lokation.
+Luk vinduet og gå et niveau op
+Luk vinduet og gå til hoved-menu
+Luk
+Lukket konto
+Lukket
+Løn
+Løntillæg
+Magenta (lyslilla)
+Mail bilag
+Mail emne
+Mail faktura:
+Mail tekst
+Mail tekster:
+Mail
+Mailafsendelse:
+Maksimal linie længde for beskrivelse, inden der brydes til ny linie, målt i mm. 
+Manual, tips og anden hjælp finder du på
+Massefakturering
+Materiale egenskaber
+Materiale
+Materiale.
+Materialets massefylde
+Max. antal linier, som vises pr. side: 
+Max.
+Medarbejderens mail
+Medarbejdernr
+Medlem af debitorgruppe
+Medlem af kreditorgruppe
+Medtag kommentarer på følgesedler
+Medtag kun linjer med angivet antal på følgeseddel
+Medtag lagerbevægelser
+Medtages på udskrifts side. A:alle, 1:første, !1:ikke første, S:sidste, !S:ikke sidste
+Min.
+Mobil
+Modkonto ved udligning af åbne poster
+Modkonto
+Modt...
+Modt.dato
+Modt.nr.
+Modtage...
+Modtagelses datoen
+Modtagelses nummer for periodens første bilag
+Modtager navn
+Modtagerens Email adresse
+Modtaget af
+Modtaget dato
+Moms %-sats for den posterede leverance
+Moms %-sats
+Moms %.
+Moms af varekøb i udlandet: 
+Moms af varekøb m.v. i udlandet
+Moms af ydelseskøb i udlandet
+Moms af ydelseskøb i udlandet: 
+Moms fri
+Moms fri. Afmærk her, hvis ....
+Moms indstillinger:
+Moms pct.sats
+Moms
+Moms%
+Moms...
+Momsangivelse
+Momsgr...
+Momsgrp
+Momsgruppe for salgsmoms ved omvendt betalingspligt.
+Momsgruppe som debitorgruppen skal tilknyttes.
+Momsgruppe som kreditorgruppen skal tilknyttes.
+Momskode for salgspriser på varekort
+Momskode
+Momskode: K_:Købs... S_:Salgs... Y_:Ydelser, E_:, 
+Momsrapport (konti som skal indgå i momsrapport): 
+Momsrapport
+Momssats for ydelsen
+Momssats
+MySQL findes.
+Måned
+Måned:
+Månedsliste
+Mængden af den aktuelle leverance.
+Mængden angivet som antal
+Mængederabatter:
+Navigation:
+Navn på en bruger, som i forvejen har tilladelse til at oprette, rette og slette databaser. 
+Navn
+Navn.
+Navn...
+Navnet på det firma, regnskabet angår
+Navnet på variablen. Variabler som benyttes i ordrelinier, her prefix: £
+Note
+Note...
+Note:
+Noter til fragtmand
+Nr
+Nr.
+Nummer...
+Numr...
+Ny Modtageliste
+Ny bruger
+Ny modtageliste
+Ny ordre, endnu uden kundetilknytning!
+Ny variant
+Ny
+Nyt budget:
+Nyt felt:
+Når dette felt er afmærket, vises priser på kundeordrer, fakturaudskrifter osv. inkl. moms.
+Når ordren er faktureret, afmærkes feltet automatisk
+Næste konto ->
+Nødvendig forberedelse:
+OB
+OBS! Der er ingen fortryd mulighed, hvis du fortsætter!
+OIOUBL
+OK
+Omgående bogføring af købs- og salgsordrer
+Omvendt betaligspligt! Afmærk her, hvis denne kundegruppe er omfattet af omvendt betalingspligt.
+Omvendt betaligspligt! Afmærk her, hvis denne leverandørgruppe er omfattet af omvendt betalingspligt.
+Omvendt betaling
+Opdater her efter en rettelse af regnskabsår
+Opdater ikke kostpris
+Opdatér
+Opera-tion
+Operation. Afmærk her, hvis ..
+Opret Ny
+Opret en ny kontakt
+Opret ny debitor
+Opret ny valuta
+Opret ny varepostering
+Opret ny
+Opret ny:
+Opret...
+Oprettede valutaer:
+Oprettelse af regnskab, sker senere, når du 1. gang logger ind, som
+Oprettet af
+Opslag - Se ...
+Opslag - Se oversigt over ordrebeholdning
+Opslag - din markørs placering angiver hvilken tabel, opslag foretages i
+Opslag
+Opslag: markørens placering bestemmer, hvilken tabel opslag skal foretages i
+Opslag:
+Optisk Læsbar
+Ordre Dato
+Ordre Felt 1
+Ordre Felt 2
+Ordre Felt 3
+Ordre Felt 4
+Ordre Felt 5
+Ordre dato
+Ordre nr.
+Ordre relaterede valg:
+Ordre relateret:
+Ordre sum
+Ordrebeholdning
+Ordrebekræftelse
+Ordreinfo:
+Ordrelinjer
+Ordren er godkendt hvis feltet er afmærket
+Ordrer
+Ordrer: Debitorer - `Kundeordrer`:
+Ordrer: Kreditorer - `Leverandørordrer`:
+Ordrerelaterede valg
+Oversigt over alle valutaer:
+Oversigt over populære valutaer:
+Overskrift (system!)
+Overskrift
+Overskriv formulardefination med system standard
+Overskriv formularer med standard
+PBS Kreditornr.
+PBS debitorgruppe
+PBS faktura
+PBS
+PDF-fil
+PDF-fil...
+PHP-funktionen mysqli_connect() kunne ikke findes
+PHP-funktionen pg_connect() kunne ikke findes
+PRODUKTION
+Pakken med
+Password...
+Passwords er forskellige
+Pct. korrektion
+Perioden slutter i år
+Perioden starter i år
+Periodens første måned
+Periodens sidste måned
+Personlige valg
+Personlige valg:
+Plukliste
+PoS-valg (Kasse)
+Popup-indstillinger:
+Pos
+Pos. nr tildeles automatisk
+Pos.
+Pos..
+Position styrer rækkefølgen af posterne
+Position tildeles automatisk.
+Positions nummer i gruppen
+Post nr
+Post
+Post...
+Posterings note...
+Postgres findes.
+Postnr
+Postnr.
+Postnr...
+Primo
+Pris
+Pris...
+Pris/enhed
+Prisgruppe
+Prisgrupper
+Prisliste
+Prisliste.
+Prisliste...
+Prislister
+Prislister:
+Privat tlf
+Privat
+Problem:
+Procenttillæg
+Produktion
+Produktionsordrer
+Program Sprog
+Program sprog
+Projekt
+Projekter
+Projekter:
+Protokol
+Provision beregnes på betalte ordrer
+Provision beregnes på fakturerede ordrer
+Provision tilfalder den kundeansvarlige såfremt der er tildelt en sådan, ellers til den som er referenceperson på de enkelte ordrer
+Provision tilfalder den kundeansvarlige
+Provision tilfalder den, der er angivet som referenceperson på de enkelte ordrer
+Provision
+Provision:
+Provisionsberegning
+Provisionsberegning:
+Provisionsprocent! Her angives hvor stor en procentdel af dækningsbidraget der medgår ved beregning af provision.
+Provisionsrapport kan ikke testes, før der er DB-adgang.
+Provisionsrapport
+Provisionsrapport:
+På 
+På den måde bytter kontonumrene i felterne debet og kredit plads, og beløbet bliver igen positivt.
+På serveren skal være installeret en af databaseserverne PostgreSQL eller MySQL/MariaDB.
+Rabat metode
+Rabat procent
+Rabat
+Rabat%
+Rabat...
+Rabatgruppe
+Rabatgrupper
+Rabatgrupper:
+Rabatsats i %.
+Rabt..
+Rap: 
+Rapport for Top 100
+Rapport for debitor Salgs statistik
+Rapport for debitor konto kort
+Rapport for debitor konto saldo
+Rapport for debitor åbne poster
+Rapport for kreditor konto kort
+Rapport for kreditor konto saldo
+Rapport for kreditor købs statistik
+Rapport for kreditor åbne poster
+Rapport over medarbejdernes provisionsindtjening
+Rapporter
+Rapporttype
+Rediger 
+Rediger Formular: Grafik
+Rediger Formular: Ordrelinier
+Rediger Formular: Tekster
+Rediger Plukliste
+Rediger Tilbuds blanket
+Rediger blanket for 1. rykker
+Rediger blanket for 2. rykker
+Rediger blanket for 3. rykker
+Rediger blanket for indkøbsforslag
+Rediger blanket for kontokort
+Rediger blanket for kreditnota
+Rediger blanket for købsfaktura
+Rediger blanket for rekvisition
+Rediger det du har valgt ovenfor
+Rediger faktura blanket
+Rediger formular for ordrebekræftelse 
+Rediger følgeseddel blanket
+Rediger konto:
+Rediger sprog
+Rediger valgt formular
+Ref
+Regnskab
+Regnskab...
+Regnskab: 
+Regnskab:
+Regnskabets status
+Regnskabskort:
+Regnskabsår
+Regnskabsår:
+Regu..
+Rekvisition
+Resultat konto
+Resultat
+Resultat/budget
+Retur til Hovedmenu
+Retur til Regnskab
+Retur til finansrapport
+Retur til hovedmenu
+Retur til indstillinger
+Retur til indstillingsmenu
+Retur til kontoplan
+Retur til vareliste
+Retur
+Rubrik A1
+Rubrik A2
+Rubrik B1
+Rubrik B2
+Rubrik C
+Rykker 1
+Rykker 2
+Rykker 3
+Rykkerrelateret
+Rød
+S.moms grp
+SHIFT Tab-tast
+SSL
+SYSTEM
+Saldi PHP-Fejl:
+Saldi mysql-Fejl:
+Saldi postgres-Fejl:
+Saldo
+Saldo...
+Salg til EU
+Salg uden for EU
+Salg..
+Salg: 
+Salgs ordre - Status
+Salgs statistik
+Salgs-moms
+Salgs-pris
+Salgs..
+Salgs...
+SalgsMomskonto
+Salgsmoms (udgående moms): 
+Salgsmoms
+Salgspris
+Samlekonto for debitorgruppen
+Samlekonto for kreditorgruppen
+SamlekontoDebitor
+Samlekt.
+Samlevare
+Sans-serif
+Se hvordan i installeringsvejledningen INSTALLATION.txt.
+Se mere på
+Send faktura med mail
+Serienr
+Serif
+Shop relaterede valg (WEB)
+Side
+Sideskift (system!)
+Sideskift
+Sidste kontonummer som skal indgå i rapporten
+Sidste side
+Sikkerheds kopi
+Sikkerhedskopi
+Simuler
+Simulering af bogføring viser bevægelser i kontoplanen
+Skjul Menu
+Skjul
+Skrift type navn: Helvetica, Times, OCRbb12
+Skrivebeskyt alle mapper på serveren, på nær: 
+Skrives der `d` eller `k`, vil det efterfølgende nummer blive tolket som et Debitor konto-nummer eller et Kreditor konto-nummer.
+Skrives en værdi her, vil der fremkomme et redigerbart felt på ordresiden med den angivne værdi. Procenttillægget er et tillæg til den samlede fakturasum før momsberegning. 
+Skrå skrift type, også kaldet italic
+Skrå
+Skæringsdato for provisionsberegning:
+Slet alt
+Slet filter og vis alt
+Slet posten
+Slet
+Slet...
+Slut-dato
+Slut..
+Sprog
+Sprog:
+Sproget som skal benyttes på faktura udskrifter
+Sproghåndtering: Opret, Nedlæg sprog
+Stamdata
+Stamdata:
+Start søgning med de angivne kriterier.
+Start søgning
+Start-dato
+Stat...
+Status konto
+Status
+Status: Aktiv eller Lukket
+Status:
+Sted
+Sted...
+Stk. rabat v. antal
+Stk. rabat
+Straks
+Stregen angår...
+Stregens x-slutpunkt målt i mm fra venstre side-kant
+Stregens x-startpunkt målt i mm fra venstre side-kant
+Stregens y-slutpunkt målt i mm fra side-bund
+Stregens y-startpunkt målt i mm fra side-bund
+Stregkode
+Strt..
+Størrelse
+Sum konto
+Sum
+Summér fra_konto. Angiv laveste kontonummer, som skal med i sammentællingen.
+Supplerende oplysning
+Supplerende stedsangivelse
+Systemet er baseret på CSS, og er med responsive design, som er velegnet til mobile enheder. 
+Systemet kontrollerer om HTTPS er benyttet. (skal testes!)
+Systemet kontrollerer om mappen er skrivbar
+Systemet kontrollerer om modulet er tilgængeligt
+Systemet kontrollerer om modulet er tilgængeligt. (skal testes!)
+Sælg...
+Sælger
+Sælgers afdeling
+Sælgers referance
+Søg efter...
+Søg en anden
+Søg
+Søgetekst
+Sørg for at der er skriveadgang for Webbrugere, til katalogerne
+TIP:
+TLS
+Tab-tast
+Tag backup i brug, ved at benytte den som nugældende formularsæt.
+Tegn en hotline-aftale, så kan du ringe eller sende en e-mail og få hurtigt svar på spørgsmål om brugen af
+Tegnsæt
+Tekst farve. Se farve skema
+Tekst linier med ordrepostering.
+Tekst
+Tekst/$variabel
+Tekstens x-startpunkt målt i mm fra venstre side-kant
+Tekster
+Teksthøjde målt i [px]
+Telefon
+Telefon(er)
+Telefon.
+Telf...
+Test om de indtastede password er ens.
+The PDF Toolkit: flette pdf-baggrund med side.
+Tidspunkt
+Til Budget
+Til konto
+Til
+Tilbagefør postering
+Tilbagefør
+Tilbud
+Tilbud:
+Tilbudsgruppe
+Tilbudsgrupper
+Tilg...
+Tilknyttet note
+Tillad negativ lagerbeholdning
+Tillægs funktioner:
+Tiltrådt
+Tip
+Tip: 
+Tip:
+Tip?:
+Tjeklister
+Tlf - Tast telefonnr. omsluttet af *, +, eller / for at importere data fra Erhvervsstyrelsen (Data leveres af CVR API)
+Top 100
+Top-linie
+Total løsning
+Træk..
+Typ...
+Type
+Type...
+Typisk er det for PostgreSQL brugeren [postgres] og for MySQL brugeren [root].
+URL til prislisten
+URL
+US dollar
+Udfyld Felt 1
+Udfyld Felt 2
+Udfyld Felt 3
+Udfyld Felt 4
+Udfyld Felt 5
+Udfyld på grundlag af sidste års tal
+Udfyld...
+Udgået
+Udland
+Udlign
+Udskriv til
+Udskriv
+Unable to connect to database:
+Undlad nummerering ved faktura
+Undlad v. faktura
+Upload/Download supportfiler
+VG
+Valu...
+Valuta benævnelse
+Valuta beskrivelse
+Valuta som ordren skal benytte
+Valuta ændringer: 
+Valuta
+Valuta.
+Valuta...
+ValutaKoder
+Valutaer
+Valutaer: 
+Valutakode for den valuta, som er benyttet på bilaget.
+Valutakode for kontoens beløb
+Valør dato
+Vandret forskydning: Angiv positivt tal for at øge, negativt tal for at mindske alle x-placeringer
+Vare antallet
+Vare beskrivelse
+Vare modtagelse
+Vare modtagelse:
+Vare-køb
+Vare-salg
+Vare...
+Vare: 
+VareMomskonto-udland
+Varegruppe
+Varegruppe...
+Varegrupper
+Varegrupper:
+Varekort
+Varekort:
+Varelager
+Vareliste:
+Varemodtagelse
+Varemærke
+Varenr
+Varenr. for procenttillæg
+Varenr. for rabat
+Varenr.
+Varenummer for ydelsen
+Varenummer hentes fra vareregistret.
+Varenummer. Entydig nummerkode, som benyttes til sortering, summering mv.
+Varer
+Varerapport
+Varerelaterede valg
+Varerelateret
+Varerelateret:
+Varianter:
+Ved varekøb i udlandet, skal der betales dansk moms på vegne af sælgeren. Samtidig kan købsmomsen trækkes fra så resultatet bliver 0
+Ved ydelseskøb i udlandet, skal der betales dansk moms på vegne af sælgeren. Samtidig kan købsmomsen trækkes fra så resultatet bliver 0
+Vedhæftet følger...
+Vedligeholdese af:
+Vedrørende...
+Vejl.-pris
+Vejl..
+Vejl...
+Vejl_pris
+Vejledende pris
+Velkommen til SALDI-DEMO
+Vend tilbage til programmets hovedmenu
+Vend tilbage til regnskab
+Venstre justeret
+Verificering af ovenstående adgangskode
+Vide mere?
+Vilkårlig søgning i transaktioner
+Vis alle lister
+Vis alt
+Vis det der matcher filteret
+Vis det valgte
+Vis forrige
+Vis næste
+Vis priser inkl. moms på kundeordrer
+Vis tip for begyndere, hvis du er ny i systemet.
+Vis
+Vis:
+Visning - Vælg hvad der skal vises
+Visning
+Vor ref.
+Vor referance
+Vælg 
+Vælg den aftalte løsning
+Vælg den alternative enhed du ønsker at bruge.
+Vælg den databaseserver type, du ønsker at bruge.
+Vælg den enhed du ønsker at bruge.
+Vælg den rabat-metode, du ønsker at bruge.
+Vælg det tegnsæt du ønsker at bruge. Nyere versioner af PostgreSQL fungerer kun med UTF8
+Vælg en Formular som du vil redigere
+Vælg en konto i kontoplanen - 
+Vælg formularens Art (Objekt type)
+Vælg hvilken gruppe kunden tilhører
+Vælg hvilket Sprog du vil benytte på formularen
+Vælg om kostpriser skal reguleres til gennemsnitspris, genanskaffelsespris eller ikke skal reguleres, ved varekøb
+Vælg om provison beregnes på fakturerede eller betalte ordrer
+Vælg på hvilken måde skal dokumentet udskrives, gemmes eller sendes.
+Vælg tekst nummer: 
+Vælg visnings nøjagtighed for beløb
+Vælg!
+Vælg
+Værd at prøve:
+Værdien i DKK af 100 
+Vært:
+X
+X-forskydning
+X-pos
+X-slut
+X-start
+X-venstre
+Y
+Y-bund
+Y-forskydning
+Y-slut
+Y-start
+Ydel: 
+Ydelses-moms
+YdelsesMomskonto-udland
+Ydelsesmoms
+Ydre størrelse
+administratoren af dit
+administratorens adgangskode
+administratorens brugernavn
+administratorkonto til dit
+april
+at en linje skal bogføres direkte modsat af, hvad der står i kassekladden, så kan man blot sætte minustegn foran beløbet. 
+august
+auto...
+brugernavn:
+centreret
+dag i måneden
+dato...
+december
+eller
+email
+er ikke linket til en medarbejder.
+er nødvendig for at flette udskrift med Logo.
+evt. forsendelses dato
+f.eks. Rekvisitions NR
+februar
+felter skal udfyldes og kontrolleres.
+filer, udpakkes i et arbejdskatalog med adgang for webbesøgende.
+for at kunne udskrive.
+hash installeret.
+hvis sproget ikke er dansk
+hvor "connect.php" skal oprettes.
+højre
+import "compass/css3";
+import url(http://fonts.googleapis.com/css?family=Patua+One|Open+Sans);
+ingen provison
+januar
+juli
+juni
+kan du læse opdaterede informationer.
+klik her for at vedhæfte et bilag
+klik her for at åbne bilaget: $dokument[$y]
+konto...
+kr/stk
+kun erhverv
+kurs...
+leverandørordre
+maj
+marts
+mcrypt installeret.
+md...
+måned
+navn...
+november
+oktober
+pr. side
+redigere denne konto
+regnskabet
+se / rette valuta
+se debitorkort
+se listens indhold
+se varekort
+september
+skal understøtte modulerne: mcrypt og hash, som benyttes til at håndtere passwords sikkert.
+skal være aktiveret !
+som brugernavn og med den valgte adgangskode
+som regnskab,
+springer til forrige felt.
+springer til næste felt.
+så får du hjælpetekster og tips.
+tilladt
+um. (uden moms) kan benyttes til at bogføre beløb uden moms på konti, selvom kontoen har en momssats tilknyttet.
+um.
+url...
+ved antal
+venstre
+virker også. 
+vise kundeordre
+vise regnskabskortet
+vælge denne post
+xx
+xx:
+xxAngiv her hvilken konto i kontoplanen procenttillægget skal konteres på.
+xxx
+yyy
+À pris
+Åbne poster
+År
+År:
+Året primo beløb, Sidste års ultimo
+Ændring af program tekster:
+Ændrings kurs
+Ønsket adgangskode for
+Ønsket navn på din hoveddatabase for
+Ønsket navn på din
+Øredifferencer
+år...
+ændre valuta
+S Fra-Til Kt.

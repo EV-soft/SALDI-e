@@ -11,9 +11,10 @@
   $pageTitl='Lager varer';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
-    Head_Navigation(tolk('@ '), $status='', $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
+    # Head_Navigation(tolk('@ '), $status='', $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
     Rude_Varer();  # Demo!
     Rude_FootMenu();
+    skilleLin();
     Rude_Varekort();  # Demo!
     
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode

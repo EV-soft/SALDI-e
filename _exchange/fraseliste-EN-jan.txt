@@ -1,0 +1,1539 @@
+﻿
++/- 0% Ok.
+E.g.
+Control Track "= Find the basis for the accounting.
+$ Variable
+Correction%
+% - Discount v. Number
+%-Rate
+(Not implemented yet!)
+(Above: Operating Accounts - Including: Balance sheets)
+(Planned)
+(Without sum-amount)
+----
+---- 
+1. Danish debtors
+1. The invoice number
+1. reception number
+14 days
+2. European debtors
+30 days
+8 days
+:
+? ...
+WARNING: All current amounts overwritten! Do not save if it's a mistake.
+Addr ...
+Password for database administrator
+Password for the above user
+Password for the SMTP server, if required.
+password
+Address
+Address.
+Address2
+Warn on low inventories
+Warning: 
+Of
+Switch! - Because there is a connection to the database!
+Switch! - Because you can not connect to the database!
+Dept.
+Div.
+Department
+Department.
+Divisions
+Departments:
+Depending on the code in the D / K will be a customer, vendor or Financial Account
+Check this box to allow negative inventory.
+Mark here when the product / service has been shipped
+Mark here, if the criteria must be recycled.
+Mark here if stock movements must be included.
+Mark here if delivery address is the same as invoice address
+Mark this field, it becomes possible to change the price at the bottom line of a sales order and being given a total discount that the inclusion allocated to individual items.
+Mark this field will get a warning if inserted goods can not be delivered to a customer order.
+Marked here comes an additional field of customer orders to billing percent of product value. Used for example by hiring of equipment.
+Posted
+Distance between the lines of the baseline, measured in millimeters. 
+Appointment
+Active database administrator
+Active
+Active...
+Enable choice
+Enabling option
+Current price ...
+Current
+Current amount. (The year end amounts)
+Current language: 
+All other folders must be writable!
+all pages
+All
+Alternative SMTP Server: Port
+Alternatively
+tamper cost
+Specify 
+Enter the password corresponding to the user name
+Enter Number
+Enter Comments
+Enter Description
+Enter E-mail
+Enter Invoice Address
+Enter Invoice Customer City Name
+Enter Invoice Customer Country
+Enter Invoice Customer Location
+Enter Invoice Company postcode
+Enter Shipping Information
+Enter Contact person
+Enter Contact Person's Name
+Enter Customer Attention
+Enter Customer Email
+Enter Company Name
+Enter Company Phone
+Enter Delivery Address
+Enter Delivery Company postcode
+Enter Delivery Country
+Enter Delivery Location
+Enter Delivery Stedets City Name
+Enter Mail topic
+Enter Mail text
+Enter Mobile.
+Enter Recipient Name
+Enter Recipient's Email
+Enter Recipient Phone
+Enter Notes to the carrier
+Enter Phone
+Enter Attachment
+Enter description of the service
+Enter your text ...
+Enter your
+Specify a +/- percentage-rate to be adjusted up / down
+Enter a date or specify two separated by a colon (eg 010605, 300605)
+Enter a search text. * Which can be used before and after the text
+Enter a text describing ...
+Enter a text describing the product
+Enter a text to be used as a barcode
+Enter unit price
+Enter an amount or enter the two separated by a colon (eg, 10000.00, 14999.99)
+Enter a document number or enter the two separated by a colon (eg 345: 350)
+Enter an invoice number or enter the two separated by a colon (eg 345: 350)
+Enter an ID number or enter the two separated by a colon (eg 345: 350)
+Enter a journal entry number or enter the two separated by a colon (eg 345: 350)
+Enter an account number or enter the two separated by a colon (eg 345: 350)
+Enter a project number or enter the two separated by a colon (for example 5: 7)
+Enter a time (eg 17:35) 
+Specify if necessary. name of a new category ...
+Specify which account the payment should be booked in a cash sale. If the field is empty created an open item to the amount on the customer's account.
+Specify which account the payment should be booked on the sale of credit cards. If the field is empty created an open item to the amount on the customer's account.
+Enter account number of the account movements must be checked
+Enter account number of the customer
+Enter criteria:
+Specify the names of the files to attach.
+Enter the name of the account which you have access to
+Enter the posting is permitted
+Enter period end Month
+Enter period end Year
+Enter period start date
+Enter period starting Month
+Enter period starting Year
+Set location
+Enter discount amount
+Enter discount rate
+Enter reporting Account
+Enter No.
+Cancel simulation
+Annuller
+Employees:
+Number of order lines on a page.
+Amount
+Amount...
+Antl ..
+Use FIFO stock items
+Apply a uniform color as the background color of the windows.
+Use graphics as background in windows.
+Apply fast billing (no quotes & automatic delivery through billing)
+Apply cost trade cards.
+Use pop-ups:
+Apply percent billing
+Use discount on total price
+Use their actual purchase price as cost.
+Art:
+Attention
+Aut. Control of costs
+Auto numbering:
+Automatic budgeting on the basis of last year's financial statements, corrected by the specified percentage. rate!
+B2B sales price
+B2B
+B2B Award
+B2B ..
+Background in windows:
+background image
+Balance
+Bank connection
+Bank account
+Bank reg.
+Bank
+Bank.
+Banks' joint paying (FI Card). Here you enter your FI creditor.
+The basic solution
+batch control
+Batch control. Mark here if ..
+Both
+Limit display in the DATA table below, by entering the search criteria in the fields below:
+Beh ...
+Keep.:
+'Holdings.
+inventory:
+Holdings:
+Amount contains the amount to be posted. If, by simulation or other checks discovers 
+Amount
+Amount...
+The amount the due date
+Amount Display:
+Bem ...
+Remark
+Remar
+Bemærkt also
+Use multiple windows
+Use mail
+Benefit
+Calculated amounts.
+Calculated field with the sum of the total amount
+Calculated Field: total
+MSG ...
+Message to recipient.
+Message
+Describe ...
+Description of unit
+Description of the group
+Description of the goods / service
+Description
+Description.
+Description...
+Descriptive text for the period
+Descriptive text that are used to order / invoice
+Determine which fields are displayed in the list
+payment deadline
+payment method
+Paid
+conditions:
+Movements and the balance of the account as set out above in Field: Account control.
+Appendix
+Appendix.
+Annex date, which is automatically set to the current date, but can be changed.
+Annex numbering:
+Annex text
+Appendix Handling
+Document Number assigned automatically and continues from last used document number from the same user.
+Annex Text is optional, but it is useful later to see what the individual items involved.
+Blue texts with shadow frame, 
+Blue 
+Post - who first made a simulation, you must confirm
+Post
+Carrying
+Bold font, also referred to as bold
+Bravo:
+Width of description
+Width
+Width locations X measured from the paper venste edge.
+browsers:
+Use invoice no.
+Use invoice numbering
+Use receive numbering
+Use receive no.
+User rights:
+User
+User...
+users
+Username for the SMTP server, if required.
+user name
+Budget 
+Budget
+Budget year Current year-end amount.
+Business to business! Mark here, if applicable B2B prices for sales to this customer group.
+Business to business! Mark here, if applicable B2B prices to this supplier group.
+Town/city
+City:
+City Name
+City Name. company headquarters
+CSS demo
+CSV Export
+CSV export
+CTRL Arrow keys
+CVR - Company ID
+CVR - Company ID. Key Reg. enclosed *, +, or / to import data from the Danish Business Authority (Data provided by CVR API)
+CVR
+Center adjusted
+Colli:
+CPR-nr
+Cyan (light blue)
+D / K
+D / K / F box used for customer and vendor transactions.
+DATA:
+DEBTORS
+DEMO: Table with fixed column header and "scroll window
+DETAILS: Click here to 
+DETAILS: ') .t
+3. Day
+Danish
+Danish kroner
+Data import & export
+database problem
+database setup
+database connection
+The database is installed
+database Name
+database Server
+Date from which and with (in the previous month) to (date of current month) commission calculation is performed
+Date of final
+Date start
+Date
+Date
+The date when the order entered
+Debit Kt. and Credit square handle fields are account number of the account, the transaction must be on.
+Debit Kt.
+Debit opening balance
+Debit
+Debtor & Creditor Grp.
+Debtor & Creditor groups:
+Debtor reports:
+debtors
+debtor Group
+debtor Groups
+debtor Accounts
+debtor List
+debtor Orders
+debtor Report
+Define yourself debtor-off groups
+Define yourself item discount groups
+Demonstration of output modules
+The date rates are valid from
+The VAT you have to pay to SKAT
+The VAT you need return from SKAT
+The currency that the group brought in
+This dialog box is universal for: info-error-tip-warn-success messages. You can move it and resize by dragging the edges.
+This string is used by the system (javascript) when opening a new window.
+density
+There is full support for changing the language for program interface and in this demo, you can switch between Danish-English-German-French-Spanish-Turkish.
+There is no set commission rate for any employees.
+There is no write access to the catalog:
+There is no track of ordreliniers data!
+There must be write access to the three subfolders:
+Corresponding to values ​​of X must be in the range 1 to 210 mm and Y should be in the range 1-297 mm
+This is done by loggge in with: 
+The number in the nomenclature as sales tax is charged on.39. Haga, Skjeberg, Østfold, Norway. 
+The number of the nomenclature, as input VAT should be charged on.
+The number in the chart of accounts, such as sales tax is charged on.
+The language to be used for billing
+The language to be used for communication with the vendor
+Diff. account
+Your username
+Your
+Miscellaneous settings
+diverse choices
+DocuBizz import
+operating
+operating account
+You've arrived at a dead end
+You can only use one option at a time.
+you edit
+Email
+EAN - E-pay ID
+EAN
+EU trade VAT
+E_ VAT?
+COD
+Owner
+Additional fields:
+electronic billing
+electronic transmission
+Subject
+A Apatche web server with PHP should be in operation.
+A descriptive text of your choice
+A dead end yet!
+English pounds
+English
+Enh ...
+Unit automatically filled
+Unit
+Unit
+Devices & Materials
+Devices and materials: 
+units:
+Unit Price:
+Device designation
+Device description of the amount
+Unit designation
+Unit Designations
+Unit price
+The unique number code ..
+Unique index system that is used by the system,
+Unique index system that is used by the system,
+Unique Item
+Is Billed and locked
+Are both DB-MySql and PHP mysqli installed?
+Are both DB-postgres and PHP-pgsql installed?
+Are both MySql and php-mysqli installed?
+Are both postgres and php-pgsql installed?
+Are you completely sure?
+The field is empty or filled with F, considered the following account number as a Financial account number.
+Suitable for reconciliation with the bank and giro accounts
+profession
+euro
+Export to CSV file
+FI creditor.
+FILTER
+FINANCIAL
+Fakt.nr.
+invoice City
+invoice Date
+invoice Country
+invoice Place
+invoice address
+Invoice No.
+Invoice number for the period's first invoice
+The invoice sum
+Invoice
+Invoice...
+invoice
+Invoice. used for customer and vendor transactions.
+Invoice and print to it under {Conditions}, selected print!
+billed
+billing date
+billing Language
+Bill
+Colour
+color Code
+Color shade
+Determine first year: 2016
+Fax
+Fat
+Error 
+Field height measured in mm
+Field text and / or $ Variables combined
+The field's x-position measured in millimeters from the left-hand edge
+The field's y-position, measured in mm from the bottom side
+field Name
+File in pdf format
+file import
+File upload: Logo, Graphics, Pictures or ped-file from LibreOffice
+File name of the graphics file
+Filename
+File Type
+File Type ...
+Financial Report
+Financial report:
+Finder open items that correspond to the amount and invoice number
+Firm ...
+Company name
+Company Mail Address
+Company address
+Company fax
+The company's website address
+Company pbsnr
+Company Name
+Remove this contact person
+more options
+Move center
+Move the entire form is at the specified x / y values.
+Font name
+Font
+To take advantage of all print facilities, the server must support additional PDF / Graphics programs.
+Connecting to Database
+Maturity
+Exit
+form Art
+form Language
+form
+Form:
+forms
+Forms have maximum paper size is A4, which means that the width is max 210 mm and height max. 297 mm.
+forms Manager
+Purpose
+Move form
+Displacement of all locations:
+Rollback
+Proceed to login and establishment of the first accounting
+continue
+prior
+By date
+From account
+From
+From...
+Shipping Method)
+resigned
+Highlight eg order fields where there are no delivery or reception, with the specified background-color hue.
+Highlighting fields:
+Receive e-mail regarding reset password
+Follow ...
+Delivery note
+follow Item
+before installation
+First account number to be included in the report
+First order lines y-start point measured in mm from side-bottom
+First page
+Save / Update
+Save data in this pane.
+Save what you have directed above
+Save your work. corrections above
+Save the entire budget.
+Save what you have directed above
+Save my forms
+Save corrections
+Save as new
+Save
+Save if you changed anything above.
+Save / Update
+Replacement cost
+General
+Genfakturerings Date
+Recall My Forms
+Average price
+Repeat code
+Repeat
+Repeat ...
+Heat ...
+shortcut
+Shortcut Key: Char-code that can be used as an abbreviation of the account number
+Forgot password?
+Approve all
+Approve
+approved
+graphics
+basis
+Group ...
+Group 
+Group number
+Group
+groups:
+Green
+Yellow
+Go to ?
+Go to Customer Accounts (Customers)
+Go to Customer Orders (Orders)
+Go to the Accounts Receivable Reports
+Go to Financial Reports
+Go to the Save / Get Backup
+Go to the day books
+Go to Account Plan
+Go to Accounts Payable
+Go to Accounts Payable Orders
+Go to Accounts Payable Reports
+Go to Production
+Go to Accounting
+Go to Product Reports
+Go to Product reception
+Go to Products List
+Go to the Settings menu
+Go to the settings menu
+Go to the window Financial Report
+Skip to
+HTTPS is active.
+REMEMBER:
+Action:
+The entire crowns
+Get orders
+Loading completed orders from the order list
+Here provides ranges of accounts as the basis for tax reports.
+Enter primotal for:
+Here is a little explanation about the use of groups.
+Here is the problem!
+Here you can specify an alternate SMTP server for sending mail. 
+Here you can specify mail subject text.
+Here you can create a new category
+Here you can edit your accounting Name
+Here you can see a demonstration of a proposal for the modernization of BALANCES.
+Here you can look up and see possible currency codes
+Here you can customize expected monthly amount. To change accounts, you do so here: Menu \ SYSTEM \ Accounts.
+Here you can choose between the variables that are relevant for the current form. Variables which can be used have a prefix: $
+Here you can write a note to the journal
+Here you can write a note to the order
+Here there is something missing
+Here you enter the filename for the desired background image. The file MUST be located in the folder: ../images/
+Here you enter the hex value for the desired RGB background color eg ff9933 for orange. See more values www.saldi.dk/dokumentation/farver 
+Displays list Id: 2
+This displays the barcode
+history
+history
+website
+Hold your mouse over the blue texts to help tips.
+Hover over
+Hurrah: 
+Fast Billing is used if you do not need to write quotations / delivery notes, and where lagerttræk be done by billing
+Remember them
+Remember future billing time
+Wish-tip for this line ...
+What language do you use the program?
+What language will you edit? 39. Haga, Skjeberg, Østfold, Norway.
+If this field is marked will not appear browser menu at the top or the side and entire window can be used as a work area. Many browsers will change with the F11 function key.
+If this field is marked, include comment lines from quotations / orders on slips.
+If this field is marked, included only those items that are included in the live ring at slip.
+If this field is marked managed inventory using the FIFO (first in first out) principle and the cost is adjusted automatically after the last purchases.
+If this box is checked, the purchase and sales invoices are booked through the journal by [Download orders] function.
+If you check this box, BALANCES work in pop-up windows, which means you can have multiple windows open simultaneously.
+If the system does not run on LANs, this should be done over a secure encrypted connection:
+How much time is there for payment
+How to be paid
+Handling the form language
+Height
+Height-Y locations are measured from the bottom of the paper.
+right aligned
+Total now
+Total
+In this column you handle PDF documents that are assigned to each entry.
+ID.
+NOT Last page
+NOT first page
+INFO
+Total
+Id
+Id.
+Id ...
+Not completed. Can still be addressed.
+import
+Import Form (s) from LO 
+Import from csv file
+Importing bank transactions or other data from .csv file (comma delimited file)
+Import / Export: Accounts, Forms, Accounts Receivable, Accounts Payable, appliances, and Data Extraction
+Divider in groups is a practical method to limit the number of displayed debtor / creditor (a kind of filter), and to assign members of the group, relevant common parameters.
+Content / unit
+Purchase Proposal
+Purchase
+Inland
+Load from .fodg file formed by Form Editing in LibreOffice
+Preferences regarding Departments
+Preferences regarding Appendix Handling
+Preferences regarding Users
+Preferences regarding Diverse choices
+Preferences regarding colors and appearance, etc.
+Preferences regarding Forms
+Preferences regarding Labels
+Preferences regarding Stocks
+Preferences regarding Mass Billing
+Preferences regarding Order Related choice
+Preferences regarding POS choice (Point-of-Sale) concern kasseapperat solution
+Preferences regarding Prislister
+Preferences regarding Projects
+Preferences regarding Commissions Calculation
+Preferences regarding Discount Groups
+Preferences regarding Fiscal Year
+Preferences regarding Reminder Related
+Settings concerning language forms
+Preferences regarding Master Data
+Preferences regarding Checklists
+Preferences regarding Categories
+Preferences regarding Item Related example. variants
+Preferences regarding WEB Shop related choices
+Settings For programming of additional modules, etc.
+Preferences regarding groups
+Settings of VAT
+Preferences regarding the program Language
+Preferences regarding registered units, description and item
+Preferences regarding accounting name and mail server for sending mail
+Preferences regarding currency
+Preferences regarding Øredifferencer
+Settings
+Enter primotal for the first year:
+Entering sales order items - `Varelinier`:
+Info: 
+Initial ?? is for those who have received the goods
+Initials for the one who has received the goods
+Initials for the creator list
+initials
+init
+Installation fails!
+Install
+Institution
+Introduction ... ............................................... .................................................. .......................................
+Moreover:
+Just.
+Adjusting the box: V:
+Adjusting the box: V: left, C: centered, H: right
+Jysk
+CREDITOR
+Calculated amounts for the current entry. 
+Cash journals
+Journal Entry list:
+Journal Entry
+Journal Entry: 
+Categories:
+Source of cost:
+Source of personal info:
+Source
+Draft note:
+draft
+Classic look:
+Click to export the selected transactions to CSV file for import into another program, for example. spreadsheet.
+Click here to save your corrections
+Click here to save any. changes.
+Click here to save
+Click here to manage your customer discount groups
+Click here to manage your product discount groups
+Click here to make a purchase proposals
+Click here to reset all data in the table.
+Click here to create your
+Click here to create a new reception
+Click here to create a product registration
+Click here to create a new item discount group
+Click here to see all lists (filter reset)
+Click here to see the next account
+Click here to delete the account. Accounts that are in use can not be deleted!
+Click here to change the sorting of the list. - Only your last election take effect.
+Click here to ...
+Click here to save all language data in a file
+Click here to load all language data from file
+Click here to get to budgeting
+Click here when you have completed the data fields on the row below.
+Kol0
+Kol1
+column Header
+Pretty...
+Contact info:
+Contact person
+Contact
+Contact person
+Cash
+Accounts - Debtors:
+Accounts - Creditors:
+Accounts
+Account for ...
+account card
+Account no.
+Account plan
+Account balance
+Account balance. The amount in the account right now.
+Account for posting of input VAT for purchases abroad
+Account for posting of input tax for ydelseskøb abroad
+Account for posting of sales tax for purchases abroad
+Account for posting of sales tax for ydelseskøb abroad
+Account
+Account control:
+Account.
+Account...
+Item Description. A descriptive text of your choice
+The balancing
+The account currency (DKK = price 100)
+account Setting
+Account setting:
+Charge cards with VAT
+Charge cards
+Charge cards:
+Account name - descriptive text
+account Name
+Kontonr
+Account no.
+Account number for cash sales.
+Account number for sales on credit cards.
+Account number for total goods and service sales outside the EU
+Account number for total purchases in the EU
+Account number for total product sales in the EU
+Account number for total ydelseskøb in EU
+Account number for total output sale in EU
+Account number from the chart of accounts to be used for translation differences and rounding ...
+Account Number. The unique number code, which is used for sorting, etc. summation.
+account Plan
+Nomenclature:
+Account Type: D = Run, S = Status, Z = Sum, H = Heading, R = Earnings, X = Page Change, L = Closed
+control tracking
+Check Administrator Passwords
+control Track
+Copy to new
+Copy
+Cost price
+Diet...
+Cost price
+Credit Kt.
+Credit opening balance
+Credit
+Credit cards
+Credit
+The creditor reports:
+Payables Account
+creditors
+creditor Groups
+Accounts Payable
+creditor Orders
+Vendor Report
+Kroner, ears
+Encryption method for connecting to the SMTP server, if required.
+only thousands
+Customer - Billing:
+customer category
+Company name
+customer order
+customer Responsible
+The customer (debtor):
+Company Name
+Customer.
+Customer: Can not corrected. The system manages this
+Customer Email
+Customer website
+Customer referance
+Customer
+customers
+Customer Link:
+customer type
+Price
+Price...
+Buy in the EU
+Buy outside EU
+Purchase..
+Purchase: 
+purchase statistics
+Purchase VAT
+Purchase VAT Account
+purchase Invoice
+Purchase VAT (input tax): 
+Input VAT
+STOCK
+labels
+stocked
+Stocked. Mark here if ...
+stock
+Inventory control
+Storage approach
+Storage features
+Storage ...
+Storage Groups
+Inventory
+The warehouse where the goods are included
+stocks
+stocks:
+Make a backup of the current set of forms.
+Lb.No.
+Lev. Service
+delivery date
+Lev ...
+Lev.rabat
+Lev.rabat ...
+delivery beskrivlse
+Deliveries of the sales order.
+deliveries:
+Supplier Name
+Supplier
+Supplier...
+Supplier
+Supplier Lookup
+Delivered to
+supplied
+Delivery to the invoice address
+Delivery:
+delivery Date
+delivery Country
+delivery address
+delivery city
+Little mention of groups.
+The line number
+line total
+line
+line spacing
+lines
+The link you used is temporary, because the right is not fully developed.
+List's creation date
+Vertical Offset: Enter a positive number to increase, negative number to reduce all y-locations
+sign in
+log out
+Log. date
+Log in
+Login to
+Lok ...
+local fax
+Localnbr.
+Location
+Location.
+Close the window and go up a level
+Close the window and go to the main menu
+close
+closed account
+Closed
+Pay
+Supplements
+Magenta (fuchsia)
+mail Annex
+mail topic
+Mail Invoice:
+mail text
+Mail texts:
+mail
+Mail Sending:
+Maximum line length of the description before is broken into a new line, measured in millimeters. 
+Manual, tips and other help can be found at
+Mass Billing
+material properties
+Substance
+Substance.
+Density of the material
+Max. number of lines displayed per. page: 
+Max.
+Employee mail
+employeeNo
+Member of the debtor group
+Member of the creditor group
+Include comments on slips
+Include only lines with given number of delivery note
+Include stock movements
+Included on the print side. A: all, 1: first!1: not the first, S: last!S: not last
+Min.
+Tel: +45 26 31 42 27
+Offset account the clearing of open items
+Offset Account
+Met...
+Modt.dato
+Modt.nr.
+Receive...
+reception date
+Reception number for the period's first Annex
+Receiver name
+Recipient's Email
+Received by
+Received date
+VAT% rate for the posted delivery
+VAT% rate
+VAT%.
+VAT on goods purchased abroad: 
+VAT on purchases, etc. abroad
+Moms of ydelseskøb abroad
+Moms of ydelseskøb abroad: 
+tax free
+VAT free. Mark here if ....
+Tax options:
+VAT pct.sats
+Moms
+VAT%
+Moms ...
+VAT Statement
+Momsgr ...
+Momsgrp
+Tax Group sales VAT on reverse charge.
+Tax Group as the debtor group to be assigned.
+Tax Group as a creditor group to be assigned.
+Tax code for sales prices on the item card
+tax Code
+VAT code: K_: Purchase ... S_: Sales ... Y_: Benefits, E_ :, 
+Tax Report (accounts to be included in the tax report): 
+tax Report
+VAT rate for the service
+VAT Rate
+MySQL is available.
+Month
+Month:
+month List
+The amount of the current supply.
+The amount listed as number
+Mængederabatter:
+Navigation:
+Name of a user who already has permission to create, edit and delete databases. 
+Name
+Name.
+Name...
+The name of the company, financial concerns
+The name of the variable. Variables used in order lines, here prefix: £
+Note
+Note...
+Note:
+Notes to the carrier
+No
+No.
+Number...
+Numr ...
+New Receive List
+New user
+New receiving list
+New order, even without customer connection!
+New variant
+New
+New budget:
+New field:
+When this box is marked, the prices for customer orders, invoice printing and so on. Incl. VAT.
+When the order is billed, marked box automatically
+Next Account ->
+Necessary preparation:
+OB
+Note: There is no undo option if you continue!
+OIOUBL
++/- 0% Ok.
+Immediate posting of buy and sell orders
+Conversely betaligspligt! Mark here if this group of customers covered by the reverse charge.
+Conversely betaligspligt! Mark here if this supplier group covered by the reverse charge.
+Conversely payment
+Update here after a correction of year
+Do not update cost
+Update
+Operation
+Operation. Mark here if ..
+Create new
+Create a new contact
+Create new customer
+Create new currency
+Create new product entry
+Create new
+Create new:
+Create...
+Created currencies:
+Creating accounts, occurs later, when you first log into that
+Created by
+Lookups - Se ...
+Lookups - See an overview of order book
+Lookups - your cursor location indicates the table, notice shall be made in
+Lookup
+Lookup: cursor location determines which table lookup must be made in
+Lookup:
+Optical Readable
+order Date
+Order Field 1
+Order Field 2
+Order Field 3
+Order Field 4
+Order Field 5
+The order date
+Order no.
+Order related choices:
+Order-related:
+The order sum
+Order book
+order Confirmation
+Order Info:
+Orderltems
+The order is accepted if the field is marked
+orders
+Orders Debtors - `Kundeordrer`:
+Orders: Accounts payable - `Leverandørordrer`:
+Order Related choice
+Overview of all currencies:
+Overview of popular currencies:
+Heading (system)
+Heading
+Overwrite formulardefination with system standard
+Overwrite forms with standard
+PBS creditor.
+PBS debtor group
+PBS invoice
+PBS
+PDF file
+PDF file ...
+PHP function mysqli_connect () could not be found
+PHP function pg_connect () could not be found
+PRODUCTION
+the package of
+Password...
+Passwords are different
+Pct. Correction
+The period ends this year
+The period starting this year
+The first month
+Net last month
+personal choice
+Personal choice:
+pick List
+POS choice (box)
+Popup settings:
+pos
+Pos. No. assigned automatically
+Pos.
+Pos ..
+Position controls the order of the items
+Position assigned automatically.
+Position number in the group
+Post code
+Post
+Post
+Post Rings note ...
+Postgres found.
+postnbr.
+Post code
+post code...
+Primo
+Price
+Price...
+Price / Unit
+Price group
+Price groups
+Price list
+Price list.
+Price list ...
+Price lists
+Price lists:
+Home phone
+Private
+Problem:
+percentage Additions
+Production
+production Orders
+application Language
+program language
+Project
+projects
+projects:
+Protocol
+Commission is calculated on the paid orders
+Commission is calculated on the invoiced orders
+Provision accrue to the customer responsible if that is assigned to one, otherwise to it as the reference person on individual orders
+Provision accrue to the customer responsible
+Provision accrue to the specified reference person on individual orders
+Commission
+Commission:
+commissions Calculation
+Provision Calculation:
+Provision Percent! Enter the percentage of the gross margin spent by calculating commission.
+Provision Report can not be tested prior to the DB access.
+Provision Report
+The commission report:
+On 
+That way exchange account numbers in the boxes debit and credit space, and the amount is again positive.
+On the server must be installed one of the database servers PostgreSQL or MySQL / MariaDB.
+Rabat method
+discount percent
+Discount
+Discount%
+Discount...
+discount Group
+discount Groups
+Discount Groups:
+Discount rate%.
+Foregone ..
+Rap: 
+Report Top 100
+Report debtor Sales Stats
+Report for customer account cards
+Report debtor account balance
+Report debtor open items
+Report vendor account cards
+Report vendor account balance
+Report creditor purchase statistics
+Report vendor open items
+Report on employees' commission earnings
+reports
+report type
+edit 
+Edit Form: Graphics
+Edit Form: Order Lines
+Edit Form: Texts
+Edit Pick List
+Change Tender form
+Edit form for the first reminder
+Edit form for the second reminder
+Edit form for 3rd reminder
+Edit form of procurement proposals
+Edit form for credit cards
+Edit form of credit
+Edit form of purchase invoice
+Edit form of requisition
+Edit the selection above
+Edit Invoice forms
+Edit form of order confirmation 
+Edit delivery note form
+Edit account:
+Change language
+Edit selected form
+Ref
+accounting
+Accounting ...
+accounting: 
+accounting:
+Regnskabets status
+Accounting Brief:
+Fiscal year
+Financial year:
+Regu ..
+requisition
+Income account
+Result
+Profit / budget
+Return to Main Menu
+Return to Accounting
+Return to Financial Report
+Return to the main menu
+Return to the settings
+Return to the settings menu
+Return to the account plan
+Return to the product list
+Returns
+box A1
+box A2
+box B1
+box B2
+box C
+Reminder 1
+Reminder 2
+Reminder 3
+Reminder Related
+Red
+S.moms grp
+SHIFT Tab key
+SSL
+SYSTEM
+Balances PHP Error:
+Balances mysql error:
+Balances postgres-Error:
+balance
+Balance ...
+Sales to EU
+Sales outside the EU
+Sales..
+Sales: 
+Sales order - Status
+sales statistics
+Sales tax
+Selling price
+Sales ..
+Sales ...
+Sales Tax Account
+Sales VAT (output tax): 
+Sales Tax
+Retail
+Summary account of the debtor group
+Summary account of the creditor group
+Collect Account Receivable
+Samlekt.
+Collect Item
+Sans-serif
+See how in the installation instructions INSTALLATION.txt.
+Look more at
+Send invoice by mail
+Serial
+Serif
+Shop related choices (WEB)
+Page
+Page breaks (system)
+side Switch
+Last account number to be included in the report
+last page
+security copy
+backup
+Simulate
+Simulation of posting shows movements in nomenclature
+Hide Menu
+Hide
+Font Name: Helvetica, Times, OCRbb12
+Write Protect all folders on the server, except: 
+Is written `d` or` K +, the next number will be interpreted as a debtor account number or any creditor account number.
+Write a value here, will appear an editable field on the order page with the specified value. Percentage addendum is an addition to the total invoice amount before VAT. 
+Inclined font, also called italic
+Inclined
+Cut-off date for commission calculation:
+Clear all
+Remove filter and show all
+Delete the entry
+Delete
+Delete ...
+End-date
+THE END
+Language
+Language:
+The language to be used on the invoice prints
+Language management: Create, Destroy languages
+Master data
+Master data:
+Start search with the specified criteria.
+Start search
+Start date
+State...
+status account
+status
+Status: Active or Closed
+status:
+Place
+Place..
+PCS. discount v. number
+PCS. discount
+Immediately
+The line concerns ...
+The string x endpoint measured in millimeters from the left-hand edge
+The swath x-start point measured in mm from the left edge
+The swath y end point measured in mm from side-bottom
+The swath y-start point measured in mm from side-bottom
+barcode
+Strt ..
+Size
+sum account
+Sum
+Sum the fra_konto. Enter the lowest account number to be included in the count.
+additional information
+Additional place indication
+The system is based on CSS, and with responsive design which is suitable for mobile devices. 
+The system checks whether HTTPS is used. (To be tested)
+The system checks whether the directory is writable
+The system checks whether the module is available
+The system checks whether the module is available. (To be tested)
+Sell...
+Seller
+Seller department
+Seller referance
+Search for...
+Search another
+search
+Search Text
+Make sure there is write access for Web users, for catalogs
+TIP:
+TLS
+Tab key
+Backup in use, using it as current set of forms.
+Draw a hotline agreement, then you can call or send an e-mail and get quick answers to questions about the use of
+Encoding
+Text color. See color scheme
+Text lines with order entry.
+Text
+Text / $ variable
+The text's x-start point as measured in millimeters from the left-hand edge
+texts
+Text height measured in [px]
+Telephone
+Telephone (s)
+Telephone.
+Tel ...
+Test whether the entered password is the same.
+The PDF Toolkit: merge PDF background page.
+time
+On Budget
+To account
+to
+Revert entry
+Revert
+Offer
+Offer:
+offers Group
+Offer Groups
+Avail ...
+associated note
+Allow negative stock
+Supplementary features:
+Appointed
+Tip
+Tip: 
+Tip:
+Tip?:
+Checklists
+Phone - Enter the phone number. enclosed *, +, or / to import data from the Danish Business Authority (Data provided by CVR API)
+Top 100
+Top-line
+Total solution
+Drag ..
+Typ ...
+Type
+Type...
+Typically for PostgreSQL user [postgres] and the MySQL user [root].
+URL to the price list
+URL
+US dollar
+Complete Field 1
+Complete Field 2
+Complete Field 3
+Fill Field 4
+Fill in Block 5
+Fill based on last year's figures
+Fill ...
+discontinued
+abroad
+Equalize
+Print to
+Print
+Unable to connect two database:
+Do numbering by invoice
+Do v. Invoice
+Upload / Download Support Files
+VG
+Valu ...
+currency denomination
+currency description
+Currency as the order to use
+Currency changes: 
+Currency
+Currency.
+Currency ...
+currency codes
+currencies
+currencies: 
+Currency Code for the currency that is used in the Annex.
+Currency code for the account amounts
+value date
+Horizontal Offset: Enter a positive number to increase, negative number to reduce all x-locations
+Item number
+Item description
+receipt of goods
+Product reception:
+Purchase
+Product sales
+Product...
+Product: 
+Item Tax Account abroad
+Category
+Category ...
+Categories
+Categories:
+product info
+Product info:
+Stock
+Item List:
+goods reception
+trademark
+Item no
+Item no. the percent surcharge
+Item no. discount
+Item no.
+Item number for the service
+Item number retrieved from the trade register.
+Item number. The unique number code, which is used for sorting, etc. summation.
+goods
+product Report
+Commodity choice
+product Related
+Product Related:
+variations:
+By purchases abroad, you must pay Danish VAT on behalf of the seller. At the same time the input VAT deducted from that the result is 0
+By ydelseskøb abroad, you must pay Danish VAT on behalf of the seller. At the same time the input VAT deducted from that the result is 0
+Attached follows ...
+Maintenance All of:
+Concerning...
+Vejl. price
+Guiding ..
+Guiding ...
+Vejl_pris
+indicative price
+Welcome to SALDI-DEMO
+Return to the main menu
+Return to Accounting
+left-aligned
+Verification of the above password
+Know more?
+Random search operations
+Other lists
+Show all
+View the matching filter
+Display the selected
+View previous
+Show next
+Show prices incl. VAT on sales orders
+View tips for beginners, if you are new to the system.
+Wise
+Wise:
+Display - choose what to display
+viewing
+Our ref.
+our referance
+choose 
+Select the agreed solution
+Select the alternative device you want to use.
+Select the database server type you want to use.
+Select the device you want to use.
+Select the discount method you want to use.
+Select the character you want to use. Recent versions of PostgreSQL will only work with UTF8
+Choose one form you want to edit
+Select an account in the chart - 
+Choose the form's Art (Object type)
+Choose which group the customer belongs
+Choose which language you want to use on the form
+Choose whether the cost should be regulated at the average price, replacement cost or should not be regulated by purchases
+Select the provison calculated on the invoiced or paid orders
+Choose the way in which the document should be printed, stored or sent.
+Select the text number: 
+Choose accuracy on display for amount
+Choose!
+choose
+Worth a try:
+The value of DKK 100 
+Host:
+X
+X Offset
+X-pos
+X-end
+X-start
+X-Left
+Y
+Y-bottom
+Y Offset
+Y-end
+Y-start
+Serv. 
+Performance-VAT
+Output VAT Account abroad
+output VAT
+outer size
+the administrator of your
+administrator password
+administrator's username
+Administrator account to your
+April
+a line to be posted directly opposite of what it says in the journal, you can just put minus signs in front of the amount. 
+August
+auto ...
+username:
+centered
+day of the month
+Date...
+December
+or
+email
+is not linked to an employee.
+needed to merge print with Logo.
+possibly. shipping date
+eg. requisition NR
+February
+fields must be completed and checked.
+files are unpacked into a working directory accessible Web visitor.
+in order to print.
+hash installed.
+if the language is not Danish
+where "connect.php" should be created.
+right
+import "compass / css3";
+import url (http://fonts.googleapis.com/css?family=Patua+One|Open+Sans);
+no provison
+January
+July
+June
+you can read updated information.
+click here to attach an annex
+click here to open the attachment: $ document [$ y]
+Account no.
+kr / item
+only business
+price...
+supplier order
+May
+March
+mcrypt installed.
+md ...
+month
+name...
+November
+October
+per. page
+edit this account
+accounts
+view / edit currency
+see customer card
+see its contents
+see item card
+September
+must support modules: mcrypt and the hash which is used to manage secure passwords.
+must be enabled!
+as username and your chosen password
+such as accounting,
+skips to the previous field.
+skips to the next field.
+then you get help texts and tips.
+Allowed
+um. (Without VAT) can be used to post the amount without VAT on accounts if the account has a rate associated.
+wo.VAT
+url ...
+by number
+left
+also works. 
+show customer order
+show accounting board
+select this item
+xx
+xx:
+xxAngiv here which account in nomenclature percent charge should be booked in.
+xxx
+yyy
+À price
+open items
+Year
+Year:
+Year-beginning amount Last year's end
+Changing the program texts:
+Amending rate
+Desired password
+Desired name of your master database
+Desired name of your
+Øredifferencer
+year...
+change currency
+S Off For Kt.
