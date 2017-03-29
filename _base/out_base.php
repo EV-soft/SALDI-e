@@ -386,6 +386,7 @@ if ($ØRollTabl==false) $ViewHeight= '99999px';
   echo '<tbody>';
   #if ($Angaar=='regnskab') $SeltRow= ''; //Ingen rækkevalg ved regnskab
   if ($ModifyRec==false) $SeltRow= ''; // Ingen mulighed for at vælge record som skal rettes/vises med detaljer
+  if (!$TablData) {msg_Info('Ingen data','Data tabellen er tom! ('.$Angaar.')');} else
   foreach ($TablData as $Row) { 
     $rowBg= RowDesign($Row,$RowLabl,$Angaar); //  $Row er pointerrefereret og ændrer indhold!
     pretty();
@@ -708,7 +709,7 @@ function htm_Rude_Top($name='', $capt='', $parms='', $icon='', $klasse='panelWma
   if ($capt=='') $Ph= 'height:0;';
   if ($name>'') //  Uden navn oprettes ingen form, så lokale(/"indlejrede forms") muliggøres!
     if ($ØformOn) echo '<form name="'.$name.'" id="PanelForm" action="'.$parms.'" method="post">';  //  "ParentForm" - Nestet forms er ikke tilladt, så under-forms skal håndteres specielt!
-  if ($Ødebug) {$fn= '&nbsp; <small><small><small>f:'.$func.'()</small></small></small>';} else $fn='';
+  if ($Ødebug) {$fn= '&nbsp; <small><small><small>'.$func.'()</small></small></small>';} else $fn='';
   echo '<div class="'.$klasse.'"'.$more.'> <div class="panelTitl" style="'.$Ph.'" max-width:400;>'.
     '<ic class="fa '.$icon.'" style="font-size:22px;color:'.$ØTitleColr.'"></ic> &nbsp;'.ucfirst(Tolk($capt)).$fn.'</div>';
   if ($capt!='') echo '<hr class="style13" style="margin-bottom: 0"/>';
@@ -915,7 +916,7 @@ global $Ødebug;
     MenuGren($clas='withsubmenu',   $href='#',                                    $labl='@SYSTEM',              $titl='@Rutiner angående indstillinger af systemet');
       MenuGren($clas='firstitem',   $href='../_system/page_Kontoplan.php',        $labl='@Kontoplan',           $titl='@Her vedligeholder du den aktuelle kontoplan');
       MenuGren($clas='withsubmenu', $href='#',                                    $labl='@Indstillinger',       $titl='@Indstillinger for programmet');
-        MenuGren($clas='firstitem', $href='../_system/page_Syssetup1.php',        $labl='@1. indstil-ofte',     $titl='@Her har du de hyppigst benyttede indstillinger');
+        MenuGren($clas='firstitem', $href='../_system/page_Valuta.php',           $labl='@1. indstil-ofte',     $titl='@Her har du de hyppigst benyttede indstillinger');
         MenuGren($clas='',          $href='../_system/page_Divsetup2.php',        $labl='@2. indstil-flere',    $titl='@Her har du de sjældnere benyttede indstillinger');
         MenuGren($clas='lastitem',  $href='../_system/page_Tilvalgsetup3.php',    $labl='@3. indstil-extra',    $titl='@Her aktiverer og indstiller tilvalgs funktioner');
       MenuGren($clas='lastitem',    $href='../_system/page_Backup.php',           $labl='@Sikkerheds kopiering',$titl='@Her kan du sikre dig dine regnskabsdata');

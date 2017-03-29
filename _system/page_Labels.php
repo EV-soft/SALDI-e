@@ -1,5 +1,5 @@
 <?php   $DocFil= '../_system/page_Labels.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-/* ## Formål:  Opsætning af Labels                                       
+/* ## FormÃ¥l:  OpsÃ¦tning af Labels                                       
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -11,8 +11,8 @@
 
 $pageTitl='Indstil: Labels';
 include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
-### INDLÆS DATA:
+if ($GLOBALS["Ã˜debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+### INDLÃ†S DATA:
 $img= '../_assets/images/saldi-e50x170.png';
 $demo= '<center>
 <table border="0" cellspacing="0" cellpadding="0"><tbody>
@@ -31,6 +31,6 @@ $lbltype= 'vare';
 ### GEM DATA:
  
   
-//  Til sidst indlæses java-scripter:   
+//  Til sidst indlÃ¦ses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

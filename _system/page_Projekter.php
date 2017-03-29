@@ -1,17 +1,18 @@
-<?php   $DocFil= '../_systemdata/page_Projekter.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-// Formål: Redigering af Projekter                                       
-//             ___   _   _    ___  _         
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___)
-//                                           
-// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
-//
+<?php   $DocFil= '../_systemdata/page_Projekter.php';    $DocVer='5.0.0';    $DocRev='2017-03-00';   $ModulNr=2;
+/* FormÃ¥l: Redigering af Projekter
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ */
 
   $pageTitl='Indstil: Projekter';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Projekter');
-### INDLÆS DATA:
+  if ($GLOBALS["Ã˜debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Projekter');
+### INDLÃ†S DATA:
 
 ### VIS DATA:
     SpalteTop(240); Rude_AdminMenu();
@@ -20,6 +21,6 @@
 ### GEM DATA:
  
   
-//  Til sidst indlæses java-scripter:   
+//  Til sidst indlÃ¦ses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

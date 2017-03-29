@@ -100,9 +100,21 @@ switch (strtolower($BgColr)) {  # TEMA-farver og Titel-prefix:
   return $result;
 }
 
-## Almindelige afarter:
-function msg_Error($title='Saldi Fejl',  $messg='Besked') {
-  msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($messg));  
+## Almindelige af-arter:
+function msg_Error($title='Fejl',     $messg='Besked') {
+  msg_Dialog('error',   tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+}
+function msg_Info($title='Info',      $messg='Besked') {
+  msg_Dialog('info',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+}
+function msg_Warn($title='Advarsel',  $messg='Besked') {
+  msg_Dialog('warn',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+}
+function msg_Tip($title='Tip',        $messg='Besked') {
+  msg_Dialog('tip',     tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+}
+function msg_Succ($title='Hurra',     $messg='Besked') {
+  msg_Dialog('success', tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
 }
 
 ?>

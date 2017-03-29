@@ -70,10 +70,10 @@ function vindue_Formaal() {
 }
 
 function vindue_Connect() {global $Øprogvers, $Øsaldihost;
-  SpalteTop(320); Rude_Install($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='saldisys',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
-  NextSpalte();   Rude_DBsetup($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='saldisys',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
-  NextSpalte();   Rude_Login($regnskab='CSS-demo',$brugernavn='admin',$brugerkode,$PrgVers=' '.$progvers,$LnkHelp,$OrgaName=$saldihost,$Logo='SALDIe50x150.png');
-  SpalteBund();   skilleLin();
+  SpalteTop(480);   Rude_Install($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='saldisys',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password);
+  NextSpalte(320);  Rude_DBsetup($db_type='MySQL',$db_encode,$db_navn='saldi-db',$db_bruger='saldisys',$db_password,$adm_navn='SaldiAdm',$adm_password,$verify_adm_password,$db_host='Danosoft');
+  NextSpalte(320);  Rude_Login($regnskab='CSS-demo',$brugernavn='admin',$brugerkode,$PrgVers=' '.$progvers,$LnkHelp,$OrgaName=$saldihost,$Logo='SALDIe50x150.png');
+  SpalteBund();     skilleLin();
 }
 
 function vindue_GitterMenu() {

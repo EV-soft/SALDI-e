@@ -71,7 +71,7 @@ global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogramSprog, $Ødesigner;
       if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Konti',            $link='../_kreditor/page_Kreditor.php',      $title='@Gå til Kreditor Konti &#xa;(Leverandører)');
       if ($vis_prodkt)  menuKnap($h='32',$w=$knapW, $label='@Produktion',       $link='../_produktion/page_Ordreliste.php',  $title='@Gå til Produktion'         );
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Vare modtagelse',  $link='../_lager/page_Varemodtagelse.php',   $title='@Gå til Vare modtagelse'    );
-     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Indstillinger',    $link='../_system/page_Syssetup1.php',    $title='@Gå til menuen Indstillinger af: Regnskab og Program');
+     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Indstillinger',    $link='../_system/page_Syssetup.php',    $title='@Gå til menuen Indstillinger af: Regnskab og Program');
       htm_nl();   
       if ($vis_finans)  menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_finans/page_Rapport.php',         $title='@Gå til Finans Rapporter'   );
       if ($vis_debitor) menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_debitor/page_Rapport.php',        $title='@Gå til Debitor Rapporter'  );
@@ -111,8 +111,8 @@ function Rude_AdminMenu() {
   $goBack= '';  # '?returside=../_base/menu.php';
   $knapW= 200;
   htm_CentrOn();
-             menuKnap($h='22',$w=$knapW,$label='@Moms',                   $link='../_system/page_Syssetup1.php',    $title='@Indstillinger angående moms');
-  htm_nl();  menuKnap($h='22',$w=$knapW,$label='@Valuta',                 $link='../_system/page_Valuta.php',       $title='@Indstillinger angående valuta');
+             menuKnap($h='22',$w=$knapW,$label='@Valuta',                 $link='../_system/page_Valuta.php',       $title='@Indstillinger angående valuta');
+  htm_nl();  menuKnap($h='22',$w=$knapW,$label='@Moms',                   $link='../_system/page_Syssetup.php',    $title='@Indstillinger angående moms');
   htm_nl();  menuKnap($h='22',$w=$knapW,$label='@Debitor & Kreditor Grp.',$link='../_system/page_Debkredgrup.php',  $title='@Indstillinger angående grupper');
   htm_nl();  menuKnap($h='22',$w=$knapW,$label='@Afdelinger',             $link='../_system/page_Afdelinger.php',   $title='@Indstillinger angående Afdelinger');
   htm_nl();  menuKnap($h='22',$w=$knapW,$label='@Projekter',              $link='../_system/page_Projekter.php',    $title='@Indstillinger angående Projekter');
@@ -137,7 +137,7 @@ function Rude_AdminMenu() {
 
 # PROGRAM-MODUL; "Navigation"
 function Rude_DiverseMenu() {
-  htm_Rude_Top($name='adminform',$capt='@Flere indstillinger 2.',$parms='../_system/page_Syssetup1.php',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
+  htm_Rude_Top($name='adminform',$capt='@Flere indstillinger 2.',$parms='../_system/page_Syssetup.php',$icon='fa-bars',$klasse='panelW240',__FUNCTION__);
   $goBack= '?returside=../_base/menu.php';
   $knapW= 220;
   htm_CentrOn();
@@ -205,9 +205,13 @@ function Rude_FootMenu($doPrint=true, $doErase=true, $doLookUp=true, $doAccept=t
 
 
 # PROGRAM-MODUL;
-function Rude_DBsetup(&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password,&$adm_navn,&$adm_password,&$verify_adm_password) {
+function Rude_DBsetup(&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password,&$adm_navn,&$adm_password,&$verify_adm_password,&$db_host) {
   global $ØButtnBgrd, $ØButtnText, $ØProgTitl, $Ønovice; 
   htm_Rude_Top($name='opret',$capt=$ØProgTitl.'-<small> € :</small> '.Tolk('@Database setup'),$parms='../_admin/ini_CreateDB.php.php',$icon='fa-wrench',$klasse='panelW320',__FUNCTION__);
+  htm_CombFelt($type='text',  $name='db_host',    $valu= $db_host,    
+               $labl='@Server vært', 
+               $titl=tolk('@Navn på den leverandør, der står for serverdriften. '),
+               $revi=true, $rows='2',$width='',$step='', $more=' placeholder="'.tolk('@Angiv HOST-leverandør...').'"');
   htm_OptioFlt($type='text',  $name='db_type',    $valu= $db_type,  
                     $labl='@Server type',  
                     $titl='@Vælg den databaseserver type, du ønsker at bruge.', 
@@ -327,7 +331,7 @@ function Rude_install(&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password,
       tolk('@skal være aktiveret !');
   echo '<hr>'.
       tolk('@Oprettelse af regnskab, sker senere, når du 1. gang logger ind, som ').$ØProgTitl.'-administrator.'.'<br><br>'.
-      tolk('@På').$ØProgTitl.'-wiki '.tolk('@kan du læse opdaterede informationer.');
+      tolk('@På').$ØProgTitl.'-wiki '.tolk('@kan du læse supplerende informationer.');
   echo '</small></div>';
   htm_RudeBund($pmpt=Tolk('@Installér'),$subm=false,$title=tolk('@Klik her for at oprette dit').$ØProgTitl.' database-system');
 }
@@ -359,22 +363,24 @@ function Rude_InstallSucces(&$db_navn, &$adm_navn) { global $ØProgTitl;
 }
 
 # PROGRAM-MODUL;
-function Rude_Login(&$regnskab,&$brugernavn,&$brugerkode,&$ProgVers,&$LnkHelp,&$OrgaName,&$Logo) { global $ØProgTitl, $ØprogramSprog;
+function Rude_Login(&$regnskab,&$brugernavn,&$brugerkode,&$ProgVers,&$LnkHelp,&$OrgaName,&$Logo,$VisMax=true) { global $ØProgTitl, $ØprogramSprog;
   htm_Rude_Top($name='logiform',$capt=Tolk('@Logind til').' <i>'.$regnskab.'</i>',$parms='',$icon='fa-key',$klasse='panelW320',__FUNCTION__); # < ? php echo htmlspecialchars($_SERVER["PHP_SELF"]);? >
   echo '<table width="100%";cellspacing="0"><tr align="center">';
   $FaLogo= '../_assets/images/'.$Logo;
-  if (file_exists($FaLogo)) echo '<tr align="center"><td colspan="3"; height="40px"><img style="border:0px solid;width:120px;heigth:80px" alt="LOGO" src="'.$FaLogo.'"></td></tr>';
-  echo '<td> <small><small>'.$ØProgTitl.'</small></small></td>';
-  echo '<td align="center">'.ucfirst(tolk('@Vært:')).'&nbsp; <b>'.$OrgaName.'</b></td>';
-  echo '<td align="right"><small><small>Vers.'.$ProgVers.'</small></small> </td>';
-  echo '<tr align="center"><td colspan="3"><br/><small><small>HUSKETIP: </small> </small> '.$LnkHelp.'</td></tr>';
-  echo '</tr></table><br>';
+  if ($VisMax) {
+    if (file_exists($FaLogo)) echo '<tr align="center"><td colspan="3"; height="40px"><img style="border:0px solid;width:120px;heigth:80px" alt="LOGO" src="'.$FaLogo.'"></td></tr>';
+    echo '<td> <small><small>'.$ØProgTitl.'</small></small></td>';
+    echo '<td align="center">'.ucfirst(tolk('@Vært:')).'&nbsp; <b>'.$OrgaName.'</b></td>';
+    echo '<td align="right"><small><small>Vers.'.$ProgVers.'</small></small> </td>';
+    echo '<tr align="center"><td colspan="3"><br/><small><small>TIP: </small> </small> '.$LnkHelp.'</td></tr>';
+    echo '</tr></table><br>';
+  }
 
   htm_CombFelt($type='text',    $name='regn', $valu= $regnskab,   $labl='@Regnskab',    $titl='@Angiv navnet på det Regnskab, som du har adgang til', $revi=true, $rows='2',$width='',$step='', $more='required="required" placeholder="'.tolk('@Regnskab...').'"');
   htm_CombFelt($type='text',    $name='navn', $valu= $brugernavn, $labl='@Brugernavn',  $titl=tolk('@Angiv dit').$ØProgTitl.' '.tolk('@Brugernavn'),  $revi=true, $rows='2',$width='',$step='', $more='required="required" placeholder="'.tolk('@Bruger...').'"');
   htm_CombFelt($type='password',$name='kode', $valu= $brugerkode, $labl='@Adgangskode', $titl='@Angiv Adgangskoden svarende til Brugernavnet',        $revi=true, $rows='2',$width='',$step='', $more='required="required" placeholder="'.tolk('@Password...').'"');
-  echo '<div style="text-align: center"><br><small><small> /da:Sprog/en:Language/de:Sprache/fr:Langue/tr:Dil/es:Lenguaje</small></small></div>';
-  SprogValg($ØprogramSprog);
+#  echo '<div style="text-align: center"><br><small><small> /da:Sprog/en:Language/de:Sprache/fr:Langue/tr:Dil/es:Lenguaje</small></small></div>';
+  if ($VisMax) SprogValg($ØprogramSprog);
   echo '<hr>';
   echo '<p align="center"><a href="'.$link=''.'"><u title="'.tolk('@Få tilsendt mail angående resat password').'">'.  tolk('@Glemt adgangskode?').'</u></a></p>';
   htm_RudeBund($pmpt=Tolk('@Log ind'),$subm=true,$title=tolk('@Gå videre til').$ØProgTitl.' '.tolk('@regnskabet'));
@@ -382,7 +388,7 @@ function Rude_Login(&$regnskab,&$brugernavn,&$brugerkode,&$ProgVers,&$LnkHelp,&$
 
 
 # PROGRAM-MODUL;
-function Rude_Syssetupxx() { 
+function Rude_Connsetup() { 
   htm_Rude_Top($name='forbind',$capt='@DB forbindelse:',$parms='',$icon='fa-key',$klasse='panelW480',__FUNCTION__);
   htm_CombFelt(                      $type='text',  $name='firmanavn',  $valu= $firmanavn,  $labl='@Firmanavn',   $titl='@Navnet på det firma, regnskabet angår',   $revi=true);
   htm_FrstFelt('50%');  htm_CombFelt($type='text',  $name='addr1',      $valu= $addr1,      $labl='@Adresse',     $titl='@Firmaets adresse',                        $revi=true);
@@ -1331,7 +1337,7 @@ function Rude_Regnskab($regnskab='', $maanedantal=12, $startaar=2017, $startmaan
 }
 
 function Rude_Regnskabsaar(&$TablData) {
-  htm_Rude_Top($name= 'regnform',$capt= '@Regnskabsår:',$parms='../_system/page_Syssetup1.php',$icon='fa-database','panelW480',__FUNCTION__); 
+  htm_Rude_Top($name= 'regnform',$capt= '@Regnskabsår:',$parms='../_system/page_Syssetup.php',$icon='fa-database','panelW480',__FUNCTION__); 
   echo '<colrlabl>';      htm_FrstFelt('44%',0);  htm_NextFelt('24%');  
   echo 'Periode start:';  htm_NextFelt('24%');  
   echo 'Periode slut:';   htm_NextFelt('8%');     htm_LastFelt(); echo '</colrlabl>';
@@ -1351,7 +1357,7 @@ function Rude_Regnskabsaar(&$TablData) {
 }
 
 function Rude_Regnskabskort(&$DATA) {
-  htm_Rude_Top($name= 'kortform',$capt= '@Regnskabskort:',$parms='../_system/page_Syssetup1.php',$icon='fa-pencil-square-o','panelW480',__FUNCTION__); 
+  htm_Rude_Top($name= 'kortform',$capt= '@Regnskabskort:',$parms='../_system/page_Syssetup.php',$icon='fa-pencil-square-o','panelW480',__FUNCTION__); 
   echo tolk('@Fastlæg 1. regnskabsår: 2016').'<br><br>';
   $besk='2016'; $aar0='2016'; $md0='01'; $aar1='2016'; $md1='12'; $aktiv=true; 
   echo '<colrlabl>';
@@ -1471,7 +1477,7 @@ function Rude_Kontrolspor(&$Data) {global $Ønovice;
 
 # PROGRAM-MODUL;
 function Rude_Formularer( &$formtype, &$formart, &$formsprog) {
-  htm_Rude_Top($name= 'formularform',$capt= '@Formularstyring',$parms='../_system/page_Syssetup1.php',$icon='fa-wrench','panelW240',__FUNCTION__);
+  htm_Rude_Top($name= 'formularform',$capt= '@Formularstyring',$parms='../_system/page_Syssetup.php',$icon='fa-wrench','panelW240',__FUNCTION__);
   htm_OptioFlt($type='text',  $name='formtype',   $valu= $formtype, 
                     $labl='@Formular',      
                     $titl='@Vælg en Formular som du vil redigere',  

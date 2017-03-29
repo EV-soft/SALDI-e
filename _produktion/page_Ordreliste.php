@@ -1,15 +1,22 @@
-<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';     $DocRev='2016-08-00';
-// Formål:  Kald til ufærdigt link
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-
+<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';     $DocRev='2017-03-00';
+/*  FormÃ¥l:  Se Produktions ordrer
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ */
   $pageTitl='Produktions ordrer';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
     
+### INDLÃ†S DATA:
+
+### VIS DATA:
     Rude_Blindgyde(); 
+
+### GEM DATA:
 
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

@@ -321,7 +321,7 @@ if ($konto_id) $udvaelg=$udvaelg."and konto_id=$konto_id";
 $r= sql_readB("select count(id) as antal from ordrer where (art = 'DO' or art = 'DK' or (art = 'PO' and konto_id > '0')) and $status $udvaelg",__FILE__, __LINE__);  //   Vis_Data($r);
       ##? $r=db_fetch_array(db_select("select count(id) as antal from ordrer where (art = 'DO' or art = 'DK' or (art = 'PO' and konto_id > '0')) and $status $udvaelg",__FILE__ . " linje " . __LINE__));
 $TablData= $r;
-var_dump($r);
+//  var_dump($r);
 $antal=$r['antal'];
 
 ##- print " </td></tr>\n<tr><td align=center valign=top>";

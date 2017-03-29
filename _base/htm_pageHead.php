@@ -66,7 +66,7 @@
   echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'css/meter-style.css" emne="PassWord-styrke måler">'; 
   echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_base.'out_style.css.php"     emne="out_modulers style">'; /* _base/ */
   if ($pageTitl!= 'Hovedmenu')  { include($ØProgRoot.$_base.'htm_TopMenu-head.htm');} # TopMenu-CSS  /* _base/ */
-  include("piwik.php");
+#  include("piwik.php");
  /*  $body = $("body");
   $(document).on({ ajaxStart: function() { $body.addClass("loading"); }, ajaxStop: function() { $body.removeClass("loading"); } });
   */ 

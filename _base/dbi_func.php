@@ -350,48 +350,50 @@ if (!function_exists('dbi_connect')) ##  $fraF og $fraL angår __FILE__ og __LIN
 /* close connection */
   function dbi_DBclose($Ødb_Link, $fraF='', $fraL='') {global $Ødb_Type;                  
     if ($Ødb_Type=='mysql') { return mysqli_close($Ødb_Link);                                                                       
-    } else {  };  // "postgres"
+    } else { return pg_close($Ødb_Link); };  // "postgres"
   }
   
   // dbi_modify()   mysqli_num_rows()
   
   
 ### Kombinerede:  Ikke nødvendig, men praktisk opdeling:    CRUD:   Create Read Update Delete
-#   sql_creat: "create", "insert", "add"    
-#   sql_read*: "select"     
-#   sql_write: "modify", "update", "alter"    
-#   sql_erase: "delete", "drop"
 
-  function sql_creat($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   /* db_modify */
+  function sql_creat($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "CREATE", "INSERT", "ADD"    /* db_modify */
     if ($Ødb_Type=='mysql') { return $Qresult= mysqli_query($Ødb_Link, $qstr);
     } else { /* "postgres" */ return pg_query($qstr);}  // 
   }
   
-  function sql_readA($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;
-    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr),MYSQLI_ASSOC, $fraF='', $fraL='');
+  function sql_readA($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
+    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_ASSOC, $fraF='', $fraL='');
     } else {  // "postgres"
     };  
   }
   
-  function sql_readN($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;
+  function sql_readN($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
     if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_NUM, $fraF='', $fraL='');
-    } else {return pg_num_rows($qstr);};  // "postgres"
+    } else {return pg_num_rows($qstr);};  // "postgres"  pg_num_fields($qstr);?
   }
   
-  function sql_readB($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;
+  function sql_readB($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
     if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_BOTH, $fraF='', $fraL='');
     } else {  // "postgres"
     };  
   }
   
-  function sql_write() {global $Ødb_Link, $Ødb_Type;
-  }
+  function sql_write() {global $Ødb_Link, $Ødb_Type;                            //  "MODIFY", "UPDATE", "ALTER"  
+    if ($Ødb_Type=='mysql') {
+    } else {  // "postgres"
+    };  
+ }
   
-  function sql_erase() {global $Ødb_Link, $Ødb_Type;
+  function sql_erase() {global $Ødb_Link, $Ødb_Type;                            //  "DELETE", "DROP"
+    if ($Ødb_Type=='mysql') {
+    } else {  // "postgres"
+    };  
   }
   
   function Vis_Data($arr) {
-    foreach ($arr as $a) {echo "<br>"; for ($i= 0; $i<= count($a); $i++) echo $a[$i].' '; echo "<br>"; } 
+    if ($arr) foreach ($arr as $a) {echo "<br>"; for ($i= 0; $i<= count($a); $i++) echo $a[$i].' '; echo "<br>"; } 
   }
 }
 

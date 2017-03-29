@@ -8,11 +8,14 @@
  * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
  */
+ global $Ødb_Link;
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'htm_pageFoot');
   echo '    <script src="../_assets/jquery/2/v214.jquery.min.js"></script><!-- SKAL indlæses før out_javascr.js! -->';
   echo '    <script src="../_assets/js/out_javascr.js"></script>';
-  echo '    <script src="../_assets/js/pw-strength.js"></script>                    <!--  PassWord-styrke måler -->';
-  echo '    <script src="../_assets/js/4.3.0.dk.zxcvbn.js"></script>                <!--  PassWord-styrke måler -->';
+  if ($Ødb_Link==false) {
+    echo '    <script src="../_assets/js/pw-strength.js"></script>                    <!--  PassWord-styrke måler -->';
+    echo '    <script src="../_assets/js/4.3.0.dk.zxcvbn.js"></script>                <!--  PassWord-styrke måler -->';    /*  Belaster indlæsning med 600+ ms */
+  };
   echo '    <!-- echo \'<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>\'; -->';
   echo '    <script src="../_assets/js/pw-cleartext.js"></script>';
   echo '    <script src="../_assets/js/jquery.formnavigation.js"></script>';

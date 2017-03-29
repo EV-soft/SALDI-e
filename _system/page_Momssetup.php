@@ -1,5 +1,5 @@
 <?php   $DocFil= '../_base/page_Syssetup1.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-/* ## Formål: Indstilling af MOMS                                       
+/* ## FormÃ¥l: Indstilling af MOMS                                       
  *             ___   _   _    ___  _         
  *            / __| /_\ | |  |   \| |   ___ 
  *            \__ \/ _ \| |__| |) | |__/ -_)
@@ -13,7 +13,7 @@
   $pageTitl='Indstil: Moms';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
-### INDLÆS DATA:
+### INDLÃ†S DATA:
 
 ### VIS DATA:
     SpalteTop(240); Rude_AdminMenu();
@@ -21,6 +21,6 @@
     SpalteBund();
 ### GEM DATA:
  
-//  Til sidst indlæses java-scripter:   
+//  Til sidst indlÃ¦ses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

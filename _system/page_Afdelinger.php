@@ -1,5 +1,5 @@
 <?php   $DocFil= '../_systemdata/page_Afdelinger.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-// Formål: Redigering af Afdelinger                                       
+// FormÃ¥l: Redigering af Afdelinger                                       
 //             ___   _   _    ___  _         
 //            / __| /_\ | |  |   \| |   ___ 
 //            \__ \/ _ \| |__| |) | |__/ -_)
@@ -10,8 +10,8 @@
 
   $pageTitl='Indstil: Afdelinger';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Afdelinger');
-### INDLÆS DATA:
+  if ($GLOBALS["Ã˜debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Afdelinger');
+### INDLÃ†S DATA:
 
 ### VIS DATA:
     SpalteTop(240); Rude_AdminMenu();
@@ -20,6 +20,6 @@
 ### GEM DATA:
  
   
-//  Til sidst indlæses java-scripter:   
+//  Til sidst indlÃ¦ses java-scripter:   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>

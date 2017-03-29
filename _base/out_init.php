@@ -14,7 +14,7 @@
  */
  
  //set_include_path(get_include_path(). PATH_SEPARATOR. '/saldi-e/_config/'. PATH_SEPARATOR. '/_base'. PATH_SEPARATOR. '/_base/_admin');
- if ($GLOBALS["Ødebug"]) echo "SøgePath: ".get_include_path()."<br>";
+ //if ($GLOBALS["Ødebug"]) echo "SøgePath: ".get_include_path()."<br>";
  
 #   Konfigurerering af DB-forbindelse:
    if ((!file_exists("../_config/connect.php")) or (filesize("../_config/connect.php")==0)) {
