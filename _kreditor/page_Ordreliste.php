@@ -16,7 +16,7 @@
     #Rude_Blindgyde(); 
     # Head_Navigation(tolk('@Leverandører'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
     Rude_Kreditorer();  # Demo!
-    Rude_FootMenu();
+//    Rude_FootMenu();
 
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?> 

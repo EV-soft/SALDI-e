@@ -19,7 +19,7 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   skilleLin();
   $kontonr= ''; $kategori= ''; $cvrnr= ''; $eannr= ''; $bankreg= ''; $bankkto= ''; $instit= ''; $ansv= ''; $formsprog= ''; $homeweb= '';
   Rude_KreditorKort($kontonr, $kategori, $cvrnr, $eannr, $bankreg, $bankkto, $instit, $ansv, $formsprog, $homeweb);
-  Rude_FootMenu();
+//  Rude_FootMenu();
   
   include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

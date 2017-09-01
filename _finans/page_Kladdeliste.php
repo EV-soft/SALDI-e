@@ -1,14 +1,17 @@
-<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-02-00';   $modulnr=0;
-// Formål:  
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-// LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
-//
-// 2016.08.00 ev - EV-soft
-
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-08-00';   $modulnr=0;
+/* Formål:  Rediger kladder
+ * Denne fil er oprettet af EV-soft  i 2017.
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ * 2016.08.00 evs - EV-soft
+ *
+ */
+ 
   $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
@@ -41,6 +44,7 @@
   #$query = db_select("select * from kladdeliste where bogfort = '-' $user order by $sort $rf",__FILE__ . " linje " . __LINE__);
 
 ### VIS DATA:
+dvl_ekko(' page_Kladdeliste 1 ');
   Rude_Kladderedigering();
 ### GEM DATA:
   

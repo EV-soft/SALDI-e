@@ -152,11 +152,17 @@ div#container
 {
    width: 128px;
    padding: 5px 5px 4px 5px;
-   background-image: none;
+   /* background-image: none; */
+	 background-image: url(../_assets/images/Arrow_Drop_Right.png);
+   background-repeat: no-repeat;
+   background-position: right top;
 }
 #wb_TopMenu ul ul :hover a.withsubmenu, #wb_TopMenu ul ul a.withsubmenu:hover, #wb_TopMenu ul ul :hover ul :hover a.withsubmenu, #wb_TopMenu ul ul a.withsubmenu:hover a.withsubmenu:hover
 {
-   background-image: none;
+   /* background-image: none; */
+	 background-image: url(../_assets/images/Arrow_Drop_Right.png);
+   background-repeat: no-repeat;
+   background-position: right top;
 }
 #wb_TopMenu ul :hover ul ul, #wb_TopMenu ul :hover ul :hover ul ul
 {

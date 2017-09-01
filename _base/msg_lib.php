@@ -1,4 +1,4 @@
-﻿<?php   $DocFil= '../includes/msg_lib.php';   $DocVer='5.0.0';    $DocRev='2017-03-00';   $modulnr=0; 
+﻿<?php   $DocFil= '../_base/msg_lib.php';   $DocVer='5.0.0';    $DocRev='2017-03-00';   $modulnr=0; 
 /* ## Formål: Dialog system baseret på CSS og jquery
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
@@ -45,6 +45,7 @@ function msg_Dialog ($BgColr= 'error',
   if ($messg=='') $messg='<p>Dette er en CSS baseret modal dialog, som kan benyttes til at vise information. '.
       'Vinduet kan flyttes og strækkes, samt lukkes med \'x\' icon. <br>'.
       '<br>Knapperne forneden kan programmeres, med valgfri kode.</p>';
+  if (false) $messg.= str_nl(1).'<strong>Jquery er ikke i drift, derfor vises simpel tekst!</strong>';
 # CODE: (don't change!)
 switch (strtolower($BgColr)) {  # TEMA-farver og Titel-prefix:
     case "error"  : $headcolr= '#FF8888'; $pref= ucfirst(tolk('@Fejl: '));      break;   # color: red
@@ -102,19 +103,19 @@ switch (strtolower($BgColr)) {  # TEMA-farver og Titel-prefix:
 
 ## Almindelige af-arter:
 function msg_Error($title='Fejl',     $messg='Besked') {
-  msg_Dialog('error',   tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+  msg_Dialog('error',   tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk($title)),ucfirst(tolk($messg)));  
 }
 function msg_Info($title='Info',      $messg='Besked') {
-  msg_Dialog('info',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+  msg_Dialog('info',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk($title)),ucfirst(tolk($messg)));  
 }
 function msg_Warn($title='Advarsel',  $messg='Besked') {
-  msg_Dialog('warn',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+  msg_Dialog('warn',    tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk($title)),ucfirst(tolk($messg)));  
 }
 function msg_Tip($title='Tip',        $messg='Besked') {
-  msg_Dialog('tip',     tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+  msg_Dialog('tip',     tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk($title)),ucfirst(tolk($messg)));  
 }
 function msg_Succ($title='Hurra',     $messg='Besked') {
-  msg_Dialog('success', tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk($title),tolk($messg));  
+  msg_Dialog('success', tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk($title)),ucfirst(tolk($messg)));  
 }
 
 ?>

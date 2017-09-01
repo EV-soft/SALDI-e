@@ -1,4 +1,4 @@
-<?php   $DocFil= '../base/page_Layoutdemo.php';    $DocVer='5.0.0';    $DocRev='2016-10-00';   $ModulNr=2;
+<?php   $DocFil= '../base/page_Layoutdemo.php';    $DocVer='5.0.0';    $DocRev='2017-04-00';   $ModulNr=0;
 //  DEMO af ny version af SALDI                                        
 //             ___   _   _    ___  _         
 //            / __| /_\ | |  |   \| |   ___ 
@@ -26,20 +26,19 @@
   $Ødebug= true;
   $pageTitl='DEMO af SALDI-€';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-  include_once("../_base/out_vinduer.php");  # Sidens indledende html-kode
-# echo '<script LANGUAGE="JavaScript"><!--function MasseFakt(tekst){ var agree = confirm(tekst);  if (agree) return true ;  else return false ;} // --></script>';
-# if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,$ModulNr,'Dette er DEMO-vinduet.');
+  include("../_base/out_vinduer.php");  # Sidens indledende html-kode
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,$ModulNr,'Dette er DEMO-vinduet.');
     
   msg_Dialog('info',
   ucfirst(tolk('@Fortsæt')),'$jQ112(this).dialog("close")','','','','',ucfirst(tolk('@Velkommen til SALDI-DEMO')),
   tolk('@Her kan du se en demonstration af et forslag til en modernisering af SALDI.').'<br><br>'.
   tolk('@Systemet er baseret på CSS, og er med responsive design, som er velegnet til mobile enheder. ').'<br><br>'.
-  tolk('@Der er fuld understøttelse til at skifte sprog for program-fladen og i denne demo, kan der skiftes mellem dansk-engelsk-tysk-fransk-spansk-tyrkisk.').'<br><br>'.
+  tolk('@Der er fuld understøttelse til at skifte sprog for program-fladen og i denne demo, kan der skiftes mellem dansk-engelsk-tysk-fransk-spansk-tyrkisk-polsk-italiensk.').'<br><br>'.
   tolk('@Denne dialogbox er universal for: info-error-tip-warn-success beskeder. Du kan flytte den og ændre størrelse ved at trække i kanterne.'));
 
   vindue_Intro();
   vindue_Connect();
-  vindue_InstallResult($db_navn,$adm_navn,$noskriv='includes');
+  vindue_InstallResult($db_navn,$adm_navn,$noskriv='_config');
   vindue_Formaal();
   vindue_GitterMenu();
   vindue_Ordreblanket(true);

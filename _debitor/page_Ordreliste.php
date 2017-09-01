@@ -1,14 +1,15 @@
-<?php      $DocFil= '../_debitor/page_Ordreliste.php';   $DocVer='5.0.0';     $DocRev='2017-02-00';      $modulnr=5;
-// Formål:  Vis debitor ordrer.
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-// LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
-//
-// 2016.08.00 ev - EV-soft
-
+<?php $DocFil= '../_debitor/page_Ordreliste.php';   $DocVer='5.0.0';  $DocRev='2017-04-00';  $modulnr=5;
+/* FORMÅL: Vis debitor ordrer.
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ * 2016.08.00 ev - EV-soft
+ */
+ 
 $pageTitl='Salgs ordrer';
 include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
 if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
@@ -44,17 +45,17 @@ $find=array();                                                                  
 # include("../includes/udvaelg.php");
 
 ### OPDATER VARIABLE:
-//- function htm_GetVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = if_isset($_GET[$name]); }}
+//- function htm_GetVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = Øif_isset($_GET[$name]); }}
 
-htm_GetVariabler(['id','konto_id','returside','valg','sort','nysort','kontoid','genberegn','start']);     //  $id = if_isset($_GET['id']);
-$valg= strtolower($valg);                                                                                 //  $konto_id = if_isset($_GET['konto_id']);
-                                                                                                          //  $returside=if_isset($_GET['returside']);
-                                                                                                          //  $valg= strtolower(if_isset($_GET['valg']));
-                                                                                                          //  $sort = if_isset($_GET['sort']);
-                                                                                                          //  $nysort = if_isset($_GET['nysort']);
-                                                                                                          //  $kontoid= if_isset($_GET['kontoid']);
-                                                                                                          //  $genberegn = if_isset($_GET['genberegn']);
-                                                                                                          //  $start = if_isset($_GET['start']);
+htm_GetVariabler(['id','konto_id','returside','valg','sort','nysort','kontoid','genberegn','start']);     //  $id = Øif_isset($_GET['id']);
+$valg= strtolower($valg);                                                                                 //  $konto_id = Øif_isset($_GET['konto_id']);
+                                                                                                          //  $returside=Øif_isset($_GET['returside']);
+                                                                                                          //  $valg= strtolower(Øif_isset($_GET['valg']));
+                                                                                                          //  $sort = Øif_isset($_GET['sort']);
+                                                                                                          //  $nysort = Øif_isset($_GET['nysort']);
+                                                                                                          //  $kontoid= Øif_isset($_GET['kontoid']);
+                                                                                                          //  $genberegn = Øif_isset($_GET['genberegn']);
+                                                                                                          //  $start = Øif_isset($_GET['start']);
 
 if (!$returside && $konto_id && !$popup) $returside="debitorkort.php?id=$konto_id";
 
@@ -123,17 +124,17 @@ if (!$returside) {
     
 $tidspkt=date("U");
  
-//- function htm_PostVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = if_isset($_POST[$name]); }}
+//- function htm_PostVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = Øif_isset($_POST[$name]); }}
 
-if ($submit=if_isset($_POST['submit'])) {
+if ($submit=Øif_isset($_POST['submit'])) {
   if (strstr($submit, "Genfaktur")) $submit="Genfakturer"; ## Fejl her?
-  htm_PostVariabler(['find','valg','sort','nysort','firma','kontoid']);   //  $find=if_isset($_POST['find']);
-                                                                          //  $valg=if_isset($_POST['valg']);
-                                                                          //  $sort = if_isset($_POST['sort']);
-                                                                          //  $nysort = if_isset($_POST['nysort']);
-                                                                          //  $firma=if_isset($_POST['firma']);
-                                                                          //  $kontoid=if_isset($_POST['kontoid']);
-  $firmanavn_ant=if_isset($_POST['firmanavn_antal']); ## Fejl her?
+  htm_PostVariabler(['find','valg','sort','nysort','firma','kontoid']);   //  $find=Øif_isset($_POST['find']);
+                                                                          //  $valg=Øif_isset($_POST['valg']);
+                                                                          //  $sort = Øif_isset($_POST['sort']);
+                                                                          //  $nysort = Øif_isset($_POST['nysort']);
+                                                                          //  $firma=Øif_isset($_POST['firma']);
+                                                                          //  $kontoid=Øif_isset($_POST['kontoid']);
+  $firmanavn_ant=Øif_isset($_POST['firmanavn_antal']); ## Fejl her?
 }
 
 if (!$valg) $valg = "ordrer";
@@ -148,9 +149,9 @@ if ($valg=="tilbud") {$status="status = 0";}
 ##?     if (db_fetch_array(db_select("select distinct id from ordrer where projekt > '0' and $status",__FILE__ . " linje " . __LINE__))) $vis_projekt='on';
 
 ##- if ($submit=="Udskriv" || $submit=="Send mails"){
-##-   htm_PostVariabler(['ordre_antal','ordre_id','checked']);      //  $ordre_antal = if_isset($_POST['ordre_antal']);
-##-                                                                 //  $ordre_id = if_isset($_POST['ordre_id']);
-##-                                                                 //  $checked = if_isset($_POST['checked']);
+##-   htm_PostVariabler(['ordre_antal','ordre_id','checked']);      //  $ordre_antal = Øif_isset($_POST['ordre_antal']);
+##-                                                                 //  $ordre_id = Øif_isset($_POST['ordre_id']);
+##-                                                                 //  $checked = Øif_isset($_POST['checked']);
 ##-   for ($x=1; $x<=$ordre_antal; $x++){
 ##-     if ($checked[$x]=="on") {
 ##-       $y++;
@@ -166,15 +167,15 @@ if ($valg=="tilbud") {$status="status = 0";}
 ##- }
 
 ##- if (isset($_POST['check'])||isset($_POST['uncheck'])) {
-##-   htm_PostVariabler(['ordre_antal','ordre_id']);                //  $ordre_antal = if_isset($_POST['ordre_antal']);
-##-                                                                 //  $ordre_id = if_isset($_POST['ordre_id']);
+##-   htm_PostVariabler(['ordre_antal','ordre_id']);                //  $ordre_antal = Øif_isset($_POST['ordre_antal']);
+##-                                                                 //  $ordre_id = Øif_isset($_POST['ordre_id']);
 ##-   if (isset($_POST['check'])) $check_all='on';
 ##- }
 
 ##- if ($submit=="Genfakturer" || $submit=="Ret"){
-##-   htm_PostVariabler(['ordre_antal','ordre_id','checked']);      //  $ordre_antal = if_isset($_POST['ordre_antal']);
-##-                                                                 //  $ordre_id = if_isset($_POST['ordre_id']);
-##-                                                                 //  $checked = if_isset($_POST['checked']);
+##-   htm_PostVariabler(['ordre_antal','ordre_id','checked']);      //  $ordre_antal = Øif_isset($_POST['ordre_antal']);
+##-                                                                 //  $ordre_id = Øif_isset($_POST['ordre_id']);
+##-                                                                 //  $checked = Øif_isset($_POST['checked']);
 ##-   for ($x=1; $x<=$ordre_antal; $x++){
 ##-     if ($checked[$x]=="on") {
 ##-       $y++;
@@ -358,7 +359,7 @@ function bold($dat,$head='',$tail='&nbsp;&nbsp;') {return $head.'<b>'.$dat.'</b>
   Rude_DebtOrdrer($TablData);  # Demo! array(['Ordrenr.','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],... []); "ordrenr,ordredate,levdate,kontonr,firmanavn,ref,sum"
   Rude_YdelserTabl($Ordnr='',$data,$fakt=false,'&nbsp;'.tolk('@Ordre nr:').bold('1250').'Ordre dato:'.bold('2017-03-16').
     'Lev. dato:'.bold('2017-03-22').' - Konto nr:'.bold('201703').'Firma navn:'.bold('Danosoft').'Sælger:'.bold('Rup') );
-  Rude_FootMenu();
+//  Rude_FootMenu();
   SpalteBund();
   
 ### GEM DATA:

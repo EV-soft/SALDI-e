@@ -1,28 +1,22 @@
-<?php $DocFil= '../_finans/page_Rapport.php'; $DocVer='5.0.0';  $DocRev='2017-01-00';
-/* Formål:  Se finans rapport
+<?php      $DocFil= '../_base/page_tips.php';    $DocVer='5.0.0';     $DocRev='2017-06-00';
+/* FORMÅL:  Omtale af program nyheder
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            |___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
- *
- * 2016.08.00 evs - EV-soft
- *
  */
- 
-  $pageTitl= 'Rapport';  # tolk('Rapport');
+
+  $pageTitl='Bruger tips';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
-  $Data=  array( ['1',''], );
 
 ### VIS DATA:
-  # Head_Navigation($pageTitl, $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
-  SpalteTop(480);   Rude_RapportFinans();
-  NextSpalte();     Rude_Rapportliste();  
-  SpalteBund();
-  # Rude_Kontrolspor($Data);
-  # Rude_FootMenu();
+    SpalteTop(480);   Rude_TipsBrug();   
+    NextSpalte();     Rude_TipsBogh();
+    SpalteBund();
     
 ### GEM DATA:
     

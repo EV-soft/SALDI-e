@@ -29,8 +29,8 @@ if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'out_-system
 
 
 <?php  
-include('../_base/version.php');
-if (!function_exists('msg_Dialog')) {include('../_base/msg_lib.php');};
+include '../_base/version.php';
+if (!function_exists('msg_Dialog')) {include '../_base/msg_lib.php';};
 
 // ----------- Funktioner ang. vinduer:
 

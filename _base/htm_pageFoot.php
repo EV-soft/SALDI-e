@@ -21,7 +21,7 @@
   echo '    <script src="../_assets/js/jquery.formnavigation.js"></script>';
   echo '    <div class="modal"><!-- Place at bottom of page --></div>';
   echo '    <script> $(document).ready(function () { $(".formnavi").formNavigation(); }); </script>';
+  echo '    <script type="text/javascript">$("#container").css("opacity", 0); $(window).load(function() {  $("#container").css("opacity", 1);});</script>';
   echo '  </body>';
-  echo '<script type="text/javascript">$("#container").css("opacity", 0); $(window).load(function() {  $("#container").css("opacity", 1);});</script>';
   echo '</html>';
 ?>
