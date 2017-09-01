@@ -291,7 +291,7 @@ function Rude_install(&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password,
   if (extension_loaded('mysqli'))     {if ($link= mysqli_connect("")) {$mq= 'checked'; mysqli_close($link);} else $mq= '';} else $mq= '';
   // Warning: mysqli_connect() [function.mysqli-connect]: (HY000/2002): No such file or directory in /var/www/advokatfirmaet-viuff.dk/saldi-e/_base/out_ruder.php on line 256
   if (extension_loaded('PostgreSQL')) {if (pg_connect(""))            {$pg= 'checked'; pg_close();}          else $pg= '';} else $pg= '';
-  $sec = isSecure();
+  $sec = ØisSecure();
   htm_Rude_Top($name='opret',$capt= '@Installations forberedelse',$parms='../_base/_admin/ini_CreateDB.php',$icon='fa-wrench',$klasse='panelW320',__FUNCTION__);
  echo '<div style="text-align:left"><small>'.'<b>'.
       tolk('@Nødvendig forberedelse:').'</b><br> '.
@@ -303,7 +303,7 @@ function Rude_install(&$db_type,&$db_encode,&$db_navn,&$db_bruger,&$db_password,
   htm_CheckFlt($type='checkbox',$name='mysql',    $valu= '',  $labl='@MySQL findes.', $titl='@Systemet kontrollerer om modulet er tilgængeligt. (skal testes!)',  $revi=false, $more=' '.$mq);
   htm_LastFelt();
   echo '<hr>'.tolk('@Hvis systemet ikke køres på lokalnet, bør det ske via en sikker krypteret forbindelse:').'<br/>';
-  htm_CheckFlt($type='checkbox',$name='https',  $valu= isSecure(),  $labl='@HTTPS er aktiv.', $titl='@Systemet kontrollerer om HTTPS er benyttet. (skal testes!)',  $revi=false, $more=' '.$sec);
+  htm_CheckFlt($type='checkbox',$name='https',  $valu= ØisSecure(),  $labl='@HTTPS er aktiv.', $titl='@Systemet kontrollerer om HTTPS er benyttet. (skal testes!)',  $revi=false, $more=' '.$sec);
   echo '</div><hr>'.
       tolk('@Pakken med').$ØProgTitl.'-'.tolk('@filer, udpakkes i en program mappe, med adgang for webbesøgende. Navngiv den: saldi-e').'<br><br>'.
       tolk('@Der skal være skriveadgang til 4 under-mapper:').'<br>';
