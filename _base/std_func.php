@@ -1,18 +1,20 @@
-<?php      $DocFil= '../includes/std_func.php';   $DocVer='5.0.0';     $DocRev='2016-08-00';      $modulnr=0;
-// Formål:  Kald til ufærdigt link
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
-//
-// 2016.08.00 ev - EV-soft
+<?php $DocFil= '../_base/std_func.php';   $DocVer='5.0.0';  $DocRev='2017-04-00';   $modulnr=0;
+/*  FORMÅL:  Almene funktioner f.eks. ang. datavisning
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ * 2016.08.00 ev - EV-soft
+ */
+//  Prefix: Ø på alle functioner, for at tilkendegive, at de er anvendt globalt ?.
 
-if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
+if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'StandardRutiner');
 
-if (!function_exists('nr_cast')) {
-  function nr_cast($tekst)
+if (!function_exists('Ønr_cast')) {
+  function Ønr_cast($tekst)
   {
     global $db_type;
       if ($db_type=='mysql') $tmp = "CAST($tekst AS SIGNED)";
@@ -20,8 +22,8 @@ if (!function_exists('nr_cast')) {
     return $tmp;
   }
 }
-if (!function_exists('dkdecimal')) {
-  function dkdecimal($tal,$decimaler) {
+if (!function_exists('Ødkdecimal')) {
+  function Ødkdecimal($tal,$decimaler) {
     if (!$decimaler && $decimaler!='0') $decimaler=2;
     if (is_numeric($tal)) { 
       if ($tal) $tal=afrund($tal,$decimaler); #Afrunding tilfoejet 2009.01.26 grundet diff i ordre 98 i saldi_104
@@ -31,8 +33,8 @@ if (!function_exists('dkdecimal')) {
   }
 }
 
-if (!function_exists('dkdato')) {
-  function dkdato($dato)
+if (!function_exists('Ødkdato')) {
+  function Ødkdato($dato)
   {
     if ($dato) {
       list ($year, $month, $day) = explode('-', $dato);
@@ -45,12 +47,12 @@ if (!function_exists('dkdato')) {
     }
   }
 }
-if (!function_exists('if_isset')) {
-  function if_isset(&$var) { return isset($var)? $var:NULL; }
+if (!function_exists('Øif_isset')) {
+  function Øif_isset(&$var) { return isset($var)? $var:NULL; }
 }
 
-if (!function_exists('usdate')) {
-  function usdate($date) 
+if (!function_exists('Øusdate')) {
+  function Øusdate($date) 
   {
     global $regnaar;
     $day=NULL;$month=NULL;$year=NULL; 
@@ -138,8 +140,8 @@ if (!function_exists('usdate')) {
     return $date;
   }
 }
-if (!function_exists('usdecimal')) {
-  function usdecimal($tal,$decimaler) {
+if (!function_exists('Øusdecimal')) {
+  function Øusdecimal($tal,$decimaler) {
     if (!$decimaler && $decimaler!='0') $decimaler=2;
     if (!$tal){
       $tal="0";
@@ -162,8 +164,8 @@ if (!function_exists('usdecimal')) {
     return $tal;
   }
 }
-if (!function_exists('findtekst')) {
-  function findtekst($tekst_id,$sprog_id) {
+if (!function_exists('Øfindtekst')) {
+  function Øfindtekst($tekst_id,$sprog_id) {
     global $db_encode;
     global $webservice;
     $ny_tekst=NULL;
@@ -216,13 +218,13 @@ if (!function_exists('findtekst')) {
     return ($tekst);
   }
 }
-if (!function_exists('javascript')) {
-  function javascript() {
+if (!function_exists('Øjavascript')) {
+  function Øjavascript() {
     
   }
 } 
-if (!function_exists('afrund')) {
-  function afrund($tal,$decimaler)
+if (!function_exists('Øafrund')) {
+  function Øafrund($tal,$decimaler)
   {
     # Korrigerer afrundingsfejl i php 
     $decimaler=$decimaler*1;  
@@ -235,8 +237,8 @@ if (!function_exists('afrund')) {
     return $tal;
   }
 }
-if (!function_exists('fjern_nul')) {
-  function fjern_nul($tal)
+if (!function_exists('Øfjern_nul')) {
+  function Øfjern_nul($tal)
   {
     #fjerner decimalnuller fra tal 
     if (strpos($tal,",")) {
@@ -248,8 +250,8 @@ if (!function_exists('fjern_nul')) {
     return $tal;
   }
 }
-if (!function_exists('bynavn')) {
-  function bynavn($postnr) {
+if (!function_exists('Øbynavn')) {
+  function Øbynavn($postnr) {
     global $db_encode;
   
     $fp=fopen("../importfiler/postnr.csv","r");
@@ -268,8 +270,8 @@ if (!function_exists('bynavn')) {
   }
 }
 
-if (!function_exists('felt_fra_tekst')) {
-  function felt_fra_tekst ($feltmatch, $tekstlinjer) {
+if (!function_exists('Øfelt_fra_tekst')) {
+  function Øfelt_fra_tekst ($feltmatch, $tekstlinjer) {
     $matchende_linjer = preg_grep("/$feltmatch/", $tekstlinjer);
     foreach ($matchende_linjer as $linje) {
       $retur = str_replace($feltmatch, "", $linje);
@@ -278,16 +280,16 @@ if (!function_exists('felt_fra_tekst')) {
   }
 }
 
-if (!function_exists('sidste_dag_i_maaned')) {
-  function sidste_dag_i_maaned ($aar, $maaned) {
+if (!function_exists('Øsidste_dag_i_maaned')) {
+  function Øsidste_dag_i_maaned ($aar, $maaned) {
     $maaned++;
     $retur = date("d", mktime(12, 0, 0, $maaned, 0, $aar));
     return $retur;
   }
 }
 
-if (!function_exists('farvenuance')) {
-  function farvenuance ($farve, $nuance) { # Notation for nuance: -33+33-33 eller -3+3-3
+if (!function_exists('Øfarvenuance')) {
+  function Øfarvenuance ($farve, $nuance) { # Notation for nuance: -33+33-33 eller -3+3-3
     global $bgcolor;
     
     if ( $bgcolor=="#" ) $bgcolor="#ffffff"; # 20141010 Hvis ingen bgcolor er angivet, så benyttes hvid som baggrund.
@@ -343,9 +345,9 @@ if (!function_exists('farvenuance')) {
   }
 }
 
-if (!function_exists('linjefarve')) {
-  #function linjefarve ($linjefarve, $ulige_bg, $lige_bg, $nuance = 0, $stdnuance = 0) {
-  function linjefarve ($linjefarve, $ulige_bg, $lige_bg, $stdnuance = 0, $nuance = 0) {
+if (!function_exists('Ølinjefarve')) {
+  #function Ølinjefarve ($linjefarve, $ulige_bg, $lige_bg, $nuance = 0, $stdnuance = 0) {
+  function Ølinjefarve ($linjefarve, $ulige_bg, $lige_bg, $stdnuance = 0, $nuance = 0) {
 
     if ( $linjefarve === $ulige_bg || $linjefarve === farvenuance($ulige_bg, $stdnuance) ) {
       if ( $nuance ) {
@@ -365,8 +367,8 @@ if (!function_exists('linjefarve')) {
   }
 }
 
-if (!function_exists('copy_row')) {
-  function copy_row($table,$id) {
+if (!function_exists('Øcopy_row')) {
+  function Øcopy_row($table,$id) {
     if (!$table || !$id) return('0');
     $r=0;$x=0;
     $fieldstring=NULL;
@@ -410,16 +412,16 @@ if (!function_exists('copy_row')) {
     return($ny_id);
   } # endfunc copy_row
 }
-if (!function_exists('reducer')) {
-  function reducer($tal){
+if (!function_exists('Øreducer')) {
+  function Øreducer($tal){
     while ((strpos($tal,".") || strpos($tal,",")) && ($tal && (substr($tal,-1,1)=='0' or substr($tal,-1,1)==',' or substr($tal,-1,1)=='.'))) {
       $tal=substr($tal,0,strlen($tal)-1);
     }
     return ($tal);
   }
 }
-if (!function_exists('transtjek')) {
-  function transtjek () {
+if (!function_exists('Øtranstjek')) {
+  function Øtranstjek () {
     global $db;
     $r=db_fetch_array(db_select("select sum(debet) as debet,sum(kredit) as kredit from transaktioner",__FILE__ . " linje " . __LINE__));
     $diff=abs(afrund($r['debet']-$r['kredit'],2));
@@ -431,8 +433,8 @@ if (!function_exists('transtjek')) {
     return($diff);
   }
 }
-if (!function_exists('cvrnr_omr')) {
-  function cvrnr_omr($landekode) {
+if (!function_exists('Øcvrnr_omr')) {
+  function Øcvrnr_omr($landekode) {
     $retur = "";
     if ( ! $landekode ) { 
       $retur = "";
@@ -471,8 +473,8 @@ if (!function_exists('cvrnr_omr')) {
     return $retur;
   }
 }
-if (!function_exists('cvrnr_land')) {
-  function cvrnr_land($cvrnr, $skat) {
+if (!function_exists('Øcvrnr_land')) {
+  function Øcvrnr_land($cvrnr, $skat) {
     $retur = "";
   
     $cvrnr = strtoupper($cvrnr);
@@ -496,8 +498,8 @@ if (!function_exists('cvrnr_land')) {
     return $retur;
   }
 }
-if (!function_exists('str2low')) {
-  function str2low($string) { global $db_encode;
+if (!function_exists('Østr2low')) {
+  function Østr2low($string) { global $db_encode;
     $string= strtolower($string);
     if ($db_encode=='UTF8') {
       $string= str_replace(chr(195).chr(134),chr(195).chr(166),$string);   # Ã †          Ã ¦
@@ -512,8 +514,8 @@ if (!function_exists('str2low')) {
   }
 }
 
-if (!function_exists('str2up')) {
-  function str2up($string) {  global $db_encode;
+if (!function_exists('Østr2up')) {
+  function Østr2up($string) {  global $db_encode;
     $string= strtoupper($string);
     if ($db_encode=='UTF8') {
       $string= str_replace(chr(195).chr(166),chr(195).chr(134),$string);
@@ -532,8 +534,8 @@ if (!function_exists('str2up')) {
 }
 
 
-if (!function_exists('find_varemomssats')) {
-  function find_varemomssats($linje_id) {
+if (!function_exists('Øfind_varemomssats')) {
+  function Øfind_varemomssats($linje_id) {
     global $regnaar;
 
     $r=db_fetch_array(db_select("select ordre_id,vare_id,momsfri,omvbet from ordrelinjer where id='$linje_id'",__FILE__ . " linje " . __LINE__));
@@ -577,8 +579,8 @@ if (!function_exists('find_varemomssats')) {
 }
 
 
-if (!function_exists('find_lagervaerdi')) {
-function find_lagervaerdi($kontonr,$slut,$tidspkt) {
+if (!function_exists('Øfind_lagervaerdi')) {
+function Øfind_lagervaerdi($kontonr,$slut,$tidspkt) {
   global $regnaar;
   $x=0;
   $lagervaerdi=0;
@@ -633,8 +635,8 @@ function find_lagervaerdi($kontonr,$slut,$tidspkt) {
 }
 
 // Funktion som laver uppercase på første bogstav i streng. Virker som php funktion 'ucfirst', men med æøå
-if (!function_exists('mb_ucfirst')) {
-  function mb_ucfirst($str, $encoding='UTF-8') {
+if (!function_exists('Ømb_ucfirst')) {
+  function Ømb_ucfirst($str, $encoding='UTF-8') {
     $firstChar = mb_substr($str, 0, 1, $encoding);
     $then = mb_substr($str, 1, mb_strlen($str, $encoding)-1, $encoding);
     return mb_strtoupper($firstChar, $encoding) . $then;
@@ -642,38 +644,38 @@ if (!function_exists('mb_ucfirst')) {
 }
 
 // Funktion som laver uppercase på første bogstav i alle ord i strengen. Virker som php funktion 'ucwords', men med æøå
-if (!function_exists('mb_ucwords')) {
-  function mb_ucwords($str) {
+if (!function_exists('Ømb_ucwords')) {
+  function Ømb_ucwords($str) {
     return mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
   }
 }
-if (!function_exists('ftptest')) {
-  function ftptest($server,$bruger,$kode) {
+if (!function_exists('Øftptest')) {
+  function Øftptest($server,$bruger,$kode) {
     global $db;
     global $exec_path;
-    $fp=fopen("../temp/$db/test.txt","w");
+    $fp=fopen("../_temp/$db/test.txt","w");
     fwrite ($fp,"Hej der\n");
     fclose($fp);
-    $fp=fopen("../temp/$db/ftpscript1","w");
+    $fp=fopen("../_temp/$db/ftpscript1","w");
     fwrite ($fp,"set confirm-close no\nput test.txt\nbye\n");
     fclose($fp);
-    $kommando="cd ../temp/$db\n$exec_path/ncftp ftp://".$bruger.":".$kode."@".$server." < ftpscript1 > ftp1.log ";
+    $kommando="cd ../_temp/$db\n$exec_path/ncftp ftp://".$bruger.":".$kode."@".$server." < ftpscript1 > ftp1.log ";
     system ($kommando);
-    unlink ("../temp/$db/test.txt");
-    $fp=fopen("../temp/$db/ftpscript2","w");
+    unlink ("../_temp/$db/test.txt");
+    $fp=fopen("../_temp/$db/ftpscript2","w");
     fwrite ($fp,"set confirm-close no\nget test.txt\nbye\n");
     fclose($fp);
-    $kommando="cd ../temp/$db\n$exec_path/ncftp ftp://".$bruger.":".$kode."@".$server." < ftpscript2 > ftp2.log ";
+    $kommando="cd ../_temp/$db\n$exec_path/ncftp ftp://".$bruger.":".$kode."@".$server." < ftpscript2 > ftp2.log ";
     system ($kommando);
-    (file_exists("../temp/$db/test.txt"))?$txt="FTP tjek OK":$txt="Fejl i FTP oplysninger";
+    (file_exists("../_temp/$db/test.txt"))?$txt="FTP tjek OK":$txt="Fejl i FTP oplysninger";
     print "<BODY onLoad=\"JavaScript:alert('$txt')\">";
-    unlink ("../temp/$db/test.txt");
-    unlink ("../temp/$db/ftpscript1");
-    unlink ("../temp/$db/ftpscript2");
+    unlink ("../_temp/$db/test.txt");
+    unlink ("../_temp/$db/ftpscript1");
+    unlink ("../_temp/$db/ftpscript2");
   }
 }
-if (!function_exists('valutaopslag')) {
-function valutaopslag($amount, $valuta, $transdate) {
+if (!function_exists('Øvalutaopslag')) {
+function Øvalutaopslag($amount, $valuta, $transdate) {
   global $connection;
   global $fejltext;
   
@@ -693,8 +695,8 @@ function valutaopslag($amount, $valuta, $transdate) {
   return array($amount,$diffkonto,$kurs); # 3'die parameter tilfojet 2009.02.10
 }}
 
-if (!function_exists('regnstartslut')) {
-function regnstartslut($regnaar) {
+if (!function_exists('Øregnstartslut')) {
+function Øregnstartslut($regnaar) {
   $r=db_fetch_array(db_select("select * from grupper where art = 'RA' and kodenr = '$regnaar'",__FILE__ . " linje " . __LINE__));
   $startmd=$r['box1'];
   $startaar=$r['box2'];
@@ -707,8 +709,8 @@ echo "$regnstart $regnslut<br>";
 }}
 
 ######################################################################################################################################
-if (!function_exists('isSecure')) {
-function isSecure() {
+if (!function_exists('ØisSecure')) {
+function ØisSecure() {
   return
     (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
     || $_SERVER['SERVER_PORT'] == 443;

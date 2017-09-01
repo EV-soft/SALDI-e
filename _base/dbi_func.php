@@ -1,5 +1,6 @@
 <?php      $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';     $DocRev='2017-03-00';  # tidl: db_query.php
 /* ## Formål: Forbedrede DB-funktioner, kompatible med PHP7
+ * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -160,10 +161,10 @@ if (!function_exists('db_select')) {
     if (!file_exists("../_temp/$db")) mkdir("../_temp/$db", 0775);
     if ($Ødb_Type=="mysql")   $query="mysqli_query";    else $query="pg_query";
     if (!$Ødb_Link) {
-      $spor.= htm_nl().htm_Ihead('Function:').'db_select()'.htm_Ihead('File:'). __FILE__ .htm_Ihead('Line:'). __LINE__.htm_Ihead('Info:').'[$Ødb_Link==false]';
+      $spor.= str_nl().str_Ihead('Function:').'db_select()'.str_Ihead('File:'). __FILE__ .str_Ihead('Line:'). __LINE__.str_Ihead('Info:').'[$Ødb_Link==false]';
       msg_Dialog('error', tolk('@Retur'),'window.history.back();', '', '', '', '', 
             tolk('@Database problem'), 
-            tolk('@Afbryder! - fordi der ikke er oprettet forbindelse til databasen!').htm_nl(2).htm_hr().'Pos: '.$spor);
+            tolk('@Afbryder! - fordi der ikke er oprettet forbindelse til databasen!').str_nl(2).str_hr().'Pos: '.$spor);
       exit; 
     }
     if ($Ødb_Link!= 'SkjulFejl')
@@ -440,17 +441,17 @@ if (!function_exists('injecttjek')) {
 OVERSIGT over omdøbte 
 Tabeller - engelsk med prefix: tbl_*
 Indekser - prefix: ix_
-Tidligere:        Ny:
+Tidligere:        Ny:                                       - Kommentar:
 
 Ang.PROGRAM:
-brugere           tblP_users
-kundedata         tblP_customer
+brugere           tblP_users                                - Brugere af program-installationen
+kundedata         tblP_customers
 online            tblP_online
-regnskab          tblP_account
+regnskab          tblP_accounts
 revisor           tblP_auditor
 tekster           tblP_texts
 
-Ang.regnskab (ACCOUNT):               Rettet i ini_createDB:
+Ang.regnskab (ACCOUNT):               Rettet i ../_base/_admin/ini_CreateDB.php:
 adresser          tblA_adress             tbl
 ansatmappe        tblA_employ_folder      tbl
 ansatmappebilag   tblA_employ_appendix    tbl
@@ -460,7 +461,7 @@ batch_salg        tblA_batch_sale         tbl    ix
 betalinger        tblA_payments           tbl
 betalingsliste    tblA_payment_list       tbl
 bilag             tblA_appendix           tbl
-brugere           tblA_users              tbl
+brugere           tblA_users              tbl               - Brugere af regnskabet
 budget            tblA_budget             tbl
 crm               tblA_crm                tbl
 enheder           tblA_units              tbl
@@ -523,6 +524,17 @@ vare_lev          tblA_product_deliver    tbl
 varianter         tblA_variants           tbl
 variant_typer     tblA_variant_typer      tbl
 variant_varer     tblA_variant_products   tbl
+
+Ang. feltnavne skal ART gøres entydig, så der skelnes mellem:
+art [text]                grp_art                                   - art i tabellen grupper/tblA_groups                DG  DIV DLV DRV EM  KASKL KG  KM  KRV MR  OLV 
+art [varchar(2)]          adr_art                                   - art i tabellen adresser/tblA_adress               S   D   K 
+art [int(11)]             frm_art                                   - art i tabellen formularer/tblA_forms              1   2   3  4...
+art [text]                job_art                                   - art i tabellen jobkort_felter/tblA_jobcard_felds
+art [text]                sly_art                                   - art i tabellen loen/tblA_salary
+art [varchar(2)]          ord_art                                   - art i tabellen ordrer/tblA_orders                 DO  
+debitorart [varchar(2)]   deb_art                                   - art i tabellen rabat/tblA_discount
+
+box*  kan ikke gøres entydige, da de indeholder forskellige data afhængig af art. 
 
  */
 ?>

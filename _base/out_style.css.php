@@ -3,6 +3,7 @@
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
 ?>
 /* ## Formål: Design af out_* elementers udseende.
+ * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -15,15 +16,30 @@
  * CSS-Layout af checkbox,textarea,input,label samt submit :
  *
  * Filer skal gemmes i UTF-8 format uden BOM!
- * 2016.08.00 ev - EV-soft
+ * 2016.08.00 evs - EV-soft
  */
 <?php 
-  global $ØPanelBgrd;
+  global $ØPanelBgrd, $ØPageBcgrd, $ØPageImage, $shadowBlur, $Øtema;
+/* 
   if ($ØPanelBgrd== '#D4FFFF')  {$ØPanelBgrd= '#FFFFD4';}  # Æggeskal
   else                          {$ØPanelBgrd= '#D4FFFF';}  # Turkis
-    $ØPanelBgrd= '#FFFFD4';    #              '#F9F8F8';   # Lysgrå
-  $ØPanelBgrd= '#EFEFEF';      #              '#FFFFFF';   # Hvid
+  $ØPanelBgrd= '#FFFFD4';      #              '#F9F8F8';   # Lysgrå
+  $ØPanelBgrd= '#EFEFEF';      #              '#EFEFEF';   # Brækket Hvid Tema-light
+  $ØPanelBgrd= '#565656';      #              '#565656';   # Mørkgrå      Tema-dark
+*/
+if (($_SESSION['Øtema']=='dark') or ($Øtema=='dark')) { // Virker tilsyneladende ikke !
+  $ØPanelBgrd= '#AAAA80';
+  $ØPageBcgrd= '#112233';
+  $shadowBlur= '0px';
+}
+else                {
+  $ØPanelBgrd= '#EFEFEF';
+  $ØPageBcgrd= '#F4FFF4';
+  $shadowBlur= '5px';
+}
+
 ?>
+
 /* PHP:
 highlight.comment #FF8000 Orange
 highlight.default #0000BB Blue
@@ -33,18 +49,20 @@ highlight.string  #DD0000 Red
 */
 
 /* FARVEPALETTE: (Central justering af benyttede nuancer) */
-:root{
+:root {
     --roedColor: #FF0000;   /* Statiske farvenuancer    */
     --guulColor: #F3F033;
     --grenColor: #336600; 
-    --grenColr1: #88DD00;
+    --grenColr1: #448800;   /* placeholder-text */
     --blueColor: #4479ff;
     --oranColor: #F37033;
     --brunColor: #550000;   /*  Tabel kanter  */
     --grayColor: #ACA9A8;
     --xx11Color: #3CBC8D;
-/*  --HintsBgrd: #FCFCCC;   /*  Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
-    --HintsBgrd: rgba(248, 248, 248, 1.0); /* Ingen transparens!    #FCFCCC;   /*  Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
+/*  --HintsBgrd: #FCFCCC;                  /* Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
+/*  --HintsBgrd: rgba(248, 248, 248, 1.0); /* Ingen transparens!    #FCFCCC;   /*  Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
+    --HintsBgrd: rgba(55, 55, 55, 1.0); 
+    --HintsText: #FFFFFF;
     --xx33Color: #CCEDFE;   /*  Filter: Lys-Blå baggrund */
     --grColrLgt: #CCCCCC;
     --Saldiblue: #003366;
@@ -53,7 +71,7 @@ highlight.string  #DD0000 Red
 /*  --PanelBgrd: #FFFFC4;   /* Panelers baggrund  (æggeskalsfarve)*/
 /*  --PanelBgrd: #D4FFFF;   /* Panelers baggrund  (turkis)  */
     --PanelBgrd: #FFFFFF;   /* Panelers baggrund  (hvid)    */
-    --PanelBgrd: <?=$ØPanelBgrd?>;  /* Initieres i ../_base/_base_init.php */
+    --PanelBgrd: <?php global $ØPanelBgrd; echo $ØPanelBgrd; ?>;  /* Initieres i ../_base/_base_init.php */
     --TapetBgrd: #44BB44;   /* Tapet baggrund  (æggeskalsfarve)    */
     --ButtnBgrd: #44BB44;   /* LysGrøn   */
     --ButtnText: #FFFFFF;   /* Hvid   */
@@ -61,11 +79,10 @@ highlight.string  #DD0000 Red
     --BtLnkText: #000000;   /* Sort   */
     --ButtnShad: #DDDDDD;   /* Knap skygge (lysgrå)  */
     --PageBcgrd: #333333;   /* Side baggrund (lysblå) F4FFF4  */
-    --PageBcgrd: <?=$ØPageBcgrd?>;  /* Initieres i ../_base/_base_init.php */
+    --PageBcgrd: <?php echo $ØPageBcgrd; ?>;  /* Initieres i ../_base/_base_init.php */
     --PageImage: url(../_assets/images/paper_fibers.png);   /* Side baggrundsbillede  */
     /* url understøttes ikke i browsere endnu! (March 29, 2016) https://blog.hospodarets.com/css_properties_in_depth  Images url like url(var(--image-url)) don’t work */
-    --PageImage: <?=$$ØPageImage?>;  /* Initieres i _base_init.php /Virker i ../_base/htm_pageHead.php */
-    --PageFile: paper_fibers.png;
+    --PageImage: <?php echo $ØPageImage; ?>;  /* Initieres i _base_init.php /Virker i ../_base/htm_pageHead.php */
  /*   --PageImage: '../_assets/images/paper_fibers.png';   /* Side baggrundsbillede  */
     --fltBgColr: #FFFFFF;   /* Validerede input felters baggrund  #53a40 */
     --fltTxColr: #550000;   /* Validerede input felters tekster #53a40 */
@@ -79,6 +96,9 @@ highlight.string  #DD0000 Red
 }
 
 
+/* Menu_Topdropdown i toppen af sider */
+/* Se filen: htm_TopMenu-head.htm (style/css)  
+
 div#container
 {
    width: 970px;
@@ -86,14 +106,18 @@ div#container
    margin: 0 auto 0 auto;
    text-align: left;
 }
+
+
 body {
-  font-family: sans-serif;
  /*  margin: 5px 5px; */
   margin: 0 auto 0 auto;
   width: 100%;
   max-width: 1200px;
-  font-size: 15px;
+  font-size: 14px;
+  font-family: sans-serif;
   line-height: 100%;
+/*  background-color: var(--PageBcgrd); */
+  background-color: <?php echo $ØPageBcgrd; ?>;
 /*  background: var(--PageBcgrd);  /* Virker! */
 /*  background-image: var(--PageImage);  /* Virker ikke! */
 /*  background-image: -webkit-var(--PageImage);    /* Virker ikke! */
@@ -117,6 +141,7 @@ body {
   #spalt240  {width: 240px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt320  {width: 320px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt480  {width: 480px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
+  #spalt640  {width: 640px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt700  {width: 700px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spaltxxx  {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
   PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
@@ -147,18 +172,19 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelWaut, .panelW110, .panelW960, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
+.panelWmax, .panelWaut, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
     border: 1px solid gray;
     background: var(--PanelBgrd);
-    box-shadow: 3px 3px 5px var(--ButtnShad);
-    border-radius: 0.40em;
+    box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
+    border-radius: 0.4em;
     margin: 0.4em 0.2em 0.4em 0.2em;
-    padding: 0.3em 0.3em 0.3em 0.3em;
+    padding: 0.3em 0.3em 0.2em 0.3em;
 }
 .panelWmax { /* width: 100%; */   }
 .panelWaut { width: auto;   }
 .panelW110 { width: 1100px; }
 .panelW960 { width: 960px;  }
+.panelW720 { width: 720px;  }
 .panelW640 { width: 640px;  }
 .panelW480 { width: 480px;  }
 .panelW320 { width: 320px;  }
@@ -178,7 +204,7 @@ body {
 .tapetWmax {
     border: 3 solid gray;
     background: var(--TapetBgrd);
-    box-shadow: 3px 3px 5px var(--ButtnShad);
+    box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
     border-radius: 0.40em;
     margin: 0.4em 0.2em 0.4em 0.2em;
     padding: 0.3em 0.3em 0.3em 0.3em;
@@ -354,9 +380,9 @@ input[type="date"] {
     display: -webkit-inline-flex;
     font-family: monospace;
     overflow: hidden;
-    /* padding: 0; */
+   /* padding: 0; */
 /*    padding: 0.8em 1% 0.05em 1%;  /*  top right bottom  left  */
-  /*    width: 100px; */
+/*    width: 100px; */
     -webkit-padding-start: 1px;
     /* 
     -webkit-box-align-items: left;
@@ -413,6 +439,7 @@ input::-webkit-datetime-edit-fields-wrapper {
     padding: 1px 0;
     white-space: pre;
 }
+
 
 input[type="date"] {
   text-align: left;
@@ -473,6 +500,7 @@ titlBg {
 .btn:hover { color: var(--btnTxOver); }
 .btn {
   font-size: 0.85em;
+  white-space: nowrap;
   position: absolute;
   top: 43%;
   left: 50%;
@@ -487,10 +515,13 @@ titlBg {
   font-weight: 300;
 }
 
-Deaktiv_input[type="submit"][title],
-
-.btn[tip]:hover:after { /* Tip på grå gradient baggrund*/
-  content: attr(tip);
+/* Anvend custom-tip i stedet for browser-tip: */
+deaktiv_input[type="submit"][title],
+deaktiv_input[type="text"][title],
+.text[tiptxt]:hover:after,
+.th[tiptxt]:hover:after,
+.btn[tiptxt]:hover:after { /* Tip på grå gradient baggrund*/
+  content: attr(tiptxt);
   white-space: pre-wrap;
   min-width: 160px;
   padding: 4px 8px;
@@ -527,7 +558,10 @@ button {
   font-size:0.80em; 
   font-weight: 700; 
   /* color:'.$color=$ØTitleColr.'; */
+  transition: font-size 0.1s;
 }
+
+.knap:hover  {font-size:0.85em; }
 
 .fieldset-auto-width {
   display: inline-block;
@@ -551,6 +585,9 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] me
     padding: 0px 3px 1px 3px;
     margin-bottom: 6px;
 }
+.tooltip{
+    text-shadow:1px 1px #AAF;
+}
 
 .mytip 
 {   content: attr(titletip);
@@ -562,7 +599,7 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] me
 .tooltiptext,                               /* Hjælpetekst som synliggøres */
 .tooltipL, .tooltipR, .tooltipB, .tooltipT, /* Bestemmer placering af Tip  */
 .tooltipB1, .tooltipB2
-{ /* Skjult tip tekst på blå baggrund plac ved label */
+{ /* Skjult tip tekst på farvet baggrund plac ved label */
     visibility: hidden;
     min-width: 160px;
     background-color: var(--HintsBgrd);
@@ -602,8 +639,10 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] me
   box-shadow: 3px 3px 5px var(--grColrLgt);
   transition-delay: 0.2s;
   background-color: var(--HintsBgrd);
+  color: var(--HintsText);
   /* opacity: 0.99; */
   visibility: visible;
+  text-shadow:0px 0px #AAF;
 }
 
 ax        { color: var(--btnTxNorm); text-decoration: none;}
@@ -705,6 +744,18 @@ th {
 .th-inner-center{
   text-align: center;
 }
+
+
+/* Sortering af tabeller:                            */
+/* https://www.kryogenix.org/code/browser/sorttable/ */
+/* op-pil / ned-pil sættes i: $ØProgRoot.$_assets.'js/sorttable.js */
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+  content: '\21F3';  /*' \25B4\25BE' ;  op/ned: 21F3  op: 21E7 ned: 21E9     /* content: ""; */ 
+  color: #8c8b8b;
+  font-size: 120%;
+}
+
+
 
 div#frm *{display:inline}
 
