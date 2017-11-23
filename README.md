@@ -27,7 +27,7 @@ Målsætningen med denne udvikling er:
 <li>  Tydeliggøre alle tekster, som brugeren kan holde musepointer over, for at få fremkaldt hjælpetekster.
 </ol>
 Det er en meget omfattende målsætning, og det betyder i praksis, en omskrivning af næsten al kode.<br>
-Derfor er du velkommen, til at deltage i projektet, hvis du kan forstå den nuværende kode, (ftp://saldi.dk/saldi/seneste/).<br>
+Derfor er du velkommen, til at deltage i projektet. Det er en fordel hvis du kan forstå den nuværende kode, (ftp://saldi.dk/saldi/seneste/).<br>
 <br>
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
@@ -35,5 +35,3 @@ En introduktion finder du her: https://ev-soft.github.io/SALDI-e/<br>
 En live demo af SALDI-€ kan du se her: https://ev-soft.dk/saldi-e/_base/page_Gittermenu.php - senest opdateret: 2017-11-23<br>
 Demoen er nyere end GitHub-coden, da den jævnligt opdateres! Kontakt mig, hvis du ønsker de seneste kildefiler.
 
-En praktisk note: Kildefiler er redigeret med tabulator sat til 2. Fremover bliver tabulator erstattet med SPACE.<br>
-Ser du på en ældre fil indeholdende tabulator, ser du den bedst, ved at tilføje ?ts=2 i adresselinien. 
