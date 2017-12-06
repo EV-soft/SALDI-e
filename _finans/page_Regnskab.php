@@ -1,9 +1,10 @@
-<?php $DocFil= '../_finans/page_Regnskab.php';   $DocVer='5.0.0';  $DocRev='2017-04-00';
-/* Formål:  Vis Regnskab
+<?php   $DocFil= '../_finans/page_Regnskab.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Vis Regnskab';
+ * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *

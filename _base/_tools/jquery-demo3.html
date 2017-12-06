@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta  name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Demoer</title>
+
+  <style custom>   <!-- EV-soft: supplerende custom style --> 
+    label  {display: inline-block;  width: 4.5em; text-align:right;}   /*   <!-- Label foran input-felter -->*/
+    input  {width:6em; text-align:center;}                              /*  <!-- Tekstjustering i input-felter --> */
+    tr:nth-child(even) {background-color: #eeeeee;  }                   /*  <!-- Zebra-background --> */
+    body {background-color: #def; }
+  </style>
+  
+  
+<!-- TABLESORTER: -->
+  <!-- http://tablesorter.com/docs/   https://mottie.github.io/tablesorter/ https://github.com/Mottie/tablesorter/blob/master/README.md -->
+  
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.blue.css">                         <!-- choose a theme file -->
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.green-saldi.css">                  <!-- choose a theme file -->
+  <script  src="../../_base\_tools\tablesorter-master\docs\js\jquery-latest.min.js"> </script>
+  <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.js"></script>          <!-- load tablesorter scripts -->
+  <!-- <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.widgets.js"></script>   --><!-- tablesorter widgets (optional) -->
+	<!-- Tablesorter: required -->
+ 	<script src="../../_base\_tools\tablesorter-master\js\widgets/widget-storage.js"></script>
+	<script src="../../_base\_tools\tablesorter-master\js/widgets/widget-filter.js"></script>
+
+ 
+ <script> 
+$(function() {
+  $("#table").tablesorter({
+    theme: 'blue',
+    widthFixed : true,
+    widgets: ["zebra", "filter"],
+    ignoreCase: false,
+    widgetOptions : {
+      filter_childRows : false,
+      filter_childByColumn : false,
+      filter_childWithSibs : true,
+      filter_columnFilters : true,
+      filter_columnAnyMatch: true,
+      filter_cellFilter : '',
+      filter_cssFilter : '', // or []
+      filter_defaultFilter : {},
+      filter_excludeFilter : {},
+      filter_external : '',
+      filter_filteredRow : 'filtered',
+      filter_formatter : null,
+      filter_functions : null,
+      filter_hideEmpty : false,
+      filter_hideFilters : false,
+      filter_ignoreCase : true,
+      filter_liveSearch : true,
+      filter_matchType : { 'input': 'exact', 'select': 'exact' },
+      filter_onlyAvail : 'filter-onlyAvail',
+      filter_placeholder : { search : 'Find', select : 'Vælg' },
+      filter_reset : 'button.reset',
+      filter_resetOnEsc : true,
+      filter_saveFilters : true,
+      filter_searchDelay : 300,
+      filter_searchFiltered: true,
+      filter_selectSource  : null,
+      filter_serversideFiltering : false,
+      filter_startsWith : false,
+      filter_useParsedData : false,
+      filter_defaultAttrib : 'data-value',
+      filter_selectSourceSeparator : '|'
+    }
+  });
+
+  // Clear stored filters - added v2.25.6
+  $('.resetsaved').click(function(){
+    $('#table').trigger('filterResetSaved');
+
+    // show quick popup to indicate something happened
+    var $message = $('<span class="results"> Reset</span>').insertAfter(this);
+    setTimeout(function(){
+      $message.remove();
+    }, 500);
+    return false;
+  });
+
+  $('button[data-filter-column]').click(function(){
+    var filters = [],
+      $t = $(this),
+      col = $t.data('filter-column'), // zero-based index
+      txt = $t.data('filter-text') || $t.text(); // text to add to filter
+    filters[col] = txt;
+    $.tablesorter.setFilters( $('#table'), filters, true ); // new v2.9
+    return false;
+  });
+});  
+   </script> 
+  
+
+<style> 
+/* REQUIRED in CUSTOM THEMES!
+ This is the only definition that MUST BE added to any custom themes.
+ This is how rows are hidden by filtering (included in provided themes) */
+.tablesorter .filtered {
+  display: none;
+}
+
+/* All of the following css is already contained within each theme file; modify it as desired */
+/* filter row */
+.tablesorter-filter-row td {
+  background: #eee;
+  line-height: normal;
+  text-align: center; /* center the input */
+  -webkit-transition: line-height 0.1s ease;
+  -moz-transition: line-height 0.1s ease;
+  -o-transition: line-height 0.1s ease;
+  transition: line-height 0.1s ease;
+}
+/* optional disabled input styling */
+.tablesorter-filter-row .disabled {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  cursor: not-allowed;
+}
+
+/* hidden filter row */
+.tablesorter-filter-row.hideme td {
+  /*** *********************************************** ***/
+  /*** change this padding to modify the thickness     ***/
+  /*** of the closed filter row (height = padding x 2) ***/
+  padding: 12px;
+  /*** *********************************************** ***/
+  margin: 0;
+  line-height: 0;
+  cursor: pointer;
+}
+.tablesorter-filter-row.hideme * {
+  height: 10px;
+  min-height: 5;
+  border: 3;
+  padding: 0;
+  margin: 0;
+  /* don't use visibility: hidden because it disables tabbing */
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+/* filters */
+.tablesorter-filter {
+  width: 95%;
+  height: inherit;
+  margin: 4px;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  color: #333;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: height 0.1s ease;
+  -moz-transition: height 0.1s ease;
+  -o-transition: height 0.1s ease;
+  transition: height 0.1s ease;
+}
+</style> 
+
+  <script>  $(document).ready(function() { $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); } ); </script>  
+
+  <style>  <!-- /* Extra selectors needed to override the default styling */ -->
+    table.tablesorter thead th,
+    table.tablesorter tfoot th    { text-align: left;  }
+    table.tablesorter tbody tr td { padding: 2px 6px; }
+    table.tablesorter tbody tr.odd  td { background: #888; color: #fff; }
+    table.tablesorter tbody tr.even td { background: #555; color: #fff; }
+   </style>
+
+  
+</head>
+<body>
+
+  <h3>JS-Sorterbar tabel med: zebra-striber, body-gruppering, (filtrering, data-redigering, body-scrolling, sticky-header).</h3>
+  Alt foregår client-side, uden behov for side-genopfriskning.<br><br>
+  Søg <button type="button" class="north-west" style="text-shadow:1px 2px #aaa;" title="Test" data-filter-column="3" data-filter-text="5?">5?</button> i Gæld kolonnen<br>
+      <button type="button" class="reset">Reset</button> <!-- targeted by the "filter_reset" option -->
+      <button type="button" class="resetsaved" title="Reload the page to see that the saved filters have cleared">Reset Saved Filters</button>
+
+  <table id="myTable" class="tablesorter-green" style="width:50em; background:#ffffff;  margin-left: auto;  margin-right: auto;" > 
+  <thead>
+    <tr>
+      <!-- add "filter-select" class or filter_functions : { '.first-name' : true } -->
+      <!-- add "filter-match" class to just match the content, so selecting "Denni" will also show "Dennis" -->
+      <th class="first-name filter-select" data-placeholder="Select a name">First Name</th>
+      <th data-placeholder="Exact matches only">Last Name</th>
+      <th data-placeholder="Choose a city">City</th>
+      <th data-value="<30">Age</th>
+      <th data-placeholder="Select a filter">Total</th>
+      <th class="filter-select filter-onlyAvail">Discount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+<!--
+    <thead> 
+      <tr class="tablesorter-ignoreRow">  
+        <td style="border: 0;" colspan="4" ><big> DATA-TABEL: </big></td>
+        <td style="border: 0; text-align:right">
+          <button type="button" class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Angiv søgekriterier i felterne, og få vist data, der svarer dertil" 
+          data-filter-column="3" data-filter-text="?"> Vis/skjul Søge-felter
+        </button></td>
+      </tr>
+      <tr> 
+        <th class="north-west-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg <d" class="filter-match">Efternavn</td>    
+        <th class="filter-select" data-placeholder="Søg <d" >Fornavn</th>   
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg hot">Email</th>    
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg >50">Gæld</th>    
+        <th class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg ww" >Hjemmeside</th> 
+      </tr> 
+    </thead> 
+ -->
+    <tbody> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+<!--     </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Sum information for gruppen ovenfor. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Andre oplysninger. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody>
+ -->      <tr>  <td>Doe</td>    <td>Jason</td>  <td>jdoe@hotmail.com</td>       <td style="text-align:right;">100.00 Kr</td> <td>http://www.jdoe.com</td>      </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+    </tbody> 
+    <tfoot> 
+      <tr style="color:#999;">  <th>Efternavn</th>    <th>Fornavn</th>   <th>Email</th>    <th>Gæld</th>    <th>Hjemmeside</th> </tr> 
+      <tr style="background:white;">  <td colspan="5">DEMO MANGLER ENDNU: Filter-felter, Input-felter, Scroll-tabel, Sticky-header</td> </tr> 
+    </tfoot> 
+  </table> 
+</body>
+</html>
+ 
+ 

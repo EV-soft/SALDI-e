@@ -1,9 +1,9 @@
-<?php   $DocFil= '../_base/page_Syssetup1.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-/* ## Formål: Indstilling af MOMS                                       
+<?php   $DocFil= '../_system/page_Momssetup.php';    $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';   $ModulNr=2;
+/* ## Purpose: 'Indstilling af MOMS ';
  *             ___   _   _    ___  _         
- *            / __| /_\ | |  |   \| |   ___ 
- *            \__ \/ _ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -12,7 +12,7 @@
   $debug= true;
   $pageTitl='Indstil: Moms';
   include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:

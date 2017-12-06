@@ -1,10 +1,10 @@
-<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-08-00';   $modulnr=0;
-/* Formål:  Rediger kladder
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0;
+/* Purpose: 'Rediger kladder';
  * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -13,14 +13,16 @@
  */
  
   $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  //  set_include_path('.././saldi-e/_base/');
+  //  Relativ path: dirname(__FILE__) . 
+  include(".././_base/htm_pageHead.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
     
 ## Forberedelse ikke taget i brug endnu:
-  $sort=isset($_GET['sort'])? $_GET['sort']:Null;
-  $order=isset($_GET['order'])? $_GET['order']:Null;  # Tidl: $rf
-  $user=isset($_GET['user'])? $_GET['user']:Null;     # Tidl: $vis
+  $sort=  isset($_GET['sort'])?   $_GET['sort']:Null;
+  $order= isset($_GET['order'])?  $_GET['order']:Null;  # Tidl: $rf
+  $user=  isset($_GET['user'])?   $_GET['user']:Null;   # Tidl: $vis
   $content= '150;URL=page_Kladdeliste.php.php?sort=$sort&order=$order&user=$user';
   
   if (isset($_GET['sort'])) { $cookievalue="$sort;$order;$user";  setcookie("saldi_kladdeliste", $cookievalue, strtotime('+30 days'));  } 
@@ -108,5 +110,5 @@ else                             {print "<td title=$Tip>  <b><a href=$TableList?
 }
 */
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include(".././_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

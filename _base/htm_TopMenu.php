@@ -1,10 +1,12 @@
+<?php   $DocFil= '../_base/htm_TopMenu.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0;
+// ## Purpose: 'Vis Menu-bjaelke paa siders top.';
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Language" content="da">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Untitled Page</title>
-<meta name="generator" content="WYSIWYG Web Builder 10 - http://www.wysiwygwebbuilder.com">
+<title>TopMenu</title>
 <style type="text/css">
 div#container
 {

@@ -1,10 +1,10 @@
-<?php      $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';     $DocRev='2017-03-00';  # tidl: db_query.php
-/* ## Formål: Forbedrede DB-funktioner, kompatible med PHP7
- * Denne fil er oprettet af EV-soft  i 2017.
+<?php   $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Forbedrede DB-funktioner, kompatible med PHP7+';
+ * Denne fil er oprettet af EV-soft i 2017.   # afløser tidl: db_query.php
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -13,7 +13,7 @@
 
 global $Øconnection, $Ødb_Link, $Ødb_Type;
 
-if (!function_exists('msg_Dialog')) {include_once('../_base/msg_lib.php');};
+if (!function_exists('msg_Dialog')) {include_once('../../_base/msg_lib.php');};
 
 /* 
 Procedural Style:
@@ -291,17 +291,17 @@ if (!function_exists('db_escape_string'))
 
 // Nye dbi_* rutiner for PHP7+ - MYSQLI:
 
-if (!function_exists('dbi_connect')) ##  $fraF og $fraL angår __FILE__ og __LINE__ for sporing af fejlsted
-{
-  function dbi_connect($sqhost, $squser, $sqpass, $sqdb, $fraF='', $fraL='') {          /* make connection (Tidl:db_connect)*/
+if (!function_exists('dbi_connect')) ##  $onFile og $onLine angår __FILE__ og __LINE__ for sporing af fejlsted
+{ { // Erkæring af alle dbi_ funktioner:
+  function dbi_connect($sqhost, $squser, $sqpass, $sqdb, $onFile=__FILE__, $onLine=__LINE__) {          /* make connection (Tidl:db_connect)*/
     global $Ødb_Problem, $Ødb_Type;
     if ($Ødb_Type=='mysql') {
       if (function_exists('mysqli_connect')) {
         $dbLink= mysqli_connect($sqhost, $squser, $sqpass, $sqdb); 
         $Ødb_Problem= mysqli_connect_error(); 
 #+        if ($Ødb_Encode=='UTF8') $names= 'utf8'; else $names= 'latin9'; mysqli_query($dbLink,'SET NAMES "'.$names.'"');
-      } else { msg_Error('@Saldi mysql-Fejl:',tolk('@PHP-funktionen mysqli_connect() kunne ikke findes')."\n".tolk('@Er både DB-MySql og PHP-mysqli installeret?')."<br/>POS: ".$fraF.' :'.$fraL); 
-          //   msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk('@Saldi mysql-Fejl:'),              tolk('@PHP-funktionen mysqli_connect() kunne ikke findes')."\n".tolk('@Er både DB-MySql og PHP-mysqli installeret?')."<br/>POS: ".$fraF.' :'.$fraL); 
+      } else { msg_Error('@Saldi mysql-Fejl:',tolk('@PHP-funktionen mysqli_connect() kunne ikke findes')."\n".tolk('@Er både DB-MySql og PHP-mysqli installeret?')."<br/>POS: ".$onFile.' :'.$onLine); 
+          //   msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk('@Saldi mysql-Fejl:'),              tolk('@PHP-funktionen mysqli_connect() kunne ikke findes')."\n".tolk('@Er både DB-MySql og PHP-mysqli installeret?')."<br/>POS: ".$onFile.' :'.$onLine); 
               exit; 
       }
     } else {  // 'postgres'
@@ -309,7 +309,7 @@ if (!function_exists('dbi_connect')) ##  $fraF og $fraL angår __FILE__ og __LIN
           if ($sqpass) $dbLink = pg_connect ('host='.$sqhost.' dbname='.$sqdb.' user='.$squser.' password='.$sqpass);
           else         $dbLink = pg_connect ('host='.$sqhost.' dbname='.$sqdb.' user='.$squser);
       } else { msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk('@Saldi postgres-Fejl:'),
-              tolk('@PHP-funktionen pg_connect() kunne ikke findes')."\n".tolk('@Er både DB-postgres og PHP-pgsql installeret?')."<br/>POS: ".$fraF.' :'.$fraL); 
+              tolk('@PHP-funktionen pg_connect() kunne ikke findes')."\n".tolk('@Er både DB-postgres og PHP-pgsql installeret?')."<br/>POS: ".$onFile.' :'.$onLine); 
               exit; 
       }
     }
@@ -317,41 +317,51 @@ if (!function_exists('dbi_connect')) ##  $fraF og $fraL angår __FILE__ og __LIN
   }
   
  /* check connection */
- function dbi_succes( $fraF='', $fraL='') {global $Ødb_Type;                         
+ function dbi_succes( $onFile='', $onLine='') {global $Ødb_Type;                         
     if ($Ødb_Type=='mysql') {
       if (mysqli_connect_errno()) {printf("Connect failed: %s\n", mysqli_connect_error()); exit();} 
             return mysqli_connect_errno();
-    } else {return pg_last_error;}  // "postgres"
+    } else {return pg_last_error;}  /* "postgres" */ 
   }
   
 /* get result */
-  function dbi_askData($dbLink, $qtxt='', $fraF='', $fraL='') {global $Ødb_Type;        
-    if ($dbLink!= 'SkjulFejl')
+  function dbi_askData($dbLink, $qtxt='', $onFile='', $onLine='', $onFunc='') {global $Ødb_Type;        
+#-  if ($dbLink!= 'SkjulFejl')
+    if ($dbLink==null) {msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk('@Saldi DB:'),
+            tolk('@Der er ikke forbindelse til DB-serveren!')."<br>".tolk('@Er connect.php oprettet korrekt?').
+            '<br><br>Spot - File: '.substr($onFile,strpos($onFile,'saldi')).' - Line: '.$onLine.' - Func: '.$onFunc); 
+            exit;} 
+    else
     if ($Ødb_Type=='mysql') { //  var_dump(mysqli_query($dbLink, $qtxt));
             return $Qresult= mysqli_query($dbLink, $qtxt);
-    } else {return pg_query($qtxt);}  // "postgres"
+    } else {return pg_query($qtxt);} /* "postgres" */ 
   }
   
 /* associative array */
-  function dbi_assoData($Qresult, $mode= MYSQLI_ASSOC, $fraF='', $fraL='') { global $Ødb_Problem, $Ødb_Type;    //  db_fetch_array($qtext)
+  function dbi_assoData($Qresult, $mode= MYSQLI_ASSOC, $onFile=__FILE__, $onLine=__LINE__, $onFunc='') { global $Ødb_Problem, $Ødb_Type;    //  db_fetch_array($qtext)
     $result= array();
-    if (!$Qresult)  {echo ' Ingen associative data! '.$Ødb_Problem; exit;} 
+    if (!$Qresult)  { //echo tolk('@Ingen associative data! ').$Ødb_Problem; 
+      msg_Dialog('error',tolk('@Fortsæt'),'$jQ112(this).dialog("close")','','','','',tolk('@Saldi DB:'),
+            tolk('@Ingen associative data! ')."<br>".
+            '<br><br>Spot - File: '.substr($onFile,strpos($onFile,'saldi')).' - Line: '.$onLine.' - Func: '.$onFunc);
+            exit;
+    } 
     else if ($Ødb_Type=='mysql') {
       {while ($row= mysqli_fetch_array($Qresult, $mode)) array_push($result,$row);}
-      return $result; }
-    else {return pg_fetch_array($Qresult);};  // "postgres"
+                            return $result; }
+    else { /* "postgres" */ return pg_fetch_array($Qresult);}; 
   }
   
 /* free Qresult set */
-  function dbi_freeData($Qresult, $fraF='', $fraL='') {global $Ødb_Type;                
+  function dbi_freeData($Qresult, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;                
     if ($Ødb_Type=='mysql') { return mysqli_free_result($Qresult);                                                                
-    } else {  };  // "postgres"
+    } else { /* "postgres" */ return pg_free_result($Qresult);  };
   }
   
 /* close connection */
-  function dbi_DBclose($Ødb_Link, $fraF='', $fraL='') {global $Ødb_Type;                  
+  function dbi_DBclose($Ødb_Link, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;                  
     if ($Ødb_Type=='mysql') { return mysqli_close($Ødb_Link);                                                                       
-    } else { return pg_close($Ødb_Link); };  // "postgres"
+    } else { /* "postgres" */ return pg_close($Ødb_Link); }; 
   }
   
   // dbi_modify()   mysqli_num_rows()
@@ -359,37 +369,35 @@ if (!function_exists('dbi_connect')) ##  $fraF og $fraL angår __FILE__ og __LIN
   
 ### Kombinerede:  Ikke nødvendig, men praktisk opdeling:    CRUD:   Create Read Update Delete
 
-  function sql_creat($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "CREATE", "INSERT", "ADD"    /* db_modify */
+  function sql_creat($qstr, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Link, $Ødb_Type;   //  "CREATE", "INSERT", "ADD"    /* db_modify */
     if ($Ødb_Type=='mysql') { return $Qresult= mysqli_query($Ødb_Link, $qstr);
-    } else { /* "postgres" */ return pg_query($qstr);}  // 
+    } else { /* "postgres" */ return $Qresult= pg_query($Ødb_Link,$qstr);}  // 
   }
   
-  function sql_readA($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
-    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_ASSOC, $fraF='', $fraL='');
-    } else {  // "postgres"
+  function sql_readA($qstr, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
+    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr,__FILE__,__LINE__,__FUNCTION__), MYSQLI_ASSOC, $onFile=__FILE__, $onLine=__LINE__);
+    } else { /* "postgres" */ return pg_fetch_assoc(pg_query($Ødb_Link,$qstr));
     };  
   }
   
-  function sql_readN($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
-    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_NUM, $fraF='', $fraL='');
-    } else {return pg_num_rows($qstr);};  // "postgres"  pg_num_fields($qstr);?
+  function sql_readN($qstr, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
+    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr,__FILE__,__LINE__,__FUNCTION__), MYSQLI_NUM, $onFile=__FILE__, $onLine=__LINE__);
+    } else { /* "postgres" */ return pg_num_rows($qstr);};  // "postgres"  pg_num_fields($qstr); ?
   }
   
-  function sql_readB($qstr, $fraF='', $fraL='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
-    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr), MYSQLI_BOTH, $fraF='', $fraL='');
-    } else {  // "postgres"
-    };  
+  function sql_readB($qstr, $onFile='', $onLine='') {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
+    if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr,$onFile,$onLine,__FUNCTION__), MYSQLI_BOTH, $onFile, $onLine);
+    } else { /* "postgres" */ return 'Ikke færdig'; /* "postgres" ? */     };  
   }
   
   function sql_write() {global $Ødb_Link, $Ødb_Type;                            //  "MODIFY", "UPDATE", "ALTER"  
-    if ($Ødb_Type=='mysql') {
-    } else {  // "postgres"
-    };  
+    if ($Ødb_Type=='mysql') { return 'Ikke færdig'; 
+    } else { /* "postgres" */ return 'Ikke færdig'; }; // "postgres" pg_update() / pg_execute() ?
  }
   
   function sql_erase() {global $Ødb_Link, $Ødb_Type;                            //  "DELETE", "DROP"
-    if ($Ødb_Type=='mysql') {
-    } else {  // "postgres"
+    if ($Ødb_Type=='mysql') { return 'Ikke færdig'; 
+    } else { /* "postgres" */ return 'Ikke færdig'; };  // "postgres" pg_execute() ?
     };  
   }
   

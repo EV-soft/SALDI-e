@@ -9,7 +9,8 @@
 //
   $_base= '../_base/';
   $pageTitl='Indstil: Enheder';
-  include($_base."htm_pageHead.php"); # Sidens indledende html-kode
+//  include($_base."htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
 ### INDLÆS DATA:
 
 ### VIS DATA:
@@ -19,5 +20,6 @@
     
 ### GEM DATA:
  
-  include($_base."htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+//  include($_base."htm_pageFoot.php"); # Sidens afsluttende html-kode
 ?>  

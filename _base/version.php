@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/version.php';   $DocVer='5.0.0';    $DocRev='2017-04-00';   $ModulNr=0;
+<?php   $DocFil= '../_base/version.php';   $DocVer='5.0.0';    $DocRev='2017-09-00';   $ModulNr=0;
 /* FORMÅL: Globale konstanter                                         
  * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
@@ -18,7 +18,7 @@
   $Øprogvers = '5.0.0α'; 
   $Øcopyright= 'Saldi.dk ApS';
   $Øcopydate = ' © 2003-2017';
-//  $Øsaldihost= 'Danosoft ApS';
+//$Øsaldihost= 'Danosoft ApS';
   $Øsaldihost= 'EV-soft';
   $Ødesigner = 'EV-soft';
 ?>

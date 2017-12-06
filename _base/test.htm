@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="da" dir="ltr">
+<meta charset="UTF-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<body>
+<STYLE>
+* {
+  padding: 0:
+  margin: 0;
+  /*transition: 0.2s all ease;*/
+  }
+#info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: black;
+  color: white;
+  padding: 25px 50px;
+}
+</STYLE>
+  
+<div id='info'></div>
+<SCRIPT type="text/javascript">
+var infoObj = document.getElementById('info');
+function tellPos(p){
+  infoObj.innerHTML = 'Position X : ' + p.pageX + '&lt;br /&gt;Position Y : ' + p.pageY;
+}
+addEventListener('mousemove', tellPos, false);
+</SCRIPT>
+
+</body>
+</html>
+

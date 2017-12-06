@@ -1,10 +1,11 @@
-<?php      $DocFil= '../_base/_tools/frasescann.php';    $DocVer='5.0.0';     $DocRev='2017-02-00';
-/*  Formål: Find alle sprog-fraser: '@Strenge med prefix: @' i alle php-filer, også i undermapper, og udskriv sorteret liste på skærm.
+<?php   $DocFil= '../_base/_tools/frasescann.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Find alle sprog-fraser: '@Strenge med prefix: '@ i alle php-filer, også i undermapper, og udskriv sorteret liste på skærm.';
  *  Efterfølgende benyttes resultatet til oversættelse af SALDI's programflade, til andre sprog.
+ * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -28,6 +29,7 @@
             (!strpos($source,'.csv')) and ((strpos($source,'.php')) or (strpos($source,'.htm'))) ) {  
           $lines = file($dir.$source); 
           foreach ($lines as $line_num => $line) {
+            $line= ' '.$line; //  Uden SPACE fejler strpos() (=0 =false?)når $search står først på linien
             if (($a=strpos($line,$search)) or ($a=strpos($line,$search1))) {
           #   if (('user_interface.php'== $source) or ('LayoutModuler.php'== $source)) {
               if ((strpos($source,'.php')) or (strpos($source,'.htm'))) {
@@ -84,7 +86,7 @@
   echo '<br>Start med at oversætte til Italiensk. Indsæt/erstat resultatet i "it"-kolonnen yderst til højre (`it` erstattes af oversat tekst!). <br>Derpå Spansk i næstseneste kolonne, og Italiensk rykker ud til højre.';
   echo '<br>Når alle kolonner er udfyldt, skal overflødige SPACE imellem " og " i første kolonne, fjernes med søg/erstat, så kolonner overalt adskilles med "," <br><br>';
   echo '<br>Kontroller i filens top og bund, at der ikke er overflødige linier. <br>Nu er du klar til at gemme den komma-separerede fil som ../_base/Sprog_DB.csv<br>';
-  echo '<br>Det er også muligt at benytte et regneark, til at opnå samme resultat<br><br>';
+  echo '<br>Det er også muligt at benytte et regneark, til at opnå samme resultat (Se: _exchange/fraseliste.ods)<br><br>';
 # var_dump($GLOBALS['system']);
 # phpinfo();
 // ToDo: resultatet gemmes i fil.

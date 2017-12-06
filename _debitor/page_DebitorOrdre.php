@@ -1,9 +1,10 @@
-<?php      $DocFil= '../_base/page_DebitorOrdre.php';   $DocVer='5.0.0';     $DocRev='2017-04-00';
-/* Formål:  Salgs ordre
+<?php      $DocFil= '../_debitor/page_DebitorOrdre.php';   $DocVer='5.0.0';     $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=2;
+/* ## Purpose: ' Vis data for en Salgs ordre ';
+ * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *

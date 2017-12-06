@@ -21,7 +21,7 @@
 ### VIS DATA:
     SpalteTop(320); Rude_AdminMenu(); 
     NextSpalte();   Rude_Regnskabsaar($TablData);    
-                    Rude_Regnskabskort($DATA);
+                    Rude_Regnskabskort($DATA, $besk='2016', $aar0='2016', $md0='01', $aar1='2016', $md1='12', $aktiv=true, $fak1Nr);
     SpalteBund();  
 ### GEM DATA:
  

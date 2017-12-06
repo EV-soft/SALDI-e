@@ -1,10 +1,11 @@
-<?php $DocFil= '../_base/std_func.php';   $DocVer='5.0.0';  $DocRev='2017-04-00';   $modulnr=0;
-/*  FORMÅL:  Almene funktioner f.eks. ang. datavisning
+<?php   $DocFil= '../_base/std_func.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Almene funktioner f.eks. ang. datavisning';
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
+ *
  * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
  *
  * 2016.08.00 ev - EV-soft
@@ -681,7 +682,7 @@ function Øvalutaopslag($amount, $valuta, $transdate) {
   
   $r = db_fetch_array(db_select("select * from valuta where gruppe = '$valuta' and valdate <= '$transdate' order by valdate desc",__FILE__ . " linje " . __LINE__));
   if ($r['kurs']) {
-    $kurs=$r['kurs'];
+    $kurs= $r['kurs'];
     $amount=afrund($amount*$kurs/100,2); # decimal rettet fra 3 til 2 20090617 grundet fejl i saldi_58_20090617-2224
   } else {
     $r = db_fetch_array(db_select("select box1 from grupper where art = 'VK' and kodenr = '$valuta'",__FILE__ . " linje " . __LINE__));
@@ -711,8 +712,7 @@ echo "$regnstart $regnslut<br>";
 ######################################################################################################################################
 if (!function_exists('ØisSecure')) {
 function ØisSecure() {
-  return
-    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    || $_SERVER['SERVER_PORT'] == 443;
+  return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443;
 }}
+
 ?>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta  name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Demoer</title>
+
+  <style custom>   <!-- EV-soft: supplerende custom style --> 
+    label  {display: inline-block;  width: 4.5em; text-align:right;}   /*   <!-- Label foran input-felter -->*/
+    input  {width:6em; text-align:center;}                              /*  <!-- Tekstjustering i input-felter --> */
+    tr:nth-child(even) {background-color: #eeeeee;  }                   /*  <!-- Zebra-background --> */
+    body {background-color: #def; }
+  </style>
+  
+  
+<!-- TABLESORTER: -->
+  <!-- http://tablesorter.com/docs/   https://mottie.github.io/tablesorter/ https://github.com/Mottie/tablesorter/blob/master/README.md -->
+  <script  src="../../_base\_tools\tablesorter-master\docs\js\jquery-latest.min.js"> </script>
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.blue.css">                         <!-- choose a theme file -->
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.green-saldi.css">                  <!-- choose a theme file -->
+  <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.js"></script>          <!-- load tablesorter scripts -->
+  <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.widgets.js"></script>  <!-- tablesorter widgets (optional) -->
+	<!-- <script src="./tablesorter-master/js/widgets/widget-filter.js"></script> -->
+  <script src="./tablesorter-master/js/parsers/parser-input-select.js"></script>
+  <script src="./tablesorter-master/js/parsers/parser-date-weekday.js"></script>
+  <script>  $(document).ready(function() { $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); } ); </script>  
+
+  <style>  <!-- /* Extra selectors needed to override the default styling */ -->
+    table.tablesorter thead th,
+    table.tablesorter tfoot th    { text-align: left;  }
+    table.tablesorter tbody tr td { padding: 2px 6px; }
+    table.tablesorter tbody tr.odd  td { background: #888; color: #fff; }
+    table.tablesorter tbody tr.even td { background: #555; color: #fff; }
+   </style>
+
+ <script> 
+$(function() {
+  $("#table").tablesorter({           // call the tablesorter plugin
+    theme: 'blue',
+    widthFixed : true,                // hidden filter input/selects will resize the columns, so try to minimize the change
+    widgets: ["zebra", "columns", "filter", 'stickyHeaders', 'editable', 'columnSelector', 'scroller'],
+                                      // initialize zebra striping and filter widgets
+    ignoreCase: false,
+    widgetOptions : {zebra: ["even", "odd"],         <!-- "normal-row", "alt-row"  -->
+      ignoreCase  : false,
+ <!-- FILTER: -->
+      <!-- filter_reset         : '.reset', -->
+      filter_childRows : false,       // If there are child rows in the table (rows with class name from "cssChildRow" option)
+                                      // and this option is true and a match is found anywhere in the child row, then it will make that row
+                                      // visible; default is false
+      filter_childByColumn : false,   // if true, filter child row content by column; filter_childRows must also be true
+      filter_childWithSibs : true,    // if true, include matching child row siblings
+      filter_columnFilters : true,    // if true, a filter will be added to the top of each table column;
+                                      // disabled by using -> headers: { 1: { filter: false } } OR add class="filter-false"
+                                      // if you set this to false, make sure you perform a search using the second method below
+      filter_columnAnyMatch: true,    // if true, allows using "#:{query}" in AnyMatch searches (column:query; added v2.20.0)
+      filter_cellFilter : '',         // extra css class name (string or array) added to the filter element (input or select)
+      filter_cssFilter : '', // or [] // extra css class name(s) applied to the table row containing the filters & the inputs within that row
+                                      // this option can either be a string (class applied to all filters) or an array (class applied to indexed filter)
+      filter_defaultFilter : {},      // add a default column filter type "~{query}" to make fuzzy searches default;
+                                      // "{q1} AND {q2}" to make all searches use a logical AND.
+      filter_excludeFilter : {},      // filters to exclude, per column
+      filter_external : '',           // jQuery selector (or object) pointing to an input to be used to match the contents of any column
+                                      // please refer to the filter-any-match demo for limitations - new in v2.15
+      filter_filteredRow: 'filtered', // class added to filtered rows (rows that are not showing); needed by pager plugin
+      filter_formatter : null,        // add custom filter elements to the filter row
+                                      // see the filter formatter demos for more specifics
+      filter_functions : null,        // add custom filter functions using this option
+                                      // see the filter widget custom demo for more specifics on how to use this option
+      filter_hideEmpty : true,        // hide filter row when table is empty
+      filter_hideFilters : false,      // if true, filters are collapsed initially, but can be revealed by hovering over the grey bar immediately
+                                      // below the header row. Additionally, tabbing through the document will open the filter row when an input gets focus
+                                      // in v2.26.6, this option will also accept a function
+      filter_ignoreCase : true,       // Set this option to false to make the searches case sensitive
+      filter_liveSearch : true,       // if true, search column content while the user types (with a delay).
+                                      // In v2.27.3, this option can contain an
+                                      // object with column indexes or classnames; "fallback" is used
+                                      // for undefined columns
+      filter_matchType :              // global query settings ('exact' or 'match'); overridden by "filter-match" or "filter-exact" class
+        { 'input': 'exact', 'select': 'exact' }, 
+      filter_onlyAvail : 'filter-onlyAvail',  // a header with a select dropdown & this class name will only show available (visible) options within that drop down.
+      filter_placeholder :            // default placeholder text (overridden by any header "data-placeholder" setting)
+        { search : '', select : '' },
+      filter_reset : 'button.reset',  // jQuery selector string of an element used to reset the filters
+      filter_resetOnEsc : true,       // Reset filter input when the user presses escape - normalized across browsers
+      filter_saveFilters : true,      // Use the $.tablesorter.storage utility to save the most recent filters (default setting is false)
+      filter_searchDelay : 300,       // Delay in milliseconds before the filter widget starts searching; This option prevents searching for
+                                      // every character while typing and should make searching large tables faster.
+      filter_searchFiltered: true,    // allow searching through already filtered rows in special circumstances; will speed up searching in large tables if true
+      filter_selectSource  : null,    // include a function to return an array of values to be added to the column filter select
+      filter_serversideFiltering : false, // if true, server-side filtering should be performed because client-side filtering will be disabled, but
+                                          // the ui and events will still be used.
+      filter_startsWith : false,      // Set this option to true to use the filter to find text from the start of the column
+                                      // So typing in "a" will find "albert" but not "frank", both have a's; default is false
+      filter_useParsedData : false,   // Filter using parsed content for ALL columns
+                                      // be careful on using this on date columns as the date is parsed and stored as time in seconds
+      filter_defaultAttrib : 'data-value',// data attribute in the header cell that contains the default filter value
+      filter_selectSourceSeparator : '|',  // filter_selectSource array text left of the separator is added to the option value, right into the option text
+ <!-- /FILTER -->
+      
+ <!-- SORTERING: -->
+      sortReset     : true,           // third click on the header will reset column to default - unsorted   
+      sortRestart   : true,           // Resets the sort direction so that clicking on an unsorted column will sort in the sortInitialOrder direction.
+      sortInitialOrder: "desc",
+<!-- /SORTERING -->
+     }
+  }); 
+ 
+  
+  $('.resetsaved').click(function(){  // Clear stored filters - added v2.25.6
+    $('#table').trigger('filterResetSaved');
+    var $message = $('<span class="results"> Reset</span>').insertAfter(this);  // show quick popup to indicate something happened
+    setTimeout(function(){
+      $message.remove();
+    }, 500);
+    return false;
+  });
+
+  $('button[data-filter-column]').click(function(){
+    var filters = [],
+      $t = $(this),
+      col = $t.data('filter-column'), // zero-based index
+      txt = $t.data('filter-text') || $t.text(); // text to add to filter
+    filters[col] = txt;
+    $.tablesorter.setFilters( $('#table'), filters, true ); // new v2.9
+    return false;
+  });
+});
+ </script> 
+<!-- /TABLESORTER: -->
+
+</head>
+<body>
+
+  <h3>JS-Sorterbar tabel med: zebra-striber, body-gruppering, (filtrering, data-redigering, body-scrolling, sticky-header).</h3>
+  Alt foregår client-side, uden behov for side-genopfriskning.<br><br>
+  Søg <button type="button" class="north-west" style="text-shadow:1px 2px #aaa;" title="Test" data-filter-column="3" data-filter-text="5?">5?</button> i Gæld kolonnen<br>
+      <button type="button" class="reset">Reset</button> <!-- targeted by the "filter_reset" option -->
+      <button type="button" class="resetsaved" title="Reload the page to see that the saved filters have cleared">Reset Saved Filters</button>
+
+  <table id="myTable" class="tablesorter-green" style="width:50em; background:#ffffff;  margin-left: auto;  margin-right: auto;" > 
+    <thead> 
+      <tr class="tablesorter-ignoreRow">  
+        <td style="border: 0;" colspan="4" ><big> DATA-TABEL: </big></td>
+        <td style="border: 0; text-align:right">
+          <button type="button" class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Angiv søgekriterier i felterne, og få vist data, der svarer dertil" 
+          data-filter-column="3" data-filter-text="?"> Vis/skjul Søge-felter
+        </button></td>
+      </tr>
+      <tr> 
+        <th class="north-west-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg <d" class="filter-match">Efternavn</td>    
+        <th class="filter-select" data-placeholder="Søg <d" >Fornavn</th>   
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg hot">Email</th>    
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg >50">Gæld</th>    
+        <th class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg ww" >Hjemmeside</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+    </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Sum information for gruppen ovenfor. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Andre oplysninger. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody>
+      <tr>  <td>Doe</td>    <td>Jason</td>  <td>jdoe@hotmail.com</td>       <td style="text-align:right;">100.00 Kr</td> <td>http://www.jdoe.com</td>      </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+    </tbody> 
+    <tfoot> 
+      <tr style="color:#999;">  <th>Efternavn</th>    <th>Fornavn</th>   <th>Email</th>    <th>Gæld</th>    <th>Hjemmeside</th> </tr> 
+      <tr style="background:white;">  <td colspan="5">DEMO MANGLER ENDNU: Filter-felter, Input-felter, Scroll-tabel, Sticky-header</td> </tr> 
+    </tfoot> 
+  </table> 
+</body>
+</html>
+ 
+ 

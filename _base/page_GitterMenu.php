@@ -1,9 +1,11 @@
-<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2017-01-00';   $ModulNr=2;
-/* ## Formål: SALDI's hovedmenu                                        
+<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=2;
+/* ## Purpose:'SALDI's gamle hovedmenu';
+ * Denne fil er oprettet af EV-soft i 2017.
+ *
  *             ___   _   _    ___  _         
- *            / __| /_\ | |  |   \| |   ___ 
- *            \__ \/ _ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -16,17 +18,17 @@
 if (!function_exists('Rude_HovedMenu')) {
 # PROGRAM-MODUL; "Navigation"
 function Rude_HovedMenu (&$regnskab, &$vis_finans, &$vis_debitor, &$vis_kreditor, &$vis_prodkt, &$vis_lager) {
-global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogramSprog, $Ødesigner;
-//  $ØprogramSprog= $_SESSION['ØprogramSprog'];
+global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogSprog, $Ødesigner;
+//  $ØprogSprog= $_SESSION['ØprogSprog'];
   $goBack= '';  # '?returside=../_base/menu.php';
   echo '<PanlHead>';        
-  htm_Rude_Top($name='menuform',$capt='',$parms='',$icon='',$klasse='panelWmax',__FUNCTION__);
+  htm_Rude_Top($name='menuform',$capt='',$parms='',$icon='',$klasse='panelWmax',__FUNCTION__,'','');
   echo '<div style="text-align: center"><img src= "../_assets/images/saldi-e50x170.png" alt="Saldi Logo" height="50" width="170" ></div>';
   echo '<div class="panelTitl" max-width:400>'.ucfirst(tolk('@Regnskab:')).' '.Tolk($regnskab).'</div>';
   $FaLogo= "../_assets/images/saldi.png";
 # if (file_exists($FaLogo)) echo '<img style="border:0px solid;width:50px;heigth:50px" alt="" src="'.$FaLogo.'">';
   
-  switch ($ØprogramSprog) {         
+  switch ($ØprogSprog) {         
     case 'da' : $knapW= 120; break; 
     case 'en' : $knapW= 140; break; 
     case 'tr' : $knapW= 160; break; 
@@ -49,21 +51,21 @@ global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogramSprog, $Ødesigner;
       if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Købs Ordrer',      $link='../_kreditor/page_Ordreliste.php',    $title='@Gå til Kreditor Ordrer &#xa;(Købs-bestillinger)');
       if ($vis_prodkt)  menuKnap($h='32',$w=$knapW, $label='@Produktion',       $link='../_produktion/page_Ordreliste.php',  $title='@Gå til Produktion'         );
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Vare lister',      $link='../_lager/page_Varer.php',            $title='@Gå til Vareliste'          );
-     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Konto plan',       $link='../_system/page_Kontoplan.php',   $title='@Gå til Kontoplan'          );
+     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Konto plan',       $link='../_system/page_Kontoplan.php',       $title='@Gå til Kontoplan'          );
       htm_nl(); 
       if ($vis_finans)  menuKnap($h='32',$w=$knapW, $label='@Regnskab',         $link='../_finans/page_Regnskab.php',        $title='@Gå til Regnskab og budget' );
       if ($vis_debitor) menuKnap($h='32',$w=$knapW, $label='@Konti',            $link='../_debitor/page_Debitor.php',        $title='@Gå til Debitor Konti &#xa;(Kunder)');
       if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Konti',            $link='../_kreditor/page_Kreditor.php',      $title='@Gå til Kreditor Konti &#xa;(Leverandører)');
       if ($vis_prodkt)  menuKnap($h='32',$w=$knapW, $label='@Produktion',       $link='../_produktion/page_Ordreliste.php',  $title='@Gå til Produktion'         );
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Vare modtagelse',  $link='../_lager/page_Varemodtagelse.php',   $title='@Gå til Vare modtagelse'    );
-     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Indstillinger',    $link='../_system/page_Syssetup1.php',    $title='@Gå til menuen Indstillinger af: Regnskab og Program');
+     /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Indstillinger',    $link='../_system/page_Syssetup1.php',       $title='@Gå til menuen Indstillinger af: Regnskab og Program');
       htm_nl();   
       if ($vis_finans)  menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_finans/page_Rapport.php',         $title='@Gå til Finans Rapporter'   );
       if ($vis_debitor) menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_debitor/page_Rapport.php',        $title='@Gå til Debitor Rapporter'  );
       if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_kreditor/page_Rapport.php',       $title='@Gå til Kreditor Rapporter' );
       if ($vis_prodkt)  menuKnap($h='32',$w=$knapW, $label='',                  $link='../_base/page_Blindgyden.php',        $title='@Gå til ?'                  );
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_lager/page_Beholdningsliste.php', $title='@Gå til Vare Rapporter'     );
-                        menuKnap($h='32',$w=$knapW, $label='@Sikkerheds kopi',  $link='../_system/page_Backup.php',      $title='@Gem/Hent sikkerhedskopi'   );
+                        menuKnap($h='32',$w=$knapW, $label='@Sikkerheds kopi',  $link='../_system/page_Backup.php',          $title='@Gem/Hent sikkerhedskopi'   );
      echo '</div>';
     htm_FrstFelt('20%',0);
     htm_NextFelt('15%');  htm_CentrOn($more='font-size:10px;');  echo 'SALDI - Version '.$Øprogvers;  htm_CentOff();       
@@ -90,7 +92,7 @@ function Rude_FootMenu($doPrint=true, $doErase=true, $doLookUp=true, $doAccept=t
 
 if (!function_exists('Rude_ProgramStatus')){
 function Rude_ProgramStatus() {
-  htm_Rude_Top($name='statform',$capt='@Program status',$parms='../_base/page_Gittermenu.php',$icon='fa-info-circle',$klasse='panelW480',__FUNCTION__);
+  htm_Rude_Top($name='statform',$capt='@Program status',$parms='../_base/page_Gittermenu.php',$icon='fa-info-circle',$klasse='panelW480',__FUNCTION__,'','');
   echo '<div style="text-align:center; color:red; background:white;"><big><i>'.htm_nl().
        tolk('@TEST udgave af').' SALDI:</i></big>'. htm_nl(3);
   echo tolk('@Dette er seneste version i udviklingen.'). htm_nl(2);

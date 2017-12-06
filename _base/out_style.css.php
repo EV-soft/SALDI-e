@@ -1,13 +1,14 @@
-<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2017-02-00';      $modulnr=0;
-  header("Content-type: text/css"); 
+<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2017-12-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
+/* ## Purpose: 'Design af out_* elementers udseende.';  */
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
+  global $ØPanelBgrd; 
+  if ($ØPanelBgrd=='') $ØPanelBgrd= '#FFEFDF'; 
 ?>
-/* ## Formål: Design af out_* elementers udseende.
- * Denne fil er oprettet af EV-soft  i 2017.
+/* Denne fil er oprettet af EV-soft  i 2016.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -17,16 +18,13 @@
  *
  * Filer skal gemmes i UTF-8 format uden BOM!
  * 2016.08.00 evs - EV-soft
- */
-<?php 
-  global $ØPanelBgrd, $ØPageBcgrd, $ØPageImage, $shadowBlur, $Øtema;
-/* 
+/*
   if ($ØPanelBgrd== '#D4FFFF')  {$ØPanelBgrd= '#FFFFD4';}  # Æggeskal
   else                          {$ØPanelBgrd= '#D4FFFF';}  # Turkis
   $ØPanelBgrd= '#FFFFD4';      #              '#F9F8F8';   # Lysgrå
   $ØPanelBgrd= '#EFEFEF';      #              '#EFEFEF';   # Brækket Hvid Tema-light
   $ØPanelBgrd= '#565656';      #              '#565656';   # Mørkgrå      Tema-dark
-*/
+* /
 if (($_SESSION['Øtema']=='dark') or ($Øtema=='dark')) { // Virker tilsyneladende ikke !
   $ØPanelBgrd= '#AAAA80';
   $ØPageBcgrd= '#112233';
@@ -54,7 +52,7 @@ highlight.string  #DD0000 Red
     --guulColor: #F3F033;
     --grenColor: #336600; 
     --grenColr1: #448800;   /* placeholder-text */
-    --blueColor: #4479ff;
+    --blueColor: green; /* #4479ff;   /* LysBlå: Labels Caption */ 
     --oranColor: #F37033;
     --brunColor: #550000;   /*  Tabel kanter  */
     --grayColor: #ACA9A8;
@@ -71,7 +69,8 @@ highlight.string  #DD0000 Red
 /*  --PanelBgrd: #FFFFC4;   /* Panelers baggrund  (æggeskalsfarve)*/
 /*  --PanelBgrd: #D4FFFF;   /* Panelers baggrund  (turkis)  */
     --PanelBgrd: #FFFFFF;   /* Panelers baggrund  (hvid)    */
-    --PanelBgrd: <?php global $ØPanelBgrd; echo $ØPanelBgrd; ?>;  /* Initieres i ../_base/_base_init.php */
+/*  --PanelBgrd: <?php global $ØPanelBgrd; echo $ØPanelBgrd; ?>;  /* Initieres i ../_base/_base_init.php */
+    --PanelBgrd: <?php echo $GLOBALS["ØPanelBgrd"]; ?>;
     --TapetBgrd: #44BB44;   /* Tapet baggrund  (æggeskalsfarve)    */
     --ButtnBgrd: #44BB44;   /* LysGrøn   */
     --ButtnText: #FFFFFF;   /* Hvid   */
@@ -90,6 +89,7 @@ highlight.string  #DD0000 Red
     --tblRowLgt: #f0f0f0;   /* Tabellinie med lys baggrund  */
     --btnTxNorm: #000000;   /* Standard tekst på knap */
     --btnTxOver: #900000;   /* Tekst på knap, når musen er over knappen */
+    --SkyTxNorm: #AAF;      /* Tekst med skygge #AAF; */
     
     /* Herudover forekommer green, blue, white, black og grånuancer, samt "importerede".  */
     /* Således kaldes farvekonstanter:    var(--GradiBott) */
@@ -113,6 +113,7 @@ body {
   margin: 0 auto 0 auto;
   width: 100%;
   max-width: 1200px;
+  text-align: center;
   font-size: 14px;
   font-family: sans-serif;
   line-height: 100%;
@@ -172,7 +173,7 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelWaut, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
+.panelWmax, .panelWaut, .panelW120, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
     border: 1px solid gray;
     background: var(--PanelBgrd);
     box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
@@ -182,6 +183,7 @@ body {
 }
 .panelWmax { /* width: 100%; */   }
 .panelWaut { width: auto;   }
+.panelW120 { width: 1200px; }
 .panelW110 { width: 1100px; }
 .panelW960 { width: 960px;  }
 .panelW720 { width: 720px;  }
@@ -191,7 +193,7 @@ body {
 .panelW240 { width: 240px;  }
 .panelW160 { width: 160px;  }
 .panelTitl {
-  font-size: 1.1em;
+  font-size: 1.0em;
   font-weight: 600;
   height: 1.4em;
   margin: 0.0em 0.4em;
@@ -463,7 +465,8 @@ input[type="date"] {
    height: 34px;
    -webkit-appearance: none;
 }
-colrlabl  { font-style: italic; font-weight: normal; font-size: 0.90em; color: blue;}
+colrlabl  { font-style: italic; font-weight: normal; font-size: 0.75em; color: var(--blueColor);}
+captlabl  { font-style: italic; font-weight: normal; font-size: 0.80em; color: brown;}
 a         { text-decoration: none;}
 i         { text-decoration: none;} 
 test      { display: inline;}
@@ -481,7 +484,7 @@ menuBg, titlBg
 titlBg {
  /*  transform: rotate(270deg); */
 }
-.btnTit {
+.btnTit { /* Titler i gittermenuens top-knapper: Vis ingen tooltip! */
 /*   content: attr(title); */
   font-size: 0.95em;
   position: absolute;
@@ -497,13 +500,15 @@ titlBg {
 }
 
 .btn       { color: var(--btnTxNorm); text-decoration: none;}
-.btn:hover { color: var(--btnTxOver); }
+.btn:hover { color: var(--btnTxOver); z-index: 777;}
 .btn {
   font-size: 0.85em;
-  white-space: nowrap;
+  white-space: pre-wrap;
+  /* min-width: 220px; */
   position: absolute;
   top: 43%;
   left: 50%;
+  z-index: 666;
   transform: translate(-50%, -50%);
   color: var(--btnTxNorm);
   margin-top: 3;
@@ -520,28 +525,35 @@ deaktiv_input[type="submit"][title],
 deaktiv_input[type="text"][title],
 .text[tiptxt]:hover:after,
 .th[tiptxt]:hover:after,
-.btn[tiptxt]:hover:after { /* Tip på grå gradient baggrund*/
+. [tiptxt]:hover:after { /* Tip på grå gradient baggrund*/
   content: attr(tiptxt);
-  white-space: pre-wrap;
-  min-width: 160px;
+  white-space: pre-wrap; 
+  height: 100%;
+  /* display: inline-block; */
+  min-width: 120px;
+  max-width: 240px;
+/*  min-height: 32px;   /* Problem med automatisk størrelse!  Baggrund tilpasser sig ikke til tekst */
   padding: 4px 8px;
   color: #333;
+  opacity: 0.9;
   position: absolute;
   bottom: 25px;    /* top: -70px; */
-  left: -25px;     /* right: -30%; */
-  z-index: 9999;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-box-shadow: 0px 0px 4px #222;
+  left:  -25px;    /* right: -30%; */
+  z-index: 19999;   /* */
+  
+  -moz-border-radius:     5px;
+  -webkit-border-radius:  5px;
+  border-radius:          5px;
+  
+  -moz-box-shadow:    0px 0px 4px #222;
   -webkit-box-shadow: 0px 0px 4px #222;
-  box-shadow: 0px 0px 4px #222;
-  background-image: -moz-linear-gradient(top, #ffffff, #cccccc);
+  box-shadow:         0px 0px 4px #222;
+  
   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #cccccc));
   background-image: -webkit-linear-gradient(top, #ffffff, #cccccc);
-  background-image: -moz-linear-gradient(top, #ffffff, #cccccc);
-  background-image: -ms-linear-gradient(top, #ffffff, #cccccc);
-  background-image: -o-linear-gradient(top, #ffffff, #cccccc);
+  background-image: -moz-linear-gradient(   top, #ffffff, #cccccc);
+  background-image: -ms-linear-gradient(    top, #ffffff, #cccccc);
+  background-image: -o-linear-gradient(     top, #ffffff, #cccccc);
 }
 
 button {
@@ -557,7 +569,8 @@ button {
   padding:4px; 
   font-size:0.80em; 
   font-weight: 700; 
-  /* color:'.$color=$ØTitleColr.'; */
+  width: 250px;
+  /* x            color:'.$color=$ØTitleColr.'; */
   transition: font-size 0.1s;
 }
 
@@ -569,32 +582,29 @@ button {
 
 /*************************************/
 /* 
-Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] med teksten [.tooltiptext] på lysfarvet shape-baggrund, når musen holdes over label
+Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] 
+       med teksten [.tooltiptext] på mørkfarvet shape-baggrund, når musen holdes over label
 */
 
-.titletip,
+/* 
+Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltip,
 .tooltipL, .tooltipR, .tooltipB, .tooltipT,
 .tooltipB1, .tooltipB2
 {   position: relative;
+    cursor: help;
     display: inline-block;
     background: white;
     border-radius:3px;
     border: 1px solid var(--GradiBott);
     box-shadow: 2px 2px 1px var(--ButtnShad);
     padding: 0px 3px 1px 3px;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
 }
 .tooltip{
-    text-shadow:1px 1px #AAF;
+    text-shadow:0px 1px var(--SkyTxNorm); /* 1px 1px var(--SkyTxNorm); */
 }
 
-.mytip 
-{   content: attr(titletip);
-    display: inline;
-}
-
-.mytip,
 /* .tooltip                                 /* LABEL som musen holdes over */
 .tooltiptext,                               /* Hjælpetekst som synliggøres */
 .tooltipL, .tooltipR, .tooltipB, .tooltipT, /* Bestemmer placering af Tip  */
@@ -612,18 +622,17 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] me
     border: 1px solid #555555;
     padding: 5px 3px;
     position: absolute;
-    z-index: 1;
+    z-index: 9999;
 }
 
 .tooltiptext,
-.tooltipT  {bottom: 20px;  left: -25px;}                    /* Plac over kilde - Inputfelters label */
-.tooltipB  {top: 22px;     left: -75px; min-width: 120px;}  /* Plac under kilde - Kolonneoverskrifter, hvor der ikke er plads ovenover. */
-.tooltipB1 {top: 22px;     left: 0px;   min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
-.tooltipB2 {top: 22px;     left: 28px;  min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
+.tooltipT  {bottom: 20px;  left: -25px;}                      /* Plac over kilde - Inputfelters label */
+.tooltipB  {top: 22px;     left: -90px;   min-width: 120px;}  /* Plac under kilde - Kolonneoverskrifter, hvor der ikke er plads ovenover. */
+.tooltipB1 {top: 22px;     left: -140px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
+.tooltipB2 {top: 22px;     left: 28px;    min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
 .tooltipL  {left: -26px;   margin-top: -28px;}
 .tooltipR  {right: -26px;  margin-top: -28px;}
 
-.mytip:hover .tooltiptext,
 /* .tooltipL:hover .tooltiptext,
 .tooltipR:hover .tooltiptext,
 .tooltipT:hover .tooltiptext, */
@@ -642,34 +651,62 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] me
   color: var(--HintsText);
   /* opacity: 0.99; */
   visibility: visible;
-  text-shadow:0px 0px #AAF;
+  z-index: 999;
+  text-shadow: 0px 0px  var(--SkyTxNorm);
+
 }
 
-ax        { color: var(--btnTxNorm); text-decoration: none;}
-ax:hover  { color: var(--btnTxOver); }
-ax[title]:hover:after {
-  content: attr(title);
+
+/* 
+Custom tiptxt benyttet til menuers navigations-knapper: */
+img,
+  a, 
+ ax        { color: var(--btnTxNorm); text-decoration: none;}
+
+img:hover,
+  a:hover, 
+ ax:hover  { color: var(--btnTxOver); }
+
+img[tiptxt]:hover:after,  /* Fremover: Udskift title med tiptxt, for at benytte custom-tip   */
+  a[tiptxt]:hover:after,
+ a1[tiptxt]:hover:after,  
+  a[title]:hover:after, 
+ ic[title]:hover:after, 
+img[title]:hover:after, 
+ ax[title]:hover:after {
+/*
+Forgrund Udseende:     */
+  content: attr(tiptxt);
   padding: 4px 8px;
   color: #333;
   position: absolute;
-  left: -25px;
-  top: 100%;
-  white-space: nowrap;
-  z-index: 20px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  left: -80px;
+  top: 60px;
+  max-width: 240px;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+  z-index: 5999;
+/*
+Baggrund Udseende:   */  
+  -moz-border-radius:     5px;
+  -webkit-border-radius:  5px;
+  border-radius:          5px;
+  
   -moz-box-shadow: 0px 0px 4px #222;
   -webkit-box-shadow: 0px 0px 4px #222;
   box-shadow: 0px 0px 4px #222;
-  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #cccccc));
-  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+  
+  background-image: -moz-linear-gradient(top, #ffffff, #dddddd);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #dddddd));
+  background-image: -webkit-linear-gradient(top, #ffffff, #dddddd);
+  background-image: -moz-linear-gradient(top, #ffffff, #dddddd);
+  background-image: -ms-linear-gradient(top, #ffffff, #dddddd);
+  background-image: -o-linear-gradient(top, #ffffff, #dddddd);
 }
 
+  a1[tiptxt]:hover:after
+  {left: -5px;}  /*  Log ud: Der er ikke plads nok til venstre */
+  
 /*************************************/
 
 /* Tabel med Fastlåst Header: */
@@ -930,7 +967,7 @@ hr.style18:before {
 /* http://stackoverflow.com/questions/1964839/how-can-i-create-a-please-wait-loading-animation-using-jquery */
 .modal {
     display:    none;
-    position:   fixed;    z-index:    1000;
+    position:   fixed;    z-index:    9999;
     top:        0;        left:       0;
     height:     100%;     width:      100%;
     background: rgba( 255, 255, 255, .8 ) 
@@ -944,3 +981,26 @@ body.loading {      /* When the body has the loading class, we turn the scrollba
 body.loading .modal {/* Anytime the body has the loading class, our modal element will be visible */
     display: block;
 }
+
+
+#grid{
+    background-color: transparent;
+    background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, 
+                           transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), 
+                     linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, 
+                           transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+    height:100%;
+    background-size: 10mm 10mm;
+}
+
+@media print {  /* https://stackoverflow.com/questions/468881/print-div-id-printarea-div-only */
+  body * { visibility: hidden;  }
+  #section-to-print, #section-to-print * { visibility: visible; }
+  #section-to-print { position: absolute; left: 0; top: 0;  }
+}
+
+
+* { padding:0; margin:0; }
+#showinfo { position:absolute; top:150mm; left:-80px; background-color:black; color:white; border-radius: 5px; padding:8px 16px; width:160px; transform: rotate(270deg); font-size: 14px;
+  font-family: sans-serif;  text-align: center;
+  }

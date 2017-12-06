@@ -1,48 +1,56 @@
-<?php $DocFil= '../_base/htm_pageHead.php';   $DocVer='5.0.0';    $DocRev='2017-08-00';   $modulnr=0;
+<?php $DocFil= '../_base/htm_pageHead.php';   $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+// ## Purpose: 'Denne fil klargoer en side med initiering af php-filer og indledende HTML-kode.';
+  session_start();                                    #+  Nødvendig for bevarelse af globale værdier
+ // $currDir= dirname(__FILE__).'/';
   $ØProgRoot= $_SERVER['DOCUMENT_ROOT']."/saldi-e/";
-  $ØProgRoot= "../";  $_base= '_base/';    $_config= '_config/';    $_assets= '_assets/';   $_system= '_system/';
+  $ØProgRoot= "./../";  //  Relativ i 1. subniveau
+//  $ØProgRoot= "./../../";  //  Relativ i 2. subniveau
+  //  define('ROOT_PATH', dirname(__DIR__) . '/');
+  //  $ØProgRoot= dirname(__DIR__) .  '/';
+  $_base= '_base/';    $_config= '_config/';    $_assets= '_assets/';   $_system= '_system/';   //  $ØProgRoot= "../";  
 //  set_include_path(get_include_path().    PATH_SEPARATOR. '/saldi-e'.          PATH_SEPARATOR. '/saldi-e/_config'. 
 //  PATH_SEPARATOR. '/saldi-e/_base'.       PATH_SEPARATOR. '/saldi-e/_assets'.  PATH_SEPARATOR. '/saldi-e/_assets/js'.  
 //  PATH_SEPARATOR. '/saldi-e/_system'.     PATH_SEPARATOR. '/saldi-e/_assets/font-awesome'.
 //  PATH_SEPARATOR. '/saldi-e/_base/_admin');   //  Dette virker ikke altid!
   
 //  echo ' DIR: '.__DIR__."<br/>";  echo 'FILE: '.__FILE__."<br/>";  echo 'BASE: '.__BASE__ ."<br/>";  echo 'NAME: '.dirname("saldi-e")."<br/>";  echo "Include_Path: ".get_include_path()."<br>";
+#  echo $ØProgRoot.'<br>';
+#  set_include_path('../'.dirname(__FILE__) );
+#  echo get_include_path().'<br>'.dirname(__FILE__).'<br>';
   
-  session_start();                                    #+  Nødvendig for bevarelse af globale værdier
-  include_once $ØProgRoot.$_base."out_init.php";      #+  Nødvendig global initiering
-/* ## Formål: Denne fil klargør en side med initiering af php-filer og indledende HTML-kode.
- * Denne fil er oprettet af EV-soft  i 2017.
+  include_once "out_init.php";      #+  Nødvendig global initiering
+/* Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
  */
-  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'htm_pageHead');
-# include_once $ØProgRoot.$_base."out_init.php";      #+  Nødvendig global initiering - indlæses i tidligere linie !
-  include_once $ØProgRoot.$_base."out_base.php";      #+  Grundmoduler, nødvendige for rude-systemet!                                                    
-  include_once $ØProgRoot.$_base."out_ruder.php";     #0  Konstruktion af samtlige ruder. Kan overspringes, hvis page_* indeholder en kopi af det nødvendige.
-#-include_once $ØProgRoot.$_base."out_vinduer.php";   #-  Eksempelsamling: kombination af ruder.                                                       
-  include_once $ØProgRoot.$_base."msg_lib.php";       #+  Nødvendigt dialog-system                                                                       
-  include_once $ØProgRoot.$_base."std_func.php";      #+  Standard blandede funktioner                                                                            
-  include_once $ØProgRoot.$_base."fil_func.php";      #+  Funktioner med filer involveret                                                                
-  include_once $ØProgRoot.$_base."dbi_func.php";      #+  Forbedrede DataBase-funktioner, kompatible med PHP7                                            
-  include_once $ØProgRoot.$_base."version.php";       #+  Initiering af globale konstanter                                          
- // include_once $ØProgRoot.$_config."connect.php";   #+  Database tilkobling
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,'htm_pageHead');
+# include_once "out_init.php";      #+  Nødvendig global initiering - indlæses i tidligere linie !
+  include_once "out_base.php";      #+  Grundmoduler, nødvendige for rude-systemet!                                                    
+  include_once "out_ruder.php";     #0  Konstruktion af samtlige ruder. Kan overspringes, hvis page_* indeholder en kopi af det nødvendige.
+#-include_once "out_vinduer.php";   #-  Eksempelsamling: kombination af ruder.                                                       
+  include_once "msg_lib.php";       #+  Nødvendigt dialog-system                                                                       
+  include_once "std_func.php";      #+  Standard blandede funktioner                                                                            
+  include_once "fil_func.php";      #+  Funktioner med filer involveret                                                                
+  include_once "dbi_func.php";      #+  Forbedrede DataBase-funktioner, kompatible med PHP7                                            
+  include_once "version.php";       #+  Initiering af globale konstanter                                          
+  include_once $ØProgRoot.$_config."connect.php";   #+  Database tilkobling
 //  Andre individuelle:                               #?  Indlæses efter behov i aktuel page_*
   
 //  global $pageTitl, $ØsprogTabl, $ØprogSprog, $ØPageImage, $ØPageLogo, $Ødebug, $ØRollTabl, $Øtema;
   $ØprogSprog= $_SESSION['ØprogSprog'];# Sprog i programfladen
-  $ØsprogCol= $_SESSION['ØsprogCol']; # Benyttes i Rude_LanguageJuster
-  $ØsprogRow= $_SESSION['ØsprogRow']; # Benyttes i Rude_LanguageJuster
-  $Ønovice  = $_SESSION['Ønovice'  ]; # Udvid visning af brugertip
-  $ØFullFilt= $_SESSION['ØFullFilt']; # Vis hjælpetekster til filter-funktionalitet
-  $ØTastkeys= $_SESSION['ØTastkeys']; # Vis Tast-genveje på navigationstaster
-  $ØRollTabl= $_SESSION['ØRollTabl']; # Sæt $ViewHeight= '99999px medfører "printlayoyt" af tabeller
-  $ØRollTabl= true;
-  $Øtema    = $_SESSION['Øtema'];
+  $ØsprogCol = $_SESSION['ØsprogCol']; # Benyttes i Rude_LanguageJuster
+  $ØsprogRow = $_SESSION['ØsprogRow']; # Benyttes i Rude_LanguageJuster
+  $Ønovice   = $_SESSION['Ønovice'  ]; # Udvid visning af brugertip
+  $ØFullFilt = $_SESSION['ØFullFilt']; # Vis hjælpetekster til filter-funktionalitet
+  $ØTastkeys = $_SESSION['ØTastkeys']; # Vis Tast-genveje på navigationstaster
+  $ØRollTabl = $_SESSION['ØRollTabl']; # Sæt $ViewHeight= '99999px medfører "printlayoyt" af tabeller
+  $ØRollTabl = true;
+  $Øtema     = $_SESSION['Øtema'];
   
 // Debug-indstilling:
 // $Ødebug= true;   $GLOBALS["Ødebug"]= true;   //  debug kan også aktiveres midlertidigt ved tilføjelse af: ?debug=true i adressefeltet
@@ -51,7 +59,7 @@ $Ødebug= false;
 
 // JavaScript benyttes til:
 // PopUp-dialog, Tabel-sortering, (Date-picker), PassWord-styrke måler, ToolTip-visning
-
+  global $pageTitl; //  Tildeles værdi i aktuel page_-fil som kalder htm_pageHead.php
   ### Side-start:
   echo '<!DOCTYPE html>';
   echo '<html lang="da" dir="ltr">';
@@ -82,7 +90,7 @@ dvl_ekko('htm_pageHead  1 ');
   echo '  <script src="https://code.jquery.com/jquery-1.12.4.js">           </script>';
   echo '  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">     </script>';
   echo '  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>   <!-- Forberedelse for datepicker med regionale tekster -->';
-  echo '  <script>  $( function() { $( "#datepicker" ).datepicker({ showWeek: true, firstDay: 1 }); } )';
+  echo '  <script>  $( function() { $( "#datepicker" ).datepicker({ showWeek: true, firstDay: 1 }); } );';
 //  <!-- Vis Uge-nr http://api.jqueryui.com/datepicker/#option-showWeek -->';
   echo '            $.datepicker.setDefaults( $.datepicker.regional[ "da" ] );';   // <!-- Benyt danske tekster -->
   echo '  </script>';
@@ -109,13 +117,34 @@ echo '		$(".south-west-alt").powerTip({ placement: "sw-alt" });';
 echo '		$(".south-east-alt").powerTip({ placement: "se-alt" });';
 echo '	});';
 echo '</script>';
-echo '<style>';
-echo '  #powerTip {color:#000; font: 14px/18px Arial, Sans-serif;}';
-echo '</style>';
+
+//echo '<style>';
+//echo '  #powerTip {color:#000; font: 14px/18px Arial, Sans-serif;}';
+//echo '</style>';
   
 //<!-- /POWERTIP -->
 
-dvl_ekko('htm_pageHead  3 ');
+//echo "<script> $('a[href][title]').tooltip({ show: { delay: 9000 }}); </script>";
+
+/* 
+?>
+<script>
+  $(".a").hover(function(){
+        var title = 
+        $(this).attr("title");              // Get the current title
+        $(this).attr("tmp_title", title);   // Store it in a temporary attribute
+        $(this).attr("title","");           // Set the title to nothing so we don't see the tooltips
+    });
+  $(".a").click(function(){                 // Fired when we leave the element
+        var title = 
+        $(this).attr("tmp_title");          // Retrieve the title from the temporary attribute
+        $(this).attr("title", title);       // Return the title to what it was
+    });
+</script>
+<?php
+*/
+
+ dvl_ekko('htm_pageHead  3 ');
   
 #  echo '  <link rel="icon" type="image/png" sizes="32x32" href="'.$ØProgRoot.$_assets.'images/favicon-32x32.png">';
 #  echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'font-awesome/css/font-awesome.min.css" emne= "ICON-system">';
@@ -156,9 +185,12 @@ dvl_ekko('htm_pageHead  3 ');
   
 #  echo '<script>  $( function() { $( "#datepicker" ).datepicker(); } );  </script>';
 #  echo '<script>$( "#datepicker" ).datepicker();</script>';
-  
+
+ 
   echo "\n</head>";
   echo "\n<body>\n";
+
+
   if ($ØsprogTabl==NULL) sprogDB_import();
 ### Benyt URL-parameter variabler: (ØprogSprog har højere prioritet, end brugervalg!)
   $str= $_GET['sprog'];   if ($str) $ØprogSprog= $str; 

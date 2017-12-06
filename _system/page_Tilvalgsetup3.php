@@ -1,11 +1,11 @@
-<?php   $DocFil= '../_base/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-/* ## Formål:  3. indstillingsmenu: Tilvalg
+<?php   $DocFil= '../_system/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $DocIni='evs';  $ModulNr=2;
+/* ## Purpose: ' 3. indstillingsmenu: Tilvalg';
  *             ___   _   _    ___  _         
- *            / __| /_\ | |  |   \| |   ___ 
- *            \__ \/ _ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+* LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
  */
 #  global $debug;  $debug= true;

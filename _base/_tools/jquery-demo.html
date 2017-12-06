@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta  name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Demoer</title>
+<!-- Nyeste JQuery: -->
+  <link   rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link   rel="stylesheet" href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
+  <!-- <script src="../../_assets/js/1.9.1/jquery-1.9.1.js">           </script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js">           </script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">     </script>  
+  
+  
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>  <!-- Forberedelse for datepicker med regionale tekster -->
+<!-- PowerTip ToolTip: -->
+	<script type="text/javascript" src="./PowerTip/jquery.powertip.js"></script>
+	<link rel="stylesheet" type="text/css" href="./PowerTip/css/jquery.powertip-white.css" />   
+  
+<!-- DATEPICKER: -->
+  <script>  $( function() { $( "#datepicker" ).datepicker({ 
+                showWeek: true, firstDay: 1,              <!-- Vis Uge-nr http://api.jqueryui.com/datepicker/#option-showWeek -->
+                changeMonth: true,  
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: "yy-mm-dd"}); } ); 
+            $.datepicker.setDefaults( $.datepicker.regional[ "da" ] );    <!-- Benyt danske tekster -->
+  </script>
+  <style> 
+    .ui-datepicker.table { text-align: center; font-weight:600;}  /*<!-- UgeNr --> */
+  </style>
+<!-- /DATEPICKER: -->
+  
+<!-- DIALOG: -->
+  <script>  
+    $( function() { $( "#dialog" )  .dialog();  
+    } );
+    $( function() { $( "#dialog-confirm" ).dialog({
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      buttons: {
+        "Luk" : function() { $( this ).dialog( "close" ); },
+        Cancel: function() { $( this ).dialog( "close" ); }
+        }
+      });
+    } );
+  </script>
+   <style>  
+    .ui-dialog .ui-dialog-titlebar    { background: #FEEFB3}
+    .ui-dialog .ui-dialog-buttonpane  { background: #FEEFB3}
+   </style>  
+<!-- /DIALOG: -->
+
+<!-- TOOLTIP: -->
+  <script> 
+    $( function() { $( document )   .tooltip( 
+      <!-- "option", "position", { my: "center+3 bottom-3", at: "center top", collision: "fit"} -->
+      
+    ); } ); 
+<!--     $('#tooltip').position({ of: currentTipHolder,  at: 'center top', my: 'center bottom' }); -->
+  </script>
+  <style>
+    .ui-tooltip {	padding: 5px;	position: absolute;	z-index: 9999;	max-width: 200px;}
+    body .ui-tooltip { border-width: 2px; }
+    
+<!-- /* Corner radius */ -->
+    .ui-corner-all, .ui-corner-top,    .ui-corner-left,  .ui-corner-tl { border-top-left-radius: 4px; }
+    .ui-corner-all, .ui-corner-top,    .ui-corner-right, .ui-corner-tr { border-top-right-radius: 4px; }
+    .ui-corner-all, .ui-corner-bottom, .ui-corner-left,  .ui-corner-bl { border-bottom-left-radius: 4px; }
+    .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border-bottom-right-radius: 4px; }
+    .ui-widget-shadow {	-webkit-box-shadow: 4px 4px 5px #666666;	box-shadow: 4px 4px 5px #666666; }
+  </style>
+<!-- /TOOLTIP: -->
+
+
+  <style custom>  /* <!-- EV-soft: supplerende custom style --> */
+    label  {display: inline-block;  width: 4.5em; text-align:right;}   /*   <!-- Label foran input-felter -->*/
+    input  {width:6em; text-align:center;}                              /*  <!-- Tekstjustering i input-felter --> */
+   <!--  td, th {border: 1px solid #dddddd; text-align: left; padding: 2px; } -->
+    tr:nth-child(even) {background-color: #eeeeee;  }                   /*  <!-- Zebra-background --> */
+    body {background-color: #def; }
+    #powerTip {color:#000; font: 14px/18px Arial, Sans-serif;}
+    
+  </style>
+  
+  
+<!-- TABLESORTER: -->
+  <!-- http://tablesorter.com/docs/   https://mottie.github.io/tablesorter/ https://github.com/Mottie/tablesorter/blob/master/README.md -->
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.blue.css">                         <!-- choose a theme file -->
+  <link    rel="stylesheet"     href="./tablesorter-master/css/theme.green-saldi.css">                  <!-- choose a theme file -->
+<!--  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>           <!- -load latest jQuery scripts: i starten af Head -->
+  <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.js"></script>          <!-- load tablesorter scripts -->
+  <script type="text/javascript" src="./tablesorter-master/js/jquery.tablesorter.widgets.js"></script>  <!-- tablesorter widgets (optional) -->
+<!-- 	
+	<script src="./tablesorter-master/js/widgets/widget-filter.js"></script>
+	<script src="./tablesorter-master/js/widgets/widget-grouping.js"></script>    <!-- grouping widget - ->
+  <script src="./tablesorter-master/js/widgets/widget-storage.js"></script>
+  <script src="./tablesorter-master/js/widgets/widget-pager.js"></script>
+  <!-- Grouping widget - ->
+  <link  href="./tablesorter-master/css/widget.grouping.css" rel="stylesheet"> <!-- added v2.28.4 widget.group.css ell. widget.grouping.css ? - ->
+  <script src="./tablesorter-master/js/parsers/parser-input-select.js"></script>
+  <script src="./tablesorter-master/js/parsers/parser-date-weekday.js"></script>
+  <!-- <script src="./tablesorter-master/js/widgets/widget-grouping.js"></script> Indlæst ovenfor! - ->
+ -->
+  <script src="./tablesorter-master/js/widgets/widget-editable.js"></script>
+  <script>  $(document).ready(function() { $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); } ); </script>  
+  
+  <script>  $(function(){$("table").tablesorter({  <!-- call the tablesorter plugin -->
+    theme         : "blue",
+    cssInfoBlock  : "tablesorter-no-sort",
+    widthFixed    : true,
+    showProcessing: true,
+    widgets       : ["zebra", "columns", "filter", 'stickyHeaders', 'editable', 'columnSelector', 'scroller'],  <!-- initialize zebra striping of the table -->
+    widgetOptions : {zebra: ["even", "odd"],         <!-- "normal-row", "alt-row"  -->
+      ignoreCase  : false,
+      
+ <!-- FILTER: -->
+      <!-- filter_reset         : '.reset', -->
+      filter_childRows     : true,
+      filter_childByColumn : true,
+      filter_childWithSibs : false,
+      filter_columnFilters : true,
+      filter_hideEmpty     : false,
+      filter_hideFilters   : false,
+ <!-- /FILTER -->
+      
+ <!-- SORTERING: -->
+      sortReset     : true,           // third click on the header will reset column to default - unsorted   
+      sortRestart   : true,           // Resets the sort direction so that clicking on an unsorted column will sort in the sortInitialOrder direction.
+      sortInitialOrder: "desc",
+      headers : { <!-- Dummy: uden virkning -->
+        90 : { lockedOrder: "asc" }, // only allow sorting in one direction
+        93 : { sortInitialOrder: "asc" },
+        94 : { sortInitialOrder: "asc" },
+        95 : { sortInitialOrder: "asc" }
+      },
+<!-- /SORTERING -->
+ 
+ <!-- EDITERING: -->
+      editable_columns       : [2,3,4],       // or "0-2" (v2.14.2); point to the columns to make editable (zero-based index)
+      editable_enterToAccept : true,          // press enter to accept content, or click outside if false
+      editable_autoAccept    : true,          // accepts any changes made to the table cell automatically (v2.17.6)
+      editable_autoResort    : false,         // auto resort after the content has changed.
+      editable_validate      : null,          // return a valid string: function(text, original, columnIndex){ return text; }
+      editable_focused       : function(txt, columnIndex, $element) { 
+        $element.addClass('focused');         // $element is the div, not the td
+      },                                      // to get the td, use $element.closest('td')
+      editable_blur          : function(txt, columnIndex, $element) {
+        // $element is the div, not the td
+        // to get the td, use $element.closest('td')
+        $element.removeClass('focused');
+      },
+      editable_selectAll     : function(txt, columnIndex, $element){
+        // note $element is the div inside of the table cell, so use $element.closest('td') to get the cell
+        // only select everthing within the element when the content starts with the letter "B"
+        return /^b/i.test(txt) && columnIndex === 0;
+      },
+      editable_wrapContent   : '<div>',       // wrap all editable cell content... makes this widget work in IE, and with autocomplete
+      editable_trimContent   : true,          // trim content ( removes outer tabs & carriage returns )
+      editable_noEdit        : 'no-edit',     // class name of cell that is not editable
+      editable_editComplete  : 'editComplete' // event fired after the table content has been edited
+<!-- /EDITERING -->
+     }
+  }); 
+   $('button[data-filter-column]').click(function(){
+    /*** first method *** data-filter-column="1" data-filter-text="!son"
+      add search value to Discount column (zero based index) input */
+    var filters = [],
+      $t = $(this),
+      col = $t.data('filter-column'), // zero-based index
+      txt = $t.data('filter-text') || $t.text(); // text to add to filter
+
+    filters[col] = txt;
+    // using "table.hasFilters" here to make sure we aren't targeting a sticky header
+    $.tablesorter.setFilters( $('#table'), filters, true ); // new v2.9
+
+    /** old method (prior to tablsorter v2.9 ***
+    var filters = $('table.tablesorter').find('input.tablesorter-filter');
+    filters.val(''); // clear all filters
+    filters.eq(col).val(txt).trigger('search', false);
+    ******/
+
+    /*** second method ***
+      this method bypasses the filter inputs, so the "filter_columnFilters"
+      option can be set to false (no column filters showing)
+    ******/
+    /*
+    var columns = [];
+    columns[5] = '2?%'; // or define the array this way [ '', '', '', '', '', '2?%' ]
+    $('table').trigger('search', [ columns ]);
+    */
+
+    return false;
+  });
+
+});
+  </script> 
+  <style>  <!-- /* Extra selectors needed to override the default styling */ -->
+    table.tablesorter thead th,
+    table.tablesorter tfoot th    { text-align: left;  }
+    table.tablesorter tbody tr td { padding: 2px 6px; }
+    table.tablesorter tbody tr.odd  td { background: #888; color: #fff; }
+    table.tablesorter tbody tr.even td { background: #555; color: #fff; }
+   </style>
+
+ <script> 
+$(function() {
+  $("#table").tablesorter({           // call the tablesorter plugin
+    theme: 'blue',
+    widthFixed : true,                // hidden filter input/selects will resize the columns, so try to minimize the change
+    widgets: ["zebra", "filter"],     // initialize zebra striping and filter widgets
+    ignoreCase: false,
+    widgetOptions : {                 // filter_anyMatch options was removed in v2.15; it has been replaced by the filter_external option   
+      filter_childRows : false,       // If there are child rows in the table (rows with class name from "cssChildRow" option)
+                                      // and this option is true and a match is found anywhere in the child row, then it will make that row
+                                      // visible; default is false
+      filter_childByColumn : false,   // if true, filter child row content by column; filter_childRows must also be true
+      filter_childWithSibs : true,    // if true, include matching child row siblings
+      filter_columnFilters : true,    // if true, a filter will be added to the top of each table column;
+                                      // disabled by using -> headers: { 1: { filter: false } } OR add class="filter-false"
+                                      // if you set this to false, make sure you perform a search using the second method below
+      filter_columnAnyMatch: true,    // if true, allows using "#:{query}" in AnyMatch searches (column:query; added v2.20.0)
+      filter_cellFilter : '',         // extra css class name (string or array) added to the filter element (input or select)
+      filter_cssFilter : '', // or [] // extra css class name(s) applied to the table row containing the filters & the inputs within that row
+                                      // this option can either be a string (class applied to all filters) or an array (class applied to indexed filter)
+      filter_defaultFilter : {},      // add a default column filter type "~{query}" to make fuzzy searches default;
+                                      // "{q1} AND {q2}" to make all searches use a logical AND.
+      filter_excludeFilter : {},      // filters to exclude, per column
+      filter_external : '',           // jQuery selector (or object) pointing to an input to be used to match the contents of any column
+                                      // please refer to the filter-any-match demo for limitations - new in v2.15
+      filter_filteredRow: 'filtered', // class added to filtered rows (rows that are not showing); needed by pager plugin
+      filter_formatter : null,        // add custom filter elements to the filter row
+                                      // see the filter formatter demos for more specifics
+      filter_functions : null,        // add custom filter functions using this option
+                                      // see the filter widget custom demo for more specifics on how to use this option
+      filter_hideEmpty : true,        // hide filter row when table is empty
+      filter_hideFilters : false,      // if true, filters are collapsed initially, but can be revealed by hovering over the grey bar immediately
+                                      // below the header row. Additionally, tabbing through the document will open the filter row when an input gets focus
+                                      // in v2.26.6, this option will also accept a function
+      filter_ignoreCase : true,       // Set this option to false to make the searches case sensitive
+      filter_liveSearch : true,       // if true, search column content while the user types (with a delay).
+                                      // In v2.27.3, this option can contain an
+                                      // object with column indexes or classnames; "fallback" is used
+                                      // for undefined columns
+      filter_matchType :              // global query settings ('exact' or 'match'); overridden by "filter-match" or "filter-exact" class
+        { 'input': 'exact', 'select': 'exact' }, 
+      filter_onlyAvail : 'filter-onlyAvail',  // a header with a select dropdown & this class name will only show available (visible) options within that drop down.
+      filter_placeholder :            // default placeholder text (overridden by any header "data-placeholder" setting)
+        { search : '', select : '' },
+      filter_reset : 'button.reset',  // jQuery selector string of an element used to reset the filters
+      filter_resetOnEsc : true,       // Reset filter input when the user presses escape - normalized across browsers
+      filter_saveFilters : true,      // Use the $.tablesorter.storage utility to save the most recent filters (default setting is false)
+      filter_searchDelay : 300,       // Delay in milliseconds before the filter widget starts searching; This option prevents searching for
+                                      // every character while typing and should make searching large tables faster.
+      filter_searchFiltered: true,    // allow searching through already filtered rows in special circumstances; will speed up searching in large tables if true
+      filter_selectSource  : null,    // include a function to return an array of values to be added to the column filter select
+      filter_serversideFiltering : false, // if true, server-side filtering should be performed because client-side filtering will be disabled, but
+                                          // the ui and events will still be used.
+      filter_startsWith : false,      // Set this option to true to use the filter to find text from the start of the column
+                                      // So typing in "a" will find "albert" but not "frank", both have a's; default is false
+      filter_useParsedData : false,   // Filter using parsed content for ALL columns
+                                      // be careful on using this on date columns as the date is parsed and stored as time in seconds
+      filter_defaultAttrib : 'data-value',// data attribute in the header cell that contains the default filter value
+      filter_selectSourceSeparator : '|'  // filter_selectSource array text left of the separator is added to the option value, right into the option text
+    }
+  });
+
+  
+  $('.resetsaved').click(function(){  // Clear stored filters - added v2.25.6
+    $('#table').trigger('filterResetSaved');
+
+    var $message = $('<span class="results"> Reset</span>').insertAfter(this);  // show quick popup to indicate something happened
+    setTimeout(function(){
+      $message.remove();
+    }, 500);
+    return false;
+  });
+
+  // External search
+  // buttons set up like this:
+  // <button type="button" data-filter-column="4" data-filter-text="2?%">Saved Search</button>
+  $('button[data-filter-column]').click(function(){
+    /*** first method *** data-filter-column="1" data-filter-text="!son"
+      add search value to Discount column (zero based index) input */
+    var filters = [],
+      $t = $(this),
+      col = $t.data('filter-column'), // zero-based index
+      txt = $t.data('filter-text') || $t.text(); // text to add to filter
+
+    filters[col] = txt;
+    // using "table.hasFilters" here to make sure we aren't targeting a sticky header
+    $.tablesorter.setFilters( $('#table'), filters, true ); // new v2.9
+
+    /** old method (prior to tablsorter v2.9 ***
+    var filters = $('table.tablesorter').find('input.tablesorter-filter');
+    filters.val(''); // clear all filters
+    filters.eq(col).val(txt).trigger('search', false);
+    ******/
+
+    /*** second method ***
+      this method bypasses the filter inputs, so the "filter_columnFilters"
+      option can be set to false (no column filters showing)
+    ******/
+    /*
+    var columns = [];
+    columns[5] = '2?%'; // or define the array this way [ '', '', '', '', '', '2?%' ]
+    $('table').trigger('search', [ columns ]);
+    */
+    return false;
+  });
+});
+ </script> 
+<!-- /TABLESORTER: -->
+
+<!-- POWERTIP: -->
+   <script type="text/javascript">
+		$(function() {
+			// placement examples
+			$('.north').powerTip({ placement: 'n' });
+			$('.east' ).powerTip({ placement: 'e' });
+			$('.south').powerTip({ placement: 's' });
+			$('.west' ).powerTip({ placement: 'w' });
+			$('.north-west').powerTip({ placement: 'nw' });
+			$('.north-east').powerTip({ placement: 'ne' });
+			$('.south-west').powerTip({ placement: 'sw' });
+			$('.south-east').powerTip({ placement: 'se' });
+			$('.north-west-alt').powerTip({ placement: 'nw-alt' });
+			$('.north-east-alt').powerTip({ placement: 'ne-alt' });
+			$('.south-west-alt').powerTip({ placement: 'sw-alt' });
+			$('.south-east-alt').powerTip({ placement: 'se-alt' });
+		});
+	</script>
+<!-- /POWERTIP -->
+
+
+</head>
+
+
+<body>
+  
+  <h3>JQ-Datepicker</h3>
+  <label for="datepicker">Dato:</label>
+  <input type="text" id="datepicker" class="north" style="text-shadow:1px 2px #aaa;" title="Her vælger du en dato på en kalender." placeholder="åååå-mm-dd">
+
+   
+  <div id="dialog" title="JQ-Simpel dialog">
+    <p>Dette er standard dialogen, som er nyttig til at vise information. Dialog vinduet kan flyttes, ændre størrelse og lukkes med  `x´ iconen.</p>
+  </div>
+  
+   <div id="dialog-confirm" title="JQ-Modal dialog">
+    <p>Dette er modal dialogen, som sikrer at brugeren har taget stilling til et vigtigt problem. Dialog vinduet kan flyttes, ændre størrelse og lukkes med  `x´ iconen.</p>
+  </div>
+   
+   
+  <h3>JQ-Tooltips</h3>
+  <p><a href="#" title="That&apos;s what this widget is">Tooltips</a> can be attached to any element. When you hover
+  the element with your mouse, the title attribute is displayed in a little box next to the element, just like a native tooltip.</p>
+  <p>But as it´s not a native tooltip, it can be styled. Any themes built with
+  <a href="http://jqueryui.com/themeroller/" title="ThemeRoller: jQuery UI&apos;s theme builder application">ThemeRoller</a>
+  will also style tooltips accordingly.</p>
+  <p>Tooltips are also useful for form elements, to show some additional information in the context of each field.</p><br/>
+  JQ-Tooltips benyttes ikke. PowerTip er mere velegnet, med inteligent placering, i forhold til vindue og objekt.
+  <p><label for="alder">Din alder:&nbsp;</label><input id="alder" class="north" 
+      style="text-shadow:1px 2px #aaa;" title="Vi benytter kun din alder til statistiske formål." placeholder="Et tal...">
+  </p>
+  <p>Hold musen over feltet for at se tooltippet.</p>
+  
+  
+  <h3>JS-Sorterbar tabel med: zebra-striber, body-gruppering, (filtrering, data-redigering, body-scrolling, sticky-header).</h3>
+  Alt foregår client-side, uden behov for side-genopfriskning.<br><br>
+  Søg <button type="button" class="north-west" style="text-shadow:1px 2px #aaa;" title="Test" data-filter-column="3" data-filter-text="5?">5?</button> i Gæld kolonnen<br>
+      <button type="button" class="reset">Reset</button> <!-- targeted by the "filter_reset" option -->
+      <button type="button" class="resetsaved" title="Reload the page to see that the saved filters have cleared">Reset Saved Filters</button>
+
+
+  <table id="myTable" class="tablesorter-green" style="width:50em; background:#ffffff;  margin-left: auto;  margin-right: auto;" > 
+    <thead> 
+      <tr class="tablesorter-ignoreRow">  
+        <td style="border: 0;" colspan="4" ><big> DATA-TABEL: </big></td>
+        <td style="border: 0; text-align:right">
+          <button type="button" class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Angiv søgekriterier i felterne, og få vist data, der svarer dertil" 
+          data-filter-column="3" data-filter-text="?"> Vis/skjul Søge-felter
+        </button></td>
+      </tr>
+      <tr> 
+        <th class="north-west-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg <d" class="filter-match">Efternavn</td>    
+        <th class="filter-select" data-placeholder="Søg <d" >Fornavn</th>   
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg hot">Email</th>    
+        <th class="north"          style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg >50">Gæld</th>    
+        <th class="north-east-alt" style="text-shadow:1px 2px #aaa;" title="Klik på overskriften, for at sortere på denne kolonne." data-placeholder="Søg ww" >Hjemmeside</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+    </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Sum information for gruppen ovenfor. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody class="tablesorter-no-sort">
+      <tr><th colspan="5" style="text-align: left;">Andre oplysninger. <small>(sorteres ikke)</small></th></tr>
+    </tbody>
+    <tbody>
+      <tr>  <td>Doe</td>    <td>Jason</td>  <td>jdoe@hotmail.com</td>       <td style="text-align:right;">100.00 Kr</td> <td>http://www.jdoe.com</td>      </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Conway</td> <td>Tim</td>    <td>tconway@earthlink.net</td>  <td style="text-align:right;">50.00 Kr</td>  <td>http://www.timconway.com</td> </tr> 
+      <tr>  <td>Smith</td>  <td>John</td>   <td>jsmith@gmail.com</td>       <td style="text-align:right;">50.00 Kr</td>  <td>http://www.jsmith.com</td>    </tr> 
+      <tr>  <td>Bach</td>   <td>Frank</td>  <td>fbach@yahoo.com</td>        <td style="text-align:right;">50.00 Kr</td>  <td>http://www.frank.com</td>     </tr> 
+    </tbody> 
+    <tfoot> 
+      <tr style="color:#999;">  <th>Efternavn</th>    <th>Fornavn</th>   <th>Email</th>    <th>Gæld</th>    <th>Hjemmeside</th> </tr> 
+      <tr style="background:white;">  <td colspan="5">DEMO MANGLER ENDNU: Filter-felter, Input-felter, Scroll-tabel, Sticky-header</td> </tr> 
+    </tfoot> 
+  </table> 
+  
+  <h3>PowerTip:</h3>
+  Tooltip-system med intelligent placering af tooltip, og pil mod objektet hjælpeteksten angår. <br>
+  Hvis standard placeringen (10 mulige) falder uden for view-område, vises tooltip på en mere velegnet placering.<br>
+  Benyttet ved tekster med <span style="text-shadow:1px 2px #aaa;">skygge.</span>
+</body>
+</html>
+ 
+ 

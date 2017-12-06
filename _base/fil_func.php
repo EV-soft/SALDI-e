@@ -1,20 +1,18 @@
-<?php   $DocFil= '../includes/fil_func.php';   $DocVer='5.0.0';    $DocRev='2017-02-00';   $modulnr=0;
-//             ___   _   _    ___  _         
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//                                           
+<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2017-11-00';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Grundbibliotek for fil-operationer ';
+ *             ___   _   _    ___  _         
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
+ *                                           
+ */
 // LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
 //
 // Rutiner angående import / export af data filer.
 //
-// Afhængig af: 
-//  
 // Denne fil er redigeret med tabulator sat til 2 tegn, og ses bedst med det.
 // Filer skal gemmes i UTF-8 format uden BOM!
 // 2016.10.00 ev - EV-soft
-
-//  include("../includes/std_func.php"); # Sidens indledende html-kode
 
 
 if (!function_exists('DetectSeparator')) {
@@ -110,9 +108,11 @@ function ImportTabFile ($fn,$startLin=0,$charset='UTF-8') {
       if ($linje= fgets($fp)) { $Lin++;
         if (strpos($linje,chr(9))==0) $skiller= '","';
         if ($charset=='UTF-8') $linje= utf8_encode($linje);
-        $LinFeltr= explode($skiller, $linje);   $rawFelt= array();
-        foreach ($LinFeltr as $felt) array_push($rawFelt, trim($felt,'"'));
-        if ($Lin>$startLin) array_push($felter, $rawFelt);
+        if (($Lin==1) and (substr($linje,0,1)==':')) {} //  Feltnavne i 1. linie springes over
+        else { $LinFeltr= explode($skiller, $linje);   $rawFelt= array();
+            foreach ($LinFeltr as $felt)  array_push($rawFelt, trim(trim($felt,'"'),"'"));
+            if ($Lin>$startLin) array_push($felter, $rawFelt);
+        }
       }
     } fclose($fp);
   } return $felter;
@@ -132,3 +132,15 @@ function ExportTabFile ($fn,$skiller='","',$Tabel2D) {// Filnavn angives UDEN fi
   }
 }
 
+
+//  Logning af DB-modifikationer
+if (!function_exists('transaktion')) {
+	function transaktion($qtext){ global $brugernavn, $db_type, $db;
+		$fp=fopen("../_temp/".$db."/.ht_modify.log","a");
+		fwrite($fp,"-- ".$brugernavn." ".date("Y-m-d H:i:s").": ".$qtext."\n");
+		fwrite($fp,$qtext.";\n");
+			if ($db_type=="mysql") 
+        mysql_query($qtext);
+      else pg_query($qtext);
+	}
+}

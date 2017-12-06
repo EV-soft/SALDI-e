@@ -14,7 +14,7 @@
             if ($p<5) { //  PLACERING i starten af en linie!
                 if ($s=strpos($line,"{")) $funcN= substr($line,0,$s); else $funcN= $line;
                 $lno= '-----> '.$LinNo;
-                echo "<pre>".$dir.' '.$sourceFile.str_repeat("&nbsp;",max(35-strlen($dir.$sourceFile),0)).' '.substr($lno,-6).': '.$funcN."</pre>";
+                echo "<pre style=\"line-height:5px;\">".$dir.' '.$sourceFile.str_repeat("&nbsp;",max(35-strlen($dir.$sourceFile),0)).' '.substr($lno,-6).': '.$funcN."</pre>";
               }
               if ((strpos($sourceFile,'out_')) and (strpos($sourceFile,'.php'))) {   //  2. KRITERIE: Filnavn
                 $fras= $line;

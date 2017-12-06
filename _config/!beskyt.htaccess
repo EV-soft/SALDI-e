@@ -1,0 +1,5 @@
+#Beskyt adgang til connect.php, med aktuelle database adgangsoplysninger:
+deny from all
+
+
+#Omdøb !beskyt.htaccess til .htaccess for at aktivere beskyttelsen!

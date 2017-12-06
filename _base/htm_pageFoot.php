@@ -1,9 +1,9 @@
-<?php   $DocFil= '../_base/htm_pageFoot.php';   $DocVer='5.0.0';    $DocRev='2017-03-00';   $modulnr=0;
-/* ## Formål: Denne fil færdiggør en side, som er påbegyndt med ../_base/htm_pageHead.php 
+<?php   $DocFil= '../_base/htm_pageFoot.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Denne fil faerdiggoer en side, som er paabegyndt med ../_base/htm_pageHead.php';
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
@@ -22,6 +22,7 @@
   echo '    <div class="modal"><!-- Place at bottom of page --></div>';
   echo '    <script> $(document).ready(function () { $(".formnavi").formNavigation(); }); </script>';
   echo '    <script type="text/javascript">$("#container").css("opacity", 0); $(window).load(function() {  $("#container").css("opacity", 1);});</script>';
-  echo '  </body>';
+  echo str_nl(4);
+  echo '  </body>'; // Startet i ../_base/htm_pageHead.php
   echo '</html>';
 ?>

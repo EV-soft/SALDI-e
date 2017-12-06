@@ -1,20 +1,28 @@
-<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2017-03-00';   $ModulNr=101;
-/* ## Formål:  Opret database og 1. regnskab for SALDI    - Efterfølger for: /admin/opret.php
- *             ___   _   _    ___  _
- *            / __| /_\ | |  |   \| |   ___ 
- *            \__ \/ _ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___|
+<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2017-11-00';    $DocIni='evs';  $ModulNr=101;
+/* ## Purpose: 'Opret database og 1. regnskab for SALDI    - Efterfoelger for: /admin/opret.php';
+ * Denne fil er oprettet af EV-soft i 2017.
+ *             ___   _   _    ___  _         
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ *
+ * Grundlæggende initiering.
+ *
+ * 2016.08.00 evs - EV-soft
  *
  */
-
+ 
 @session_start();
-$s_id=session_id();
+$s_id= session_id();
 
-ini_set("display_errors","0");
+##+ ini_set("display_errors","0");
     
 global $Ødb_Encode, $Ødb_Type, $Øsqdb, $Øconnection, $Ødb_Link, $Ødb_Problem;
-$Øsqdb= 'Test';
-$db= 'Test';
+$Øsqdb= 'test';
+$db= 'test';
+$Ødb_Type= 'mysql';
 
 if (!$_POST['regnskab']||!$_POST['brugernavn']||!$_POST['passwd']||!$_POST['passwd2']) {
 //  include("../includes/online.php");
@@ -25,19 +33,40 @@ if (!$_POST['regnskab']||!$_POST['brugernavn']||!$_POST['passwd']||!$_POST['pass
   }
 }
 
+if ($Øsqdb) include('../../_config/connect.php');
+if (!function_exists('transaktion')) { include('../../_base/fil_func.php'); }
+if (!function_exists('dbi_connect')) { include('../../_base/dbi_func.php'); }
+
 if (true) {
-  if ($db_type=='mysql') {
+#+  transaktion("begin");
+  make_DataBase();
+  make_Tables();
+  make_Indexes();
+  make_BaseData();
+  make_Kontoplan($std_kto_plan);
+#+  transaktion("commit");
+}
+echo 'DONE...';
+
+
+// Her følger ovennævnte funktions erklæringer:
+
+function make_DataBase () { global $brugernavn, $Ødb_Type, $Ødb_Link, $db;
+  if ($Ødb_Type=='mysql') {
     sql_creat('CREATE DATABASE '.$db, __FILE__, __LINE__);      //  db_modify("CREATE DATABASE $db",__FILE__ . " linje " . __LINE__);
     $Ødb_Link= dbi_connect($sqhost, $squser, $sqpass, $Øsqdb);  // $mysqli = mysqli_connect('localhost', 'user', 'pass', $db); //  mysql_select_db($db);    if (!$db_encode=="UTF8") $db_encode="UTF8"; else $db_encode="LATIN1";
     sql_creat('SET character_set_client = "UTF8"', __FILE__, __LINE__);  //  db_modify("SET character_set_client = 'UTF8'", __FILE__, __LINE__);    else db_modify("SET character_set_client = 'LATIN1'", __FILE__, __LINE__);
-  } else {
-    if ($Ødb_Encode=="UTF8") sql_creat('CREATE DATABASE $db with encoding = "UTF8"',__FILE__ . " linje " . __LINE__);
-    else sql_creat('CREATE DATABASE $db with encoding = "LATIN9"',__FILE__ . " linje " . __LINE__);
-    db_close($connection);
-    $connection = db_connect ("$sqhost","$squser","$sqpass","$db",__FILE__ . " linje " . __LINE__);
+  } else { // "postgres"
+    if ($Ødb_Encode=="UTF8") 
+         sql_creat('CREATE DATABASE $db with encoding = "UTF8"',  __FILE__, __LINE__);
+    else sql_creat('CREATE DATABASE $db with encoding = "LATIN9"',__FILE__, __LINE__);
+    dbi_DBclose($connection);                                                
+    $connection = dbi_connect ($sqhost,$squser,$sqpass,$db,__FILE__, __LINE__);
   }
-  
-  transaktion("begin");
+};
+
+
+function make_Tables () {
   sql_creat('CREATE TABLE tblA_adress           (id serial NOT NULL, ## adresser ##
             firmanavn text, addr1 text, addr2 text, postnr text, bynavn text, land text, 
             kontakt text, tlf text, fax text, email text, web text, bank_navn text, bank_reg text, bank_konto text, bank_fi text, 
@@ -325,7 +354,10 @@ if (true) {
 # sql_creat('CREATE TABLE osc_adresser (id serial NOT NULL,saldi_id integer,osc_id integer,PRIMARY KEY (id))', __FILE__, __LINE__);
 # sql_creat('CREATE TABLE osc_ordrer (id serial NOT NULL,saldi_id integer,osc_id integer,PRIMARY KEY (id))', __FILE__, __LINE__);
 # sql_creat('CREATE TABLE osc_varer (id serial NOT NULL,saldi_id integer,osc_id integer,PRIMARY KEY (id))', __FILE__, __LINE__);
+};
 
+
+function make_Indexes () {
   sql_creat('CREATE INDEX ix_batch_kob_antal              ON tblA_batch_purchase  (antal)',         __FILE__, __LINE__);
   sql_creat('CREATE INDEX ix_batch_kob_fakturadate        ON tblA_batch_purchase  (fakturadate)',   __FILE__, __LINE__);
   sql_creat('CREATE INDEX ix_batch_kob_id                 ON tblA_batch_purchase  (id)',            __FILE__, __LINE__);
@@ -353,45 +385,27 @@ if (true) {
   sql_creat('CREATE INDEX ix_transaktioner_kontonr        ON tblA_transactions    (kontonr)',       __FILE__, __LINE__);
   sql_creat('CREATE INDEX ix_varer_beskrivelse            ON tblA_product         (id)',            __FILE__, __LINE__);
   sql_creat('CREATE INDEX ix_varer_id                     ON tblA_product         (id)',            __FILE__, __LINE__);
+};
+
+
+
+function make_BaseData () { global $brugernavn, $Ødb_Type, $db;
 
 ### Opret 1. BRUGER (=system-adm):
   // ?: $brugernavn,  $passwd, saldikrypt, $version
   sql_creat('INSERT INTO tblA_users (brugernavn,rettigheder,regnskabsaar)     VALUES ("'.$brugernavn.'","11111111111111111111",1)', __FILE__, __LINE__);
-  $r= sql_read('SELECT id FROM tblA_users WHERE brugernavn="'.$brugernavn.'"', __FILE__, __LINE__); //  $r=db_fetch_array(db_select("select id from tblA_users where brugernavn='$brugernavn'",__FILE__ . " linje " . __LINE__));
+  $r= sql_readB('SELECT id FROM tblA_users WHERE brugernavn="'.$brugernavn.'"', __FILE__, __LINE__); //  $r=db_fetch_array(db_select("select id from tblA_users where brugernavn='$brugernavn'",__FILE__ . " linje " . __LINE__));
   $pw=saldikrypt($r[id],$passwd);
   sql_creat('UPDATE tblA_users SET kode ='.$pw.' WHERE id="'.$r[id].'"', __FILE__, __LINE__);
   
   sql_creat('INSERT INTO tblA_groups (beskrivelse,art,box1)                   VALUES ("Version","VE","$version")',   __FILE__, __LINE__);
   sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box4,box5)       VALUES ("Div_valg","2","DIV","","")',  __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10) VALUES ("Div_valg","3","DIV","","","","on","on","on","","","","")', __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10) 
+                                                                              VALUES ("Div_valg","3","DIV","","","","on","on","on","","","","")', __FILE__, __LINE__);
   sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art)            VALUES ("Dansk","DA","1","SPROG")',    __FILE__, __LINE__);
   sql_creat('INSERT INTO tblA_units  (betegnelse,beskrivelse)                 VALUES ("stk","styk")',                __FILE__, __LINE__);
   sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art,box1,box2)  VALUES ("Administratorer","","0","brgrp","","11111111")', __FILE__, __LINE__);
-  
-### Indlæs/Opret KONTOPLAN:
-  if ($std_kto_plan) {
-    if (file_exists("../_exchange/egen_kontoplan.txt")) 
-         $fp= fopen("../_exchange/egen_kontoplan.txt","r");
-    else $fp= fopen("../_exchange/_standard/kontoplan.txt","r");
-    if ($fp) { $x=0;
-      while (!feof($fp))   { $x++;  
-        list($kontonr[$x], $beskrivelse[$x], $kontotype[$x], $moms[$x], $fra_kto[$x], $valuta[$x], $valutakurs[$x]) = explode(chr(9),fgets($fp));
-        if (!$kontonr[$x]) { $x--;}
-      }
-      $kontoantal= $x;
-      for ($x=1; $x<=$kontoantal; $x++) {
-        $beskrivelse[$x]= dbi_escape_string(trim(str_replace('"','',$beskrivelse[$x])));
-        if ($db_encode=="UTF8") $beskrivelse[$x]= utf8_encode($beskrivelse[$x]);
-        $kontotype[$x]= trim(str_replace('"','',$kontotype[$x]));
-        $moms[$x]= trim(str_replace('"','',$moms[$x]));
-        $fra_kto[$x]= $fra_kto[$x]*1;
-        if (!$valuta[$x]) $valuta[$x]= '0';
-        if (!$valutakurs[$x]) $valutakurs[$x]= '100';
-        sql_creat('INSERT INTO tblA_account_plan (kontonr,beskrivelse,kontotype,fra_kto,moms,regnskabsaar,lukket,valuta,valutakurs) VALUES ("'.
-                  $kontonr[$x].'","'.$beskrivelse[$x].'","'.$kontotype[$x].'","'.$fra_kto[$x].'","'.$moms[$x].'","1","","'.$valuta[$x].'","'.$valutakurs[$x].')',  __FILE__, __LINE__);
-      }
-      fclose($fp);
-    }
+
 ### Indlæs/Opret VAREGRUPPER:
     if (file_exists("../_exchange/egne_grupper.txt")) 
          $fp= fopen("../_exchange/egne_grupper.txt","r");
@@ -405,7 +419,7 @@ if (true) {
         }
       }
       fclose($fp);
-      if ($sqdb=='rotary') {  //  Forskudt regnskabsår:
+      if ($sqdb=='rotary') {  //  Forskudt regnskabsår: FIXIT: gøres alment!
         $startmd='07';        $slutmd='06';
         (date('m')>=7)?$startaar=date("Y"):$startaar=date("Y")-1;
         $slutaar=$startaar+1;
@@ -418,7 +432,7 @@ if (true) {
       sql_creat('INSERT INTO grupper (beskrivelse,kode,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) '.
                 'VALUES ("'.$ra_besk.'","'.'","1","RA","'.$startmd.'","'.$startaar.'","'.$slutmd.'","'.$slutaar.'","on","0","","","","","","","","")', __FILE__, __LINE__);
       //  db_modify("insert into grupper (beskrivelse,kode,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) values ('$ra_besk','','1','RA','$startmd','$startaar','$slutmd','$slutaar','on','0','','','','','','','','')",__FILE__ . " linje " . __LINE__);
-    }
+    } // else ?
 ### Indlæs/Opret VARER:
     if (file_exists("../_exchange/egne_varer.txt")) {
       $fp= fopen("../_exchange/egne_varer.txt","r");
@@ -432,21 +446,50 @@ if (true) {
         fclose($fp);
       }
     }
+    // else ?
 ### Indlæs/Opret FORMULARER:
     include("../_base/spc_func.php"); //  formularimport()
-    formularimport("../_exchange/_standard/formular.txt");
+    formularimport("../_exchange/_standard/formular.tab");
     sql_creat('UPDATE tblA_forms SET sprog = "Dansk"', __FILE__, __LINE__);
-    if ($fra_formular) {
+    if ($fra_formular) {  // fra_formular ??
       sql_creat('INSERT INTO tblA_adress (firmanavn,addr1,addr2,postnr,bynavn,kontakt,tlf,email,cvrnr,art)'.
                 'VALUES("'.$firmanavn.'","'.$addr1.'","'.$addr2.'","'.$postnr.'","'.$bynavn.'","'.$kontakt.'","'.$tlf.'","'.$email.'","'.$cvrnr.'","S")', __FILE__, __LINE__);
     }
-  }
-  
-  transaktion("commit");
-  
-}
- echo 'DONE...';
- 
- 
- 
+    // else ?
+};
+
+function make_Kontoplan ($std_kto_plan) { global $brugernavn, $Ødb_Type, $db;
+### Indlæs/Opret KONTOPLAN:
+  $customFile= "../_exchange/egen_kontoplan.tab";
+  $stdardFile= "../_exchange/_standard/kontoplan.tab";
+  if ($std_kto_plan) {
+    if (file_exists($customFile)) 
+         { $fp= fopen($customFile,"r"); $source= $customFile;}
+    else { $fp= fopen($stdardFile,"r"); $source= $stdardFile;}
+    
+    if ($fp) { $x=0;
+      while (!feof($fp))   { $x++;  
+        list($kontonr[$x], $beskrivelse[$x], $kontotype[$x], $moms[$x], $fra_kto[$x], $valuta[$x], $valutakurs[$x]) = explode(chr(9),fgets($fp));
+        if (!$kontonr[$x]) { $x--;}
+      }
+      $kontoantal= $x;
+      for ($x=1; $x<=$kontoantal; $x++) {
+        $beskrivelse[$x]= dbi_escape_string(trim(str_replace('"','',$beskrivelse[$x])));
+        if ($db_encode=="UTF8") $beskrivelse[$x]= utf8_encode($beskrivelse[$x]);
+        $kontotype[$x]= trim(str_replace('"','',$kontotype[$x]));
+        $moms[$x]=      trim(str_replace('"','',$moms[$x]));
+        $fra_kto[$x]= $fra_kto[$x]*1;
+        if (!$valuta[$x]) $valuta[$x]= '0';
+        if (!$valutakurs[$x]) $valutakurs[$x]= '100';
+        
+        sql_creat('INSERT INTO tblA_account_plan (kontonr,beskrivelse,kontotype,fra_kto,moms,regnskabsaar,lukket,valuta,valutakurs) VALUES ("'.
+                  $kontonr[$x].'","'.$beskrivelse[$x].'","'.$kontotype[$x].'","'.$fra_kto[$x].'","'.$moms[$x].'","1","","'.$valuta[$x].'","'.$valutakurs[$x].')',  __FILE__, __LINE__);
+      }
+      fclose($fp);
+      // Kontoplan oprettet på grundlag af $source
+    }  // else 'Hverken '.$customFile.' eller '.$stdardFile.' kunne findes, hvorfor der ikke blev oprettet en kontoplan!'
+  };  // else $std_kto_plan
+};
+
+
 ?>

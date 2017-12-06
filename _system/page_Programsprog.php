@@ -10,8 +10,9 @@
  */
 
   $pageTitl= 'Indstil mere: Programtekster';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+
 ### INDLÆS DATA:
 
 ### VIS DATA:

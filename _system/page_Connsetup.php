@@ -1,10 +1,10 @@
-<?php   $DocFil= '../_base/_admin/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2017-03-00';   $modulnr=99;
-/* ## Formål:  Opsætning af forbindelse til database.
- *             ___   _   _    ___  _
- *            / __| /_\ | |  |   \| |   ___ 
- *            \__ \/ _ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___|
- *
+<?php   $DocFil= '../_system/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2017-03-00';   $DocIni='evs';  $ModulNr=99;
+/* ## Purpose: 'Opsaetning af forbindelse til database.';
+ *             ___   _   _    ___  _         
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
+ *                                           
  * LICENS & Copyright (c) 2004-2017 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
  *
  * 2016.08.00 ev - EV-soft
@@ -15,7 +15,7 @@ global $Ødb_Link, $Ødb_Type, $Øprogvers, $ØProgRoot;  //  Tildeles værdi i 
   $pageTitl='SALDI - det frie danske økonomisystem';
   $_base= '../_base/';
   include($_base."htm_pageHead.php"); # Sidens indledende html-kode   $_SERVER['DOCUMENT_ROOT'].   saldi-e/_base/
-  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
 
 ### INDLÆS DATA:
   if (file_exists("../_config/connect.php"))  {

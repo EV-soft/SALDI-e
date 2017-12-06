@@ -24,7 +24,7 @@
   SpalteTop(960);   
 //  Head_Navigation($pageTitl, $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
   Rude_Varemodtagelse();
-  Rude_FootMenu();
+//  Rude_FootMenu();
   SpalteBund();
 ### GEM DATA:
 
