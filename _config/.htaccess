@@ -1,2 +1,0 @@
-#Beskyt adgang til connect.php, med aktuelle database adgangsoplysninger:
-deny from all
