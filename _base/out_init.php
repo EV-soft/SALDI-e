@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Initiering af globalt benyttede konstanter og variabler';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -29,6 +29,11 @@
    }
 
 /* 
+### Om $ModulNr:
+  ModulNr angår rettighedsstyring, som er planlagt, men ikke implementeret.
+  De andre variabler i filernes top-linie, skal altid opdateres, når der foretages ændringer i filen!
+  På grundlag af filens 2 første linier, kan der føres statisik/status på programmet.
+
 ### Om fejlfindings flaget Ødebug=true:
 1.  I rude_header's Titel tilføjes navnet på aktuel function
 2.  Der sker logning med debug_log() af oplysning om PHP-filer, der indlæses
@@ -65,8 +70,9 @@ Flaget sættes:
 //  if (session_status() == PHP_SESSION_NONE) { session_start(); }
 //  $_SESSION['sess_id']= session_id();
 
-global $ØTastkeys;
+global $ØTastkeys, $ØPanelIx;
 $ØTastkeys= true;
+$ØPanelIx= 0;
 
 if  (is_null($_SESSION['ØprogSprog']))  $_SESSION['ØprogSprog']= 'da';
 
@@ -89,9 +95,9 @@ $ØButtnBgrd= '#44BB44';  /* LysGrøn   */     $ØButtnText= '#FFFFFF';   /* Hvi
 $ØBtLnkBgrd= 'yellow';   /* '#FCFCCC';  */   $ØBtLnkText= '#000000';
 // Knap-farver:
 $ØTextLight= 'white';       $ØTextDark= 'black'; 
-$ØBtDelBgrd= '#DD1111';         $ØBtDelText= $ØTextLight;  # Slet:RØD
+$ØBtDelBgrd= '#DD1111';     $ØBtDelText= $ØTextLight;  # Slet:RØD
 $ØBtSavBgrd= 'yellow';      $ØBtSavText= $ØTextDark;   # Gem/Submit:GUL
-$ØBtNavBgrd= 'green';       $ØBtNavText= $ØTextLight;  # Naviger:GRØN
+$ØBtNavBgrd= '#269B26';     $ØBtNavText= $ØTextLight;  # Naviger:GRØN
 $ØBtNewBgrd= 'blue';        $ØBtNewText= $ØTextLight;  # OpretNy:BLÅ
 $Ødimmed=    ' opacity:0.8;';
 
@@ -102,12 +108,15 @@ $Øtema= $_SESSION['Øtema'];
 if ($Øtema=='dark') 
   {$ØTitleColr= '#6699CC';   /* Lys-blå   */ 
    $ØPanelBgrd= '#FFEEDD';   /*  '#565656';   # Mørkgrå      Tema-dark */
+   $ØTapetColr= '#EEEEEE';
    $ØPageBcgrd= '#112233';   /* Side baggrunds farve (lysblå) F4FFF4  */
    $ØPageImage= '../_assets/images/stjerner.jpg';   // $ØPageImage= '../_assets/images/paper_fibers.png';  /* Side baggrundsbillede  */
+   $ØButtnText= '#000000';   /* Sort   */
   }
 else      
   {$ØTitleColr= '#003366';   /* Mørkblå   */ 
    $ØPanelBgrd= '#EFEFEF';   /* '#EFEFEF';   # Brækket Hvid Tema-light /* Lys baggrund for paneler (ruder). aktuel farve sættes i ../_base/out_style.css.php */
+   $ØTapetColr= '#FFE0C0';
    $ØPageBcgrd= '#F4FFF4';   /* Side baggrunds farve (lysblå) F4FFF4  */
    $ØPageImage= '../_assets/images/paper_fibers.png';  /* Side baggrundsbillede  */
 }
@@ -121,6 +130,7 @@ $ØtblRowLgt= '#f0f0f0';   /* Tabellinie med lys baggrund  */
 $ØLineBrun=  '#550000;';  /* Tabel ydre ramme */
 // Sørg for at farver stemmer overens med FARVEPALETTE i ../_base/out_style.css.php
 $ØHeaderFont= 'font-size:0.75em;';
+$ØIconStyle= 'color:brown;';
 
 if (is_null($ØlanguageTable)) $ØlanguageTable= array(); 
 if (is_null($ØsprogCol)) $ØsprogCol=3;  

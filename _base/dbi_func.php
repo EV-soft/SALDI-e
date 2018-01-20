@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';    $DocRev='2018-01-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Forbedrede DB-funktioner, kompatible med PHP7+';
  * Denne fil er oprettet af EV-soft i 2017.   # afløser tidl: db_query.php
  *             ___   _   _    ___  _         
@@ -353,14 +353,14 @@ if (!function_exists('dbi_connect')) ##  $onFile og $onLine angår __FILE__ og _
   }
   
 /* free Qresult set */
-  function dbi_freeData($Qresult, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;                
-    if ($Ødb_Type=='mysql') { return mysqli_free_result($Qresult);                                                                
+  function dbi_freeData($Qresult, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;
+    if ($Ødb_Type=='mysql') { return mysqli_free_result($Qresult);
     } else { /* "postgres" */ return pg_free_result($Qresult);  };
   }
   
 /* close connection */
-  function dbi_DBclose($Ødb_Link, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;                  
-    if ($Ødb_Type=='mysql') { return mysqli_close($Ødb_Link);                                                                       
+  function dbi_DBclose($Ødb_Link, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Type;
+    if ($Ødb_Type=='mysql') { return mysqli_close($Ødb_Link); 
     } else { /* "postgres" */ return pg_close($Ødb_Link); }; 
   }
   
@@ -370,13 +370,13 @@ if (!function_exists('dbi_connect')) ##  $onFile og $onLine angår __FILE__ og _
 ### Kombinerede:  Ikke nødvendig, men praktisk opdeling:    CRUD:   Create Read Update Delete
 
   function sql_creat($qstr, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Link, $Ødb_Type;   //  "CREATE", "INSERT", "ADD"    /* db_modify */
-    if ($Ødb_Type=='mysql') { return $Qresult= mysqli_query($Ødb_Link, $qstr);
-    } else { /* "postgres" */ return $Qresult= pg_query($Ødb_Link,$qstr);}  // 
+    if ($Ødb_Type=='mysql') { $Qresult= mysqli_query($Ødb_Link, $qstr);  if ($Qresult) echo '<br>OK '; else echo ' fail '; return $Qresult;
+    } else { /* "postgres" */ return $Qresult= pg_query($Ødb_Link,$qstr);}  //  "postgres" 
   }
   
   function sql_readA($qstr, $onFile=__FILE__, $onLine=__LINE__) {global $Ødb_Link, $Ødb_Type;   //  "SELECT" 
     if ($Ødb_Type=='mysql') { return dbi_assoData(dbi_askData($Ødb_Link,$qstr,__FILE__,__LINE__,__FUNCTION__), MYSQLI_ASSOC, $onFile=__FILE__, $onLine=__LINE__);
-    } else { /* "postgres" */ return pg_fetch_assoc(pg_query($Ødb_Link,$qstr));
+    } else { /* "postgres" */ return pg_fetch_assoc(pg_query($Ødb_Link,$qstr)); // "postgres" 
     };  
   }
   

@@ -1,5 +1,6 @@
-<?php   $DocFil= '../_base/htm_TopMenu.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0;
-// ## Purpose: 'Vis Menu-bjaelke paa siders top.';
+<?php   $DocFil= '../_base/htm_TopMenu.php';   $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+// ## Purpose: 'Eksempel-fil: Vis Menu-bjaelke paa siders top.';
+//  Systemet er blevet integreret i out_moduler. Se Menu_Topdropdown i out_base.php.
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

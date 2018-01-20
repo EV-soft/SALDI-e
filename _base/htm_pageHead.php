@@ -38,7 +38,7 @@
   include_once "fil_func.php";      #+  Funktioner med filer involveret                                                                
   include_once "dbi_func.php";      #+  Forbedrede DataBase-funktioner, kompatible med PHP7                                            
   include_once "version.php";       #+  Initiering af globale konstanter                                          
-  include_once $ØProgRoot.$_config."connect.php";   #+  Database tilkobling
+#+  include_once $ØProgRoot.$_config."connect.php";   #+  Database tilkobling
 //  Andre individuelle:                               #?  Indlæses efter behov i aktuel page_*
   
 //  global $pageTitl, $ØsprogTabl, $ØprogSprog, $ØPageImage, $ØPageLogo, $Ødebug, $ØRollTabl, $Øtema;
@@ -51,6 +51,7 @@
   $ØRollTabl = $_SESSION['ØRollTabl']; # Sæt $ViewHeight= '99999px medfører "printlayoyt" af tabeller
   $ØRollTabl = true;
   $Øtema     = $_SESSION['Øtema'];
+  
   
 // Debug-indstilling:
 // $Ødebug= true;   $GLOBALS["Ødebug"]= true;   //  debug kan også aktiveres midlertidigt ved tilføjelse af: ?debug=true i adressefeltet
@@ -67,7 +68,8 @@ $Ødebug= false;
   echo '  <meta charset="UTF-8">';
   echo '  <title>'.$pageTitl.'</title>';
   echo '  <link rel="icon" type="image/png" sizes="32x32" href="'.$ØProgRoot.$_assets.'images/favicon-32x32.png">';
-  echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'font-awesome/css/font-awesome.min.css">';    //   emne= "ICON-system"
+//  echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'font-awesome/css/font-awesome.min.css">';                                  //   emne= "ICON-system" version 4.7
+  echo '  <script defer src="'.$ØProgRoot.$_assets.'font-awesome5/fontawesome-free-5.0.2/svg-with-js/js/fontawesome-all.js"></script>';   //   emne= "ICON-system" version 5
   echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'js/1.12.0/themes/base/jquery-ui.css">';      //   emne="jquery Dialog"
   echo '  <script src= "'.$ØProgRoot.$_assets.'js/sorttable.js"></script>';  //  Sortering af tabeller
   
@@ -89,11 +91,11 @@ dvl_ekko('htm_pageHead  1 ');
   echo '  <link rel="stylesheet" href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">';
   echo '  <script src="https://code.jquery.com/jquery-1.12.4.js">           </script>';
   echo '  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">     </script>';
-  echo '  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>   <!-- Forberedelse for datepicker med regionale tekster -->';
-  echo '  <script>  $( function() { $( "#datepicker" ).datepicker({ showWeek: true, firstDay: 1 }); } );';
+#+  echo '  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>   <!-- Forberedelse for datepicker med regionale tekster -->';
+#+  echo '  <script>  $( function() { $( "#datepicker" ).datepicker({ showWeek: true, firstDay: 1 }); } );';
 //  <!-- Vis Uge-nr http://api.jqueryui.com/datepicker/#option-showWeek -->';
-  echo '            $.datepicker.setDefaults( $.datepicker.regional[ "da" ] );';   // <!-- Benyt danske tekster -->
-  echo '  </script>';
+#+  echo '            $.datepicker.setDefaults( $.datepicker.regional[ "da" ] );';   // <!-- Benyt danske tekster -->
+#+  echo '  </script>';
   
 dvl_ekko('htm_pageHead  2 ');
 
@@ -175,7 +177,9 @@ echo '</script>';
 #  echo '  </script>';
   echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_assets.'css/meter-style.css" emne="PassWord-styrke måler">'; 
   echo '  <link rel="stylesheet" href= "'.$ØProgRoot.$_base.'out_style.css.php"     emne="out_modulers style">'; /* _base/ */
-  if ($pageTitl!= 'Hovedmenu')  
+  PanelInit();
+  $vismenu= (($pageTitl!= 'Hovedmenu') and ($pageTitl!= 'Logind til SALDI'));
+  if ($vismenu)
     { include $ØProgRoot.$_base.'htm_TopMenu-head.css.htm';} # TopMenu-CSS  /* _base/ */
   include 'piwik.php';
  /*  $body = $("body");
@@ -189,7 +193,7 @@ echo '</script>';
  
   echo "\n</head>";
   echo "\n<body>\n";
-
+  
 
   if ($ØsprogTabl==NULL) sprogDB_import();
 ### Benyt URL-parameter variabler: (ØprogSprog har højere prioritet, end brugervalg!)
@@ -204,7 +208,7 @@ echo '</script>';
   echo '<script type="text/javascript">$(document).ready(function() {    $('#body').show();    $('#msg').hide();});</script>';
  */
   
-  if (($pageTitl!= 'Hovedmenu')  and ($loggetind=true))
+  if ($vismenu and ($loggetind=true))
     {Menu_Topdropdown(); htm_nl(2); }  /* include $ØProgRoot."_base/htm_TopMenu-body.htm"; Erstattet af rutiner i out_base.php*/ 
   // Her placeres sidens indhold
   

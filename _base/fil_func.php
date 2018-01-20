@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2017-11-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2018-01-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Grundbibliotek for fil-operationer ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -100,17 +100,19 @@ function ReadKontoPlan ($filnavn, $splitter, $charset='UTF-8') {
   }
 }
 
-// Indlæs data fra fil til array. Separator skifter automatisk fra TAB til "," hvis TAB ikke findes i første indlæste linie.
+// Indlæs data fra fil til array. Separator skifter automatisk fra TAB til "," hvis TAB ikke findes i først indlæste linie.
 function ImportTabFile ($fn,$startLin=0,$charset='UTF-8') {
   $fp= fopen($fn,"r");
   if ($fp) {  $felter=array();  $skiller= chr(9);  $Lin=0;
     while (!feof($fp)) {
       if ($linje= fgets($fp)) { $Lin++;
-        if (strpos($linje,chr(9))==0) $skiller= '","';
+        if (strpos($linje,chr(9))==0) $skiller= '","';  //  csv
+        if (strpos($linje,'"'.chr(9).'"')!=0) $textsep='"'; else $textsep=' ';
         if ($charset=='UTF-8') $linje= utf8_encode($linje);
         if (($Lin==1) and (substr($linje,0,1)==':')) {} //  Feltnavne i 1. linie springes over
         else { $LinFeltr= explode($skiller, $linje);   $rawFelt= array();
-            foreach ($LinFeltr as $felt)  array_push($rawFelt, trim(trim($felt,'"'),"'"));
+            //  foreach ($LinFeltr as $felt)  array_push($rawFelt, trim(trim($felt,'"'),"'"));
+            foreach ($LinFeltr as $felt)  array_push($rawFelt, trim($felt,$textsep));
             if ($Lin>$startLin) array_push($felter, $rawFelt);
         }
       }

@@ -1,12 +1,15 @@
-<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2017-03-00';   $modulnr=0;
-// Formål:  Specielle string-funktioner
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
-//
+<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2017-12-00';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Specielle string-funktioner';
+ *             ___   _   _    ___  _         
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
+ *                                           
+ *
+ * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+ * 2016.08.00 ev - EV-soft
+ */
 
 if (!function_exists('periodeoverskrifter')) {
   function periodeoverskrifter ($periodeantal, $periode_aar, $periode_md, $periode_dag=1, $periode_laengde="regnskabsmaaned", $regnskabsaar="") {

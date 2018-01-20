@@ -1,10 +1,10 @@
-<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2017-12-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
+<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-01-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
 /* ## Purpose: 'Design af out_* elementers udseende.';  */
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
   global $ØPanelBgrd; 
   if ($ØPanelBgrd=='') $ØPanelBgrd= '#FFEFDF'; 
 ?>
-/* Denne fil er oprettet af EV-soft  i 2016.
+/* Denne fil er oprettet af EV-soft  i 2016. Dette bibliotek er udviklet 2016-1018 af EV-soft.
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -173,7 +173,7 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelWaut, .panelW120, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW320, .panelW240, .panelW160 {
+.panelWmax, .panelWaut, .panelW120, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW400, .panelW320, .panelW240, .panelW160 {
     border: 1px solid gray;
     background: var(--PanelBgrd);
     box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
@@ -189,15 +189,16 @@ body {
 .panelW720 { width: 720px;  }
 .panelW640 { width: 640px;  }
 .panelW480 { width: 480px;  }
+.panelW400 { width: 400px;  }
 .panelW320 { width: 320px;  }
 .panelW240 { width: 240px;  }
 .panelW160 { width: 160px;  }
 .panelTitl {
-  font-size: 1.0em;
+  font-size: 0.90em;
   font-weight: 600;
-  height: 1.4em;
-  margin: 0.0em 0.4em;
-  padding: 0.1em 0.5% 0.3em;
+  height: 1.1em;
+  margin: 0.0em 0.2em;
+  padding: 0.1em 0.1em 0.3em;
   position: relative;
   width: 100%;
   text-align: center;
@@ -622,13 +623,13 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
     border: 1px solid #555555;
     padding: 5px 3px;
     position: absolute;
-    z-index: 9999;
+    z-index: 99999;
 }
 
 .tooltiptext,
 .tooltipT  {bottom: 20px;  left: -25px;}                      /* Plac over kilde - Inputfelters label */
 .tooltipB  {top: 22px;     left: -90px;   min-width: 120px;}  /* Plac under kilde - Kolonneoverskrifter, hvor der ikke er plads ovenover. */
-.tooltipB1 {top: 22px;     left: -140px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
+.tooltipB1 {top: 22px;     left: -180px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
 .tooltipB2 {top: 22px;     left: 28px;    min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
 .tooltipL  {left: -26px;   margin-top: -28px;}
 .tooltipR  {right: -26px;  margin-top: -28px;}
@@ -660,31 +661,40 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 /* 
 Custom tiptxt benyttet til menuers navigations-knapper: */
 img,
+ic,
   a, 
  ax        { color: var(--btnTxNorm); text-decoration: none;}
 
 img:hover,
   a:hover, 
- ax:hover  { color: var(--btnTxOver); }
+ ax:hover  { 
+  color: var(--btnTxOver); 
+  }
 
-img[tiptxt]:hover:after,  /* Fremover: Udskift title med tiptxt, for at benytte custom-tip   */
-  a[tiptxt]:hover:after,
- a1[tiptxt]:hover:after,  
+ img[tiptxt]:hover:after,  /* Fremover: Udskift title med tiptxt, for at benytte custom-tip   */
+   a[tiptxt]:hover:after,
+  a1[tiptxt]:hover:after,  
+  ic[tiptxt]:hover:after, 
+ div[tiptxt]:hover:after, 
   a[title]:hover:after, 
- ic[title]:hover:after, 
 img[title]:hover:after, 
  ax[title]:hover:after {
 /*
 Forgrund Udseende:     */
   content: attr(tiptxt);
+  font-size:12px;
+  font-weight: normal;
   padding: 4px 8px;
   color: #333;
-  position: absolute;
-  left: -80px;
-  top: 60px;
-  max-width: 240px;
   overflow-wrap: break-word;
   white-space: pre-line;
+/*
+Placering:   */  
+  position: absolute;
+  left: 110px;
+  top: 50px;
+  min-width: 140px;
+  max-width: 240px;
   z-index: 5999;
 /*
 Baggrund Udseende:   */  
@@ -692,9 +702,9 @@ Baggrund Udseende:   */
   -webkit-border-radius:  5px;
   border-radius:          5px;
   
-  -moz-box-shadow: 0px 0px 4px #222;
+  -moz-box-shadow:    0px 0px 4px #222;
   -webkit-box-shadow: 0px 0px 4px #222;
-  box-shadow: 0px 0px 4px #222;
+  box-shadow:         0px 0px 4px #222;
   
   background-image: -moz-linear-gradient(top, #ffffff, #dddddd);
   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #dddddd));
@@ -1002,5 +1012,8 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
 
 * { padding:0; margin:0; }
 #showinfo { position:absolute; top:150mm; left:-80px; background-color:black; color:white; border-radius: 5px; padding:8px 16px; width:160px; transform: rotate(270deg); font-size: 14px;
+  font-family: sans-serif;  text-align: center;
+  }
+#showkoor { position:absolute; top:141.5mm; left:-48px; background-color:green; color:white; border-radius: 5px; padding:8px 16px; width:160px; transform: rotate(270deg); font-size: 14px;
   font-family: sans-serif;  text-align: center;
   }

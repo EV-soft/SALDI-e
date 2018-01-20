@@ -52,6 +52,12 @@ if (!function_exists('Øif_isset')) {
   function Øif_isset(&$var) { return isset($var)? $var:NULL; }
 }
 
+function PostSet($varname, $default) {
+  $varname= $_POST["$varname"];
+  if (!$varname) $varname= $default;
+  return $varname;
+}
+
 if (!function_exists('Øusdate')) {
   function Øusdate($date) 
   {
