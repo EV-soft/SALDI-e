@@ -91,11 +91,12 @@ if ($_POST) {
     SpalteBund();
     skilleLin();
     SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    NextSpalte();   Rude_Medarbejdere();
+    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
     SpalteBund();
 
 ### GEM DATA:

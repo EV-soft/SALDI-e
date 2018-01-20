@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2017-11-00';    $DocIni='evs';  $ModulNr=101;
+<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2018-01-00';    $DocIni='evs';  $ModulNr=101;
 /* ## Purpose: 'Opret database og 1. regnskab for SALDI    - Efterfoelger for: /admin/opret.php';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -25,7 +25,7 @@ $db= 'test';
 $Ødb_Type= 'mysql';
 
 if (!$_POST['regnskab']||!$_POST['brugernavn']||!$_POST['passwd']||!$_POST['passwd2']) {
-//  include("../includes/online.php");
+//  include_once("../includes/online.php");
   if ($db != $Øsqdb) {
     echo '<BODY onLoad="javascript:alert(\'Hmm du har vist ikke noget at gøre her! Dit IP nummer, brugernavn og regnskab er registreret!\')">';
     echo '<meta http-equiv="refresh" content="1;URL=../index/logud.php">';
@@ -33,20 +33,20 @@ if (!$_POST['regnskab']||!$_POST['brugernavn']||!$_POST['passwd']||!$_POST['pass
   }
 }
 
-if ($Øsqdb) include('../../_config/connect.php');
-if (!function_exists('transaktion')) { include('../../_base/fil_func.php'); }
-if (!function_exists('dbi_connect')) { include('../../_base/dbi_func.php'); }
+if ($Øsqdb) include_once('../../_config/connect.php');
+if (!function_exists('transaktion')) { include_once('../../_base/fil_func.php'); }
+if (!function_exists('dbi_connect')) { include_once('../../_base/dbi_func.php'); }
 
 if (true) {
 #+  transaktion("begin");
-  make_DataBase();
-  make_Tables();
-  make_Indexes();
-  make_BaseData();
-  make_Kontoplan($std_kto_plan);
+  echo '<br>Opretter database...';    make_DataBase();
+  echo '<br>Opretter tabeller...';    make_Tables();
+  echo '<br>Opretter indekser...';    make_Indexes();
+  echo '<br>Opretter grunddata..';    make_BaseData();
+  echo '<br>Opretter kontoplan..';    make_Kontoplan($std_kto_plan);
 #+  transaktion("commit");
 }
-echo 'DONE...';
+echo '<br>DONE...';
 
 
 // Her følger ovennævnte funktions erklæringer:
@@ -389,27 +389,33 @@ function make_Indexes () {
 
 
 
-function make_BaseData () { global $brugernavn, $Ødb_Type, $db;
+function make_BaseData () { global $adm_username, $Ødb_Type, $db;
 
 ### Opret 1. BRUGER (=system-adm):
   // ?: $brugernavn,  $passwd, saldikrypt, $version
-  sql_creat('INSERT INTO tblA_users (brugernavn,rettigheder,regnskabsaar)     VALUES ("'.$brugernavn.'","11111111111111111111",1)', __FILE__, __LINE__);
-  $r= sql_readB('SELECT id FROM tblA_users WHERE brugernavn="'.$brugernavn.'"', __FILE__, __LINE__); //  $r=db_fetch_array(db_select("select id from tblA_users where brugernavn='$brugernavn'",__FILE__ . " linje " . __LINE__));
-  $pw=saldikrypt($r[id],$passwd);
-  sql_creat('UPDATE tblA_users SET kode ='.$pw.' WHERE id="'.$r[id].'"', __FILE__, __LINE__);
+#+  sql_creat('INSERT INTO tblA_users (brugernavn,rettigheder,regnskabsaar)     VALUES ("'.$brugernavn.'","11111111111111111111",1)', __FILE__, __LINE__);
+#+  $r= sql_readB('SELECT id FROM tblA_users WHERE brugernavn="'.$brugernavn.'"', __FILE__, __LINE__); //  $r=db_fetch_array(db_select("select id from users where brugernavn='$brugernavn'",__FILE__ . " linje " . __LINE__));
+#+  $pw=saldikrypt($r[id],$passwd);
+#+  sql_creat('UPDATE tblA_users SET kode ='.$pw.' WHERE id="'.$r[id].'"', __FILE__, __LINE__);
   
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,art,box1)                   VALUES ("Version","VE","$version")',   __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box4,box5)       VALUES ("Div_valg","2","DIV","","")',  __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10) 
-                                                                              VALUES ("Div_valg","3","DIV","","","","on","on","on","","","","")', __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art)            VALUES ("Dansk","DA","1","SPROG")',    __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_units  (betegnelse,beskrivelse)                 VALUES ("stk","styk")',                __FILE__, __LINE__);
-  sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art,box1,box2)  VALUES ("Administratorer","","0","brgrp","","11111111")', __FILE__, __LINE__);
+$adm_username= 'SaldiAdm';
+$adm_password= 'geheimdb';
+$adm_passhash= password_hash($adm_password,PASSWORD_BCRYPT ); 
 
+  sql_creat('INSERT INTO tblA_users (brugernavn,kode,rettigheder,regnskabsaar)  VALUES ("'.$adm_username.'",'.$adm_passhash.',"11111111111111111111",1)', __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,art,box1)                     VALUES ("Version","VE","$version")',   __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box4,box5)         VALUES ("Div_valg","2","DIV","","")',  __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10) 
+                                                                                VALUES ("Div_valg","3","DIV","","","","on","on","on","","","","")', __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art)              VALUES ("Dansk","DA","1","SPROG")',    __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_units  (betegnelse,beskrivelse)                   VALUES ("stk","styk")',                __FILE__, __LINE__);
+  sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,art,box1,box2)    VALUES ("Administratorer","","0","brgrp","","11111111")', __FILE__, __LINE__);
+
+  $source= '../../_exchange/';
 ### Indlæs/Opret VAREGRUPPER:
-    if (file_exists("../_exchange/egne_grupper.txt")) 
-         $fp= fopen("../_exchange/egne_grupper.txt","r");
-    else $fp= fopen("../_exchange/_standard/grupper.txt","r");
+    if (file_exists($source."egne_grupper.csv")) 
+         $fp= fopen($source."egne_grupper.csv","r");
+    else $fp= fopen($source."_standard/grupper.csv","r");
     if ($fp) {
       while (!feof($fp)) { $linje=fgets($fp);
         if ($linje && substr($linje,0,1)!='#') {
@@ -434,8 +440,8 @@ function make_BaseData () { global $brugernavn, $Ødb_Type, $db;
       //  db_modify("insert into grupper (beskrivelse,kode,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) values ('$ra_besk','','1','RA','$startmd','$startaar','$slutmd','$slutaar','on','0','','','','','','','','')",__FILE__ . " linje " . __LINE__);
     } // else ?
 ### Indlæs/Opret VARER:
-    if (file_exists("../_exchange/egne_varer.txt")) {
-      $fp= fopen("../_exchange/egne_varer.txt","r");
+    if (file_exists($source."egne_varer.txt")) {
+      $fp= fopen($source."egne_varer.txt","r");
       if ($fp) {
         while (!feof($fp)) { $x++;  $linje=fgets($fp);
           if ($linje && substr($linje,0,1)!="#") {
@@ -447,9 +453,10 @@ function make_BaseData () { global $brugernavn, $Ødb_Type, $db;
       }
     }
     // else ?
+    
 ### Indlæs/Opret FORMULARER:
-    include("../_base/spc_func.php"); //  formularimport()
-    formularimport("../_exchange/_standard/formular.tab");
+    include_once("../../_base/spc_func.php"); //  formularimport() 
+    formularimport($source."_standard/formularer.v50.tab");
     sql_creat('UPDATE tblA_forms SET sprog = "Dansk"', __FILE__, __LINE__);
     if ($fra_formular) {  // fra_formular ??
       sql_creat('INSERT INTO tblA_adress (firmanavn,addr1,addr2,postnr,bynavn,kontakt,tlf,email,cvrnr,art)'.
@@ -460,8 +467,8 @@ function make_BaseData () { global $brugernavn, $Ødb_Type, $db;
 
 function make_Kontoplan ($std_kto_plan) { global $brugernavn, $Ødb_Type, $db;
 ### Indlæs/Opret KONTOPLAN:
-  $customFile= "../_exchange/egen_kontoplan.tab";
-  $stdardFile= "../_exchange/_standard/kontoplan.tab";
+  $customFile= $source."egen_kontoplan.tab";
+  $stdardFile= $source."_standard/kontoplan.tab";
   if ($std_kto_plan) {
     if (file_exists($customFile)) 
          { $fp= fopen($customFile,"r"); $source= $customFile;}
