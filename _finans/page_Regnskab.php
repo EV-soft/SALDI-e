@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_finans/page_Regnskab.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_finans/page_Regnskab.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Vis Regnskab';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -13,7 +13,7 @@
  */
  
   $pageTitl= 'Regnskab';  # tolk('Regnskab');
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   include("../_base/str_func.php");
 	
   $TablData= ImportTabFile('../_exchange/kontoplan-extra.tab');  // Indlæs data fra TAB-fil
@@ -25,5 +25,5 @@
   if (!$printLayout)
 //    Rude_FootMenu();
     
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

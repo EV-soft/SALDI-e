@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Valuta.php';    $DocVer='5.0.0';    $DocRev='2017-03-00';   $DocIni='evs';  $ModulNr=2;
+<?php   $DocFil= '../_system/page_Valuta.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Valuta vedligeholdelse';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -12,7 +12,7 @@
   global $Ødebug;
   $Ødebug= true;
   $pageTitl='Indstil Valuta';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,'Hovedmenu');
 ### INDLÆS DATA:
 
@@ -25,5 +25,5 @@
   
 
 //  Til sidst indlæses java-scripter:   
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>

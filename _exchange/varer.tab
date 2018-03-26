@@ -1,4 +1,4 @@
-"varenr"	"enhed"	"beskrivelse"	"kostpris"	"salgspris"	"vejl_pris"	"notes"	"gruppe"	"min_lager"	"max_lager"	"lokation"	"stregkode"
+#"varenr"	"enhed"	"beskrivelse"	"kostpris"	"salgspris"	"vejl_pris"	"notes"	"gruppe"	"min_lager"	"max_lager"	"lokation"	"stregkode"
 "62112"	"Palle"	"Pejsebrænde Ask - palle med løst stablet ca.25 cm"	1.350,00	1.596,00	0,00	""	6	0,00	0,00	""
 "62113"	"Palle"	"Pejsebrænde  Birk - palle med løst stablet ca.25 cm"	1.350,00	1.596,00	0,00	""	6	0,00	0,00	""
 "62114"	"Palle"	"Pejsebrænde EG - palle med løst stablet ca.25 cm"	1.350,00	1.596,00	0,00	""	6	0,00	0,00	""

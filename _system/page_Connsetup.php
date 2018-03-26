@@ -1,20 +1,23 @@
-<?php   $DocFil= '../_system/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2017-03-00';   $DocIni='evs';  $ModulNr=99;
+<?php   $DocFil= '../_system/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=99;
 /* ## Purpose: 'Opsaetning af forbindelse til database.';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
  *
- * 2016.08.00 ev - EV-soft
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
+ * 
  *
  */
  
-global $Ødb_Link, $Ødb_Type, $Øprogvers, $ØProgRoot;  //  Tildeles værdi i htm_pageHead.php
+global $Ødb_Link, $Ødb_Type, $Øprogvers, $ØProgRoot;  //  Tildeles værdi i htm_pagePrepare.php
   $pageTitl='SALDI - det frie danske økonomisystem';
   $_base= '../_base/';
-  include($_base."htm_pageHead.php"); # Sidens indledende html-kode   $_SERVER['DOCUMENT_ROOT'].   saldi-e/_base/
+  include($_base."htm_pagePrepare.php"); # Sidens indledende html-kode   $_SERVER['DOCUMENT_ROOT'].   saldi-e/_base/
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
 
 ### INDLÆS DATA:
@@ -79,5 +82,5 @@ if ($felt_mangler==false) {// Klar til at tilkoble:
   
 ### GEM DATA:
 
-  include($ØProgRoot.$_base."htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include($ØProgRoot.$_base."htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

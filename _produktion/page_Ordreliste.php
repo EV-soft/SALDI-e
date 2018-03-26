@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';     $DocRev='2017-03-00';
+<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /*  Formål:  Se Produktions ordrer
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
@@ -9,7 +9,7 @@
  *
  */
   $pageTitl='Produktions ordrer';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
     
 ### INDLÆS DATA:
 
@@ -18,5 +18,5 @@
 
 ### GEM DATA:
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

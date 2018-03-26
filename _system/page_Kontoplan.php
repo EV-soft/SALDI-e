@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_systemdata/page_Kontoplan.php';    $DocVer='5.0.0';   $DocRev='2017-11-00';    $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Kontoplan.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Rediger Kontoplan';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -12,7 +12,7 @@
 
   global $pageTitl;
   $pageTitl='Kontoplan';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
     
 ### INDLÆS DATA:
     $TablData= ImportTabFile('../_exchange/kontoplan.tab');  // Indlæs kontoplan fra TAB-fil
@@ -21,13 +21,13 @@
 
 ### VIS DATA:
     if ($printLayout) {$ØRollTabl= false;}
-    SpalteTop(640);     Rude_Kontoplan($TablData);
+    SpalteTop(960);     Rude_Kontoplan($TablData);
     
     if (!$printLayout)
-    {NextSpalte(640);   Rude_KontoKort($kortdata);}
+    {NextSpalte(960);   Rude_KontoKort($kortdata);}
     SpalteBund();
     
 ### GEM DATA:
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

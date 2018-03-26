@@ -1,54 +1,47 @@
-<?php   $DocFil= '../_systemdata/page_Formtext.php';    $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_FormText.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Redigering af udskrivnings formularer';
- * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
  *
- * 
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
+* 
  */
-
-if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Formularredigering');
-
   $pageTitl='Formularredigering';
-  include_once("../_base/htm_pageHead.php"); # Sidens indledende html-kode
-### INDLÆS DATA:
-    $demo1= '4'; $demo2= '1:Tekster'; $demo3= 'dansk'; $demo4= '2:Linjer'; $demo5= '3:Ordrelinjer';  $demo6= 'A4p'; 
+  if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 
+  include_once("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
+### INDLÆS DATA:
+    include_once("../_config/connect.php");   #+  Database tilkobling
+    // Data indlæses i Rude_xx, da der kun skal benyttes deldata (filter: WHERE).
+    if (pushed('btn_edit'))   { echo 'Gemmer data...  '; include ('../_system/save_Formularer.php'); }  //  function pushed($name) { return (isset($_POST[$name])); }
+    if (pushed('btn_new'))    { echo 'Opretter data...'; include ('../_system/save_Formularer.php'); }
+    if (pushed('blanket'))    { echo 'Skifter blanket.'; include ('../_system/save_Formularer.php'); }
+    
 ### VIS DATA:
-    SpalteTop(240); $selected= Rude_Formularer($frm,$art,$lang,$papr);
+    SpalteTop(240); // BrugerMenu:
+global $Øart;
+    if ($art) echo 'Art:'.$art.'|',$Øart.'|'.$GLOBALS["Øart"];
+    $selected= Rude_Formularer($frm,$art,$lang,$papr);  //  Her vælger brugeren, hvad der skal redigeres.
     $frm=  $selected[0];
-    $art=  $selected[1];
+    $art=  $selected[1];    $Øart= $art;    $GLOBALS["Øart"]= $art; //  Virker ikke ! ? Efter Gem er den glemt !
     $lang= $selected[2];
     $papr= $selected[3];
-    NextSpalte();   
+    NextSpalte();   // Hent fra DB og rediger:
     switch ($art) {         
-      case '0:Layout'; case '5:Mail tekst'
-                           : Rude_FormRedigerLayout($frm,$art,$lang,$papr); break;       
-      case '1:Tekster'     : Rude_FormRedigerText($frm,$art,$lang,$papr); break;       
+      case '5:Mail tekst'; 
+      case '0:Layout'      : Rude_FormRedigerLayout($frm,$art,$lang,$papr); break;       
+      case '1:Tekster'     : Rude_FormRedigerText($frm,$art,$lang,$papr);   break;       
       case '2:Linjer'      : Rude_FormRedigerGrafik($frm,$art,$lang,$papr); break;     
       case '3:Ordrelinjer' : Rude_FormRedigerOrdrelin($frm,$art,$lang,$papr); break;   
-    default : Rude_FormRedigerText();                           
-    }                                                             
-#    Rude_FormRedigerText();
+    default : Rude_FormRedigerText($frm,$art,$lang,$papr);                           
+    }
     SpalteBund();
-#   skilleLin();
-    
-#   SpalteTop(240); Rude_Formularer($demo1,$demo4,$demo3,$demo6);
-#   NextSpalte();   Rude_FormRedigerGrafik();
-#   SpalteBund();
-#   skilleLin();
-#   
-#   SpalteTop(240); Rude_Formularer($demo1,$demo5,$demo3,$demo6);
-#   NextSpalte();   Rude_FormRedigerOrdrelin();
-#   SpalteBund();
-#   skilleLin();
-   //  $filDATA= ImportTabFile(realpath($_SERVER["DOCUMENT_ROOT"]). '/saldi-e/_exchange/_standard/formular-utf8.tab');
-#   Rude_PrintlayoutTXT($filDATA);
-    
 
-  include_once("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include_once("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_kreditor/page_Kreditor.php';   $DocVer='5.0.0';     $DocRev='2017-02-00';      $modulnr=5;
+<?php      $DocFil= '../_kreditor/page_Kreditor.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=5;
 // Formål:  Kald til ufærdigt link
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
@@ -12,7 +12,7 @@
 if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
 
   $pageTitl='Kreditorer ordrer';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 
   # Head_Navigation(tolk('@Kreditor'), $status=tolk('@ '), $goPrev=true, $goHome=true, $goUp=false, $goFind=true, $goNew=true, $goNext=true);  
   Rude_Kreditorer();  # Demo!
@@ -21,5 +21,5 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'');
   Rude_KreditorKort($kontonr, $kategori, $cvrnr, $eannr, $bankreg, $bankkto, $instit, $ansv, $formsprog, $homeweb);
 //  Rude_FootMenu();
   
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

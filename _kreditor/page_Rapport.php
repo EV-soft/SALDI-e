@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_kreditor/page_Rapport.php';    $DocVer='5.0.0';     $DocRev='2017-02-00';
+<?php      $DocFil= '../_kreditor/page_Rapport.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 // Formål:  Se rapport
 //             ___   _   _    ___  _
 //            / __| /_\ | |  |   \| |   ___ 
@@ -9,7 +9,7 @@
 //
 
   $pageTitl='Kreditor Rapport';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
 ### INDLÆS DATA:
@@ -22,5 +22,5 @@
 ### GEM DATA:
     
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

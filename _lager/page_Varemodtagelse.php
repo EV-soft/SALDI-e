@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_lager/page_Varemodtagelse.php';   $DocVer='5.0.0';    $DocRev='2016-11-00';   $modulnr=0; 
+<?php   $DocFil= '../_lager/page_Varemodtagelse.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Formål: Vare modtagelse
  *             ___   _   _    ___  _
  *            / __| /_\ | |  |   \| |   ___ 
@@ -9,7 +9,7 @@
  *
  */
   $pageTitl='Vare modtagelse';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
 ### INDLÆS DATA:
@@ -29,5 +29,5 @@
 ### GEM DATA:
 
    
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

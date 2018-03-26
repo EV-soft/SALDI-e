@@ -1,17 +1,20 @@
-<?php $DocFil= '../_debitor/page_Ordreliste.php';   $DocVer='5.0.0';  $DocRev='2017-04-00';  $modulnr=5;
-/* FORMÅL: Vis debitor ordrer.
+<?php $DocFil= '../_debitor/page_Ordreliste.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=5;
+/* ## Purpose:'Vis debitor ordrer.';
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            |___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
- * 2016.08.00 ev - EV-soft
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
+ * 
  */
  
 $pageTitl='Salgs ordrer';
-include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
@@ -39,9 +42,9 @@ $find=array();                                                                  
                                                                                                                                 //  $ref=NULL;  $summer=NULL;   $totalkost=NULL;  $tr_title=NULL;
                                                                                                                                 //  $understreg=NULL;  $vis_projekt=NULL;  $vis_ret_next=NULL;   
                                                                                                                                 //  $find=array();
-//  include("../_config/connect.php");  Indlæst i htm_pageHead
+//  include("../_config/connect.php");  Indlæst i htm_pagePrepare
 # include("../includes/online.php");
-//  include("../includes/std_func.php");  Indlæst i htm_pageHead
+//  include("../includes/std_func.php");  Indlæst i htm_pagePrepare
 # include("../includes/udvaelg.php");
 
 ### OPDATER VARIABLE:
@@ -62,9 +65,11 @@ if (!$returside && $konto_id && !$popup) $returside="debitorkort.php?id=$konto_i
 // TEST: $r2= sql_readB("select * from tekster where sprog_id = 1", __FILE__, __LINE__);   Vis_Data($r2);
 
 ### HENT DB-VÆRDIER:
-
+global $Ødb_Link;
+if (!$Ødb_Link) include_once "../_config/connect.php";   #+  Database tilkobling
+  
 ## hurtigfakt:
-if (sql_readB("select id from grupper where art = 'DIV' and kodenr = '3' and box4='on'",__FILE__, __LINE__)) $hurtigfakt='on';  ##? if (db_fetch_array(db_select("select id from grupper where art = 'DIV' and kodenr = '3' and box4='on'",__FILE__ . " linje " . __LINE__))) $hurtigfakt='on';
+if (sql_readA("select id from grupper where art = 'DIV' and kodenr = '3' and box4='on'",__FILE__, __LINE__)) $hurtigfakt='on';  ##? if (db_fetch_array(db_select("select id from grupper where art = 'DIV' and kodenr = '3' and box4='on'",__FILE__ . " linje " . __LINE__))) $hurtigfakt='on';
 
 ## valg:
 if ($valg=="tilbud" && $hurtigfakt) $valg="ordrer"; 
@@ -364,5 +369,5 @@ function bold($dat,$head='',$tail='&nbsp;&nbsp;') {return $head.'<b>'.$dat.'</b>
   
 ### GEM DATA:
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

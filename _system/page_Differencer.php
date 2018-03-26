@@ -1,15 +1,20 @@
-<?php   $DocFil= '../_systemdata/page_Differencer.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $ModulNr=2;
-// Formål: Håndtering af øre differencer                                       
-//             ___   _   _    ___  _         
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___)
-//                                           
-// LICENS & Copyright (c) 2004-2017 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
-//
+<?php   $DocFil= '../_system/page_Differencer.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Haandtering af ore differencer';
+ *             ___   _   _    ___  _         
+ *            / __) / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            (___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
+ * 
+ */
 
   $pageTitl='Øredifferencer';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
@@ -20,5 +25,5 @@
 ### GEM DATA:
   
 //  Til sidst indlæses java-scripter:   
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>

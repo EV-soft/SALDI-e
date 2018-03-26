@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_finans/page_Provisionsrapport.php';    $DocVer='5.0.0';   $DocRev='2017-11-00';    $DocIni='evs';  $ModulNr=4;
+<?php   $DocFil= '../_finans/page_Provisionsrapport.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=4;
 /* ## Purpose: 'Provisionsrapport';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -13,7 +13,7 @@
  */
  
   $pageTitl= 'Provisionsrapport';  # tolk('@Provisionsrapport');
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
  // include("../includes/connect.php");
  // include("../includes/online.php");
 //  include("../includes/forfaldsdag.php");
@@ -288,5 +288,5 @@ function slutdato($dato)  {
   Rude_Provisionsrapport();
   Rude_FootMenu();
    
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

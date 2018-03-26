@@ -1,4 +1,4 @@
-<?php $DocFil= '../_base/_admin/page_Admin.php';   $DocVer='5.0.0';  $DocRev='2017-09-00';   $modulnr=100;
+<?php $DocFil= '../_base/_admin/page_Admin.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=100;
 /* Formål:  Vis administrators indstillings muligheder.
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -16,7 +16,7 @@
 
   $pageTitl= 'Administrationsmenu';     
   set_include_path( '..' . DIRECTORY_SEPARATOR . '_base');
-  include("../../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
     
@@ -34,7 +34,7 @@
   
 ### GEM DATA:
     
-  include($ØProgRoot."_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include($ØProgRoot."_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 EXIT;
 ?>  
 

@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_finans/page_Budget.php';   $DocVer='5.0.0';     $DocRev='2017-02-00';
+<?php      $DocFil= '../_finans/page_Budget.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* Formål:  Rediger/Vis Budget
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
@@ -12,7 +12,7 @@
  */
  
   $pageTitl= 'Budget';  # tolk('@Budget');
-  include('../_base/htm_pageHead.php'); # Sidens indledende html-kode
+  include('../_base/htm_pagePrepare.php'); # Sidens indledende html-kode
   include('../_base/str_func.php');   #-  include("../includes/finansfunk.php");
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
  
@@ -27,5 +27,5 @@
 
 ### GEM DATA:
    
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_debitor/page_DebitorOrdre.php';   $DocVer='5.0.0';     $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=2;
+<?php      $DocFil= '../_debitor/page_DebitorOrdre.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=2;
 /* ## Purpose: ' Vis data for en Salgs ordre ';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -13,7 +13,7 @@
  */
  
   $pageTitl='Salgs ordre';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 
   $wide=false;  # Bredt panel til vareposter.
   $hide=true; # Skjul sekundære paneler
@@ -46,5 +46,5 @@
                           echo '<div class="clearWrap"/>';
                           Rude_FootMenu();
   
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>

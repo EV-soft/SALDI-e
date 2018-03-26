@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_finans/page_Kontrol.php';    $DocVer='5.0.0';     $DocRev='2017-04-00';
+<?php      $DocFil= '../_finans/page_Kontrol.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* Formål:  Sporing af beløbs oprindelse
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
@@ -12,7 +12,7 @@
  */
  
   $pageTitl= 'Kontrol spor';  # tolk('Rapport');
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 ### INDLÆS DATA:
   $Data=  array( ['1',''], );
 
@@ -29,5 +29,5 @@
 ### GEM DATA:
     
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

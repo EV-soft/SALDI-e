@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* Purpose: 'Rediger kladder';
  * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
@@ -15,7 +15,7 @@
   $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
   //  set_include_path('.././saldi-e/_base/');
   //  Relativ path: dirname(__FILE__) . 
-  include(".././_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include(".././_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
     
@@ -110,5 +110,5 @@ else                             {print "<td title=$Tip>  <b><a href=$TableList?
 }
 */
 
-  include(".././_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include(".././_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

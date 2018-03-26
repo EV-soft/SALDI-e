@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2017-02-00';   $DocIni='evs';  $ModulNr=2;
+<?php   $DocFil= '../_system/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: ' 3. indstillingsmenu: Tilvalg';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -10,7 +10,7 @@
  */
 #  global $debug;  $debug= true;
   $pageTitl='Diverse tilvalg menu';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
 ### INDLÆS DATA:
@@ -24,5 +24,5 @@
 ### GEM DATA:
 
 //  Til sidst indlæses java-scripter:   
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>
