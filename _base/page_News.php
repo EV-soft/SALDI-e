@@ -1,15 +1,15 @@
-<?php      $DocFil= '../_base/page_News.php';    $DocVer='5.0.0';     $DocRev='2017-02-00';
-// Formål:  Omtale af program nyheder
-//             ___   _   _    ___  _
-//            / __| /_\ | |  |   \| |   ___ 
-//            \__ \/ _ \| |__| |) | |__/ -_)
-//            |___/_/ \_|____|___/|_|  \___|
-//
-// 2016-08-00 ev - EV-soft
-//
+<?php      $DocFil= '../_base/page_News.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';
+/* FORMÅL:  Omtale af program nyheder
+ *             ___   _   _    ___  _         
+ *            / __| / \ | |  |   \| |   ___ 
+ *            \__ \/ ^ \| |__| |) | |__/ -_)
+ *            |___/_/ \_|____|___/|_|  \___)
+ *                                           
+ * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ */
 
   $pageTitl='Nyheder';
-  include("../_base/htm_pageHead.php"); # Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
@@ -20,5 +20,5 @@
 ### GEM DATA:
     
 
-  include("../_base/htm_pageFoot.php"); # Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

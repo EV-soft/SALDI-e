@@ -1,17 +1,26 @@
-<?php $DocFil='../_base/htm_TopMenu-head.css.htm';    $DocVer='5.0.0';     $DocRev='2018-01-00';   $DocIni='evs';  $ModulNr=0;
-/* ## Purpose: ' CSS Style-settings for TopMenu (i toppen af naesten alle sider)';
- * Denne fil er oprettet af EV-soft  i 2017.
+<?php $DocFil='../_base/htm_TopMenu-head.css.htm';    $DocVer='5.0.0';     $DocRev='2018-02-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: ' CSS Style-settings for TopMenu (i toppen af alle sider)';
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * ## LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ * ## LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ *
+  Oprettet: 2017-08-00 evs - EV-soft
+  Ændrings-Log:
+      
  *
  */
 ?>
 
 <style type="text/css">
+
+:root {
+--width120: 128px; /* var(--width120); */
+--width128: 128px; /* var(--width128); */
+}
+    
 div#container
 {   width: 1200px;   position: relative;   margin: 0 auto 0 auto;   text-align: left;}
 #wb_TopMenu
@@ -19,9 +28,9 @@ div#container
 #wb_TopMenu ul
 {   list-style-type: none;   margin: 0;   padding: 0;}
 #wb_TopMenu li
-{   float: left;   margin: 0;   padding: 0px 2px 0px 0px;   width: 120px;}
-#wb_TopMenu a
-{   display: block;   float: left;   color: #FFFFFF;   border: 1px #C0C0C0 solid;   -moz-border-radius: 3px;
+{   float: left;   margin: 0;   padding: 0px 2px 0px 0px;   width: var(--width120);}
+#wb_TopMenu a, aaa
+{  display: block;   float: left;   color: #FFFFFF;   border: 1px #C0C0C0 solid;   -moz-border-radius: 3px;
    -webkit-border-radius: 3px;   border-radius: 3px;   background-color: #3A3A3A;
    background: -moz-linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
    background: -webkit-linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
@@ -29,9 +38,12 @@ div#container
    background: -ms-linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
    background: linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
    font-family: Arial;   font-weight: normal;   font-size: 11px;   font-style: normal;   text-decoration: none;
-   width: 128px;   height: 18px;   padding: 0px 5px 0px 5px;   vertical-align: middle;
+   width: var(--width128);   height: 18px;   padding: 0px 5px 0px 5px;   vertical-align: middle;
    line-height: 18px;   text-align: center;
 }
+#wb_TopMenu aaa, #wb_TopMenu a:hover
+{  text-align: left;  width: 50px; color:#D2691E; background: #DEDEDE; }
+
 #wb_TopMenu li:hover a, #wb_TopMenu a:hover, #wb_TopMenu .active
 {  color: #D2691E;   background-color: #C0C0C0;
    background: -moz-linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
@@ -39,16 +51,16 @@ div#container
    background: -o-linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
    background: -ms-linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
    background: linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
-   border: 2px #C0C0C0 solid;   /* Mistanke: når mus forlader hovedmenu slukkes undermeny, måske fordi den krydser border?  */
+   border: 2px #C0C0C0 solid;
 }
 #wb_TopMenu li.firstmain
-{   padding-left: 0px;}
+{   padding-left: 0px;  width: 50px;}
 #wb_TopMenu li.lastmain
 {   padding-right: 0px;}
 #wb_TopMenu li:hover, #wb_TopMenu li a:hover
 {   position: relative;}
 #wb_TopMenu a.withsubmenu
-{   padding: 0 5px 0 5px;   width: 128px;}
+{   padding: 0 5px 0 5px;   width: var(--width128);}
 #wb_TopMenu li:hover a.withsubmenu, #wb_TopMenu a.withsubmenu:hover
 {  background-image: none;
    background: -moz-linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
@@ -58,15 +70,15 @@ div#container
    background: linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
 }
 #wb_TopMenu ul ul
-{   position: absolute;   left: 0px;   top: 0px;   visibility: hidden;   width: 120px;   height: auto;
+{   position: absolute;   left: 0px;   top: 0px;   visibility: hidden;   width: var(--width120);   height: auto;
     border: none;   background-color: transparent;
 }
 #wb_TopMenu ul :hover ul
 {   left: 0px;   top: 20px;   padding-top: 0px;   visibility: visible;}
 #wb_TopMenu .firstmain:hover ul
-{   left: 0px;}
+{   left: 0px;  width: 50px;}
 #wb_TopMenu li li
-{   width: 120px;   padding: 0 0px 0px 0px;   border: 0px #C0C0C0 solid;   border-width: 0 0px;}
+{   width: var(--width120);   padding: 0 0px 0px 0px;   border: 0px #C0C0C0 solid;   border-width: 0 0px;}
 #wb_TopMenu li li.firstitem
 {   border-top: 0px #C0C0C0 solid;}
 #wb_TopMenu li li.lastitem
@@ -94,7 +106,7 @@ div#container
    background: linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
 }
 #wb_TopMenu ul ul a.withsubmenu, #wb_TopMenu ul :hover ul a.withsubmenu, #wb_TopMenu ul :hover ul :hover ul a.withsubmenu
-{   width: 128px;   padding: 3px 5px 3px 5px;   <!-- background-image: none; --> }
+{   width: var(--width128);   padding: 3px 5px 3px 5px;   <!-- background-image: none; --> }
 #wb_TopMenu ul ul :hover a.withsubmenu, #wb_TopMenu ul ul a.withsubmenu:hover, #wb_TopMenu ul ul :hover ul :hover a.withsubmenu, #wb_TopMenu ul ul a.withsubmenu:hover a.withsubmenu:hover
 {  /* background-image: none; */
    background-image: url(../_assets/images/Arrow_Drop_Right.png);
@@ -116,5 +128,9 @@ div#container
 {   clear: both;   font-size: 1px;   height: 0;   line-height: 0;}
 #wb_TopMenu
 {   position: absolute;   left: 0px;   top: 0px;   width: 994px;   height: 20px;   z-index: 0;}
-
+/* 
+#all ul:hover a, #.parent.siblings:hover {
+opacity: 0.5; visibility: visible;
+}
+ */
 </style>

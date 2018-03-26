@@ -1,10 +1,10 @@
-<?php   $DocFil= '../_systemdata/page_Formtext.php';    $DocVer='5.0.0';    $DocRev='2017-09-00';
-/* ## FORMÅL: Redigering af udskrivnings formularer
+<?php   $DocFil= '../_base/Text.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';   $ModulNr=0;
+/* ## Purpose: 'Redigering af udskrivnings formularer/Formularredigering';
  * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
  *

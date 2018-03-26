@@ -1,23 +1,24 @@
-<?php   $DocFil= '../_base/version.php';   $DocVer='5.0.0';    $DocRev='2017-09-00';   $ModulNr=0;
-/* FORMÅL: Globale konstanter                                         
- * Denne fil er oprettet af EV-soft  i 2017.
+<?php   $DocFil= '../_base/version.php';   $DocVer='5.0.0';    $DocRev='2018-02-00';   $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Initiering af globalt benyttede konstanter.';
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
  *
- * Grundlæggende initiering.
  *
- * 2016.08.00 evs - EV-soft
+ * 
+  Oprettet: 2017-08-00 evs - EV-soft
+  Ændrings-Log:
+      
  *
  */
  
  
   $Øprogvers = '5.0.0α'; 
   $Øcopyright= 'Saldi.dk ApS';
-  $Øcopydate = ' © 2003-2017';
+  $Øcopydate = ' © 2003-2018';
 //$Øsaldihost= 'Danosoft ApS';
   $Øsaldihost= 'EV-soft';
   $Ødesigner = 'EV-soft';

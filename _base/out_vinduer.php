@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/out_vinduer.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/out_vinduer.php';    $DocVer='5.0.0';    $DocRev='2018-02-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Demonstrerer benyttelsen af out_-systemet, hvorledes vinduer opbygges af ruder.';
  * Denne fil er oprettet af EV-soft i 2016.
  *             ___   _   _    ___  _         
@@ -6,11 +6,13 @@
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
  *
  * Grundlæggende initiering.
  *
- * 2016.08.00 evs - EV-soft
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
  *
  * ## Formål:  Design af vinduers layout. Her ser du hvorledes Ruder, sammensættes til Vinduer.
  *          Teknikken benyttes i page_***.php filer, som viser en html side ad gangen.

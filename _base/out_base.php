@@ -1,12 +1,11 @@
-<?php   $DocFil1='../_base/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2018-01-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil1='../_base/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Grundbibliotek for kontruktion af moduler, angaaende udskrivning til skaerm. ';
- * Denne fil er oprettet af EV-soft i 2017. Dette bibliotek er udviklet 2017-1018 af EV-soft.
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
  * ## LICENS:  (indføjes når filen er "færdig" og anvendelig i SALDI-systemet.)
  * Dette program er fri software. Du kan gendistribuere det og / eller modificere det under
@@ -19,23 +18,33 @@
  * REKLAMATIONSRET ELLER GARANTI. Se GNU General Public Licensen for flere detaljer. 
  * En dansk oversaettelse af licensen kan læses her:  http://www.saldi.dk/dok/GNU_GPL_v2.html
  * 
- * Copyright (c) 2004-2017 Saldi.dk ApS 
+ * Copyright (c) 2004-2018 Saldi.dk ApS 
  * ----------------------------------------------------------------------
- *
+  Oprettet: 2016-08-00 evs - EV-soft   #: Dette bibliotek er udviklet 2016-1018 af EV-soft.
+  Ændrings-Log:
+      
+
  * ## AFHÆNGIGHED:
  * out_base.php er afhængig af: out_init.php og out_style.css.php
+ * page_*.php er afhængig af: htm_pagePrepare.php og htm_pageFinalize.php
  * 
+ * ## Benyttede prefixer i fil-navne:
  * htm_*.php  - Grundmoduler (htm_*) egnet for adaptive skærm-output.
  * out_*.php  - Modulerne benyttes KUN i out_ruder.php, hvor system-paneler (ruder) opbygges.
  * out_*.php  - Ruder spalte-opsættes efterfølgende i out_vinduer.php, som er de vinduer brugeren oplever. 
- * page_*.php - Sider bestående af mange vinduer gemmes i filer med prefix: page_*.php f.eks.: page_Layoutdemo.php
+ * page_*.php - Sider bestående af et eller mange vinduer gemmes i filer med prefix: page_*.php f.eks.: page_Layoutdemo.php
+ * save_*.php - Filer som overfører data til/fra database.
+ * ini_*  - Initiering af Database, konstander og variabler
+ * fil_*  - Fil-funktioner
+ * dbi_*  - DataBase-funktioner
+ * spc_*  - Specielle funktioner
  * 
- * ## Andre benyttede prefixer i functions-navne:
+ * ## Andre benyttede prefixer i funktions-navne:
  * dvl_*  - Develop-system
  * msg_*  - Message-system
  * Rude_* - Panel i spaltesystem
  * Lbl_*  - Label i input-system
- * str_*  - String-function
+ * str_*  - String-funktion
  * 
  * ## INFO om kommentarer:
  *  ##  Permanent kommentar til forklaring af funtionalitet:
@@ -45,7 +54,8 @@
  * 
  * ## VIGTIGT: 
  * Kilde-filer skal gemmes i UTF-8 format uden BOM!  (for ikke konstant at konvertere fra ANSI til UTF-8)
- * Givagt: Filnavne er følsomme overfor store/små bogstaver. For øget læsbarhed er første ord i et filnavn angivet med stort!
+ * Givagt: Filnavne er følsomme overfor store/små bogstaver. 
+ *   For øget læsbarhed er første ord (efter prefix) i et filnavn angivet med stort!
  *   f.eks: page_Kladdeliste.php. - PHP-rutiners navne er ufølsomme...
  *
  * ## NOTER:
@@ -75,7 +85,7 @@
                                                                                                     
  * ***** Grundlæggende Rutiner for layout og visning af data ***************************************
 
- * ## include "../_base/out_init.php";  // Skal kaldes forinden. (sker i htm_pageHead.php)
+ * ## include "../_base/out_init.php";  // Skal kaldes forinden. (sker i htm_pagePrepare.php)
  * if ($GLOBALS["$Ødebug"]) debug_log($DocVer1,$DocRev1,$modulnr1,$DocFil1,'');
  * echo "\n<!-- $DocVer1  $DocRev1  $modulnr1  $DocFil1 -->\n";
  */
@@ -97,7 +107,7 @@ if (!function_exists('msg_Dialog')) {
 if (!function_exists('dvl_pretty')) {
   function dvl_pretty($testlabl='') {
   global $Ødebug;    // Indsæt linieskift og evt. label, i den dannede html-kode, så kildekode bliver mere læsbar
-  if ($Ødebug) {echo "\n"; if ($testlabl>'') echo '<!-- '.$testlabl.': -->'."\n";}
+  if ($Ødebug) { echo "\n"; if ($testlabl>'') echo '<!-- '.$testlabl.': -->'."\n"; return "\n"; }
 }}
 
 if (!function_exists('dvl_ekko')) {
@@ -121,17 +131,18 @@ function Lbl_Tip($lbl,$tip,$plc='',$h='13px') {
       case "S":  $class= 'tooltipB';  break;    # Plac. Under
       case "O":  $class= 'tooltipR';  break;    # Plac. TH
       case "N":  $class= 'tooltipT';  break;    # Plac. Over
+      case "NW": $class= 'tooltipB0'; break;    # Plac. Retning NW
       case "SW": $class= 'tooltipB1'; break;    # Plac. Retning SW
       case "SO": $class= 'tooltipB2'; break;    # Plac. Retning SØ
       default :  $class= 'tooltiptext'; # Plac. Over
     }
     if (strlen($tip)<140) {$wdth='';} else {$wdth='style ="min-width: 380px;"';}
-    return '<div class="tooltip" style="height:'.$h.';">'.ucfirst(tolk($lbl).' ').'<span class="'.$class.'" '.$wdth.'>'.tolk($tip).'</span></div>';
+    return '<div class="tooltip" style="heightxxx:'.$h.';">'.ucfirst(tolk($lbl).' ').'<span class="'.$class.'" '.$wdth.'>'.tolk($tip).'</span></div>';
   //  return 'TESST';
   }
 }
 
-# BASISMODUL for data-visning, label, titelTip og input:     ($more giver mulighed for at benytte parametre, som ikke er forud defineret.) // Ændret rækkefølge: $labl ,$titl
+# BASISMODUL for data-visning, label, titelTip og input:     ($more giver mulighed for at benytte parametre, som ikke er forud defineret. f.eks: 'min="-99" max="99"') // Ændret rækkefølge: $labl ,$titl
 function htm_CombFelt($type='',$name='',$valu='',$labl='',$titl='',$revi=true,$rows='2',$width='',$step='',$more='',$plho='')   # Inputfelt kombineret med label
 {global $ØblueColor;
   dvl_pretty('htm_CombFelt');
@@ -144,8 +155,8 @@ function htm_CombFelt($type='',$name='',$valu='',$labl='',$titl='',$revi=true,$r
     echo '<div class="lablInput"> <input type= "date" '.$more.' id="'.$name.'" name="'.$name.'" style="line-height:100%; font-size:smaller; height:14px;" value="'.$valu.
     '" placeholder="yyyy-mm-dd"  '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
   if ($type== 'time')
-    echo '<div class="lablInput"> <input type= "number" '.$more.' style="text-align: center; '.'  step="'.$step.'" id="'.$name.'" name="'.$name.'" style="line-height:100%; font-size:smaller; height:14px;" value="'.$valu.
-    '"   '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput"> <input type= "number" '.$more.' style="text-align: center; step="'.$step.'" id="'.$name.'" name="'.$name.
+        '" style="line-height:100%; font-size:smaller; height:14px;" value="'.$valu.'" '.$aktiv.' />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
   if (($name=='posi') or ($name=='antal')or ($name=='varenumr')) 
     {$align= 'style="text-align:center"';} else $align= ''; //  smaller fordi browser input, er voldsomt bredt!
 
@@ -169,13 +180,17 @@ function htm_CombFelt($type='',$name='',$valu='',$labl='',$titl='',$revi=true,$r
     '">'.$LablTip.'</label> </div>';
   
   if ($type== 'number')   /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
-    echo '<div class="lablInput"> <input type= "number" '.$more.' lang="en" style="text-align: right; line-height: 100%;" width="'.$width.' px" step="'.$step.'" id="'.$name.
+    echo '<div class="lablInput"> <input type="number" '.$more.' lang="en" style="text-align:right; line-height:100%;" width="'.$width.'px" step="'.$step.'" id="'.$name.
     '" name="'.$name.'" value="'.$valu.'" '.$eventInvalid.' '.$aktiv.$plh.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
     
   if ($type== 'numberL')  # Beløb og % - venstreplaceret /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
-    echo '<div class="lablInput" style="width:'.$width.'; display:inline-block; height:1.5em;"> <input type= "number" '.$more.' lang="en" style="text-align: left; line-height:100%;" step="'.$step.'" id="'.$name.
-    '" name="'.$name.'" value="'.$valu.'"; '.$eventInvalid.' '.$aktiv.$plh.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
+    echo '<div class="lablInput" style="width:'.$width.'; display:inline-block; height:1.5em;"> <input type= "number" '.$more.' lang="en" style="text-align:left; line-height:100%;" step="'.$step.'" id="'.$name.
+    '" name="'.$name.'" value="'.$valu.'" '.$eventInvalid.' '.$aktiv.$plh.' pattern="(\d{3})([\.])(\d{2})" />  <label for="'.$name.'">'.$LablTip.'</label> </div>';
     
+  if ($type== 'barc') 
+    echo '<div class="lablInput"> <input type= "text" '.$more.' width="'.$width.'" id="'.$name.'" name="'.$name.'" '.$align.' style="font-family:barcode; font-size:20px; text-align:center; line-height:100%; " value="'.$valu.
+    '" '.$eventInvalid.' '.$aktiv.$plh.' /> <label for="'.$name.'">'.$LablTip.'</label> </div>';  //  <font style="font-family:barcode; font-size:32px;">*STREGKODE*</font>
+      
   if ($type== 'radio')  // Skræddersyet !
     echo '<form action=""><div>&nbsp; <small>'. // Nestet form!
     '<colrlabl>'.$LablTip.':</colrlabl >  '.
@@ -222,7 +237,7 @@ function htm_CheckFlt($type='Fixed',$name='checkboxName',$valu='',$labl='',$titl
   if ($revi==true) {$aktiv= ''; $colr='';}  else {$aktiv='disabled'; $colr='#_$888888';};   //  readonly kan evt. angives i $more
   if ($valu==true) {$valu= 'checked'; } else {$valu=''; };
   dvl_pretty('htm_CheckFlt');
-  echo '&nbsp;<input type= "checkbox" name="'.$name.'" value=""'.$valu.' '.$aktiv.' '.$more.'>'.
+  echo '&nbsp;<input type= "checkbox" name="'.$name.'" value="" '.$valu.' '.$aktiv.' '.$more.'>'.
        '<label for="'.$name.'" style="color:'.$colr.'; ">';     dvl_pretty('htm_CheckFlt');
   echo '<colrlabl>'.Lbl_Tip($labl,$titl).'</colrlabl> </label> '.$nl;
   if (isset($_POST[$name])) return($_POST[$name]);
@@ -244,16 +259,17 @@ function htm_DingBat($hex,$clr='black') {
 }
 
 # BASISMODUL for <select> Element (option):
-function htm_OptioFlt($type='UnUsed',$name='',$valu='',$labl='',$titl='',$revi=true,$optlist=array(),$action='',$events='',$maxwd='300px') {global $ØblueColor;
+function htm_OptioFlt($type='UnUsed',$name='',$valu='',$labl='',$titl='',$revi=true,$optlist=array(),$action='',$events='',$maxwd='300px') {
+  global $ØblueColor;
   $eventInvalid= 'oninvalid="this.setCustomValidity(\''.tolk('@Vælg '.$labl.' på listen!').'\')"';
-  if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv='disabled'; $colr='#_$888888';};
+  if ($revi==true) {$aktiv= ''; $colr='';} else {$aktiv=' disabled'; $colr='color:#888888;';};
   #$array= array(['Fil i pdf-format','pdf','PDF-fil'],['Elektronisk forsendelse','email','email'],['Elektronisk fakturering','ioubl','OIOUBL'],['PBS faktura','pbs','PBS']);
  # echo  '<form><!-- this is a dummy --></form> ';
   echo '<div class="lablInput">';
     dvl_pretty('htm_OptioFlt');
 #+    echo ' <form action="'.$action.'">';   # required  // Nestet form!
     echo '<label style="color:'.$ØblueColor.'; font-weight:400; font-size:smaller"><colrlabl>'.Lbl_Tip($labl,$titl).'</colrlabl>'.
-    ' <select class="styled-select"  name="'.$name.'" '.$events.' '.$eventInvalid.' style="max-width: '.$maxwd.';"> <option value="'.$valu.'" >'.Tolk('@Vælg!');  # title="'.$titl.'"     selected="'.$valu.'"
+    ' <select class="styled-select"  name="'.$name.'" '.$events.' '.$eventInvalid.' style="max-width: '.$maxwd.'; '.$colr.'" '.$aktiv.'> <option value="'.$valu.'" >'.Tolk('@Vælg!');  # title="'.$titl.'"     selected="'.$valu.'"
       foreach ($optlist as $rec) {    # $optlist= [0:Tip, 1:value, 2:Label, 3:Action]
         dvl_pretty();
         echo '<option value="'.$rec[1].'" title="'.tolk($rec[0]).'" '.$rec[3];
@@ -296,7 +312,7 @@ function htm_RadioGrp($type='vert',$name='',$labl='',$titl='',$optlist=array(),$
       if ($rec[3]) {$valgt= 'checked';} else $valgt= '';
       dvl_pretty();
       echo '<input type= "radio" name="'.$name.'" value="'.$valu=$rec[0].'" '.$valgt.' title="'.tolk($rec[3]).'">'.
-            $lbl= Tolk($rec[1]).' &nbsp; <font style="color:'.$ØbrwnColor.'">'.
+            $lbl= ' '.Tolk($rec[1]).' &nbsp; <font style="color:'.$ØbrwnColor.'">'.
             $suff=Tolk($rec[2]).'</font>&nbsp;'; 
   } 
   echo '</small></div> </form>';  dvl_pretty();
@@ -399,24 +415,25 @@ function run_Script ($cmdStr) {
 # "RulleTabel" mellem fastlåst TabelTop og Bund, hvis tabellen er højere end $ViewHeight
 # Mulighed for: Filtrering / Sortering / Recordvalg / NyRecord
 # NyRecord, når $CreateRec=true
-function htm_Tabel($RowLabl='',      # htm_TabelInp:  array([0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder, 7:HideCol])
-                   $RowBody= array(['@Kol0','7%','D','text','left','Tip','Plac','Hide'],['...']), # Default! Kolonne-egenskaber. Arr-eksempel erstattes med aktuel parameter!
-                // $RowBody= array(['labl0'=>'@Kol0','width1'=>'7%','sort2'=>'D','color3'=>'text','just4'=>'left','tip5'=>'Tip','plachold6'=>''],['...']), # Default! Kolonne-egenskaber. Arr-eksempel erstattes med aktuel parameter!      
-                //  Hide er ny. Skal benyttes til at springe kolonner over i visning, både filter, overskrifter og data.
-                   $TablData= array(),  # De data som skal vises i tabellen
-                   $FilterOn= true,     # Default! Mulighed for at skjule records med filter.
-                   $SorterOn= true,     # Default! Mulighed for at sortere records efter kolonne indhold
-                   $CreateRec=true,     # Default! Mulighed for at oprette en record
-                   $ModifyRec=true,     # Default! Mulighed for at ændre data i en row (ikke aktiv endnu)
-                   $ViewHeight='200px', # Default! erstattes af eventuel parameter.
-                   $Angaar='')          # Angår forskellig Manipulering/layout af sum-linier: regnskab, budget og kontoplan
+function htm_TabelOut(
+           $RowLabl='',      # htm_TabelInp:  array([0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder, 7:HideCol])
+           $RowBody= array(['@Kol0','7%','D','text','left','Tip','Plac','Hide'],['...']), # Default! Kolonne-egenskaber. Arr-eksempel erstattes med aktuel parameter!
+        // $RowBody= array(['labl0'=>'@Kol0','width1'=>'7%','sort2'=>'D','color3'=>'text','just4'=>'left','tip5'=>'Tip','plachold6'=>''],['...']), # Default! Kolonne-egenskaber. Arr-eksempel erstattes med aktuel parameter!      
+        // Hide er ny. Skal benyttes til at springe kolonner over i visning, både filter, overskrifter og data.    #Alt. benytte hidd i $RowBody[3]?
+           $TablData= array(),  # De data som skal vises i tabellen
+           $FilterOn= true,     # Default! Mulighed for at skjule records med filter.
+           $SorterOn= true,     # Default! Mulighed for at sortere records efter kolonne indhold
+           $CreateRec=true,     # Default! Mulighed for at oprette en record
+           $ModifyRec=true,     # Default! Mulighed for at ændre data i en row (ikke aktiv endnu)
+           $ViewHeight='200px', # Default! erstattes af eventuel parameter.
+           $Angaar='')          # Angår forskellig Manipulering/layout af sum-linier: regnskab, budget og kontoplan
 { global $ØProgRoot, $ØButtnBgrd, $ØLineBrun, $Ønovice, $ØFullFilt, $ØRollTabl, $ØBtNewBgrd, $ØTextLight, $Ødimmed, $ØHeaderFont;
 if ($ØRollTabl==false) $ViewHeight= '99999px';
 #+  if ($Angaar!='Rude_LanguageJuster')
 #+  userTip();
 //  $Ønovice= isset($_POST['tip']);
-dvl_ekko('htm_Tabel  0 ');
-  dvl_pretty('htm_Tabel');
+dvl_ekko('htm_TabelOut  0 ');
+  dvl_pretty('htm_TabelOut');
   if (!$FilterOn) { $CaptFilt= '<ic class="fas fa-filter" style="font-size:20px;color:brown;"> </ic><b>'.tolk('@FILTER:').'</b>'; } // fas fa-filter
   else { $CaptFilt= '<b title="'.tolk('@Reducer visning af DATA i tabellen nedenfor, ved at angive søge-kriterier i felterne herunder:').'"> <ic class="fas fa-filter" style="font-size:14px;color:brown;"> </ic> '.tolk('@FILTER:').'</b>';  };
   if ($Ønovice) $CaptFilt.= tolk('@Begræns visning i DATA-tabellen nedenfor, ved at angive søge-kriterier i felterne herunder:');
@@ -424,7 +441,7 @@ dvl_ekko('htm_Tabel  0 ');
   if (!$SorterOn) { $CaptSort= '<b>'.tolk('@DATA:').'</b>'; }
   else { $CaptSort= '<b title="'.$tip.'"> <ic class="fas fa-database" style="font-size:14px;color:brown;"> </ic>  '.tolk('@DATA:').'</b>';  };
   
-dvl_ekko('htm_Tabel  1 ');
+dvl_ekko('htm_TabelOut  1 ');
 //  if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':1');
 
 ### outputTabel med Filter:
@@ -439,9 +456,11 @@ dvl_ekko('htm_Tabel  1 ');
       dvl_pretty();
       echo '<table cellspacing="0">';
       echo '<thead> <tr>';
+      $first= 'class="first"';
       foreach ($RowBody as $Body) { dvl_pretty(); 
         //if (strtolower($Body[7])!= 'hide') 
-          echo '<th style="width:'.$Body[1].';'.$ØHeaderFont.'" title="'.tolk($Body[5]).'"> <div class="extra-wrap"><div class="th-inner">'.ucfirst(tolk($Body[0])).'</div></div> </th>';  
+          echo '<th '.$first.' style="width:'.$Body[1].';'.$ØHeaderFont.'" title="'.tolk($Body[5]).'"> <div class="extra-wrap"><div class="th-inner">'.ucfirst(tolk($Body[0])).'</div></div> </th>';  
+          $first= '';
       } echo '</tr> ';
       dvl_pretty();
       echo '<tr class="row">';
@@ -477,16 +496,21 @@ dvl_ekko('htm_Tabel  1 ');
 ### Tabellens Header med sortervalg:  //  FIXIT: HeaderRow starter med et blankt felt, som forskyder alle overskrifter! ? ÅRSAG: <span class="th-inner">
   dvl_pretty();
   echo '<thead><tr>';                 //  FIXIT: Sorterings-pil placeres ikke i den fastlåste HeaderRow (DIV konflikt?)   Samme årsag!
-  $RowSelect= '<span class="tooltip"><font style="font-size:115%;">&#x21E8;</font><span class="tooltiptext" style="bottom: -12px; left: 65px">'.tolk('@Se mere: ').str_nl(1).tolk('@Klik på pil-knappen, for at ').tolk($RowLabl).'.</span></span>';
+  $RowSelect= '<span class="tooltip"><font style="font-size:115%;">&#x21E8;</font><span class="tooltiptext" style="bottom: -12px; left: 65px">'.
+      tolk('@Se mere: ').str_nl(1).tolk('@Klik på pil-knappen, for at ').tolk($RowLabl).'.</span></span>';
   //  OnClick Read RowIx, Getdata(RowIx), ShowDetails(RowIx)
+  $first= 'class="first"';
   foreach ($RowBody as $Body) { dvl_pretty(); 
-    echo '<th title="'.tolk($Body[5]).'" style="padding-left:1px; width:'.$Body[1].'; '.$ØHeaderFont.'"> <span class="th-inner-FIXIT">'.ucfirst(tolk($Body[0])).'</span> </th>';
+    if ($Body[3]!='hidd')
+      echo '<th '.$first.' title="'.tolk($Body[5]).'" style="width:'.$Body[1].'; '.$ØHeaderFont.' cursor:ns-resize;"> '.
+              '<div class="th-inner -FIXIT">'.ucfirst(tolk($Body[0])).'</div> '.
+           '</th>';
+      $first= '';
   } echo '</tr></thead>';
   
 ### Vis Data:  
   dvl_pretty();
   echo '<tbody>';
-  
   if ($Angaar=='kontoplan') {$goTo= 'href="'.$ØProgRoot.'_base/page_Blindgyden.php?rowix="';}  //  {$goTo= 'href="page_Kontokort.php?rowix=';}
   else $goTo = '';
   if ($ModifyRec==false) {$RowSelect= '';}  // Ingen mulighed for at vælge record som skal rettes/vises med detaljer
@@ -517,17 +541,17 @@ dvl_ekko('htm_Tabel  1 ');
         else  {$spcSty= ';" '.$span.'>'; $spcStyend= '';} // Ingen rækkevalg ved regnskab
         
         dvl_pretty();
-        echo '<td style= "background-color:'.$bg.'; text-align:'.$RowBody[$x-1][4].'; '.$fed.$spcSty.$Col.$spcStyend.' </td>'; 
+        if ($Body[3]!='hidd')
+          echo '<td style= "background-color:'.$bg.'; text-align:'.$RowBody[$x-1][4].'; '.$fed.$spcSty.$Col.$spcStyend.' </td>'; 
       }
       echo $genvej.'</tr>'; 
     } 
-  echo '</tbody><tfoot>';
     
 ### Opret ny record:
     if ($CreateRec) { $x= 0;  
       foreach ($RowBody as $Body) { $x++; 
         dvl_pretty();
-        echo '<td style="padding:0; vertical-align: bottom;">';
+        echo '<td style="padding:0; vertical-align: bottom; background:#DDFFFF;">';
         if ($x==1) { $index= '9998+1';  # "background:'.$ØButtnBgrd.'; color:white;"
           echo '<div1 class="tooltip" style="background:'.$ØBtNewBgrd.'; color:'.$ØTextLight.';'.$Ødimmed.'; white-space: word-wrap;">'.
             tolk('@Opret ny:').'<span class="tooltiptext" style="bottom: -12px; left: 35px; ">'.dvl_pretty().
@@ -538,9 +562,9 @@ dvl_ekko('htm_Tabel  1 ');
               '" placeholder="'.tolk($Body[6]).'" style="text-align:left; width:98%; padding-left:4px; background-color:#FCFCCC;" /></div></td> ';
       }
     }
-  echo '</tfoot> </table> </div> </div>'; ### Slut Tabel og View
+  echo '<tfoot></tfoot></tbody> </table> </div> </div>'; ### Slut Tabel og View
   htm_Rammeslut();
-} //  htm_Tabel
+} //  htm_TabelOut
 
 
 function RowDesign (&$Row,$RowLabl,$Angaar='') { # Row: [0:kontonr, 1:beskrivelse, 2:kontotype, 3:moms, 4:fra_kto, 5:til_kto, 6:lukket]
@@ -596,7 +620,8 @@ function MakeOptList($valu,$optliste=[]) { if ($valu='') $valu= tolk('@?...');
 if (!function_exists('htm_SelectStr')) {  # Optimering: Disse lister bør kunne oprettes 1 gang, kun ved opstart!
 function htm_SelectStr($name,$valu,$optliste=[],$more='',$nodiv=false) {
   if ($nodiv) $Result= ''; else $Result= '<div style="margin-right:0;"> ';
-  $Result.= '<select class="styled-select" id="'.$name.'" name="'.$name.'" style="max-width:120px; background-color:transparent; '.$more.'"> <option value="'.$valu.'" title="'.tolk('@Vælg').'" >';
+  $Result.= '<select class="styled-select" id="'.$name.'" name="'.$name.'" style="max-width:120px; background-color:transparent; '.$more.
+    '"> <option value="" selected disabled hidden> '.tolk('@Vælg').'...<option value="'.$valu.'" >';
   foreach ($optliste as $rec) {
     $titl= tolk($rec[0]);
     $Result.= '<option value="'.$rec[1].'" title="'.$titl.'"'.$rec[3];
@@ -690,7 +715,7 @@ dvl_pretty('htm_TabelInp_Budget');
     echo '<th style="font-size:small; border:0px solid; width:'.$wdh.';'.$ØHeaderFont.'">'.
          '<div class="extra-wrap"><div class="north" align="center" title="'.tolk($tip).'">'.ucfirst(tolk($lbl)).'</div></div> </th>'; }}
 
-### Kolonne-LABELS:   FIXIT: Labels skal være statiske, ikke rulle med op i tabel-ruden! (som de ikke gør i htm_Tabel() ) Lbl_Tip/tooltiptext skjules, når dern placeres ovenover).
+### Kolonne-LABELS:   FIXIT: Labels skal være statiske, ikke rulle med op i tabel-ruden! (som de ikke gør i htm_TabelOut() ) Lbl_Tip/tooltiptext skjules, når dern placeres ovenover).
   echo '<tr>';
     foreach ($RowBody as $Spec) PwrOut($Spec[1], $Spec[0], $Spec[5]);
   /*   {
@@ -709,8 +734,8 @@ dvl_pretty('htm_TabelInp_Budget');
       dvl_pretty();
       echo '<tr class="row"; '.$rowBg.'>';
 ### Tabel-BODY:
-      $ColIx= -1;  $offset=0;                # htm_TabelInp:  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
-      foreach ($RowBody as $Body) {$ColIx++;  # htm_Tabel:  [0:ColLabl, 1:ColWidth, 2:ColJust,        3:InpType,             4:ColTip, 5:placeholder]
+      $ColIx= -1;  $offset=0;                 # htm_TabelInp:  [0:ColLabl, 1:ColWidth, 2:ColJust:U/D/UD, 3:InpType, 4:FeltJust, 5:ColTip, 6:placeholder]
+      foreach ($RowBody as $Body) {$ColIx++;  # htm_TabelOut:  [0:ColLabl, 1:ColWidth, 2:ColJust,        3:InpType,             4:ColTip, 5:placeholder]
         if ($ColIx==2) $offset=6; //  Ix 2 til 7 (som kontoplan), skal ikke udskrives, kun benyttes til layoutstyring!
         if (is_array($Dat[$ColIx+$offset])) $DatFelt= $Dat[$ColIx+$offset][$DatIx]; else $DatFelt= $Dat[$ColIx+$offset];   //  Afhængig af array i 1 eller 2 dimensioner!
         if (($ColIx==0) or ($ColIx==14)) $bg= $ØtblRowLgt; else $bg= 'transparent';                     //  Hvid: Konto og Ialt
@@ -719,7 +744,7 @@ dvl_pretty('htm_TabelInp_Budget');
         else  # I alle andre tilfælde Standard: text m.fl.
           if ($rowBg>'')  echo '<td style= "text-align:'.$Body[4].';">'.tolk($DatFelt).'</td>';    //  Kun TEXT: Overskrifter og sum-rækker
           else  { if ($offset>2) $val= number_format($DatFelt*1,0,',','.'); else $val= tolk($DatFelt);      
-                  echo '<td> <input type= "text" name="Kol'.$ColIx.'" '.'value="'.$val.'" placeholder="'.tolk($Body[6]).
+                  echo '<td> <input type= "text" name="Kol'.$ColIx.'[]" '.'value="'.$val.'" placeholder="'.tolk($Body[6]).
 # Brug af rgba-opacity, påvirker ikke forgundsfarve!  '" style= "text-align:'.$Body[4].'; background-color: '.$bg.'; background-color: white; opacity:0.70; width:100%; width:92%;" /></td> ';
                                  '" style= "text-align:'.$Body[4].'; background-color: '.$bg.'; background: rgba(255, 255, 255, 0.5); width:100%; width:92%;" /></td> ';
                 }
@@ -731,12 +756,10 @@ dvl_pretty('htm_TabelInp_Budget');
 
 
 # BASISMODUL for tabelInput (Redigerbare data i tabel-celler):
-function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
-                        #$Capt2='',     # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder]
-                        $HeadLine= array('0','1','2','3','4','5'),
-                        $RowPref= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:disp!      '],['Næste record']), # Generel struktur!
-                        $RowBody= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:placeholder'],['Næste record']), # Generel struktur! 
-                        $RowSuff= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:value!     '],['Næste record']), # Generel struktur! 
+function htm_TabelInp ( $HeadLine= array('0','1','2','3','4','5'),
+                        $RowPref= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:disp!      ','6:disp'],   ['Næste record']), # Generel struktur!
+                        $RowBody= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:placeholder','6:default'],['Næste record']), # Generel struktur! 
+                        $RowSuff= array(['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:value!     ','6:disp'],   ['Næste record']), # Generel struktur! 
                         &$DATA= array(), # "Row-Body"
                         $ViewHeight= '500px',
                         $PadTop='26px',
@@ -744,11 +767,13 @@ function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
                       ) 
 { global $ØblueColor, $ØLineBrun, $ØRollTabl, $ØHeaderFont, $ØIconStyle;
   dvl_pretty('htm_TabelInp'); 
+  if ($$GLOBALS["Ødebug"]) $bord= ' border:1px solid brown; '; else $bord= ' border:none; ';
  # $ViewHeight= '';
   echo '<div class="fixed-table-container"                 style= "max-height:'.$ViewHeight.'; padding-top:'.$PadTop.'; ">';
   // if (strlen($PadTop)>'2') {echo '<table>'; foreach ($RowBody  as $Pref) 
-    // {echo '<th style="width:'.$Pref[1].' align:'.$Pref[2].';'.$ØHeaderFont.'"> '.''.Lbl_Tip($Pref[0],$Pref[5],'SO','0px').' </th>';} echo '</table>'; }
+  // {echo '<th style="width:'.$Pref[1].' align:'.$Pref[2].';'.$ØHeaderFont.'"> '.''.Lbl_Tip($Pref[0],$Pref[5],'SO','0px').' </th>';} echo '</table>'; }
   echo '<div class="fixed-table-container-inner extrawrap" style= "max-height: '.$ViewHeight.'; overflow-y: auto;">';
+### Overskrifts linie:
   if ($HeadLine[0][0]>'') { # [0:Label, 1:Width, 2:Just, 3:Type, 4:Tip, 5:Value]
     dvl_pretty(); 
       echo '<div class="header-background" style="color:'.$ØblueColor.';"> &nbsp;';
@@ -757,9 +782,9 @@ function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
         echo tolk($Capt[0]).' ';  //  Label:
         if ($Capt[3]=='show') $forskel= '" disabled value="'; else $forskel= '"    placeholder="';
         dvl_pretty(); 
-        if ($Capt[3]=='html') //  Raw Html-kode
-        echo $Capt[5].' title="'.tolk($Capt[4]); else   //  Input-felt              
-        echo '<input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).
+        if ($Capt[3]=='html')   //  Raw Html-kode
+          echo $Capt[5]; else   //  Input-felt              
+          echo '<input type= "'.$Capt[3].'" name="note" title="'.tolk($Capt[4]).
                               $forskel.tolk($Capt[5]). '" style="width:'.$Capt[1].'; text-align:'.$Capt[2].';" />&nbsp;&nbsp;';
        }
     echo '</div>';
@@ -768,15 +793,15 @@ function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
   echo '<table class="formnavi" cellspacing="0" style="border: 1px solid '.$ØLineBrun.';">';
 ### Kolonne-LABELS:
   dvl_pretty();
-  echo '<thead><tbody><tr> '; 
+  echo '<thead><tr> '; 
   foreach ($RowPref  as $Pref) {dvl_pretty(); echo '<th class="south" style="width:'.$Pref[1].' align:'.$Pref[3].';'.$ØHeaderFont.'"> '.  // ['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:disp!      ']
         '<div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Pref[0],$Pref[5],'SO','0px').'</div></div> </th>';}
   $kNo= 0;
-  foreach ($RowBody as $Spec) {dvl_pretty(); if ($kNo++>2) $plc='SW'; else $plc='SO'; echo '<th style="width:'.$Spec[1].';'.$ØHeaderFont.'">'.  //  ['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:placeholder']
-        '<div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Spec[0],$Spec[4],$plc,'0px').'</div></div> </th>';  }
+  foreach ($RowBody as $Spec) {dvl_pretty(); if ($Spec[2]!='hidd') {if ($kNo++>3) $plc='SW'; else $plc='SO'; if ($kNo==count($RowBody)) $plc='SW';echo '<th style="width:'.$Spec[1].';'.$ØHeaderFont.'">'.  //  ['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:placeholder']
+        '<div class="extra-wrap"><div class="th-inner-center" align="center">'.Lbl_Tip($Spec[0],$Spec[4],$plc,'0px').'</div></div> </th>';  } else {echo '<th style="width:0px;">';};}
   foreach ($RowSuff  as $Suff) {dvl_pretty(); echo '<th style="width:'.$Suff[1].    //  ['0:ColLabl', '1:ColWidth', '2:InpType', '3:FeltJust', '4:ColTip', '5:value!     ']
                                                       ' align:'.$Suff[3].';'.$ØHeaderFont.'">'.Lbl_Tip($Suff[0],$Suff[4],'SW','0px').'</th>';}
-  echo '</tr></tbody></thead>  ';
+  echo '</tr></thead>  ';
   dvl_pretty();
   
 ### Kolonne-DATA-INPUT:   
@@ -787,53 +812,134 @@ function htm_TabelInp ( #$Capt1='', // $Capt* benyttes kun i htm_Tabel
   foreach ($DATA as $Dat) { $DatIx++;
     dvl_pretty();
     echo '<tr class="row">';
-    foreach ($RowPref  as $Pref) {dvl_pretty(); echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[3].'">'.tolk($Pref[4]).' </td>';} 
+    foreach ($RowPref  as $Pref) {dvl_pretty(); echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[3].'; '.$bord.'">'.tolk($Pref[4]).' </td>';} 
 ### Tabel-BODY:
     $ColIx= -1;
     $inpBg= 'background-color:transparent;'; //' background-color: white; opacity:0.60; ';
     foreach ($RowBody as $Body) {$ColIx++;                # [0:ColLabl, 1:ColWidth, 2:ColJust, 3:InpType, 4:ColTip, 5:placeholder, 7:BG-color]
       dvl_pretty();
-      $valu= $Dat[$ColIx][0];
+      if (is_array($Dat[$ColIx]) )
+           $valu= $Dat[$ColIx][0];
+      else $valu= $Dat[$ColIx];
+      echo '<td style="'.$bord.' text-align:center; ';
       switch ($Body[2]) {  # Specielle InpTyper:
-        case "vars" : echo '<td> <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste" style="max-width:120px"> <option value="" >-';
+        case "vars" : echo '">'.' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste" style="max-width:120px"> <option value="" >-';
                         foreach ($optlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
-                      echo '</select></div></td> ';   break;
-        case "chck" : echo '<td style="text-align:center;">'. '<input type= "checkbox" name="bold" value="" '.$valu.' </td>';  break;
-        case "moms" : echo '<td>'. htm_SelectStr($name="moms",$valu,MomsListe()).'</td>';  break;
-        case "just" : echo '<td>'. htm_SelectStr($name="just",$valu,JustListe()).'</td>';  break;
-        case "side" : echo '<td>'. htm_SelectStr($name="side",$valu,Side_List()).'</td>';  break;
-        case "font" : echo '<td>'. htm_SelectStr($name="font",$valu,FontListe()).'</td>';  break;
-        case "kont" : echo '<td>'. htm_SelectStr($name="kont",$valu,KontListe()).'</td>';  break;
-        case "valu" : echo '<td>'. htm_SelectStr($name="valu",$valu,ValuListe()).'</td>';  break;
-        case "stat" : echo '<td>'. htm_SelectStr($name="stat",$valu,StatListe()).'</td>';  break;
-        case "date" : echo '<td>'. '<input type= "date"date id="'.$name.'" name="'.$name.
-                      '" style="line-height:100%; text-align:left; width:85%; font-size:small; height:16px; '.$inpBg.' value="'.$valu.
-                      '" placeholder="yyyy-mm-dd"  '.$aktiv.' />'.
-                      '</td>';  break;
+                      echo '</select></div> ';   break;
+        case "chck" : echo '">'.'<input type= "checkbox" name="chck" value="" '.$valu.' ';  break;
+        case "bold" : echo '">'.'<input type= "checkbox" name="bold" value="" '.isbold($valu).' ';  break;
+        case "ital" : echo '">'.'<input type= "checkbox" name="ital" value="" '.isital($valu).' ';  break;
+        case "moms" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,MomsListe());  break;
+        case "just" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,JustListe());  break;
+        case "side" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,Side_List());  break;
+        case "font" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,FontListe());  break;
+        case "kont" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,KontListe());  break;
+        case "valu" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,ValuListe());  break;
+        case "stat" : echo '">'.htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu,StatListe());  break;
+        
+        case "date" : echo '">'.'<input type= "date" id="'.$name.'" name="'.$name.'" style="line-height:100%; text-align:left; '.
+                              'width:85%; font-size:small; height:16px; '. $inpBg. '" value="'.$valu. '" placeholder="yyyy-mm-dd" '.$aktiv.' />';  break;
         case "show" : //  Kun visning af data:
-                      echo '<td style="width:'.$Body[1].'; margin-right:0; text-align:'.$Body[3].'; '.$inpBg.'">'.utf8_decode(tolk($Dat[$ColIx])).'</td> ';  break;
+                      // echo ' width:'.$Body[1].'; margin-right:0; text-align:'.$Body[3].'; '.$inpBg.'" name="Kol'.$ColIx.'[]"> '.(tolk($valu)).' ';  break;
+                      echo 'width:'.$Body[1].';"> <input type= "data" name="Kol'.$ColIx.'[]" '.'value="'.$valu. '" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; " readonly  /> ';  break;
+        case "helt" : echo 'width:'.$Body[1].';"> <input type= "'.$Body[2].'" name="Kol'.$ColIx.'[]" '.'value="'.number_format($valu, 0). //  Heltal
+                                    '" placeholder="'.tolk($Body[5]).'" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; padding-left:2px; padding-right:2px;" /> ';
+                      break; //number_format($number, 0, '.', '')
         case "data" : //  Vis og rediger data:     (måske fejl her: viser kun 1. bogstav når $Dat ikke er en array?)
-        case "area" : if ($Dat[$ColIx][0]=='Nyt felt')  {  # Opret ny record
-                        echo '<td> '.tolk('@Nyt felt:').' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
+        case "area" : if ($valu=='Nyt felt')  {  # Opret ny record
+                        echo '"> '.tolk('@Nyt felt:').' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste"> <option value="" >-';
                           foreach ($ordlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
-                        echo '</select></div></td> ';
+                        echo '</select></div> ';
                       } else # Vis redigerbart datafelt:
-                        echo '<td style="width:'.$Body[1].';"> <div style="margin-right:0;"> <input type= "'.$Body[2].'" name="Kol'.$ColIx.'" '.'value="'.htmlentities(stripslashes(tolk($Dat[$ColIx][0]))).
-                                    '" placeholder="'.tolk($Body[5]).'" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%;" /></div></td> ';
+                        //echo '<td style="width:'.$Body[1].';"> <div style="margin-right:0;"> <input type= "'.$Body[2].'" name="Kol'.$ColIx.'[]" '.'value="'.htmlentities(stripslashes(tolk($Dat[$ColIx][0]))).
+                        echo 'width:'.$Body[1].';"> <input type= "'.$Body[2].'" name="Kol'.$ColIx.'[]" '.'value="'.htmlentities(stripslashes(tolk($valu))).
+                                    '" placeholder="'.tolk($Body[5]).'" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; padding-left:2px; padding-right:2px;" /> ';
                       break;
-        default     : echo '<td> <div style="margin-right:0;"> <input type= "'.$Body[2].'"  name="Kol'.$ColIx.'" '.'value="" '.
-                          'placeholder="'.tolk($Body[5]).   '" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; " /></div></td> ';
-    }  };
+        case "hidd" : //  Skjulte data medtages for at gøre opdatering nemmere:
+                        echo 'width:0; padding:0px; border:none;">  <input type= "hidden" name="Kol'.$ColIx.'[]" '.'value="'.htmlentities(stripslashes(tolk($valu))).
+                                    '" placeholder="'.tolk($Body[5]).'" style="text-align:'.$Body[3].'; '.$inpBg.' width:0px;" /> ';
+                      break;
+        default     : echo '"> <input type= "'.$Body[2].'"  name="Kol'.$ColIx.'[]" '.'value="" '.
+                          'placeholder="'.tolk($Body[5]).   '" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; " /> ';
+      }  
+      echo '</td>';
+    };
 ### RowTail:
-  foreach ($RowSuff as $felt) {dvl_pretty(); echo '<td style="text-align:'.$felt[3].'; width:'.$felt[1].'; title:'.$felt[4].'">'.$felt[5].'</td>';}
+    foreach ($RowSuff as $felt) {dvl_pretty(); 
+              if ($felt[0]=='@Slet') {$vises='<button type= "submit" name="btn_del_'.$DatIx.'" class="tooltip" style="height: 20px;" >'.  dvl_pretty().
+                                      Lbl_Tip($felt[5],tolk('@Slet pos: ').$DatIx,'SW','0px'). '</button>';}    
+              if ($felt[0]=='@Skjul') {$vises='<button type= "submit" name="btn_hid_'.$DatIx.'" class="tooltip" style="height: 20px;" >'.  dvl_pretty().
+                                      Lbl_Tip($felt[5],tolk('@Skjul pos: ').$DatIx,'SW','0px'). '</button>';}    // Records som ikke må slettes, kan skjules
+              else {$vises= $felt[5];} 
+              echo '<td style="'.$bord.'text-align:'.$felt[3].'; width:'.$felt[1].'; title:'.$felt[4].'">'.$vises.'</td>';
+              }
     echo '</tr>';
   } # Ide: Mulighed for at vise kolonne-summer, eller andet, på en "footer-række" under tabellen.
-  //  <i class="fa fa-times fa-lg" style="color:yellow; "></i>
-  if (strlen($rowadd)>0) { echo '<tr style="background:#FCFCCC;">'.'<td colspan="99"><ic class="fas fa-plus-square" style="'.$ØIconStyle.'" '.  //  fa-lg
-                      'title="'.tolk('@Tilføj en ny record til denne tabel.').'" > '.str_Plaintxt($rowadd).'</td>'.'</tr>';}
-  echo '</tbody> </table> </div>';    echo '</div>';
+
+### Opret Ny record:
+    if (strlen($rowadd)>0) { 
+      echo '<tr style="background:#DDFFFF;">';
+      foreach ($RowPref  as $Pref) {dvl_pretty(); echo '<td style="width:'.$Pref[1].'; text-align:'.$Pref[3].'; '.$bord.'">'.tolk($Pref[4]).' </td>';} 
+      $ColIx= -1;  
+      foreach ($RowBody as $Body) { $ColIx++; // Nye Indateringsfelter:
+        $valu= '';
+        //  if ($ColIx==1) $index= '9998+1';
+        if ($Body[2]=='show') $ro= 'readonly'; else $ro='';
+        switch ($Body[2]) {  # Specielle InpTyper:
+          case "vars" : echo '">'.' <div style="margin-right:0; font-size:x-small"> <select class="styled-select" name="liste" style="max-width:120px"> <option value="" >-';
+                          foreach ($optlist as $rec) { echo '<option value="'.$rec[1].'" '.$rec[3];   if ($rec[1]==$valu) echo ' selected';   echo '>'.$lbl=$rec[2].'</option> '; }
+                        echo '</select></div> ';   break;
+          case "bold" : $content= '<input type= "checkbox" name="bold" value="" '.isbold($valu).'/>';  break;
+          case "ital" : $content= '<input type= "checkbox" name="ital" value="" '.isital($valu).'/>';  break;
+          case "just" : $content= htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu=$Body[6],JustListe());  break;
+          case "side" : $content= htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu=$Body[6],Side_List());  break;
+          case "font" : $content= htm_SelectStr($name='Kol'.$ColIx.'[]' ,$valu=$Body[6],FontListe());  break;
+          default     : $content= '<input type= "'.$Body[2].'" name="Kol'.$ColIx.'[]" '.'value="'.$default=$Body[6].'" placeholder="'.tolk($Body[5]).   '" style="text-align:'.$Body[3].'; '.$inpBg.' width:100%; " '.$ro.' /> ';
+        }  
+        if ($Body[2]=='hidd') 
+          {echo '<td style="width:0; padding:0px; '.$bord.'">  <input type= "hidden" name="Kol'.$ColIx.'[]" '.'value="'.htmlentities(stripslashes(tolk($valu))).
+                '" placeholder="'.tolk($Body[5]).'" style="text-align:'.$Body[3].';  width:0px;" /></td> ';}
+        else 
+          {echo '<td style="padding:0; vertical-align: bottom; background-color:#FCFCCC; '.$bord.' text-align:center; "><div style="margin-right: 2px;">'.$content.' </div></td> '; } 
+      }   // OpretNy-knap:
+      echo '<td style="padding:0; margin-right: 12px; text-align:right; '.$bord.' padding-right:6px;" colspan="99" >'.
+              '<div class="th-inner-center" style="text-align:right; font-size: 0.85em; padding-rigth:0.7em; '.$bord.' ">'.
+              Lbl_Tip('@Ny',tolk('@Klik på den Blå icon, for at oprette ny postering, når du har udfyldt datafelterne'),'NW','0px').'</div> '.
+              '<button type= "submit" name="btn_new" class="tooltip" style="height: 20px;" title="'.tolk('@Opret postering med de angivne data').'">'.
+              '<ic class="fas fa-check-circle" style="color:blue; font-size:14px;"></ic></button></td></tr> ';
+    }
+    echo '</tbody> </table> </div>';    echo '</div>';
 #+  NaviTip();
 }
+
+/*
+"Submit Table:"
+https://stackoverflow.com/questions/10216450/php-loop-through-html-table-elements-from-submit-form
+
+HTML: I have a js function that adds the following to a table dynamically (Button on form)
+<tr>
+        <td><input type="text" name="name[]" ></td>
+        <td><input type="text" name="surname[]" ></td>
+        <td><input type="text" name="age[]"> </td>
+</tr>
+
+PHP: and this is the way that i process the table within the form
+<?php  
+  $rowCount =  count($_POST['name']); 
+  echo "<table>";
+  for($i=0; $i<=$rowCount-1; $i++)
+    {
+      echo "<tr>";
+        echo "<td>".$_POST['name'][$i]."</td>";
+        echo "<td>".$_POST['surname'][$i]."</td>";
+        echo "<td>".$_POST['age'][$i]."</td>";
+      echo "</tr>";
+    }
+  echo "</table>";?>
+*/
+
+
+
 
 function htm_Formstart($name='',$more='') { //  eks: $more= 'action="#"';
   dvl_pretty('htm_Formstart');
@@ -843,36 +949,43 @@ function htm_Formslut() {
   echo '</form>';
 }
  
-// functions for Panel håndtering:
-function PanelInit() {
+// functioner for Panel håndtering:
+function PanelInit() { $maxPaneler= 40;
   echo '<script>';
   echo 'function PanelMinimizeAll() {';
-  for ($Ix=1; $Ix<=40; $Ix++) {echo ' var x = document.getElementById("HideDiv'.$Ix.'");';  echo ' x.style.display = "none"; ';}
+  for ($Ix=1; $Ix<=$maxPaneler; $Ix++) {echo ' var h = document.getElementById("HideDiv'.$Ix.'"); var p = document.getElementById("panel'.$Ix.'");';  
+                                        echo ' h.style.display = "none"; p.style.width = "240px"; ';}
   echo ' }';
   echo 'function PanelMaximizeAll() {';
-  for ($Ix=1; $Ix<=40; $Ix++) {echo ' var x = document.getElementById("HideDiv'.$Ix.'");';  echo ' x.style.display = "block"; ';}
+  for ($Ix=1; $Ix<=$maxPaneler; $Ix++) {echo ' var h = document.getElementById("HideDiv'.$Ix.'"); var p = document.getElementById("panel'.$Ix.'");';  
+  echo ' h.style.display = "block"; p.style.width = "100%"; ';}
   echo ' }';
   echo '</script>';
 }
   
 # LAYOUT moduler: Rude= Baggrund for en samling datafelter.
-function htm_Rude_Top($name='', $capt='', $parms='', $icon='', $klasse='panelWmax', $func='Udefineret', $more='', $BookMark='../_base/page_Blindgyden.php') {  # SKAL efterfølges af htm_RudeBund !
-  global $Ødebug, $ØTitleColr, $ØRudeForm, $ØProgRoot, $ØPanelIx;
+function htm_Rude_Top($frmName='', $capt='', $parms='', $icon='', $klasse='panelWmax', $func='Udefineret', $more='', $BookMark='../_base/page_Blindgyden.php') 
+{  # SKAL efterfølges af htm_RudeBund !
+  global $Ødebug, $ØTitleColr, $ØRudeForm, $ØProgRoot, $ØPanelIx; 
   $ØPanelIx++;
   echo '<script>';  //  Skjul/vis Panel-Body
   echo 'function PanelSwitch'.$ØPanelIx.'() {';
-  echo '    var x = document.getElementById("HideDiv'.$ØPanelIx.'");';
-  echo '    if (x.style.display === "none") { x.style.display = "block"; } else { x.style.display = "none"; }}';
+  echo '    var h = document.getElementById("HideDiv'.$ØPanelIx.'");';
+  echo '    var p = document.getElementById("panel'.$ØPanelIx.'");';
+  echo '    if (h.style.display === "none") { h.style.display = "block"; p.style.width = "100%"; } else { h.style.display = "none"; p.style.width = "240px"; }}'; //   
   echo 'function PanelMinimize'.$ØPanelIx.'() {';
-  echo '    var x = document.getElementById("HideDiv'.$ØPanelIx.'");';  echo '    x.style.display = "none"; }';
+  echo '    var h = document.getElementById("HideDiv'.$ØPanelIx.'");';  echo '    h.style.display = "none"; p.style.width = "240px"; }';  //h.style.width = "480px"; }';
   echo 'function PanelMaximize'.$ØPanelIx.'() {';
-  echo '    var x = document.getElementById("HideDiv'.$ØPanelIx.'");';  echo '    x.style.display = "block"; }';
+  echo '    var h = document.getElementById("HideDiv'.$ØPanelIx.'");';  echo '    h.style.display = "block"; p.style.width = "100%"; }';
   echo '</script>';
-  dvl_pretty('htm_Rude_Top');                     //- dvl_ekko('htm_Rude_Top  XX ');
+  dvl_pretty('htm_Rude_Top');                       //- dvl_ekko('htm_Rude_Top  XX ');
   if ($capt=='') $Ph= 'height:0px;'; else $Ph= '';  //- dvl_ekko('htm_Rude_Top  XX1 '.$ØRudeForm);
-  if ($name>'') //  Uden navn oprettes ingen form, så lokale(/"indlejrede") forms muliggøres!
-    if ($ØRudeForm) 
-    echo '<form name="'.$name.'" id="PanelForm" action="'.$parms.'" method="post">';  //  "ParentForm" - Nestet forms er ikke tilladt, så under-forms skal håndteres specielt!
+  
+  if ($frmName>'') //  Uden navn oprettes ingen form, så lokale(/"indlejrede") forms muliggøres!
+    {$ØRudeForm= true;
+    echo '<form name="'.$frmName.'" id="'.$frmName.'" action="'.$parms.'" method="post">';  //  "ParentForm" - Nestet forms er ikke tilladt, så under-forms skal håndteres specielt!
+    }  else $ØRudeForm= false;
+  
   if ($Ødebug) {$fn= '&nbsp; <small><small><small>'.$func.'()</small></small></small>';} else $fn='';
     //    "https://ev-soft.dk/saldi-wiki/doku.php?id=saldi:manualen#konti"
     //    "https://ev-soft.dk/saldi-wiki/doku.php?id=legeplads:lege-side#kontakt"
@@ -884,30 +997,36 @@ function htm_Rude_Top($name='', $capt='', $parms='', $icon='', $klasse='panelWma
     if ($BookMark=='../_base/page_Blindgyden.php') {$kilde= $BookMark; $BookMark= '';};
     if ($BookMark=='') { $wikilnk= '';  $kilde=''; }
   };
-  $wikilnk= '<a href="'.$kilde.$BookMark.'" target="_blank" tiptxt="'.tolk('@Online hjælp, Find relevante informationer til dette panel, i SALDI-wiki').'"><img src= '.$ØProgRoot.
+  $wikilnk= '<a href="'.$kilde.$BookMark.'" target="_blank" title="'.tolk('@Online hjælp, Find relevante informationer til dette panel, i SALDI-wiki. (Når Wiki for Saldi-€ er oprettet...) '.
+  'Du kan her også være med til at vedligeholde hjælp og vejledning, da WIKIen er redigerbar.').'"><img src= "'.$ØProgRoot.
         '_assets/images/wikilogo.png " alt="Saldi Wiki" style="width:20px;height:20px; margin-right:2px; float:right;" '.'> </a>';
-  echo '<div class="'.$klasse.'"'.$more.' > '.    //  Rude-start
-       '<div class="panelTitl" style="'.$Ph.' color:'.$ØTitleColr.'; cursor:s-resize; text-align: left; display: inline-block; width:75%;""  tiptxt="'.tolk('@Klik for at åbne/lukke dette panel').'" onclick=PanelSwitch'.$ØPanelIx.'(); >';  //  Rude-Header
+  
+  echo '<div class="'.$klasse.'" id="panel'.$ØPanelIx.'" '.$more.' > '.    //  Rude-start
+       '<div class="panelTitl" style="'.$Ph.' color:'.$ØTitleColr.'; cursor:row-resize; text-align: left; display: inline-block; width:75%;"  tiptxt="'.
+        tolk('@Klik for at åbne/lukke dette panel').'" onclick=PanelSwitch'.$ØPanelIx.'(); >';  //  Rude-Header
   echo '<ic class="'.$icon.'" style="font-size:20px;color:brown;"> </ic> &nbsp;'.ucfirst(Tolk($capt)).$fn;
   echo '</div>';
-  echo '<ic class="fas fa-angle-double-up"   style="width:12px;height:12px; margin-top:6px; margin-right:4px; float:right; cursor:zoom-out;" title="'.tolk('@Klik for at lukke alle paneler').';" onclick=PanelMinimizeAll(); cursor:row-resize></ic>';
-  echo '<ic class="fas fa-angle-double-down" style="width:12px;height:12px; margin-top:6px; margin-right:0px; float:right; cursor:zoom-in;" title="'.tolk('@Klik for at åbne alle paneler').';"  onclick=PanelMaximizeAll(); cursor:row-resize></ic>';
+  echo '<ic class="fas fa-angle-double-up"   style="width:12px;height:12px; margin-top:6px; margin-right:4px; float:right; cursor:zoom-out;" title="'.
+        tolk('@Klik for at lukke alle paneler').';" onclick=PanelMinimizeAll(); cursor:row-resize></ic>';
+  echo '<ic class="fas fa-angle-double-down" style="width:12px;height:12px; margin-top:6px; margin-right:0px; float:right; cursor:zoom-in;" title="'.
+        tolk('@Klik for at åbne alle paneler').';"  onclick=PanelMaximizeAll(); cursor:row-resize></ic>';
   echo  $wikilnk; //  tiptxt virker ikke ovenfor, derfor: title !
   //echo '</div>'; //  Rude-Header
-  echo '<div id="HideDiv'.$ØPanelIx.'" >';   // Klap-sammen herfra! 
+  echo '<div id="HideDiv'.$ØPanelIx.'" style="background:'.$ØBodyBcgrd.';">';   // Klap-sammen herfra! 
   if ($capt!='') echo '<hr class="style13" style="margin-bottom: 0;margin-top: 0;"/>';
 } # Panelets < /rudediv>, < /hiding> og < /form> er placeret i htm_RudeBund, som skal kaldes til slut!
 
-function htm_RudeBund($pmpt='', $subm=false, $title='@Husk at gemme her, hvis du har rettet noget ovenfor, inden du forlader vinduet.',$akey='',$simu=false) { # SKAL følge efter htm_Rude_Top !
+function htm_RudeBund($pmpt='', $subm=false, $title='@Husk at gemme her, hvis du har rettet noget ovenfor, inden du forlader vinduet.',$akey='',$simu=false,$frmName='') { # SKAL følge efter htm_Rude_Top !
   global $ØRudeForm;    dvl_pretty('htm_RudeBund  XX ');
+  if ($title=='') $title= '@Husk at gemme her, hvis du har rettet noget ovenfor, inden du forlader vinduet.';
   if ($ØRudeForm)
     if ($subm==true) {
       echo '<hr class="style13" style= "height:4px;"><div class="centrer" style="height:25px">';  
       if ($simu) {
-        htm_CheckFlt($type='checkbox',$name='tip', $valu= $Ønovice, $labl='@Simuler? ', $titl='@Simuler, dvs. gem ikke straks',$revi=true, $more=' '.$Ønovice,' ');//  Simuler
+        htm_CheckFlt($type='checkbox',$name='sim', $valu= $Ønovice, $labl='@Simuler? ', $titl='@Simuler, dvs. gem ikke straks',$revi=true, $more=' '.$Ønovice,' ');//  Simuler
         htm_sp(3);
       }
-      htm_Accept($pmpt,$title,$width='',$akey); echo '</div>';  
+      htm_Accept($pmpt,$title,$width='',$akey,$frmName); echo '</div>';  
     }
   echo '</div>';  // Klap-sammen hertil!
   echo '</div>';  // Rude-slut
@@ -934,40 +1053,41 @@ function PanelBetjening() {
 
 function htm_Accept($labl='', $title='', $width='',$akey='',$form='PanelForm')   //  Kan kun benyttes på PanelForm! (Rude_Top/Rude_Bund)
 {global $ØBtNavBgrd, $ØBtNavText, $ØBtSavBgrd, $ØBtSavText, $ØBtDelBgrd, $ØBtNewBgrd, $ØTextLight, $ØTextDark, $Ødimmed, $ØTastkeys;
-  //  $ØTastkeys= true;
-  if ($ØTastkeys) 
-  {
+ ## Genvejstaster:
+  if ($ØTastkeys) {
     if ($akey>'') $genv=' ´<i>'.$akey.'</i>´'; else $genv='';
     if (!$genv) $ktip=''; else $ktip= '<br>'.tolk('@Tastatur genvej: ').$akey;
   }
   if ($width) $width= ' width: '.$width.';';
 #  $overTxt= 'onmouseover="style.background=\'blue\'" onmouseout="style.background=\''.$ØBtSavBgrd.'\'"';
   dvl_pretty('htm_Accept');
+## Udseende:
   /* Generelt-Navigation  */  $colors= ' background:'.$ØBtNavBgrd.'; color:'.$ØBtNavText.';'.$Ødimmed; # naviger-knap: GRØN
-  if (($labl=='@Gem') or ($labl=='@Gem rettelser') or ($labl=='@Fakturér') or ($labl=='@Opret ordre')or ($labl=='@Rediger det valgte') )
+  if (($labl=='@Gem') or ($labl=='@Gem rettelser') or ($labl=='@Fakturér') or ($labl=='@Opret ordre') or ($labl=='@Rediger det valgte') )
                               {$colors= ' background:'.$ØBtSavBgrd.'; color:'.$ØBtSavText.';'.$Ødimmed  # Submit-knap: GUL
                             #  ' onmouseover="style.background=\''.$ØBtSavText.'\'" onmouseover="style.color="\''.$ØBtSavBgrd.'\'" '.
                             #  ' onmouseout ="style.background=\''.$ØBtSavBgrd.'\'"'.
                               ;}
   if (($labl=='@Slet') )      {$colors= ' background:'.$ØBtDelBgrd.'; color:'.$ØTextLight.';'.$Ødimmed;} # Slet: RØD
   if (($labl=='@Opret Ny') )  {$colors= ' background:'.$ØBtNewBgrd.'; color:'.$ØTextLight.';'.$Ødimmed;} #   Ny: BLÅ
+## Funktion:
   if (($labl=='@Retur til hovedmenu')) {textKnap($label='@Retur til hovedmenu',  $title='@Vend tilbage til programmets hovedmenu',
-                                 $link= '../_base/page_Gittermenu.php', $akey='', 
+                                 $link= '../_base/page_Hovedmenu.php', $akey='', 
                                  $more= ' background:'.$ØBtNavBgrd.'; color:'.$ØBtNavText.';'.$Ødimmed); 
-  } 
-  else  echo '<button form="'.$form.'" type= "submit" name="submit" class="tooltip" style="margin: 1px 1px; padding: 1px 3px; height: 22px; '.$width.
-        $colors.'" accesskey="'.$akey.'">'. # Submit-knap: GUL
-        ucfirst(tolk($labl)).$genv.'<span class="tooltiptext">'.tolk($title).$ktip.'</span></button>';
+  } else  
+  echo '<button form="'.$form.'" type= "submit" name="btn_'.$form.'" id="btn_'.$form.'" class="tooltip" style="margin: 1px 1px; padding: 1px 3px; height: 22px; '.$width.
+  $colors.'" accesskey="'.$akey.'">'. # Submit-knap: GUL
+  ucfirst(tolk($labl)).$genv.'<span class="tooltiptext">'.tolk($title).$ktip.'</span></button>';
 }
 
 
 # LAYOUT moduler: Lagen= Baggrund for en gruppe af ruder. (Parametre, som htm_Rude_Top)
 function htm_Tapet_Top($name='', $capt='', $parms='#', $icon='', $klasse='tapetWmax', $func='Udefineret') {  //  Problem: lyster ikke tapetWmax
-  global $Ødebug, $ØTitleColr, $ØTapetColr;
+  global $Ødebug, $ØTitleColr, $ØTapetBgrd;
   if ($Ødebug) {$fn= '&nbsp; <small><small><small>f:'.$func.'()</small></small></small>';} else $fn='';
   dvl_pretty('htm_Tapet_Top');
   if ($name>'') echo '<form name="'.$name.'" id="'.$name.'" action="'.$parms.'" method="post">';
-  echo '<div class="'.$klasse.'" style= "background:'.$ØTapetColr.';" > <div class="panelTitl" style="height:0;" >'.
+  echo '<div class="'.$klasse.'" style= "background:'.$ØTapetBgrd.';" > <div class="panelTitl" style="height:0;" >'.
     '<ic class="'.$icon.'" style="font-size:22px; color:'.$ØTitleColr.'"></ic> &nbsp;'.ucfirst(Tolk($capt)).$fn.'</div>';
 } # Boxens </div>  er placeret i htm_TapetBund, som skal kaldes til slut!
 
@@ -1011,7 +1131,7 @@ function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $g
 //  echo '<p align="center"><b>'.tolk('@Navigation:').'<b></p>';
   echo '<p align="center">';  #<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
   if ($goPrev)  iconKnap($faicon='fas fa-caret-square-left',    $title= tolk('@Vis forrige')  .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='f');
-  if ($goHome)  iconKnap($faicon='fas fa-home',                 $title= tolk('@Luk vinduet og gå til hoved-menu.'),$link='../_base/page_Gittermenu.php'.$goBack,$akey='h');
+  if ($goHome)  iconKnap($faicon='fas fa-home',                 $title= tolk('@Luk vinduet og gå til hoved-menu.'),$link='../_base/page_Hovedmenu.php'.$goBack,$akey='h');
   if ($goUp  )  iconKnap($faicon='fas fa-caret-square-up',      $title= tolk('@Luk vinduet og gå et niveau op.')  ,$link= $goBack,                      $akey='l');
   if ($goFind)  iconKnap($faicon='fas fa-search',               $title= tolk('@Søg en anden') .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='s');
   if ($goNew )  iconKnap($faicon='fas fa-plus-square',          $title= tolk('@Opret ny')     .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='o');
@@ -1028,28 +1148,17 @@ function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $g
 
 # PROGRAM-MODUL;
 function SprogValg(&$ØprogSprog) {
-# Disse sprog-fraser skal IKKE oversættes, da valgmuligheder skal forstås af udlændinge!
   #htm_Caption('@Program sprog:');
   echo '<span style="display: inline-block; width:280px">';
   htm_OptioFlt($type='text', $name='progsprog', $valu=$ØprogSprog, 
       $labl= '@Program sprog:', 
-      $titl= tolk('@Hvilket sprog vil du benytte programmet med ?').' <br> (Virker kun delvist!. 2 opdateringer nødvendig!!!)', 
+      $titl= tolk('@Hvilket sprog vil du benytte programmet med ?').' <br> (Virker kun delvist!.<br> Klik 2 gange er nødvendig!!!)', 
       $revi=true, $optlist= SPR_Liste(),
-/*       array( # [0]:Tip [1]:value [2]:Text  [3]:events
-      ['Vælg dansk sprog',               'da','Dansk',    ],  //  Redigeres noget her, skal der også redigeres i Rude_LanguageJuster()
-      ['Select English language',        'en','English',  ],
-      ['Wählen Sie deutsche Sprache',    'de','Deutsch',  ],
-      ['Choisissez la langue française', 'fr','Français', ],
-      ['Türk Dili seçin',                'tr','Türkçe',   ],
-      ['Wybierz język duński',           'pl','Polski',   ],  //  pl-PL Polish (Poland)
-      ['Elegir el idioma español',       'es','Español',  ],
-      ['Selezionare la lingua italiana', 'it','Italian',  ]),
- */
       $action= $result= $_POST[$name],
       $events='onchange="this.form.submit();"  ');  //   onblur="window.location.reload(true);"  ');  //  onchange="update(this)"
     echo '</span>';
     if (strlen($result)==2) $ØprogSprog= $result;
-    $_SESSION['ØprogSprog']= $ØprogSprog;    //  $ØprogSprog= $_SESSION['ØprogSprog']; udføres i ../_base/htm_pageHead.php
+    $_SESSION['ØprogSprog']= $ØprogSprog;    //  $ØprogSprog= $_SESSION['ØprogSprog']; udføres i ../_base/htm_pagePrepare.php
 }
 // SprogValg Virker kun delvist! Første gang opdates sprog kun i lokal rude, 2. gang følger de øvrige med!
 
@@ -1096,12 +1205,12 @@ function MenuStart($clas='firstmain',$href='#',$labl='',$titl='') {  //  SKAL ef
          '<i class="fas fa-sign-out-alt" style="font-size:16px; color:red" ></i> '.tolk('@Log ud').'</a1></box><br>';
   echo '  <div id="wb_TopMenu" style="position:absolute;left:100px;top:1px;width:1200px;height:24px;z-index:999;">';
   echo '    <ul>';
-  echo '      <li class="'.$clas.'"><a href="'.$href.'" target="_self" tiptxt="'.tolk($titl).'">'.tolk($labl).'</a> </li>';
+  echo '      <li class="'.$clas.'" style="width:50px; text-align:left;"><aaa href="'.$href.'" target="_self" tiptxt="'.tolk($titl).'">'.tolk($labl).'</aaa> </li>';
 }
 function MenuGren($clas='',$href='#',$labl='',$titl='') {
   if ($href=='../_base/page_Blindgyden.php') {$blnd='<i style="font-color:gray;">'; $obs='<small> '.tolk('@påtænkt!').'</small>';} else {$blnd=''; $obs='';};
   if (strpos($labl,'Log ud')>0) {$bold='<bx style="font-color:red; font-weight:800;">'; } else {$bold='';};
-  if (strpos($href,'http' )>0) $targ='_blank'; else $targ='_self';
+  if (strpos($href,'ttp' )>0) $targ='_blank'; else $targ='_self'; //  Test om http forekommer
   $link= 'href="'.$href.'" target="'.$targ.'" title="" tiptxt="'.tolk($titl).'" >'.$blnd.$bold.tolk($labl);
   if ($bold!='') {$link.= '</bx>'.$obs;}
   if ($blnd!='') {$link.= '</i>'.$obs;} else {$link.= $obs;}
@@ -1123,9 +1232,9 @@ function MenuSlut() {global $ØProgRoot, $ØProgTitl, $Øprogvers, $Øcopydate, 
   echo "\n";
 }
 
-function Menu_Topdropdown($vis_finans=true, $vis_debitor=true, $vis_kreditor=true, $vis_prodkt=false, $vis_lager=true) { //  Menu-placering/størrelse foregår i MenuStart()
+function Menu_Topdropdown($vis_finans=true, $vis_debitor=true, $vis_kreditor=true, $vis_prodkt=false, $vis_lager=true) { //  Menu-placering/størrelse styres i MenuStart()
 global $Ødebug, $ØProgTitl;
-  MenuStart($clas='firstmain',      $href='../_base/page_Gittermenu.php',         $labl='@MENU',                $titl='@Gå til Hovedmenu i gammelt layout');
+  MenuStart($clas='firstmain',      $href=''/* '../_base/page_Gittermenu.php' */, $labl='@MENU:',               $titl='Programmets MENU' /* '@Gå til Hovedmenu i gammelt layout' */);
     if ($vis_finans) {
       MenuGren($clas='withsubmenu', $href='#',                                    $labl='@FINANS',              $titl='@Administration af regnskab');
       MenuGren($clas='firstitem',   $href='../_finans/page_Kladdeliste.php',      $labl='@Kasse kladder',       $titl='@Her kan du vælge kassekladde, og redigere den');
@@ -1151,14 +1260,15 @@ global $Ødebug, $ØProgTitl;
       MenuGren($clas='lastitem',    $href='../_kreditor/page_Rapport.php',        $labl='@Rapporter',           $titl='@Analyser af køb');
         
     }      
-    if ($vis_lager) {
-    MenuGren($clas='withsubmenu',   $href='#',                                    $labl='@LAGER',               $titl='@Rutiner angående lagerførte produkter');
-      MenuGren($clas='firstitem',   $href='../_lager/page_Varer.php',             $labl='@Vare lister',         $titl='@Oversigt over salgsvarer');
-      MenuGren($clas='',            $href='../_lager/page_Varemodtagelse.php',    $labl='@Vare modtagelse',     $titl='@Lister for varemodtagelse');
-      MenuGren($clas='lastitem',    $href='../_lager/page_Beholdningsliste.php',  $labl='@Rapporter',           $titl='@Analyser over varer');
-    }
     if ($vis_prodkt) { 
       MenuGren($clas='withsubmenu', $href='#',                                    $labl='@PRODUKTION',          $titl='@Rutiner angående produktion');
+      MenuGren($clas='lastitem',    $href='../_lager/page_Beholdningsliste.php',  $labl='@Rapporter',           $titl='@Analyser over produktion');
+    }
+    if ($vis_lager) {
+    MenuGren($clas='withsubmenu',   $href='#',                                    $labl='@LAGER',               $titl='@Rutiner angående lagerførte produkter');
+      MenuGren($clas='firstitem',   $href='../_lager/page_Varer.php',             $labl='@Vare lager',          $titl='@Oversigt over salgsvarer, samt detaljer på varekort');
+      MenuGren($clas='',            $href='../_lager/page_Varemodtagelse.php',    $labl='@Vare modtagelse',     $titl='@Lister for varemodtagelse');
+      MenuGren($clas='lastitem',    $href='../_lager/page_Beholdningsliste.php',  $labl='@Rapporter',           $titl='@Analyser af varesalg m.v.');
     }
     if (true) {
     MenuGren($clas='withsubmenu',   $href='#',                                    $labl='@SYSTEM',              $titl='@Her indstiller du programmet og regnskabet');
@@ -1177,7 +1287,8 @@ global $Ødebug, $ØProgTitl;
         MenuGren($clas='',          $href='../_base/page_Blindgyden.php',         $labl='@Notesblok',           $titl='@Start en simpel skrivemaskine');
         MenuGren($clas='',          $href='../_base/page_Tips.php',               $labl='@Tips',                $titl=tolk('@Her er der nyttige tips, til brugen af').$ØProgTitl);
         MenuGren($clas='',          $href='../_base/page_News.php',               $labl='@Nyheder',             $titl='@Her omtales nogle af de nyheder, der er tilføjet i den nye SALDI-€');
-        MenuGren($clas='lastitem',  $href='http://www.ev-soft.dk/saldi-wiki/doku.php?id=saldi:manualen ', $labl='@DokuWiki - Manual', $titl='@Manual, tips og anden hjælp finder du på'.$ØProgTitl.'-DokuWiki');  
+        MenuGren($clas='lastitem',  $href='http://www.ev-soft.dk/saldi-wiki/doku.php?id=saldi:manualen', 
+                                                                                  $labl='@DokuWiki - Manual', $titl='@Manual, tips og anden hjælp finder du på'.$ØProgTitl.'-DokuWiki');  
     }
     if ($Ødebug) { 
       MenuGren($clas='withsubmenu', $href='#',                                    $labl='@TOOLS',               $titl='@Udviklerens redskaber');
@@ -1194,8 +1305,8 @@ global $Ødebug, $ØProgTitl;
 ### SPALTER, PANELER m.v.:
 // Spalter:
 function SpalteTop ($w=240) {dvl_pretty('SpalteTop');  echo '<PanlHead> <div id="wrapper"> <column id="spalt'.$w.'">'; } // SpalteTop spalt240, spalt320 (erkl. i Out_style.css.php)
-function NextSpalte($w=320) {echo '</column> <column id="spalt'.$w.'">'; }                  // SpalteBund/SpalteTop
-function SpalteBund()       {echo '</column> </div> </PanlHead><div class="clearWrap"/>'; } // erstatter EndSpalter
+function NextSpalte($w=320) {echo '</column> <column id="spalt'.$w.'">'; } 
+function SpalteBund()       {echo '</column> </div> </PanlHead><div class="clearWrap"/>'; }
 
 // Paneler:
 function panelStart() {dvl_pretty('panelStart');  echo '<PanlFoot>';}
@@ -1206,7 +1317,7 @@ function skilleLin () {echo '<hr size="10" color="#AA4D00"/>';}
 function htm_CentHead($txt='')  {echo '<div style="text-align:center; font-weight:900;"><colrlabl>'.$txt.'</colrlabl></div>';}
 function htm_CentrOn($more='')  {echo '<div style="text-align:center; '.$more.'">';}
 function htm_CentOff()          {echo '</div>';}
-function htm_Spacer($w='30')    {echo '<div1 style= "width:'.$w.' em;">&nbsp; </div1>';}
+function htm_Spacer($w='30')    {echo '<div1 style= "width:'.$w.'em;">&nbsp; </div1>';}
 
 // En gruppe af elementer på en linie, med en felles overskrift forrest.
 function htm_KnapGrup($Pmpt='@Vis:', $Start=true, $ruler=true, $style='text-align:center;') { global $ØbrwnColor;
@@ -1217,19 +1328,29 @@ function htm_KnapGrup($Pmpt='@Vis:', $Start=true, $ruler=true, $style='text-alig
     echo '</div>';
 }
 
+function htm_Ihead($head) {echo '<br/><i>'.$head.'</i> ';}
 function htm_hr($c='#0')  {echo '<hr style="color:'.$c.';"/>';}
 function htm_nl($rept=1)  {echo str_repeat('<br/>',$rept);}
-function htm_lf($rept=1)  {echo str_repeat(' &#xa;',$rept);}  //  LineFeed i strenge
-function htm_Ihead($head) {echo '<br/><i>'.$head.'</i> ';}
+function htm_lf($rept=1)  {echo str_repeat(' &#xa;',$rept);}  //  LineFeed
 function htm_sp($rept=1)  {echo str_repeat('&nbsp;',$rept);}
 
 
 // Streng-funktioner:
+function str_Ihead($head) {return '<br /><i>'.$head.'</i> ';}
 function str_hr($c='#0')  {return '<hr style="color:'.$c.';"/>';}
-function str_nl($rept=1)  {return str_repeat('<br/>',$rept);}
-function str_lf($rept=1)  {return str_repeat(' &#xa;',$rept);}  //  LineFeed i strenge
-function str_Ihead($head) {return '<br/><i>'.$head.'</i> ';}
+function str_nl($rept=1)  {return str_repeat("<br />",$rept);}
+function str_lf($rept=1)  {return str_repeat(' &#xa;',$rept);}  //  LineFeed i strenge  &#010;  &#xa;  \n \u000A  \x0A  &#13;
 function str_sp($rept=1)  {return str_repeat('&nbsp;',$rept);}
+
+function isbold($str) {if (strpos(' '.$str,'bold')>0) return 'checked'; else return '';}
+function isital($str) {if (strpos(' '.$str,'italic')>0) return 'checked'; else return '';}
+
+  
+// Array-funktioner:
+function Vis_Data($arr) { //  Vis indhold af en array:
+  if ($arr) foreach ($arr as $a) {echo "<br>"; for ($i= 0; $i<= count($a); $i++) echo $a[$i].' '; echo "<br>"; } 
+}
+
 
 # SUPPLERENDE moduler:
 
@@ -1338,34 +1459,38 @@ function htm_HiddVari($name='',$val='') {
 function htm_NullVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = NULL; }}
 function htm_GetVariabler($namelist=[''])  { foreach ($namelist as $name) {global $$name; $name = Øif_isset($_GET[$name]); }}
 function htm_PostVariabler($namelist=['']) { foreach ($namelist as $name) {global $$name; $name = Øif_isset($_POST[$name]); }}
-
+function pushed($name) { return (isset($_POST[$name])); } //  En submit-knap er aktiveret
+//  function var_PostSet($name) { if (isset($_POST[$name])) $$name=  $_POST[$name]; }
  
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//        Generering af diverse lister:
 $kontoTypeListe= array(['H','@Overskrift'],['D','@Drift'],['S','@Status'],['Z','@Sum'],['R','@Resultat'],['X','@Sideskift'],['L','@Lukket']);
 
 $momsKodeListe= array(['K','@Købsmoms'],['S','@Salgsmoms'],['Y','@Ydelsesmoms'],['E','@EU-varemoms']);
 
 $artsKodeListe= array(['VG','@VareGruppe'],['DG','@DebitorGruppe'],['KG','@KreditorGruppe'],['VPG','@yyy'],['VTG','@yyy'],['VRG','@yyy'],
-                      ['SM','@SalgsMomskonto'],['VK','@ValutaKoder'],['PRJ','@yyy'],['YM','@YdelsesMomskonto-udland'],
+                      ['SM','@SalgsMomskonto'],['VK','@ValutaKoder'],['PRJ','@Projekter'],['YM','@YdelsesMomskonto-udland'],
                       ['EM','@VareMomskonto-udland'],['KM','@KøbsMomskonto'],['SD','@SamlekontoDebitor'],
                       ['KD','@KreditorSamlekonto'],['RA','@Regnskabsår'],['PV','@yyy'],['LG','@LagerGrupper'],
                       ['S','@yyy'],['MR','@MomsRapportkonto'],['xx','@yyy']);
-# Diverse lister: [Tip Tekst, Value, Label]
-function JustListe () {return( [['@Venstre justeret','V','V'],['@Center justeret','C','C'],['@Højre justeret','H','H']] ); }
+
+# Diverse lister: [@Tip_Tekst, Value, Label]
+#function JustListe () {return( [['@V: Venstre justeret','V','V/L'],['@C: Center justeret','C','C'],['@H: Højre justeret','H','H/R']] ); }
+function JustListe () {return( [['@V: Venstre justeret','V','V'],['@C: Center justeret','C','C'],['@H: Højre justeret','H','H']] ); }
 function FartListe () {return( [['@0: Generelt - f.eks. papirformat','0','@0: Generelt'],['@1: Grafik= Linier og billeder','1','@1: Grafik'],
-                                ['@2: Tekster og variabelnavne','2','@2: Tekster'],['@3: Ordrelinier - Gentagende linier på sidens midte','3','@3: Ordrelinier'],
+                                ['@2: Tekster og variabelnavne ($)','2','@2: Tekster'],['@3: Ordrelinier - Gentagende linier på sidens midte (£)','3','@3: Ordrelinier'],
                                 ['@5: Mail tekst - Emne og Beskedtekst i mail forsendelse','5','@5: Mail tekst']] ); }
-function SideListe () {return( [['@Alle sider','A','@A: Alle sider'],['@Kun Første side','1','@1: Kun Første side'],['@IKKE første side','!1','@!1: IKKE første side'],
-                                ['@Kun Sidste side','S','@S: Kun Sidste side'],['@IKKE Sidste side','!S','@!S: IKKE Sidste side']] ); }
-function Side_List () {return( [['@Alle sider','A','A'],['@Kun Første side','1','1'],['@IKKE første side','!1','!1'],
-                                ['@Kun Sidste side','S','S'],['@IKKE Sidste side','!S','!S']] ); }
+function SideListe () {return( [['@Alle sider','A','@A: Alle sider',''],['@Kun første side','1','@1: Kun første side',''],['@IKKE første side','!1','@!1: IKKE første side',''],
+                                ['@Kun sidste side','S','@S: Kun sidste side',''],['@IKKE sidste side','!S','@!S: IKKE sidste side','']] ); }
+function Side_List () {return( [['@Alle sider','A','A'],['@Kun første side','1','1'],['@IKKE første side','!1','!1'],
+                                ['@Kun sidste side','S','S'],['@IKKE sidste side','!S','!S']] ); }
 function FontListe () {return( [['@Sans-serif','Helvetica','Helvetica'],['@Serif','Times','Times'],['@Optisk Læsbar','OCRbb12','OCRbb12']] ); }
 function KontListe () {return( [['@Drifts konto','D','D'],['@Status konto','S','S'],['@Sum konto','Z','Z'],['@Overskrift (system!)','H','H'],
                                 ['@Resultat konto','R','R'],['@Sideskift (system!)','X','X'],['@Lukket konto','L','L']] ); }
 function MomsListe () {return( [['@Købs-moms','K1','K1'],['@Salgs-moms','S1','S1'],['@Ydelses-moms','Y1','Y1'],['@EU-moms?','E1','E1']] ); }
 function ValuListe () {return( [['@Danske kroner','DKK','DKK'],['@Euro','EUR','EUR'],['@US dollar','$','$'],['@Engelsk pund','£','£']] ); }
 function StatListe () {return( [['@Aktiv','1','Aktiv'],['@Lukket','0','Lukket']] ); }
-function Aar_Liste () {return( [['2015','2015','2015'],['2016','2016','2016'],['2017','2017','2017']] ); }
+function Aar_Liste () {return( [['2016','2016','2016'],['2017','2017','2017'],['2018','2018','2018']] ); }
 function Grp0Liste () {return( [['@Alle ','0','@0. Alle','']] ); }
 function Grp1Liste () {return( [['@Ydelser ','1','@1. Ydelser',''],['@Handelsvarer','2','@2. Handelsvarer',''],
                                 ['@Forbrugsvarer', '3','@3. Forbrugsvarer',''],['@Fragt/Porto','4','@4. Fragt/Porto','']] ); }
@@ -1373,17 +1498,17 @@ function Grp_Liste () {return( [['@Alle ','0','@0. Alle',''],['@Ydelser ','1','@
                                 ['@Forbrugsvarer', '3','@3. Forbrugsvarer',''],['@Fragt/Porto','4','@4. Fragt/Porto','']] ); }
 function PageListe () {return( [['@A5-Højformat ','A5-portrait','A5-p'],['@A5-bredformat ','A5-landscape','A5-l'],['@A4-Højformat ','A4-portrait','A4-p'],
                                 ['@A4-bredformat ','A4-landscape','A4-l'],['@A3-Højformat ','A3-portrait','A3-p'],['@A3-bredformat ','A3-landscape','A3-l']] ); }
-function PaprListe () {return( [['@A5 Højformat: H:210mm B:148mm', 'A5p', '@A5 portrait'],
-                                ['@A5 Bredformat: H:148mm B:210mm','A5l', '@A5 landscape'],
-                                ['@A4 Højformat: H:297mm B:210mm', 'A4p', '@A4 portrait'],
-                                ['@A4 Bredformat: H:210mm B:297mm','A4l', '@A4 landscape'],
-                                ['@A3 Højformat: H:420mm B:297mm', 'A3p', '@A3 portrait'],
-                                ['@A3 Bredformat: H:297mm B:420mm','A3l', '@A3 landscape']] ); }
-function FormObjkt () {return( [['@Side layout og placering af ordrelinier',     '0:Layout',       '@Layout'],
-                                ['@Tekster og variabler med data',               '1:Tekster',      '@Tekster'],
-                                ['@Grafiske streger og logo-billede',            '2:Linjer',       '@Grafik'],
-                                ['@Gentagne ordrelinier på sidens midte',        '3:Ordrelinjer',  '@Ordrelinjer'],
-                                ['@Emne og besked benyttet til mailforsendelse', '5:Mail tekst',   '@Mail tekst']] ); }
+function PaprListe () {return( [['@A5 Højformat: H:210mm B:148mm', 'A5p', '@A5 portrait',''],
+                                ['@A5 Bredformat: H:148mm B:210mm','A5l', '@A5 landscape',''],
+                                ['@A4 Højformat: H:297mm B:210mm', 'A4p', '@A4 portrait',''],
+                                ['@A4 Bredformat: H:210mm B:297mm','A4l', '@A4 landscape',''],
+                                ['@A3 Højformat: H:420mm B:297mm', 'A3p', '@A3 portrait',''],
+                                ['@A3 Bredformat: H:297mm B:420mm','A3l', '@A3 landscape','']] ); }
+function FormObjkt () {return( [['@Side layout og placering af ordrelinier',                    '0:Layout',       '@Layout'],
+                                ['@Tekster og variabler med data',                              '1:Tekster',      '@Tekster'],
+                                ['@Grafiske streger og logo-billede',                           '2:Linjer',       '@Grafik'],
+                                ['@Gentagne ordre- eller specikations-linier på siders midte',  '3:Ordrelinjer',  '@Ordrelinjer'],
+                                ['@Emne og besked benyttet til mailforsendelse',                '5:Mail tekst',   '@Mail tekst']] ); }
 # Ikke færdige:                     
 function RabtListe () {return( [['@Venstre ','V','V'],['@Center ','C','C'],['@Højre ','H','H']] ); }
 function PrisListe () {return( [['@Venstre ','V','V'],['@Center ','C','C'],['@Højre ','H','H']] ); }
@@ -1416,23 +1541,28 @@ function ERH_Liste () {return( [
             ] ); }
 
 function FRM_Liste () {return( [
-            ['@1: Tilbuds blanket',              '1', '@1: Tilbud'],
-            ['@2: formular for ordrebekræftelse','2', '@2: Ordrebekræftelse'],
-            ['@3: følgeseddel blanket',          '3', '@3: Følgeseddel'],
-            ['@4: faktura blanket',              '4', '@4: Faktura'],
-            ['@5: blanket for kreditnota',       '5', '@5: Kreditnota'],
-            ['@6: blanket for 1. rykker',        '6', '@6: Rykker 1'],
-            ['@7: blanket for 2. rykker',        '7', '@7: Rykker 2'],
-            ['@8: blanket for 3. rykker',        '8', '@8: Rykker 3'],
-            ['@9: Plukliste',                    '9', '@9: Plukliste'],
-          # ['@10: POS (Point of Sale ),         '10', '@10: POS (Kasse)'],   // Point of Sale (POS) 
-            ['@11: blanket for kontokort',       '11', '@11: Kontokort'],
-            ['@12: blanket for indkøbsforslag',  '12', '@12: Indkøbsforslag'],
-            ['@13: blanket for rekvisition',     '13', '@13: Rekvisition'],
-            ['@14: blanket for købsfaktura',     '14', '@14: Købsfaktura']
+            ['@1: Tilbuds blanket',              '1', '@1: Tilbud',''],
+            ['@2: formular for ordrebekræftelse','2', '@2: Ordrebekræftelse',''],
+            ['@3: følgeseddel blanket',          '3', '@3: Følgeseddel',''],
+            ['@4: faktura blanket',              '4', '@4: Faktura',''],
+            ['@5: blanket for kreditnota',       '5', '@5: Kreditnota',''],
+            ['@6: blanket for 1. rykker',        '6', '@6: Rykker 1',''],
+            ['@7: blanket for 2. rykker',        '7', '@7: Rykker 2',''],
+            ['@8: blanket for 3. rykker',        '8', '@8: Rykker 3',''],
+            ['@9: Plukliste',                    '9', '@9: Plukliste',''],
+          # ['@10: POS (Point of Sale ),         '10', '@10: POS (Kasse)',''],   // Point of Sale (POS) 
+            ['@11: blanket for kontokort',       '11', '@11: Kontokort',''],
+            ['@12: blanket for indkøbsforslag',  '12', '@12: Indkøbsforslag',''],
+            ['@13: blanket for rekvisition',     '13', '@13: Rekvisition',''],
+            ['@14: blanket for købsfaktura',     '14', '@14: Købsfaktura','']
           ]  ); }   
             
-function ListLookup($liste,$search,$colsearch,$colresult) { $result='';
+function ShowCol($liste,$col,$sep) { $result=$sep; // Vis en kolonne fra en liste
+  foreach ($liste as $row) { $result.= tolk($row[$col]).$sep; }
+  return $result;
+}
+
+function ListLookup($liste,$search,$colsearch,$colresult) { $result=''; //  Returner en kolonne fra en liste på grundlag af en anden kolonne
   foreach ($liste as $row) {if ($row[$colsearch]==$search) {$result= $row[$colresult]; break;} }
   return $result;
 }
@@ -1469,8 +1599,9 @@ function DanListe($listen,$suff='') {
 ### DIVERSE LISTER:
 
 # SUB-FUNCTION:
+if (!function_exists('FormVars')) {
 function FormVars($form_nr) { # Returner alle de felter, som er relevante for en given formular
-  $result= ['eget_firmanavn', 'egen_addr1', 'egen_addr2', 'eget_postnr', 'eget_bynavn', 'eget_land', 'eget_cvrnr', 'egen_tlf', 'egen_fax', ' egen_bank_navn', 'egen_bank_reg', 'egen_bank_konto', 'egen_email', 'egen_web'];
+  $result= ['eget_firmanavn', 'egen_addr1', 'egen_addr2', 'eget_postnr', 'eget_bynavn', 'eget_land', 'eget_cvrnr', 'egen_tlf', 'egen_fax', 'egen_bank_navn', 'egen_bank_reg', 'egen_bank_konto', 'egen_email', 'egen_web'];
   if ($form_nr<6  || $form_nr==10 || $form_nr>=12) { $result= array_merge($result, ['ansat_initialer', 'ansat_navn', 'ansat_addr1', 'ansat_addr2', 'ansat_postnr', 'ansat_by', 'ansat_email', 'ansat_mobil', 'ansat_tlf', 'ansat_fax', 'ansat_privattlf']);
   } elseif ($form_nr==11) { $result= array_merge($result, ['adresser_firmanavn', 'adresser_addr1', 'adresser_addr2', 'adresser_postnr', 'adresser_bynavn', 'adresser_land', 'adresser_kontakt', 'adresser_cvrnr']); } 
   if ($form_nr!=11) { $result= array_merge($result, ['ordre_firmanavn', 'ordre_addr1', 'ordre_addr2', 'ordre_postnr', 'ordre_bynavn', 'ordre_land', 'ordre_kontakt', 'ordre_cvrnr']); }
@@ -1490,26 +1621,25 @@ function FormVars($form_nr) { # Returner alle de felter, som er relevante for en
 //  if ($form_nr<5) print "<option value = \"kopier_alt|5\">Kopier alt fra kreditnota,
   
   $r= $result;  $result= array();
-  foreach ($r as $rec) {$result= array_merge($result, array([$rec,$rec,'$'.$rec]));}
-  # print_r($result);
+  foreach ($r as $rec) {$result= array_merge($result, array([$rec,'$'.$rec,'$'.$rec]));}
   return $result;
-}
+}}
 
 # SUB-FUNCTION:
+if (!function_exists('OrdrVars')) {
 function OrdrVars($form_nr) { # Returner alle de felter, som er relevante for en given formular
   $result= [];
     if ($form_nr<6 || $form_nr==9 || ($form_nr>=12 && $form_nr<=14)) 
       $result= array_merge($result, ['posnr', 'varenr', 'lev_varenr', 'antal', 'enhed', 'beskrivelse', 'pris', 'rabat', 'momssats', 'procent', 'linjemoms', 'varemomssats', 'linjesum', 'projekt'] );
-    if ($form_nr==3) $result= array_merge($result, [ 'lev_tidl_lev', 'lev_antal', 'lev_rest', 'lokation'] );
-    if ($form_nr==9) $result= array_merge($result, [ 'leveres', 'lokation', 'Fri tekst'] );
-//  } elseif ($form_nr==11) {$result= array_merge($result,  [beskrivelse, dato, debet, faktnr, forfaldsdato, kredit, saldo]); }
-//  } else {$result= array_merge($result,  [dato, faktnr, beskrivelse, beløb] ) }
+    if ($form_nr==3)   $result= array_merge($result, ['lev_tidl_lev', 'lev_antal', 'lev_rest', 'lokation'] );
+    if ($form_nr==9)   $result= array_merge($result, ['leveres', 'lokation', 'Fri tekst'] );
+    if ($form_nr==11) {$result= array_merge($result, ['beskrivelse', 'dato', 'debet', 'faktnr', 'forfaldsdato', 'kredit', 'saldo'] ); }
+    else              {$result= array_merge($result, ['dato', 'faktnr', 'beskrivelse', 'beløb'] ); }
 
   $r= $result;  $result= array();
-  foreach ($r as $rec) {$result= array_merge($result, array([$rec,$rec,'£'.$rec]));}
-  # print_r($result);
+  foreach ($r as $rec) {$result= array_merge($result, array([$rec,'£'.$rec,'£'.$rec]));}
   return $result;
-}
+}}
 
 $VareVars= [['@Vare beskrivelse','$beskrivelse','$beskrivelse'],['@Varens pris ialt','$pris','$pris'],['@Varens enhedspris','$enhedspris','$enhedspris'],
               ['@Vare enhed','$enhed','$enhed'],['@Varebillede','$img','$img'],['@Stregkode med varenummer','$stregkode','$stregkode'],['@Vare nummer','$varenr','$varenr',]];
@@ -1521,37 +1651,35 @@ $VareVars= [['@Vare beskrivelse','$beskrivelse','$beskrivelse'],['@Varens pris i
 OM systemet:
  Al output til skærm, sker via centrale rutiner, som er blok-struktureret, så rettelser kun skal
  udføres et minimum steder. [out_base.php]
- Hvor der benyttes: "echo" skal det vurderes, om subrutiner kan benyttes, eller skal oprettes.
+ Hvor der i koden benyttes: "echo" skal det vurderes, om subrutiner kan benyttes, eller skal oprettes.
  
  Alle vinduer opbygges af ruder (paneler), som alle er defineret i [out_ruder.php]
- Ruders titel består af en icon og en tekst, og de har ofte en Gem-knap i bunden.
- Alle HTML-sider initieres med filen [htm_pageHead.php] og afsluttes med [htm_pageFoot.php]
+ Ruders titel består af en icon og en tekst, og de har ofte en Gem/opdater-knap i bunden.
+ Alle HTML-sider initieres med filen [htm_pagePrepare.php] og afsluttes med [htm_pageFinalize.php]
  
  Adaptive layout ved Skærmbredde[px]:
- < 320    : 1 spalte med fast bredde. 5-kolonnet Gittermenu ombrydes.
- 320.. 640: 1 spalte med varierende bredde. 5-kolonnet Gittermenu ombrydes.
- 640..1000: 1 spalte med varierende bredde. Gittermenu i fuld bredde.
- > 1000   : 3-spaltet layout. Fast spalte-bredde: 320px. Gittermenu i fuld bredde.
+ < 320    : 1 spalte med fast bredde.
+ 320.. 640: 1 spalte med varierende bredde.
+ 640..1000: 1 spalte med varierende bredde.
+ > 1000   : 3-spaltet layout.
  
- (En vertikal menu kan reducere bredden til 4 elementer! : 415px)
- 
- Tip vises ved mus over tydeligt markeret label, som ikke optager selvstændig plads men er indeholdt i input-felt.
+ Tip vises ved mus over tydeligt markeret label, som ikke optager selvstændig plads, men er indeholdt i input-felt.
  Der er konsekvent angivet tip for: Knapper for navigation, Knapper for funktioner, Kolonne-overskrifter, Titler, m.fl.
  Der kan angives tast-genveje for alle knapper/links
  
- Tabeller er med fast vindueshøjde, så overskrifter over og knapper under tabellen, altid kan være synlige.
- Der er grundlæggende 2 tabel-rutiner: KunSeData og SeOgRetData. Budget benytter en skræddersyet version.
+ Mange tabeller er med fast vindueshøjde, så overskrifter over og knapper under tabellen, altid kan være synlige.
+ Der er grundlæggende 2 tabel-rutiner: KunSeData (htm_TabelOut) og SeOgRetData (htm_TabelInp). Budget benytter en skræddersyet version.
  Tabeller kan med flag akti-/deaktivere: Filter, Sortering, Opret ny record
  
  Alle labels og tip kan oversættes til et andet program-sprog (7 europæiske sprog), 
- med nem opdatering af alle forekommende fraser, når prefix: @ er benyttet.
+ med nem opdatering af alle forekommende fraser, når prefix: '@ er benyttet.
  Fraselængden for dansk bør pt. begrænses til max. 200 tegn.
  Er der længere fraser, skal de opdeles i flere, ved at indskyde >'.'@< i frasen,
  på et hensigsmæssig sted (ny sætning) for ikke at sabotere sprogoversættelse.
  Tegn der ikke må benyttes: < > " @ (udover prefixet)' fordi de mistolkes!
  Formaterings tags som: </small> fjernes. De skal i stedet indeholdes i selvstændige strenge omkring fraser.
  Slut ikke en frase med SPACE, da den kan blive fjernet, og key passer da ikke!
- Brugeren kan selv korrigere sprog-tekster i regneark. Finjusteringen kan også udføres i programet.
+ Brugeren kan selv korrigere sprog-tekster i regneark. Finjustering kan også udføres i programmet.
  
  Sprogtekster kan vedligeholdes i LO-regneark:
  Importer fra:  {Sprog_DB.csv}    
@@ -1574,10 +1702,10 @@ OM systemet:
  CSS-layout:
  Farver, placeringer. tekststørrelser m.v. kan justeres centralt i CSS-fil. [out_style.css.php]
  
- Der mulighed for assistance til fejlfinding, når flaget (debug==true)
+ Der er mulighed for assistance til fejlfinding, når flaget (debug==true)
  
  Systemet omfatter pt. følgende filer:
- page_Layoutdemo.php   - Demo af systemet
+ page_Layoutdemo.php      - Demo af systemet
  out_javascr.js           - Systemets javascript
  out_style.php (.css)     - Systemets CSS
  out_base.php             - Systemets Modulære Grundsystem
@@ -1586,6 +1714,11 @@ OM systemet:
  user_interface.php       - Modulært Grundsystem
  frasescann.php           - Skanner efter fraser i alle projektfiler, men gemmer pt. kun dem i: user_interface.php og page_Layoutdemo.php
  Sprog_DB.csv             - Importfil, hvor alle sprogvarianter samles manuelt (copy/paste), med hjælp af Google-translate.
+ 
+ I programmets tekster benyttes følgende tegn-prefixer:
+ @xxx i starten af fraser, som skal kunne udskifter med fremmedsprog
+ $xxx i tekster til formularer, hvor de angiver et variabelnavn
+ £xxx i vare-tekster til formularer, hvor de angiver et variabelnavn
  
   */
   

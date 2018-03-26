@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2017-12-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2018-02-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Specielle string-funktioner';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -6,9 +6,12 @@
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
  *
- * LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
- * 2016.08.00 ev - EV-soft
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
+ * 
  */
 
 if (!function_exists('periodeoverskrifter')) {

@@ -1,5 +1,5 @@
-<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2017-11-00';   $DocIni='evs';  $ModulNr=2;
-/* ## Purpose:'SALDI's gamle hovedmenu';
+<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=2;
+/* ## Purpose:'SALDI's (gamle) hovedmenu';
  * Denne fil er oprettet af EV-soft i 2017.
  *
  *             ___   _   _    ___  _         
@@ -11,8 +11,12 @@
  *
  */
   $pageTitl='Hovedmenu';
-  include("../_base/htm_pageHead.php"); ## Sidens indledende html-kode
+  include("../_base/htm_pagePrepare.php"); ## Sidens indledende html-kode
   if ($GLOBALS['$Ødebug']) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+  include('../_system/page_Licens.php'); exit;
+  
+  
+  
   
 ### OUTPUT RUTINER: - Kopieret fra out_ruder.php
 if (!function_exists('Rude_HovedMenu')) {
@@ -112,5 +116,5 @@ function Rude_ProgramStatus() {
     SpalteBund();
 
 //  Til sidst indlæses java-scripter:   
-  include("../_base/htm_pageFoot.php"); ## Sidens afsluttende html-kode
+  include("../_base/htm_pageFinalize.php"); ## Sidens afsluttende html-kode
 ?>

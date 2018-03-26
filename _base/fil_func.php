@@ -1,19 +1,22 @@
-<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2018-01-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Grundbibliotek for fil-operationer ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  */
-// LICENS & Copyright (c) 2004-2016 DANOSOFT ApS *** Se filen: ../LICENS_Copyright.txt
 //
 // Rutiner angående import / export af data filer.
 //
 // Denne fil er redigeret med tabulator sat til 2 tegn, og ses bedst med det.
 // Filer skal gemmes i UTF-8 format uden BOM!
-// 2016.10.00 ev - EV-soft
-
+/* 
+  Oprettet: 2016-10-00 evs - EV-soft
+  Ændrings-Log:
+      
+ */
 
 if (!function_exists('DetectSeparator')) {
 function DetectSeparator($filnavn) {  // Test for feltantal og feltadskiller i fil som skal indlæses (import)
@@ -106,10 +109,11 @@ function ImportTabFile ($fn,$startLin=0,$charset='UTF-8') {
   if ($fp) {  $felter=array();  $skiller= chr(9);  $Lin=0;
     while (!feof($fp)) {
       if ($linje= fgets($fp)) { $Lin++;
+        #+  Skal testes: if ($linje[0]==':') $startLin=$Lin+0; //  Kommentar-linie overspringes
         if (strpos($linje,chr(9))==0) $skiller= '","';  //  csv
         if (strpos($linje,'"'.chr(9).'"')!=0) $textsep='"'; else $textsep=' ';
-        if ($charset=='UTF-8') $linje= utf8_encode($linje);
-        if (($Lin==1) and (substr($linje,0,1)==':')) {} //  Feltnavne i 1. linie springes over
+        if ($charset=='UTF-8') $linje= addslashes(utf8_encode($linje)); 
+        if (($Lin==1) and (substr($linje,0,1)=='#')) {} //  Feltnavne i 1. linie springes over
         else { $LinFeltr= explode($skiller, $linje);   $rawFelt= array();
             //  foreach ($LinFeltr as $felt)  array_push($rawFelt, trim(trim($felt,'"'),"'"));
             foreach ($LinFeltr as $felt)  array_push($rawFelt, trim($felt,$textsep));

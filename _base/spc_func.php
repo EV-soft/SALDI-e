@@ -1,14 +1,20 @@
-<?php   $DocFil= '../_base/spc_func.php';   $DocVer='5.0.0';    $DocRev='2018-01-00';   $modulnr=0;
-/* FORMÅL: Specielle funktioner
+<?php   $DocFil= '../_base/spc_func.php';   $DocVer='5.0.0';    $DocRev='2018-02-00';   $DocIni='evs';  $modulnr=0;
+/* ## Purpose: 'Specielle funktioner';
  *             ___   _   _    ___  _         
- *            / __| / \ | |  |   \| |   ___ 
+ *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
- *            |___/_/ \_|____|___/|_|  \___)
+ *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ *
+ *
+ * 
+  Oprettet: 2017-08-00 evs - EV-soft
+  Ændrings-Log:
+      
  *
  */
-
+ 
 
 
 function formularimport($filnavn,$formularnr='') { //  Indlæs formular fra fil, til database tabel
@@ -34,7 +40,7 @@ $fp=fopen($filnavn,"r");
         $xa= $xa*1; $ya= $ya*1; $xb= $xb*1; $yb=$yb*1; $str=$str*1; $color=$color*1;
         if (($formularnr && $formular==$formularnr) || !$formularnr) {
           sql_creat('INSERT INTO tblA_forms (formular,art,beskrivelse,xa,ya,xb,yb,justering,str,color,font,fed,kursiv,side,sprog)'.
-          'VALUES('.$formular.'","'.$art.'","'.$beskrivelse.'","'.$xa.'","'.$ya.'","'.$xb.'","'.$yb.'","'.$justering.'","'.$str.'","'.
+          'VALUES("'.$formular.'","'.$art.'","'.$beskrivelse.'","'.$xa.'","'.$ya.'","'.$xb.'","'.$yb.'","'.$justering.'","'.$str.'","'.
           $color.'","'.$font.'","'.$fed.'","'.$kursiv.'","'.$side.'","'.$sprog.'")', __FILE__, __LINE__);
         }
       }

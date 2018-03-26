@@ -1,27 +1,29 @@
-<?php   $DocFil= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2017-12-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Initiering af globalt benyttede konstanter og variabler';
- * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS      *** Se filen: ../LICENS_Copyright.txt
  *
  * Grundlæggende initiering.
  *
- * 2016.08.00 evs - EV-soft
+  Oprettet: 2016-08-00 evs - EV-soft
+  Ændrings-Log:
+      
  *
  */
- 
+
  //set_include_path(get_include_path(). PATH_SEPARATOR. '/saldi-e/_config/'. PATH_SEPARATOR. '/_base'. PATH_SEPARATOR. '/_base/_admin');
  //if ($GLOBALS["Ødebug"]) echo "SøgePath: ".get_include_path()."<br>";
  
 #   Konfigurerering af DB-forbindelse:
-   if ((!file_exists("../_config/connect.php")) or (filesize("../_config/connect.php")< 10)) {
+   $cfg= '../_config/connect.php';
+   if ((!file_exists($cfg)) or (filesize($cfg)< 10)) {
 #     echo '<meta http-equiv="refresh" content="0;url=install.php"><br>';   # Omdirigering til DB-opsætning
 #     echo '</head><body><br><br>';
-     echo '<p>Installationen er ikke konfigureret.</p><br>';
+     echo '<p>Installationen er ikke konfigureret: '.$cfg.'</p><br>';
 #     echo '<p>Du  bliver videresendt til installeringssiden.</p><br><br>';
 #     echo '<p>Skulle dette ikke ske, så <a href="install.php">KLIK HER</a></p><br><br>';
 #     echo '</body></html><br>';
@@ -42,9 +44,10 @@
 5.  Der indføjes kommentarer i HTML-kode, så kildekode, bliver lettere forståelig
 6.  Manuelt kan tilføjes specielle hændelser
 7.  I TopMenu vises ekstra punkt: TOOLS med nyttige rutiner for programmøren
+8.  I ../_base/dbi_func.php sættes udvidet PHP-fejlmelding: ini_set('display_errors',1);
 
 Flaget sættes:
-  Globalt/statisk:  i starten af htm_pageHead.php eller i out_init.php
+  Globalt/statisk:  i starten af htm_pagePrepare.php eller i out_init.php
   Manuelt/dynamisk: i URL tilføjes "?debug=true"
   
  * Se også nyttige noter i starten af ../_base/out_base.php
@@ -60,8 +63,8 @@ Flaget sættes:
 # ../_base/db_query.php        - Data overførsel
 # ../_base/settings.php        - Initiering af ver. 3.x.x's variable
 # ../_base/version.php         - Versions stamp
-# (1): indlæses i htm_pageHead.php - htm_pageHead.php opbygger et vindue. (SKAL afsluttes med htm_pageFoot.php)
-# Se: ../_base/htm_pageHead.php for aktuel indlæsning af de almene rutiner.
+# (1): indlæses i htm_pagePrepare.php - htm_pagePrepare.php opbygger et vindue. (SKAL afsluttes med htm_pageFinalize.php)
+# Se: ../_base/htm_pagePrepare.php for aktuel indlæsning af de almene rutiner.
 
 //  if (!function_exists('tolk')) include "../_?????/out_base.php";  # Tolk() benyttes i out_init.php!
 
@@ -70,14 +73,14 @@ Flaget sættes:
 //  if (session_status() == PHP_SESSION_NONE) { session_start(); }
 //  $_SESSION['sess_id']= session_id();
 
-global $ØTastkeys, $ØPanelIx;
+global $ØTastkeys, $ØPanelIx, $ØPanelBgrd, $Øart, $blanket;
 $ØTastkeys= true;
 $ØPanelIx= 0;
 
 if  (is_null($_SESSION['ØprogSprog']))  $_SESSION['ØprogSprog']= 'da';
 
 ### GLOBALE variabler ang. program-styring:     Bemærk benyttet prefix: $Ø blot for at tilkendegive at variablen benyttes på forskellige HTML-sider.
-if (is_null($Ødebug))         $Ødebug= false;       /* $Ødebug kan også tildeles værdi via URL-parameter: ?debug=true  Se: ../_base/htm_pageHead.php */ /* true: Aktivering af fejlfinding: FilLogning [debug_log()], Kilde-HTML med extra linieskift og stikord [dvl_pretty()] */
+if (is_null($Ødebug))         $Ødebug= false;       /* $Ødebug kan også tildeles værdi via URL-parameter: ?debug=true  Se: ../_base/htm_pagePrepare.php */ /* true: Aktivering af fejlfinding: FilLogning [debug_log()], Kilde-HTML med extra linieskift og stikord [dvl_pretty()] */
 if (is_null($ØprogSprog))     $ØprogSprog= 'da';    /* $ØprogSprog kan også tildeles værdi via URL-parameter: ?sprog=xx */      /* Initiering til dansk, hvis udefineret */
 if (is_null($Ønovice))        $Ønovice= true;       /* Vis/Skjul hjælpetips mv. */
 if (is_null($ØFullFilt))      $ØFullFilt= true;     /* Vis/Skjul fuld filter-funktionalitet mv. */
@@ -107,20 +110,37 @@ $Øtema= $_SESSION['Øtema'];
 
 if ($Øtema=='dark') 
   {$ØTitleColr= '#6699CC';   /* Lys-blå   */ 
-   $ØPanelBgrd= '#FFEEDD';   /*  '#565656';   # Mørkgrå      Tema-dark */
-   $ØTapetColr= '#EEEEEE';
-   $ØPageBcgrd= '#112233';   /* Side baggrunds farve (lysblå) F4FFF4  */
+   $ØPanelBgrd= '#1E91CF';   /*  '#565656';   # Mørkgrå      Tema-dark */
+   $ØTapetBgrd= '#F5F5F5';
+   $ØBodyBcgrd= '#1978AB';   /* Panelers klap-sammen baggrund */
+   $ØPageBcgrd= '#F5F5F5';   /* Side baggrunds farve (lysblå) F4FFF4  */
    $ØPageImage= '../_assets/images/stjerner.jpg';   // $ØPageImage= '../_assets/images/paper_fibers.png';  /* Side baggrundsbillede  */
    $ØButtnText= '#000000';   /* Sort   */
   }
 else      
   {$ØTitleColr= '#003366';   /* Mørkblå   */ 
    $ØPanelBgrd= '#EFEFEF';   /* '#EFEFEF';   # Brækket Hvid Tema-light /* Lys baggrund for paneler (ruder). aktuel farve sættes i ../_base/out_style.css.php */
-   $ØTapetColr= '#FFE0C0';
+   $ØTapetBgrd= '#FFE0C0';
+   $ØBodyBcgrd= '#1978AB';   /* Panelers klap-sammen baggrund */
    $ØPageBcgrd= '#F4FFF4';   /* Side baggrunds farve (lysblå) F4FFF4  */
    $ØPageImage= '../_assets/images/paper_fibers.png';  /* Side baggrundsbillede  */
+   $ØButtnText= '#000000';   /* Sort   */
 }
-//$ØPanelBgrd= '#EFEFEF';
+//  #1978AB - Due-blå
+//  #1E91CF - Himmel-blå
+//  #F5F5F5 - Lys-grå
+
+$ØPanelBgrd= 'cyan';
+$temaer= [
+  [0,'TitleColr', 'PanelBgrd',' TapetBgrd', 'PageBcgrd',  'ButtnText',  'PageImage'],
+  [1,'#6699CC',   '#FFEEDD',    '#EEEEEE',  '#112233',    '#000000',    '../_assets/images/stjerner.jpg'],      //  Dark
+  [2,'#003366',   '#EFEFEF',    '#FFE0C0',  '#F4FFF4',    '#000000',    '../_assets/images/paper_fibers.png'],  //  Light
+  [3,'#FFFFFF',   '#1E91CF',    '#1978AB',  '#F5F5F5',    '#000000',    '../_assets/images/stjerner.jpg'],  //  Custom
+];
+function changeTema($ix='1') { global $ØTitleColr, $ØPanelBgrd, $ØTapetBgrd, $ØPageBcgrd, $ØButtnText, $ØPageImage;
+  $ØTitleColr= $temaer[$ix][1];  $ØPanelBgrd= $temaer[$ix][2];  $ØTapetBgrd= $temaer[$ix][3];  
+  $ØPageBcgrd= $temaer[$ix][4];  $ØButtnText= $temaer[$ix][5];  $ØPageImage= $temaer[$ix][6];
+}
 
 $ØPageLogo=  '../_assets/images/SALDIe25x75.png';   /* Side baggrundsLOGO  */
 $ØblueColor= 'green'; //'#4479ff';   /* Benyttes kun i out_base.php sv.t. --blueColor i out_style.css.php */
@@ -128,7 +148,8 @@ $ØbrwnColor= 'brown';
 $ØtblRowDrk= '#e0e0e0';   /* Tabellinie med mørk baggrund */
 $ØtblRowLgt= '#f0f0f0';   /* Tabellinie med lys baggrund  */
 $ØLineBrun=  '#550000;';  /* Tabel ydre ramme */
-// Sørg for at farver stemmer overens med FARVEPALETTE i ../_base/out_style.css.php
+// Sørg for at farver stemmer overens med FARVEPALETTE i ../_base/out_style.css.php som indlæses efter out_init.php
+
 $ØHeaderFont= 'font-size:0.75em;';
 $ØIconStyle= 'color:brown;';
 
@@ -150,7 +171,10 @@ else $charset="ISO-8859-1";
  */
  
 $regnskab= '@CSS-demo';
-$vis_finans= true;    $vis_debitor= true;   $vis_kreditor= true;    $vis_lager= false;    $vis_prodkt= false;
+global $vis_finans, $vis_debitor, $vis_kreditor, $vis_prodkt, $vis_lager;
+
+$vis_finans= true;    $vis_debitor= true;   $vis_kreditor= true;    $vis_prodkt= false;    $vis_lager= true;
+
 $regnskab=''; $username=''; $userkode=''; 
 
 $db= '';  $Øbrugernavn= '??';

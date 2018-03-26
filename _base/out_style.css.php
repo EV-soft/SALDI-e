@@ -1,23 +1,27 @@
-<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-01-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
+<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
 /* ## Purpose: 'Design af out_* elementers udseende.';  */
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
-  global $ØPanelBgrd; 
+  global $ØPanelBgrd, $ØTapetBgrd, $ØPageBcgrd; 
   if ($ØPanelBgrd=='') $ØPanelBgrd= '#FFEFDF'; 
 ?>
-/* Denne fil er oprettet af EV-soft  i 2016. Dette bibliotek er udviklet 2016-1018 af EV-soft.
+/* 
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
  *            (___/_/ \_|____|___/|_|  \___)
  *                                           
- * LICENS & Copyright (c) 2004-2017 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
+ * LICENS & Copyright (c) 2004-2018 Saldi.dk ApS *** Se filen: ../LICENS_Copyright.txt
  *
  * Design af out_* elementers udseende.
  *
  * CSS-Layout af checkbox,textarea,input,label samt submit :
  *
  * Filer skal gemmes i UTF-8 format uden BOM!
- * 2016.08.00 evs - EV-soft
+ * 
+  Oprettet: 2016-08-00 evs - EV-soft    #: Dette bibliotek er udviklet 2016-1018 af EV-soft.
+  Ændrings-Log:
+      
+ *
 /*
   if ($ØPanelBgrd== '#D4FFFF')  {$ØPanelBgrd= '#FFFFD4';}  # Æggeskal
   else                          {$ØPanelBgrd= '#D4FFFF';}  # Turkis
@@ -68,10 +72,11 @@ highlight.string  #DD0000 Red
     --GradiBott: #cccccc;
 /*  --PanelBgrd: #FFFFC4;   /* Panelers baggrund  (æggeskalsfarve)*/
 /*  --PanelBgrd: #D4FFFF;   /* Panelers baggrund  (turkis)  */
-    --PanelBgrd: #FFFFFF;   /* Panelers baggrund  (hvid)    */
+/*  --PanelBgrd: #FFFFFF;   /* Panelers baggrund  (hvid)    */
 /*  --PanelBgrd: <?php global $ØPanelBgrd; echo $ØPanelBgrd; ?>;  /* Initieres i ../_base/_base_init.php */
     --PanelBgrd: <?php echo $GLOBALS["ØPanelBgrd"]; ?>;
-    --TapetBgrd: #44BB44;   /* Tapet baggrund  (æggeskalsfarve)    */
+/*  --TapetBgrd: #44BB44;   /* Tapet baggrund  (æggeskalsfarve)    */
+    --TapetBgrd: <?php echo $GLOBALS["ØTapetBgrd"]; ?>;
     --ButtnBgrd: #44BB44;   /* LysGrøn   */
     --ButtnText: #FFFFFF;   /* Hvid   */
     --BtLnkBgrd: #FCFCCC;   /* LysGul   */
@@ -81,7 +86,7 @@ highlight.string  #DD0000 Red
     --PageBcgrd: <?php echo $ØPageBcgrd; ?>;  /* Initieres i ../_base/_base_init.php */
     --PageImage: url(../_assets/images/paper_fibers.png);   /* Side baggrundsbillede  */
     /* url understøttes ikke i browsere endnu! (March 29, 2016) https://blog.hospodarets.com/css_properties_in_depth  Images url like url(var(--image-url)) don’t work */
-    --PageImage: <?php echo $ØPageImage; ?>;  /* Initieres i _base_init.php /Virker i ../_base/htm_pageHead.php */
+    --PageImage: <?php echo $ØPageImage; ?>;  /* Initieres i _base_init.php /Virker i ../_base/htm_pagePrepare.php */
  /*   --PageImage: '../_assets/images/paper_fibers.png';   /* Side baggrundsbillede  */
     --fltBgColr: #FFFFFF;   /* Validerede input felters baggrund  #53a40 */
     --fltTxColr: #550000;   /* Validerede input felters tekster #53a40 */
@@ -144,6 +149,7 @@ body {
   #spalt480  {width: 480px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt640  {width: 640px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spalt700  {width: 700px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
+  #spalt1100 {width:1100px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
   #spaltxxx  {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
   PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
 }
@@ -212,7 +218,10 @@ body {
     margin: 0.4em 0.2em 0.4em 0.2em;
     padding: 0.3em 0.3em 0.3em 0.3em;
 }
-.tapetWmax { width: 100%;   }
+.tapetWmax { 
+    /* max-width: 100%;   */ 
+    /* width: 640px;    */
+}
 
 
 .clearWrap {
@@ -370,6 +379,17 @@ input[type="submit"]:active {
   border-width: 0 0 0em;
   margin-top: 0.15em;
 }
+
+input[type="tal2d"],
+input[type="date"],
+input[type="text"],
+input[type="helt"],
+input[type="data"] {
+  border: 1px black;
+  border-right: 1px gray;
+  border-collapse;
+}
+
 
 input[type="date"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 input[type="date"]::-webkit-calendar-picker-indicator { background: orange; width: 7px;}
@@ -585,13 +605,14 @@ button {
 /* 
 Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*] 
        med teksten [.tooltiptext] på mørkfarvet shape-baggrund, når musen holdes over label
+       Vises med minimal forsinkelse
 */
 
 /* 
 Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltip,
 .tooltipL, .tooltipR, .tooltipB, .tooltipT,
-.tooltipB1, .tooltipB2
+.tooltipB0, .tooltipB1, .tooltipB2
 {   position: relative;
     cursor: help;
     display: inline-block;
@@ -609,7 +630,7 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 /* .tooltip                                 /* LABEL som musen holdes over */
 .tooltiptext,                               /* Hjælpetekst som synliggøres */
 .tooltipL, .tooltipR, .tooltipB, .tooltipT, /* Bestemmer placering af Tip  */
-.tooltipB1, .tooltipB2
+.tooltipB0, .tooltipB1, .tooltipB2
 { /* Skjult tip tekst på farvet baggrund plac ved label */
     visibility: hidden;
     min-width: 160px;
@@ -629,6 +650,7 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltiptext,
 .tooltipT  {bottom: 20px;  left: -25px;}                      /* Plac over kilde - Inputfelters label */
 .tooltipB  {top: 22px;     left: -90px;   min-width: 120px;}  /* Plac under kilde - Kolonneoverskrifter, hvor der ikke er plads ovenover. */
+.tooltipB0 {top: -22px;    left: -180px;  min-width: 160px;}  
 .tooltipB1 {top: 22px;     left: -180px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
 .tooltipB2 {top: 22px;     left: 28px;    min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
 .tooltipL  {left: -26px;   margin-top: -28px;}
@@ -639,6 +661,7 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltipT:hover .tooltiptext, */
 .tooltip:hover .tooltipT,
 .tooltip:hover .tooltipB,
+.tooltip:hover .tooltipB0,
 .tooltip:hover .tooltipB1,
 .tooltip:hover .tooltipB2,
 .tooltip:hover .tooltipL,
@@ -769,6 +792,7 @@ table {
 .fixed-table-container td {
   border-left: 1px dotted #2223;
   padding-left: 2px;
+  padding-right: 3px;
 }
 tc {
   font-size: 0.8em; 
@@ -788,6 +812,11 @@ th {
   padding-left: 2px;
   margin-left: -1px;
 }
+.first .th-inner {
+    border-left: none;
+    padding-left: 8px;
+  }
+
 .th-inner-center{
   text-align: center;
 }
@@ -817,6 +846,7 @@ div#frm *{display:inline}
 
 /*************************************/
 
+hr {margen: 8px;  border-width: 2px; margin: 3px; }
 hr.style1{  border-top: 1px solid #8c8b8b;}
 hr.style2 { border-top: 3px double #8c8b8b;}
 hr.style3 { border-top: 1px dashed #8c8b8b;}
@@ -1017,3 +1047,29 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
 #showkoor { position:absolute; top:141.5mm; left:-48px; background-color:green; color:white; border-radius: 5px; padding:8px 16px; width:160px; transform: rotate(270deg); font-size: 14px;
   font-family: sans-serif;  text-align: center;
   }
+
+/* JQuery: */  
+.ui-tooltip {
+/*
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+ */
+  content: attr(tiptxt);
+  font: 12px "Helvetica", Sans-Serif;
+  padding: 3px 6px;
+  background-color: WhiteSmoke;
+/* 
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+ */  
+  }
+  /*
+  .tooltip-inner { white-space: pre-line;}
+  /*
+  .ui-tooltip-content{
+  white-space:pre;
+  
+  }
+  */
+  
