@@ -32,6 +32,6 @@ Derfor er du velkommen, til at deltage i projektet. Det er en fordel hvis du kan
 <b>Note: This is af danish project, and most source-code is in danish language.</b>
 
 En introduktion finder du her: https://ev-soft.github.io/SALDI-e/<br>
-En live demo af SALDI-€ kan du se her: https://ev-soft.dk/saldi-e/_base/page_Hovedmenu.php - senest opdateret: 2018-08-24<br>
+En live demo af SALDI-€ kan du se her: https://ev-soft.dk/saldi-e/_base/page_Hovedmenu.php - senest opdateret: 2018-09-01<br>
 Demoen er nyere end GitHub-coden, da den jævnligt opdateres! Kontakt mig, hvis du ønsker de seneste kildefiler.
 
