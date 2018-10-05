@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Debkredgrup.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Debkredgrup.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Redigering af Debitor- og Kreditor-grupper';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -12,14 +12,16 @@
  */
 
   $pageTitl='Debitor- & Kreditor-grupper';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
+  DocAlder($DocRev);
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Debkredgrup');
     
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_DefKredGrp();
+    SpalteTop(240);   Panl_AdminMenu();
+    NextSpalte(960);  Panl_DefKredGrp();
     SpalteBund();
     
 ### GEM DATA:

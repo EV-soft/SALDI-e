@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Programsprog.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Programsprog.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Redigering af Programtekster';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -12,14 +12,16 @@
 
   $pageTitl= 'Indstil mere: Programtekster';
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240); Rude_DiverseMenu();
-    NextSpalte();   Rude_LanguageJuster();
+    SpalteTop(240);   Panl_DiverseMenu();
+    NextSpalte(640);  Panl_LanguageJuster();
     SpalteBund();
+    //PanelInitier(3,4);
 ### GEM DATA:
   
 

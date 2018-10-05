@@ -1,4 +1,4 @@
-<?php   $DocFil= '../modulscann.php';    $DocVer='5.0.0';    $DocRev='2017-10-00';   $DocIni='evs';  $ModulNr=0; 
+<?php   $DocFil= '../modulscann.php';    $DocVer='5.0.0';    $DocRev='2018-08-10';   $DocIni='evs';  $ModulNr=0; 
 /* ## Purpose:'Rapportering af alle kilde-filers status.';
  * Denne fil er oprettet af EV-soft i 2017.
 */
@@ -103,7 +103,7 @@ $(function(){  $("#myTable").tablesorter({ sortList: [[0,0], [1,0]] });});
 /* <?php */ if(isset($_GET['clicked']) && $_GET['clicked']=='Y' ){ $filliste= getFileList("./", true, 3);  /* do your php work */} /* ?> */
 
   echo '<table id="myTable" class="tablesorter">';
-  echo '<thead> <tr class="tablesorter-ignoreRow"> <th colspan="10"> Tabellen nedenfor er sorterbar - Klik på overskrifter.<br> Tabellen indeholder en oversigt over SALDI-€\'s kildefiler</th>    </tr>'.
+  echo '<thead> <tr class="tablesorter-ignoreRow"> <th colspan="10"> Tabellen nedenfor er sorterbar - Klik på overskrifter.<br> Tabellen indeholder en oversigt over SALDI-€\'s kildefiler (.php .htm og .html)</th>    </tr>'.
                '<tr>  <th>Ix</th> <th>Path</th> <th>Filnavn</th>  <th>FilFacts</th>  <th>Link</th> <th>Version</th> <th>Revision</th> <th>Initialer</th> <th>ModulNr</th> <th>Formål</th> </tr> </thead>';
   echo '<tfoot> <tr>  <th style="padding-left:5px">Ix</th> <th style="padding-left:5px">Path</th> <th style="padding-left:5px">Filnavn</th>  <th style="padding-left:5px">FilFacts</th>  <th style="padding-left:5px">Link</th> <th style="padding-left:5px">Version</th> <th style="padding-left:5px">Revision</th> <th style="padding-left:5px">Initialer</th> <th style="padding-left:5px">ModulNr</th> <th style="padding-left:5px">Formål</th> </tr> </tfoot>';
   

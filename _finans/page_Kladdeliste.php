@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_finans/page_Kladdeliste.php';   $DocVer='5.0.0';    $DocRev='2018-09-20';     $DocIni='evs';  $ModulNr=0;
 /* Purpose: 'Rediger kladder';
  * Denne fil er oprettet af EV-soft  i 2017.
  *             ___   _   _    ___  _         
@@ -15,6 +15,7 @@
   $pageTitl= 'Kasse kladder';  # tolk('@Kasse kladder');
   //  set_include_path('.././saldi-e/_base/');
   //  Relativ path: dirname(__FILE__) . 
+  $GLOBALS["ØProgModu"]= ['prim']; ## prim eller/og sekd og comm eller none
   include(".././_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
@@ -47,7 +48,9 @@
 
 ### VIS DATA:
 dvl_ekko(' page_Kladdeliste 1 ');
-  Rude_Kladderedigering();
+  SpalteTop(1200); Panl_Kassekladder();
+  SpalteBund();
+  PanelInitier(2,7);
 ### GEM DATA:
   
 /* 

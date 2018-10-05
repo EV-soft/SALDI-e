@@ -1,8 +1,10 @@
-<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
+<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-09-21';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
 /* ## Purpose: 'Design af out_* elementers udseende.';  */
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
   global $ØPanelBgrd, $ØTapetBgrd, $ØPageBcgrd; 
   if ($ØPanelBgrd=='') $ØPanelBgrd= '#FFEFDF'; 
+  $shadowBlur= '3px';
+  #DocAlder($DocRev);
 ?>
 /* 
  *             ___   _   _    ___  _         
@@ -63,7 +65,7 @@ highlight.string  #DD0000 Red
     --xx11Color: #3CBC8D;
 /*  --HintsBgrd: #FCFCCC;                  /* Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
 /*  --HintsBgrd: rgba(248, 248, 248, 1.0); /* Ingen transparens!    #FCFCCC;   /*  Tip: #FCFCCC-Gul baggrund, #E6EEF7-Blå baggrund */
-    --HintsBgrd: rgba(55, 55, 55, 1.0); 
+    --HintsBgrd: rgba(55, 55, 55, 0.90); 
     --HintsText: #FFFFFF;
     --xx33Color: #CCEDFE;   /*  Filter: Lys-Blå baggrund */
     --grColrLgt: #CCCCCC;
@@ -115,12 +117,12 @@ div#container
 
 body {
  /*  margin: 5px 5px; */
-  margin: 0 auto 0 auto;
+  margin: auto;
   width: 100%;
   max-width: 1200px;
   text-align: center;
   font-size: 14px;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 100%;
 /*  background-color: var(--PageBcgrd); */
   background-color: <?php echo $ØPageBcgrd; ?>;
@@ -143,34 +145,36 @@ body {
 /* PANELER i SPALTER: (Tilpasning til smalle skærme) */
 /* for 960px or greater */
 @media screen and (min-width: 960px) {
-  #wrapper   {width: 1030px; padding: 0px;    /*  margin: 5px 5px; */}
-  #spalt240  {width: 240px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spalt320  {width: 320px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spalt480  {width: 480px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spalt640  {width: 640px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spalt700  {width: 700px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spalt1100 {width:1100px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left}
-  #spaltxxx  {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
-  PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
+  #spltwrap  {width: 1280px; padding: 0px;    /*  margin: 5px 5px; */}
+  #spalt240  {width: 240px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt320  {width: 320px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt400  {width: 400px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt480  {width: 480px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt640  {width: 640px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt720  {width: 720px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt960  {width: 960px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spalt1100 {width:1100px;  padding: 5px 5px; margin: 5px 5px 5px 0px; float: left; }
+  #spaltsaut {width: auto;   padding: 5px 0px 5px 5px; margin: 5px 0px 5px 0px; float: left;}
+  data-PanlHead, PanlFoot  {clear: both;   padding: 0 5px;}
 }
 
 /* for 960px or less */
 @media screen and (max-width: 960px) {
-  #wrapper   {width: 99%;  }
+  #spltwrap  {width: 99%;  }
   #spalt320  {width: 41%;  padding: 5px 5px;   margin: 0px 0px 5px 5px;}
-  #spaltxxx  {width: auto; padding: 5px 5px;   margin-left: 0px;   clear: both;    float: none;  }
-  PanlHead, PanlFoot {padding: 1px 5px;   clear: both;}
+  #spaltsaut {width: auto; padding: 5px 5px;   margin-left: 0px;   clear: both;    float: none;  }
+  data-PanlHead, PanlFoot {padding: 1px 5px;   clear: both;}
 }
   
-/* for 600px or less */
+/* for 640px or less */
 @media screen and (max-width: 640px) {
-  #spalt320 {width: auto;  float: none;  margin-left: 5px; }
-  #spaltxxx {width: auto;  float: none;  margin-left: 5px; }
+  #spalt320  {width: auto;  float: none;  margin-left: 5px; }
+  #spaltsaut {width: auto;  float: none;  margin-left: 5px; }
 }
 
 /* for 480px or less */
 @media screen and (max-width: 480px) {
-  PanlHead {height: auto; }
+  data-PanlHead {height: auto; }
   h1    {font-size: 2em;  }
 }
 
@@ -179,50 +183,58 @@ body {
 /*************************************/
 
 /* PANELER: (i forskellige bredder) */
-.panelWmax, .panelWaut, .panelW120, .panelW110, .panelW960, .panelW720, .panelW640, .panelW480, .panelW400, .panelW320, .panelW240, .panelW160 {
+.panelWmax, .panelWaut, .panelW120, .panelW110, .panelW100, .panelW960, .panelW720, 
+.panelW640, .panelW480, .panelW400, .panelW320, .panelW240, .panelW160 {
     border: 1px solid gray;
     background: var(--PanelBgrd);
     box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
     border-radius: 0.4em;
-    margin: 0.4em 0.2em 0.4em 0.2em;
-    padding: 0.3em 0.3em 0.2em 0.3em;
+    /* margin: 0.4em 0.2em 0.4em 0.2em; /**/
+    padding: 0.3em 0.3em 0.4em 0.3em; /**/
 }
 .panelWmax { /* width: 100%; */   }
 .panelWaut { width: auto;   }
 .panelW120 { width: 1200px; }
 .panelW110 { width: 1100px; }
-.panelW960 { width: 960px;  }
+.panelW100 { width: 1020px; }
+.panelW960 { width: 960px;  } 
+                 /* 800px; */
 .panelW720 { width: 720px;  }
 .panelW640 { width: 640px;  }
+                 /* 560px; */
 .panelW480 { width: 480px;  }
 .panelW400 { width: 400px;  }
 .panelW320 { width: 320px;  }
 .panelW240 { width: 240px;  }
 .panelW160 { width: 160px;  }
-.panelTitl {
-  font-size: 0.90em;
+.panelTitl,.tapetTitl {
+  font-family: sans-serif;
+  font-size: 0.82em;
   font-weight: 600;
   height: 1.1em;
   margin: 0.0em 0.2em;
   padding: 0.1em 0.1em 0.3em;
+  /*background: #FFEEDD;*/
   position: relative;
   width: 100%;
   text-align: center;
 }
+.tapetTitl {
+  font-size: 1.2em;
+  font-family: sans-serif;
+}
 
 .tapetWmax {
-    border: 3 solid gray;
+    border: 3px solid gray;
     background: var(--TapetBgrd);
+    background-image: url(../_assets/images/eurosymbol60.png);
     box-shadow: 3px 3px  <?php echo $shadowBlur; ?> var(--ButtnShad);
     border-radius: 0.40em;
     margin: 0.4em 0.2em 0.4em 0.2em;
     padding: 0.3em 0.3em 0.3em 0.3em;
-}
-.tapetWmax { 
     /* max-width: 100%;   */ 
     /* width: 640px;    */
 }
-
 
 .clearWrap {
     /* overflow: auto; */
@@ -260,6 +272,7 @@ form {
   height: 2.2em;
   margin: 0.05em 0.05em;
   position: relative;
+ /*  padding-top: 8px; /* htm_CombFelt: Gør plads til label */
   /* width: 100%; */
 }
 
@@ -290,7 +303,7 @@ form {
   cursor: text;
   font-size: 0.95em;
   font-weight: 500;
-  padding: 0.8em 1% 0.1em 1%; /*  top right bottom  left  */
+  padding: 0.1em 1% 0.1em 1%; /*  top right bottom  left  */
   position: absolute;
   transition: all 0.15s ease;
   /* width: 95%; */
@@ -298,6 +311,7 @@ form {
 
 .label {
   font-style: italic; 
+  font-family: sans-serif;
   font-weight: normal;
   color: blue;
   padding: 0.05em 1%;
@@ -342,7 +356,7 @@ form {
 .lablInput input[type="email"].filled:valid ~label:after {
   color: var(--blueColor);
   display: inline-block;
-  font: normal normal normal 14px/1;  /*  font-style  font-variant  font-weight   font-size/line-height font-family */
+  font: normal normal normal 14px/1em;  /*  font-style  font-variant  font-weight   font-size/line-height font-family */
   font-size: 2em;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -387,7 +401,7 @@ input[type="helt"],
 input[type="data"] {
   border: 1px black;
   border-right: 1px gray;
-  border-collapse;
+  border-collapse;  */
 }
 
 
@@ -413,6 +427,7 @@ input[type="date"] {
     height: 17px;
 }
 
+
 input::-webkit-datetime-edit {
     -webkit-flex: 1;
     -webkit-user-modify: read-only !important;
@@ -437,41 +452,7 @@ option {
   /* font-style: italic; */
 }
 
-/* 
-Default:
-input[type="date"] {
-     -webkit-align-items: center;
-     display: -webkit-inline-flex;
-     font-family: monospace;
-     overflow: hidden;
-     padding: 0;
-     -webkit-padding-start: 1px;
-}
 
-input::-webkit-datetime-edit {
-    -webkit-flex: 1;
-    -webkit-user-modify: read-only !important;
-    display: inline-block;
-    min-width: 0;
-    overflow: hidden;
-}
-
-input::-webkit-datetime-edit-fields-wrapper {
-    -webkit-user-modify: read-only !important;
-    display: inline-block;
-    padding: 1px 0;
-    white-space: pre;
-}
-
-
-input[type="date"] {
-  text-align: left;
-::-webkit-inner-spin-button { display: none; }
-::-webkit-calendar-picker-indicator { background: orange; }
-  ::-webkit-inner-spin-button { display: none; }
-  width: 90px;
-}
- */
 .fa-paragraph:before { font-weight: bold; content: '§'; }
 
 .styled-select select {
@@ -486,14 +467,15 @@ input[type="date"] {
    height: 34px;
    -webkit-appearance: none;
 }
-colrlabl  { font-style: italic; font-weight: normal; font-size: 0.75em; color: var(--blueColor);}
-captlabl  { font-style: italic; font-weight: normal; font-size: 0.80em; color: brown;}
-a         { text-decoration: none;}
-i         { text-decoration: none;} 
-test      { display: inline;}
-big       { font-size: larger;}
-.centrer  { text-align: center }
-cbutton   { margin:auto;  display:block;}
+data-colrlabl  { font-family: sans-serif; /* font-style: italic;*/ font-weight: normal; font-size: 0.75em; color: var(--blueColor);}
+data-yelllabl  { font-family: sans-serif; /* font-style: italic;*/ font-weight: normal; font-size: 0.75em; color: yellow;}
+captlabl       { font-family: sans-serif; font-style: italic; font-weight: normal; font-size: 0.80em; color: brown;}
+a              { text-decoration: none;}
+i              { text-decoration: none;} 
+test           { display: inline;}
+big            { font-size: larger;}
+.centrer       { text-align: center }
+cbutton        { margin:auto;  display:block;}
 
 menuBg, titlBg
 {
@@ -508,6 +490,7 @@ titlBg {
 .btnTit { /* Titler i gittermenuens top-knapper: Vis ingen tooltip! */
 /*   content: attr(title); */
   font-size: 0.95em;
+  font-family: sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -524,15 +507,16 @@ titlBg {
 .btn:hover { color: var(--btnTxOver); z-index: 777;}
 .btn {
   font-size: 0.85em;
+  font-family: sans-serif;
   white-space: pre-wrap;
   /* min-width: 220px; */
   position: absolute;
-  top: 43%;
+  top: 30%;
   left: 50%;
   z-index: 666;
   transform: translate(-50%, -50%);
   color: var(--btnTxNorm);
-  margin-top: 3;
+  margin-top: 3px;
 /*   max-width: 160px; */
   padding: .001em;  
   border: none;  
@@ -544,10 +528,10 @@ titlBg {
 /* Anvend custom-tip i stedet for browser-tip: */
 deaktiv_input[type="submit"][title],
 deaktiv_input[type="text"][title],
-.text[tiptxt]:hover:after,
-.th[tiptxt]:hover:after,
-. [tiptxt]:hover:after { /* Tip på grå gradient baggrund*/
-  content: attr(tiptxt);
+.text[data-tiptxt]:hover:after,
+.th[data-tiptxt]:hover:after,
+.th[data-tiptxt]:hover:after { /* Tip på grå gradient baggrund*/
+  content: attr(data-tiptxt);
   white-space: pre-wrap; 
   height: 100%;
   /* display: inline-block; */
@@ -586,11 +570,15 @@ button {
   
   }
 .knap {
-  margin:6px; 
-  padding:4px; 
+  margin:1px; 
+  padding:2px; 
   font-size:0.80em; 
-  font-weight: 700; 
-  width: 250px;
+  font-family: sans-serif;
+  font-weight: 500; 
+  max-width: 250px;
+  border: 2px;  
+  border-radius: 6px;
+  display: inline;
   /* x            color:'.$color=$ØTitleColr.'; */
   transition: font-size 0.1s;
 }
@@ -609,28 +597,34 @@ Tip-system:  Label [.tooltip .labltip], som kan vise popup-vindue [.tooltip*]
 */
 
 /* 
-Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
+Custom data-tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltip,
 .tooltipL, .tooltipR, .tooltipB, .tooltipT,
-.tooltipB0, .tooltipB1, .tooltipB2
-{   position: relative;
+.tooltipNW, .tooltipSW, .tooltipSØ
+{   font-family: sans-serif;
+    position: relative;
     cursor: help;
     display: inline-block;
-    background: white;
+    background: Snow;
+    color: black;
     border-radius:3px;
     border: 1px solid var(--GradiBott);
     box-shadow: 2px 2px 1px var(--ButtnShad);
     padding: 0px 3px 1px 3px;
+    text-align: center;
     margin-bottom: 2px;
+    font-size: 11px;
+    /* top: -8px;  /* Kun htm_CombFelt: Hæv label */
+}
 }
 .tooltip{
-    text-shadow:0px 1px var(--SkyTxNorm); /* 1px 1px var(--SkyTxNorm); */
+    text-shadow:0px 0.6px var(--SkyTxNorm); /* 1px 1px var(--SkyTxNorm); */
 }
 
 /* .tooltip                                 /* LABEL som musen holdes over */
 .tooltiptext,                               /* Hjælpetekst som synliggøres */
 .tooltipL, .tooltipR, .tooltipB, .tooltipT, /* Bestemmer placering af Tip  */
-.tooltipB0, .tooltipB1, .tooltipB2
+.tooltipNW, .tooltipSW, .tooltipSØ
 { /* Skjult tip tekst på farvet baggrund plac ved label */
     visibility: hidden;
     min-width: 160px;
@@ -650,9 +644,9 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltiptext,
 .tooltipT  {bottom: 20px;  left: -25px;}                      /* Plac over kilde - Inputfelters label */
 .tooltipB  {top: 22px;     left: -90px;   min-width: 120px;}  /* Plac under kilde - Kolonneoverskrifter, hvor der ikke er plads ovenover. */
-.tooltipB0 {top: -22px;    left: -180px;  min-width: 160px;}  
-.tooltipB1 {top: 22px;     left: -180px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
-.tooltipB2 {top: 22px;     left: 28px;    min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
+.tooltipNW {bottom: 20px;  left: -180px;  min-width: 160px;}  
+.tooltipSW {top: 22px;     left: -280px;  min-width: 160px;}  /* Ved 1. kolonne er der ikke plads tv for feltet*/
+.tooltipSØ {top: 22px;     left: 28px;    min-width: 160px;}  /* Ved n. kolonne er der ikke plads th for feltet*/
 .tooltipL  {left: -26px;   margin-top: -28px;}
 .tooltipR  {right: -26px;  margin-top: -28px;}
 
@@ -661,9 +655,9 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 .tooltipT:hover .tooltiptext, */
 .tooltip:hover .tooltipT,
 .tooltip:hover .tooltipB,
-.tooltip:hover .tooltipB0,
-.tooltip:hover .tooltipB1,
-.tooltip:hover .tooltipB2,
+.tooltip:hover .tooltipNW,
+.tooltip:hover .tooltipSW,
+.tooltip:hover .tooltipSØ,
 .tooltip:hover .tooltipL,
 .tooltip:hover .tooltipR,
 .tooltip:hover .tooltiptext,
@@ -682,11 +676,17 @@ Custom tiptxt benyttet til program-tip og link-knapper i paneler: */
 
 
 /* 
-Custom tiptxt benyttet til menuers navigations-knapper: */
+Custom data-tiptxt benyttet til menuers navigations-knapper: */
 img,
 ic,
+data-ic,
   a, 
  ax        { color: var(--btnTxNorm); text-decoration: none;}
+
+data-ic {
+  box-shadow: 2px 2px gray;
+  border: 2px solid #000;
+}
 
 img:hover,
   a:hover, 
@@ -694,17 +694,18 @@ img:hover,
   color: var(--btnTxOver); 
   }
 
- img[tiptxt]:hover:after,  /* Fremover: Udskift title med tiptxt, for at benytte custom-tip   */
-   a[tiptxt]:hover:after,
-  a1[tiptxt]:hover:after,  
-  ic[tiptxt]:hover:after, 
- div[tiptxt]:hover:after, 
+ img[data-tiptxt]:hover:after,  /* Fremover: Udskift title med data-tiptxt, for at benytte custom-tip   */
+   a[data-tiptxt]:hover:after,
+  a1[data-tiptxt]:hover:after,  
+  ic[data-tiptxt]:hover:after,
+data-ic [data-tiptxt]:hover:after,
+ div[data-tiptxt]:hover:after, 
   a[title]:hover:after, 
 img[title]:hover:after, 
  ax[title]:hover:after {
 /*
 Forgrund Udseende:     */
-  content: attr(tiptxt);
+  content: attr(data-tiptxt);
   font-size:12px;
   font-weight: normal;
   padding: 4px 8px;
@@ -737,100 +738,15 @@ Baggrund Udseende:   */
   background-image: -o-linear-gradient(top, #ffffff, #dddddd);
 }
 
-  a1[tiptxt]:hover:after
+  a1[data-tiptxt]:hover:after
   {left: -5px;}  /*  Log ud: Der er ikke plads nok til venstre */
   
 /*************************************/
-
-/* Tabel med Fastlåst Header: */
-/* Se mere: https://codepen.io/chiranjeeb/pen/LGsiv */
-.fixed-table-container {
-  width: 99%;
-  table-layout: fixed;
-  border: 1px solid #8c8b8b;
-  margin: 10px auto;
-  background-color: white;
-  font-size: 0.8em; /* 1.0em;   12px; */
-  /* above is decorative or flexible */
-  position: relative; /* could be absolute or relative */
-  padding-top: 26px; /* header-height */
-}
-
-.fixed-table-container-inner {
-  overflow-x: hidden;
-  overflow-y: auto;
- /*  max-height: 150px; */
-}
-
-.header-background {
-  background-color: #DDDDDD;
-  height: 26px; /* header-height */
-  /* position: absolute; */
-  top: 0;
-  right: 0;
-  left: 0;
-}
-
-table {
-  background-color: var(--PanelBgrd);
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-size: 1.1em; 
-  font-weight: 200;
-}
-
-.row {
-  display: table-row;
-  background:       var(--tblRowDrk);
-  background-color: var(--tblRowDrk);
-}
-.row:nth-of-type(odd) {
-  background: var(--tblRowLgt);
-  background-color: var(--tblRowLgt);
-} 
-.fixed-table-container td {
-  border-left: 1px dotted #2223;
-  padding-left: 2px;
-  padding-right: 3px;
-}
-tc {
-  font-size: 0.8em; 
-  font-weight:400;
-  color: var(--btnTxOver);
-}
-th {
-  color: var(--blueColor);  /* LysBlå text*/
-}
+/* Tablesorter: https://github.com/Mottie/tablesorter/issues/1066 */  
+.hidden { display: none; }  
+  /* Bør flyttes til htm_Tableinit.php som indeholer alt andet... ? */
   
-.th-inner {
-  position: absolute;
-  top: 0;
-  line-height: 26px; /* header-height */
-  text-align: left;
-  border-left: 1px solid #ccc;
-  padding-left: 2px;
-  margin-left: -1px;
-}
-.first .th-inner {
-    border-left: none;
-    padding-left: 8px;
-  }
-
-.th-inner-center{
-  text-align: center;
-}
-
-
-/* Sortering af tabeller:                            */
-/* https://www.kryogenix.org/code/browser/sorttable/ */
-/* op-pil / ned-pil sættes i: $ØProgRoot.$_assets.'js/sorttable.js */
-table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
-  content: '\21F3';  /*' \25B4\25BE' ;  op/ned: 21F3  op: 21E7 ned: 21E9     /* content: ""; */ 
-  color: #8c8b8b;
-  font-size: 120%;
-}
-
+/*************************************/
 
 
 div#frm *{display:inline}
@@ -846,7 +762,7 @@ div#frm *{display:inline}
 
 /*************************************/
 
-hr {margen: 8px;  border-width: 2px; margin: 3px; }
+hr {margin: 8px;  border-width: 2px; margin: 3px; }
 hr.style1{  border-top: 1px solid #8c8b8b;}
 hr.style2 { border-top: 3px double #8c8b8b;}
 hr.style3 { border-top: 1px dashed #8c8b8b;}
@@ -959,54 +875,9 @@ hr.style18:before {
 
 
 
-/****************** Error, Success, Warning, and Info Messages with CSS *******************/
-
-/**@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); **/
-.my-notify-info, .my-notify-success, .my-notify-warning, .my-notify-error {
-    padding:10px;
-    margin:10px 0;
-}
-.my-notify-info:before, .my-notify-success:before, .my-notify-warning:before, .my-notify-error:before {
-    font-family:FontAwesome;
-    font-style:normal;
-    font-weight:400;
-    speak:none;
-    display:inline-block;
-    text-decoration:inherit;
-    width:1em;
-    margin-right:.2em;
-    text-align:center;
-    font-variant:normal;
-    text-transform:none;
-    line-height:1em;
-    margin-left:.2em;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale
-}
-.my-notify-info:before    { content:"\f05a";}
-.my-notify-success:before { content:'\f00c';}
-.my-notify-warning:before { content:'\f071';}
-.my-notify-error:before   { content:'\f057';}
-.my-notify-info {
-    color: #00529B;
-    background-color: #BDE5F8;
-}
-.my-notify-success {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-}
-.my-notify-warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
-}
-.my-notify-error {
-    color: #D8000C;
-    background-color: #FFBABA;
-}
-
 /* http://stackoverflow.com/questions/1964839/how-can-i-create-a-please-wait-loading-animation-using-jquery */
-.modal {
-    display:    none;
+.modalxxx {
+    display:    none; /*?*/
     position:   fixed;    z-index:    9999;
     top:        0;        left:       0;
     height:     100%;     width:      100%;
@@ -1022,6 +893,16 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
     display: block;
 }
 
+.loader {
+  margin: auto;
+  margin-top: 5px;
+  width: 32px;
+  height: 32px;
+  background: url(../_assets/images/wait.gif);
+}
+.loader:before {
+    content: "\f013";
+}
 
 #grid{
     background-color: transparent;
@@ -1040,7 +921,7 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
 }
 
 
-* { padding:0; margin:0; }
+/*  * { padding:0; margin:0; } */
 #showinfo { position:absolute; top:150mm; left:-80px; background-color:black; color:white; border-radius: 5px; padding:8px 16px; width:160px; transform: rotate(270deg); font-size: 14px;
   font-family: sans-serif;  text-align: center;
   }
@@ -1055,7 +936,7 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
     color: white;
     border-radius: 20px;
  */
-  content: attr(tiptxt);
+  content: attr(data-tiptxt);
   font: 12px "Helvetica", Sans-Serif;
   padding: 3px 6px;
   background-color: WhiteSmoke;
@@ -1073,3 +954,6 @@ body.loading .modal {/* Anytime the body has the loading class, our modal elemen
   }
   */
   
+span { display: block; }
+/* div {  display: inline-block  !important; }   /*  pga. Fejl: display: none - på alle div! af ukendt årsag ??? */
+/* head, title, link[href][rel], meta, style, script { 	display: block; } /**/

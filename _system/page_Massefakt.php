@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Massefakt.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Massefakt.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Haandtering af Massefakturering   ';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -10,13 +10,14 @@
  */
 
   $pageTitl='Massefakturering';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240);   Rude_DiverseMenu();
-    NextSpalte();     Rude_Massefakt();
+    SpalteTop(240);   Panl_DiverseMenu();
+    NextSpalte();     Panl_Massefakt();
     SpalteBund();
 ### GEM DATA:
   

@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_FormText.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_FormText.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Redigering af udskrivnings formularer';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -15,10 +15,11 @@
   $pageTitl='Formularredigering';
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include_once("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 ### INDLÆS DATA:
     include_once("../_config/connect.php");   #+  Database tilkobling
-    // Data indlæses i Rude_xx, da der kun skal benyttes deldata (filter: WHERE).
+    // Data indlæses i Panl_xx, da der kun skal benyttes deldata (filter: WHERE).
     if (pushed('btn_edit'))   { echo 'Gemmer data...  '; include ('../_system/save_Formularer.php'); }  //  function pushed($name) { return (isset($_POST[$name])); }
     if (pushed('btn_new'))    { echo 'Opretter data...'; include ('../_system/save_Formularer.php'); }
     if (pushed('blanket'))    { echo 'Skifter blanket.'; include ('../_system/save_Formularer.php'); }
@@ -27,19 +28,19 @@
     SpalteTop(240); // BrugerMenu:
 global $Øart;
     if ($art) echo 'Art:'.$art.'|',$Øart.'|'.$GLOBALS["Øart"];
-    $selected= Rude_Formularer($frm,$art,$lang,$papr);  //  Her vælger brugeren, hvad der skal redigeres.
+    $selected= Panl_Formularer($frm,$art,$lang,$papr);  //  Her vælger brugeren, hvad der skal redigeres.
     $frm=  $selected[0];
     $art=  $selected[1];    $Øart= $art;    $GLOBALS["Øart"]= $art; //  Virker ikke ! ? Efter Gem er den glemt !
     $lang= $selected[2];
     $papr= $selected[3];
-    NextSpalte();   // Hent fra DB og rediger:
+    NextSpalte(640);   // Hent fra DB og rediger:
     switch ($art) {         
       case '5:Mail tekst'; 
-      case '0:Layout'      : Rude_FormRedigerLayout($frm,$art,$lang,$papr); break;       
-      case '1:Tekster'     : Rude_FormRedigerText($frm,$art,$lang,$papr);   break;       
-      case '2:Linjer'      : Rude_FormRedigerGrafik($frm,$art,$lang,$papr); break;     
-      case '3:Ordrelinjer' : Rude_FormRedigerOrdrelin($frm,$art,$lang,$papr); break;   
-    default : Rude_FormRedigerText($frm,$art,$lang,$papr);                           
+      case '0:Layout'      : Panl_FormRedigerLayout($frm,$art,$lang,$papr); break;       
+      case '1:Tekster'     : Panl_FormRedigerText($frm,$art,$lang,$papr);   break;       
+      case '2:Linjer'      : Panl_FormRedigerGrafik($frm,$art,$lang,$papr); break;     
+      case '3:Ordrelinjer' : Panl_FormRedigerOrdrelin($frm,$art,$lang,$papr); break;   
+    default : Panl_FormRedigerText($frm,$art,$lang,$papr);                           
     }
     SpalteBund();
 

@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=99;
+<?php   $DocFil= '../_system/page_Connsetup.php';   $DocVer='5.0.0';   $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=99;
 /* ## Purpose: 'Opsaetning af forbindelse til database.';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -17,6 +17,7 @@
 global $Ødb_Link, $Ødb_Type, $Øprogvers, $ØProgRoot;  //  Tildeles værdi i htm_pagePrepare.php
   $pageTitl='SALDI - det frie danske økonomisystem';
   $_base= '../_base/';
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include($_base."htm_pagePrepare.php"); # Sidens indledende html-kode   $_SERVER['DOCUMENT_ROOT'].   saldi-e/_base/
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
 
@@ -73,12 +74,12 @@ if ($felt_mangler==false) {// Klar til at tilkoble:
   
 ### VIS DATA:
     
-  //Rude_Connsetup(); 
-  SpalteTop(480); Rude_Install($db_type='MySQL',$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password);
-  NextSpalte();   Rude_DBsetup($db_type='MySQL',$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password,$db_host='MyServer');
+  //Panl_Connsetup(); 
+  SpalteTop(480); Panl_Install($db_type='MySQL',$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password);
+  NextSpalte();   Panl_DBsetup($db_type='MySQL',$db_encode,$db_navn,$db_bruger,$db_password,$adm_navn,$adm_password,$verify_adm_password,$db_host='MyServer');
   SpalteBund();   
   skilleLin();
-  NextSpalte();   Rude_Login($regnskab='CSS-demo',$brugernavn='admin',$brugerkode,$PrgVers=' '.$Øprogvers,$LnkHelp='Dette er en demonstration.',$OrgaName=$saldihost='MyServer',$Logo='SALDIe50x150.png');
+  NextSpalte();   Panl_Login($regnskab='CSS-demo',$brugernavn='admin',$brugerkode,$PrgVers=' '.$Øprogvers,$LnkHelp='Dette er en demonstration.',$OrgaName=$saldihost='MyServer',$Logo='SALDIe50x150.png');
   
 ### GEM DATA:
 

@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Brugere.php';  $DocVer='5.0.0';  $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Brugere.php';  $DocVer='5.0.0';  $DocRev='2018-09-20';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Administration af Bruger rettigheder';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -14,13 +14,15 @@
 if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Brugerdata');
 
   $pageTitl='Brugerdata';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
+  DocAlder($DocRev);
     
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240);   Rude_AdminMenu();
-    NextSpalte(640);  Rude_Brugere();
+    SpalteTop(240);   Panl_AdminMenu();
+    NextSpalte(720);  Panl_Brugere();
     SpalteBund();
     
 ### GEM DATA:

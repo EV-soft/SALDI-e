@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Tilvalgsetup3.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: ' 3. indstillingsmenu: Tilvalg';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -10,6 +10,7 @@
  */
 #  global $debug;  $debug= true;
   $pageTitl='Diverse tilvalg menu';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
@@ -17,10 +18,10 @@
     
     
 ### VIS DATA:
-    SpalteTop(240);    Rude_TilvalgsMenu();
-    NextSpalte();      
+    SpalteTop(240);    Panl_TilvalgsMenu();
+    NextSpalte(320);   Panl_Tilvalg();
     SpalteBund();
-    
+    //PanelInitier(3,7);
 ### GEM DATA:
 
 //  Til sidst indlæses java-scripter:   

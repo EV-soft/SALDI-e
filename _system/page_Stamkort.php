@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Stamkort.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Stamkort.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Indstillinge af firma-stamdata';
  * Denne fil er oprettet af EV-soft i 2017.
  *             ___   _   _    ___  _         
@@ -16,8 +16,10 @@ if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,'Hovedmenu');
 ### INDLÆS DATA:
 
   $pageTitl='Indstil: Firmadata';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
-
+  DocAlder($DocRev);
+  
   
 ## Subrutiner:
 function Post2Var($nm)      { $v= $nm; global $$v;  $$v= $_POST[$nm]; }                         # $nm:type= string
@@ -30,8 +32,13 @@ if ($_POST) {
   foreach (array('kontonr','vis_lukket','pbs_nr','pbs','fi_nr')    as $felt) {PostTrim2Var($felt);};
   foreach (array('firmanavn','addr1','addr2','postnr','bynavn','kontakt','tlf','fax','cvrnr','bank_navn','bank_reg','bank_konto','email','ny_email','mailfakt',)
                                                                    as $felt) {PostAdd2Var($felt);};
-  $gruppe = if_isset($_POST['gruppe']) *1;
+//  Findes i out_base.php:
+//  function set_ajour($name)  {if (isset($_POST[$name]))  {$_SESSION[$name]= $$name= htmlspecialchars($_POST[$name]); return $$name; } } //  En variabel med navnet: $name er opdateret, og husket i SESSION
+//  function set_FormVars ($names) { foreach ($names as $name) $$name= set_ajour($name); }  //  Ja: $$name er ikke en fejl. Der refereres til værdien af variablen med navnet $name
+//  set_FormVars(['id','ans_id','ans_ant','lukket_ant','posnr']);  // Opdater alle variabler på form 'debiform' :
 
+//+  $gruppe = if_isset($_POST['gruppe']) *1;
+/*
   if ($postnr && !$bynavn) $bynavn= bynavn($postnr);
   if ($id==0) {
     $query = db_modify("insert into adresser (kontonr,firmanavn,addr1,addr2,postnr,bynavn,tlf,fax,cvrnr,art,bank_navn,bank_reg,bank_konto,email,mailfakt,pbs_nr,pbs,bank_fi,gruppe) values ('$kontonr','$firmanavn','$addr1','$addr2','$postnr','$bynavn','$tlf','$fax','$cvrnr','S','$bank_navn','$bank_reg','$bank_konto','$ny_email','$mailfakt','$pbs_nr','$pbs','$fi_nr','$gruppe')",__FILE__ . " linje " . __LINE__);
@@ -54,6 +61,7 @@ if ($_POST) {
     db_modify("update regnskab set email='$ny_email' where db='$db'",__FILE__ . " linje " . __LINE__); 
     include("../includes/online.php");
   }
+*/
 }
 
 //+ $query = db_select("select * from adresser where art = 'S'",__FILE__ . " linje " . __LINE__);
@@ -85,21 +93,21 @@ if ($_POST) {
 
     $firmanavn='DemoFirma'; $pbs='L';  # DEMO
     $Navn='DemoAnsat';
-    //  Bemærk at hvis variabler ikke blot skal vises, men skal ændre værdi, skal de erklæres med prefix: & hvilket eksempelvis kan ses i erklæringen af Rude_Stamdata()
+    //  Bemærk at hvis variabler ikke blot skal vises, men skal ændre værdi, skal de erklæres med prefix: & hvilket eksempelvis kan ses i erklæringen af Panl_Stamdata()
     //  Det bevirker at data ikke overføres som værdier, men som en pointer til variablen. Det er samtidigt mindre ram-krævende, og hurtigere!
 ### VIS DATA:
-    SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_Stamdata($firmanavn, $addr1, $addr2, $postnr, $bynavn, $ny_email, $homepage, $bank_navn, $bank_reg, $bank_konto, $cvrnr, $tlf, $fax, $pbs_nr, $pbs, $gruppe, $fi_nr);
+    SpalteTop(240);   Panl_AdminMenu();
+    NextSpalte(320);  Panl_Stamdata($firmanavn, $addr1, $addr2, $postnr, $bynavn, $ny_email, $homepage, $bank_navn, $bank_reg, $bank_konto, $cvrnr, $tlf, $fax, $pbs_nr, $pbs, $gruppe, $fi_nr);
+    NextSpalte(320);  Panl_CVRopslag('din virksomhed');
     SpalteBund();
     skilleLin();
-    SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_Medarbejdere();
-    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
-    // NextSpalte();   Rude_Ansat($Medarbejdernr, $bankkto, $Navn, $Initialer, $Adresse, $Adresse2, $Postnr, $By, $Mail, $Mobil, $Lokalnr, $Lokalfax, $Privattlf, $Bank, $Løn, $Løntillæg, $Bemærkning, $Tiltrådt, $Fratrådt);
+    
+    SpalteTop(240);  // Panl_AdminMenu();
+    NextSpalte(480);  Panl_Medarbejdere();
     SpalteBund();
+    if ($_SESSION['cvrSoeg']) 
+         PanelInitier(4,17);
+    else PanelInitier(3,17);
 
 ### GEM DATA:
   

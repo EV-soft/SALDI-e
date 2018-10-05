@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Syssetup.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Syssetup.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Indstilling af MOMS  ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -16,8 +16,8 @@
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_MomsSetup();
+    SpalteTop(240); Panl_AdminMenu();
+    NextSpalte();   Panl_MomsSetup();
     SpalteBund();
 ### GEM DATA:
  

@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2018-02-00';    $DocIni='evs';  $ModulNr=101;
+<?php   $DocFil= '../_base/_admin/ini_CreateDB.php';    $DocVer='5.0.0';   $DocRev='2018-09-24';    $DocIni='evs';  $ModulNr=101;
 /* ## Purpose: 'Opret database og 1. regnskab for SALDI    - Efterfoelger for: /admin/opret.php';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -16,6 +16,7 @@
  */
  
 ### Kør denne fil kun 1 gang, ellers oprettes dubletter i DB!
+### Database felter får tilføjet: COMMENT <Kolonne-label> når de er i brug, så ubenyttede felter kan nedlægges senere
 
 @session_start();
 $s_id= session_id();
@@ -83,7 +84,7 @@ function make_DataBase () { global $brugernavn, $Ødb_Type, $Ødb_Link, $db, $Ø
   }
 };
 
-// PLAN: For at kunne udtynde de felter, som ikke er i brug, tilføjes COMMENT til alle de felter, som ER i brug!
+// PLAN: For at kunne nedlægge de felter, som ikke er i brug, tilføjes COMMENT "<Felt-Label>" til alle de felter, som ER i brug!
 function make_Tables () {
   $if= ' IF NOT EXISTS ';
   $ch= '';  //  'CHARACTER SET = utf8 COLLATE utf8_danish_ci';
@@ -93,13 +94,13 @@ function make_Tables () {
             firmanavn text                    COMMENT "Adressat", 
             addr1 text                        COMMENT "Vejnavn og husnr", 
             addr2 text                        COMMENT "Steds benævnelse", 
-            postnr text,                      COMMENT "Postnummer",
-            bynavn text,                      COMMENT "Bynavn",
-            land text,                        COMMENT "Land",
-            kontakt text,                     COMMENT "Kontakt",
-            tlf text,                         COMMENT "Telefon",
-            fax text,                         COMMENT "Fax",
-            email text,                       COMMENT "Email",
+            postnr text                       COMMENT "Postnummer",
+            bynavn text                       COMMENT "Bynavn",
+            land text                         COMMENT "Land",
+            kontakt text                      COMMENT "Kontakt",
+            tlf text                          COMMENT "Telefon",
+            fax text                          COMMENT "Fax",
+            email text                        COMMENT "Email",
             web text, 
             bank_navn text, 
             bank_reg text, 
@@ -154,7 +155,8 @@ function make_Tables () {
             kategori text, 
             saldo numeric(15,3),                                  
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_employed    '.$ch.'  (id serial NOT NULL, ## Ver 3.x: ansatte ##
+  sql_creat('CREATE TABLE'.$if.' tblA_employed    '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: ansatte ##
             konto_id integer, 
             navn text, 
             addr1 text, 
@@ -186,7 +188,8 @@ function make_Tables () {
             overtid numeric(1,0), 
             sag_id integer,  
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_crm  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: crm ##
+  sql_creat('CREATE TABLE'.$if.' tblA_crm  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: crm ##
             konto_id int, 
             kontakt_id int, 
             ansat_id int, 
@@ -194,7 +197,8 @@ function make_Tables () {
             notedate date, 
             spor text,                             
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_users  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: brugere ##
+  sql_creat('CREATE TABLE'.$if.' tblA_users  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: brugere ##
             brugernavn text, 
             kode text, 
             tmp_kode text, 
@@ -204,7 +208,8 @@ function make_Tables () {
             ansat_id integer, 
             sprog_id integer, 
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_groups           (id serial NOT NULL, ## Ver 3.x: grupper ##
+  sql_creat('CREATE TABLE'.$if.' tblA_groups  '.
+  '         (id serial NOT NULL, ## Ver 3.x: grupper ##
             beskrivelse text, 
             kode text, 
             kodenr text, 
@@ -224,7 +229,8 @@ function make_Tables () {
             box13 text, 
             box14 text,       
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_journal_entry  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: kassekladde ##
+  sql_creat('CREATE TABLE'.$if.' tblA_journal_entry  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: kassekladde ##
             bilag integer,
             transdate date,
             beskrivelse text,
@@ -240,14 +246,15 @@ function make_Tables () {
             ansat text,
             afd integer,
             projekt text,
-            valuta integer,
+            valutakode varchar(3),      # Ændret fra: valuta integer,
             valutakurs numeric(15,3),
             ordre_id integer,
             forfaldsdate date,
             betal_id text,
             dokument text,        
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_tmp_journal_Entry  '.$ch.'  (id integer,       ## Ver 3.x:  tmpkassekl ##
+  sql_creat('CREATE TABLE'.$if.' tblA_tmp_journal_Entry  '.$ch.
+        '  (id integer,       ## Ver 3.x:  tmpkassekl ##
             lobenr integer,
             bilag text,
             transdate text,
@@ -263,12 +270,13 @@ function make_Tables () {
             afd text,
             projekt text,
             ansat text,
-            valuta text,
+            valutakode varchar(3),
             valutakurs text,
             forfaldsdate text,
             betal_id text,
             dokument text)'                       , __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_draft_list  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: kladdeliste ##
+  sql_creat('CREATE TABLE'.$if.' tblA_draft_list  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: kladdeliste ##
             kladdedate date,
             bogforingsdate date,
             kladdenote text,
@@ -278,14 +286,15 @@ function make_Tables () {
             hvem text,
             tidspkt text,               
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_account_plan  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: kontoplan ##
+  sql_creat('CREATE TABLE'.$if.' tblA_account_plan  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: kontoplan ##
             kontonr numeric(15,0),
             beskrivelse text,
             kontotype varchar(1),
             moms text,
             fra_kto numeric(15,0),
             til_kto numeric(15,0),
-            lukket varchar(2),
+            lukket varchar(2),      # "on" eller andet
             primo numeric(15,3),
             saldo numeric(15,3),
             regnskabsaar integer,
@@ -293,10 +302,11 @@ function make_Tables () {
             overfor_til numeric(15,0),
             anvendelse text,
             modkonto numeric(15,0),
-            valuta integer,
+            valutakode varchar(3),      # Ændret fra: valuta integer,
             valutakurs numeric(15,4),              
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_charge_cards  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: kontokort ##
+  sql_creat('CREATE TABLE'.$if.' tblA_charge_cards  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: kontokort ##
             ref_id integer,
             faktnr integer,
             refnr integer,
@@ -305,14 +315,15 @@ function make_Tables () {
             debet numeric(15,0),
             transdate date,
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_orders  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: ordrer ##
-            konto_id integer,
-            firmanavn text,
-            addr1 text,
-            addr2 text,
-            postnr text,
-            bynavn text,
-            land text,
+  sql_creat('CREATE TABLE'.$if.' tblA_orders  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: ordrer ## 
+            konto_id integer,                         
+            firmanavn text                COMMENT "Firma navn"
+            addr1 text,                               
+            addr2 text,                               
+            postnr text,                                        
+            bynavn text,                              
+            land text,                                
             kontakt text,
             email text,
             mail_fakt varchar(2),
@@ -328,22 +339,22 @@ function make_Tables () {
             institution text,
             betalingsbet text,
             betalingsdage integer,
-            kontonr text,
+            kontonr text                COMMENT "Konto nr.",
             cvrnr text,
             ord_art varchar(2),
-            valuta text,
+            valutakode varchar(3),
             valutakurs numeric(15,3),
             sprog text,
             projekt text,
-            ordredate date,
-            levdate date,
+            ordredate date              COMMENT "Ordre dato",
+            levdate date                COMMENT "Lev. dato",
             fakturadate date,
             notes text,
-            ordrenr integer,
-            sum numeric(15,3),
+            ordrenr integer             COMMENT "Ordre nr.",
+            sum numeric(15,3)           COMMENT "Ordre sum",
             momssats numeric(15,3),
-            status integer,
-            ref text,
+            status integer              COMMENT "Status - 0..4",
+            ref text                    COMMENT "Sælger",
             fakturanr text,
             modtagelse integer,
             kred_ord_id integer,
@@ -385,7 +396,8 @@ function make_Tables () {
   //      sql_creat('CREATE INDEX ix_ordrer_betalt                ON tblA_orders         (betalt)'       ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_ordrer_id                    ON tblA_orders         (id)'           ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_ordrer_ordrenr               ON tblA_orders         (ordrenr)'      ,__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_order_lines  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: ordrelinjer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_order_lines  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: ordrelinjer ##
             varenr text,
             beskrivelse text,
             enhed text,
@@ -427,11 +439,13 @@ function make_Tables () {
   //      sql_creat('CREATE INDEX ix_ordrelinjer_id               ON tblA_order_lines    (id)'           ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_ordrelinjer_ordre_id         ON tblA_order_lines    (ordre_id)'     ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_ordrelinjer_vare_id          ON tblA_order_lines    (vare_id)'      ,__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_order_texts  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: ordretekster ##
+  sql_creat('CREATE TABLE'.$if.' tblA_order_texts  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: ordretekster ##
             tekst text,
             sort numeric(15,0),
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_open_post  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: openpost ##
+  sql_creat('CREATE TABLE'.$if.' tblA_open_post  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: openpost ##
             konto_id integer,
             konto_nr text,
             faktnr text,
@@ -445,9 +459,9 @@ function make_Tables () {
             bilag_id integer,
             udlign_id integer,
             udlign_date date,
-            valuta text,
-            projekt text,
+            valutakode varchar(3),
             valutakurs numeric(15,3),
+            projekt text,
             forfaldsdate date,
             betal_id text,
             betalings_id text,                      
@@ -455,7 +469,8 @@ function make_Tables () {
   //    sql_creat('CREATE INDEX ix_openpost_id                  ON tblA_open_post      (id)'           ,__FILE__, __LINE__);
   //    sql_creat('CREATE INDEX ix_openpost_konto_id            ON tblA_open_post      (konto_id)'     ,__FILE__, __LINE__);
   //    sql_creat('CREATE INDEX ix_openpost_udlign_id           ON tblA_open_post      (udlign_id)'    ,__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_transactions  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: transaktioner ##
+  sql_creat('CREATE TABLE'.$if.' tblA_transactions  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: transaktioner ##
             kontonr numeric(15,0),
             bilag numeric(15,0),
             transdate date,
@@ -470,7 +485,7 @@ function make_Tables () {
             logdate date,
             afd integer,
             ordre_id integer,
-            valuta text,
+            valutakode varchar(3),
             valutakurs numeric(15,3),
             moms numeric(15,3),
             adresser_id int4,
@@ -480,7 +495,8 @@ function make_Tables () {
   //    sql_creat('CREATE INDEX' ix_transaktioner_transdate      ON tblA_transactions   (transdate)'    ,__FILE__, __LINE__);
   //    sql_creat('CREATE INDEX' ix_transaktioner_kontonr        ON tblA_transactions   (kontonr)'      ,__FILE__, __LINE__);
   
-  sql_creat('CREATE TABLE'.$if.' tblA_simulation  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: simulering ##
+  sql_creat('CREATE TABLE'.$if.' tblA_simulation  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: simulering ##
             kontonr numeric(15,0),
             bilag numeric(15,0),
             transdate date,
@@ -495,12 +511,13 @@ function make_Tables () {
             logtime time,
             afd int4,
             ordre_id int4,
-            valuta text,
+            valutakode varchar(3),
             valutakurs numeric(15,3),
             moms numeric(15,3),
             adresser_id int4,                  
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_product  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: varer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_product  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: varer ##
             varenr text,
             stregkode text,
             beskrivelse text,
@@ -556,7 +573,8 @@ function make_Tables () {
    //     sql_creat('CREATE INDEX ix_varer_beskrivelse            ON tblA_product        (id)'           ,__FILE__, __LINE__);
    //     sql_creat('CREATE INDEX ix_varer_id                     ON tblA_product        (id)'           ,__FILE__, __LINE__);
 
-  sql_creat('CREATE TABLE'.$if.' tblA_stock_status  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: lagerstatus ##
+  sql_creat('CREATE TABLE'.$if.' tblA_stock_status  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: lagerstatus ##
             lager integer,
             vare_id integer,
             beholdning numeric(15,3),
@@ -566,7 +584,8 @@ function make_Tables () {
             lok4 text,
             lok5 text,    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_batch_purchase  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: batch_kob ##
+  sql_creat('CREATE TABLE'.$if.' tblA_batch_purchase  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: batch_kob ##
             kobsdate date,
             fakturadate date,
             vare_id integer,
@@ -583,7 +602,8 @@ function make_Tables () {
   //      sql_creat('CREATE INDEX ix_batch_kob_kobsdate           ON tblA_batch_purchase (kobsdate)'     ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_batch_kob_linje_id           ON tblA_batch_purchase (linje_id)'     ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_batch_kob_vare_id            ON tblA_batch_purchase (vare_id)'      ,__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_batch_sale  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: batch_salg ##
+  sql_creat('CREATE TABLE'.$if.' tblA_batch_sale  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: batch_salg ##
             salgsdate date,
             fakturadate date,
             batch_kob_id integer,
@@ -599,7 +619,8 @@ function make_Tables () {
   //      sql_creat('CREATE INDEX ix_batch_salg_fakturadate       ON tblA_batch_sale     (fakturadate)'  ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_batch_salg_salgsdate         ON tblA_batch_sale     (salgsdate)'    ,__FILE__, __LINE__);
   //      sql_creat('CREATE INDEX ix_batch_salg_vare_id           ON tblA_batch_sale     (vare_id)'      ,__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_Serial  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: serienr ##
+  sql_creat('CREATE TABLE'.$if.' tblA_Serial  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: serienr ##
             vare_id integer,
             kobslinje_id integer,
             salgslinje_id integer,
@@ -607,16 +628,19 @@ function make_Tables () {
             batch_salg_id integer,
             serienr text,                                         
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_parts_lists  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: styklister ##
+  sql_creat('CREATE TABLE'.$if.' tblA_parts_lists  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: styklister ##
             vare_id integer,
             indgaar_i integer,
             antal numeric(15,3),
             posnr integer,                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_units  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: enheder ##
+  sql_creat('CREATE TABLE'.$if.' tblA_units  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: enheder ##
             betegnelse text,beskrivelse text,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_materials  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: materialer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_materials  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: materialer ##
             beskrivelse text,
             densitet numeric(15,3),
             materialenr text,
@@ -627,20 +651,23 @@ function make_Tables () {
             opdat_date date,
             opdat_time time,                      
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_product_deliver  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: vare_lev ##
+  sql_creat('CREATE TABLE'.$if.' tblA_product_deliver  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: vare_lev ##
             posnr integer,
             lev_id integer,
             vare_id integer,
             lev_varenr text,
             kostpris numeric(15,3),               
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_booking  '.$ch.'  (linje_id integer,   ## Ver 3.x: reservation ##
+  sql_creat('CREATE TABLE'.$if.' tblA_booking  '.$ch.
+        '  (linje_id integer,   ## Ver 3.x: reservation ##
             batch_kob_id integer,
             batch_salg_id integer,
             vare_id integer,
             antal numeric(15,3),lager integer)', __FILE__, __LINE__);
   // tblA_forms  ('id','form','frm_art','side','besk','just','x0','y0','dx','dy','dim','colr','font','style','imglnk','lngkey','note')
-  sql_creat('CREATE TABLE'.$if.' tblA_forms  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: formularer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_forms  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: formularer ##
             form integer,         
             frm_art integer,      
             side varchar(2),    
@@ -658,12 +685,14 @@ function make_Tables () {
             lngkey VARCHAR(300),  
             note VARCHAR(99), 
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_commission  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: provision ##
+  sql_creat('CREATE TABLE'.$if.' tblA_commission  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: provision ##
             gruppe_id integer,
             ansat_id integer,
             provision numeric(15,3),                             
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_history  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: historik ##
+  sql_creat('CREATE TABLE'.$if.' tblA_history  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: historik ##
             konto_id int,
             kontakt_id int,
             ansat_id int,notat text,
@@ -672,12 +701,14 @@ function make_Tables () {
             kontaktes date,
             dokument text,          
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_currency  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: valuta ##
+  sql_creat('CREATE TABLE'.$if.' tblA_currency  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: valuta ##
             gruppe integer,
             valdate date,
             kurs numeric(15,3),                                   
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_payment_list  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: betalingsliste ##
+  sql_creat('CREATE TABLE'.$if.' tblA_payment_list  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: betalingsliste ##
             listedate date,
             udskriftsdate date,
             listenote text,
@@ -687,7 +718,8 @@ function make_Tables () {
             hvem text,
             tidspkt text,                                         
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_payments  '.$ch.'  (id serial NOT NULL, ## Ver 3.x: betalinger ##
+  sql_creat('CREATE TABLE'.$if.' tblA_payments  '.$ch.
+        '  (id serial NOT NULL, ## Ver 3.x: betalinger ##
             bet_type text,
             fra_kto text,
             egen_ref text,
@@ -695,14 +727,15 @@ function make_Tables () {
             modt_navn text,
             belob text,
             betalingsdato text,
-            valuta text,
+            valutakode varchar(3),
             kort_ref text,
             kvittering text,
             ordre_id integer,
             bilag_id integer,
             liste_id integer,                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_timesheet        (id serial NOT NULL, ## Ver 3.x: tidsreg ##
+  sql_creat('CREATE TABLE'.$if.' tblA_timesheet     '.
+        '  (id serial NOT NULL, ## Ver 3.x: tidsreg ##
             person integer,
             ordre integer,
             pnummer integer,
@@ -722,7 +755,8 @@ function make_Tables () {
             faerdig integer,
             circ_time integer,                                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_tables           (id serial NOT NULL, ## Ver 3.x: tabeller ##
+  sql_creat('CREATE TABLE'.$if.' tblA_tables      '.
+      '     (id serial NOT NULL, ## Ver 3.x: tabeller ##
             person integer,
             ordre integer,
             pnummer integer,
@@ -742,17 +776,20 @@ function make_Tables () {
             faerdig integer,
             circ_time integer,                                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_texts            (id serial NOT NULL, ## Ver 3.x: tekster ##
+  sql_creat('CREATE TABLE'.$if.' tblA_texts          '.
+        '  (id serial NOT NULL, ## Ver 3.x: tekster ##
             sprog_id integer,
             tekst_id integer,
             tekst text,         
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_product_texts    (id serial NOT NULL, ## Ver 3.x: varetekster ##
+  sql_creat('CREATE TABLE'.$if.' tblA_product_texts  '.
+				'  (id serial NOT NULL, ## Ver 3.x: varetekster ##
             sprog_id integer,
             vare_id integer,
             tekst text,          
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_jobcard          (id serial NOT NULL, ## Ver 3.x: jobkort ##
+  sql_creat('CREATE TABLE'.$if.' tblA_jobcard        '.
+				'  (id serial NOT NULL, ## Ver 3.x: jobkort ##
             konto_id integer,
             ordre_id integer,
             kontonr text,
@@ -781,7 +818,8 @@ function make_Tables () {
             felt_10 text,
             felt_11 text,                                         
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_jobcard_felds    (id serial NOT NULL, ## Ver 3.x: jobkort_felter ##
+  sql_creat('CREATE TABLE'.$if.' tblA_jobcard_fields  '.
+				'  (id serial NOT NULL, ## Ver 3.x: jobkort_felter ##
             job_id integer,
             job_art text,
             feltnr integer,
@@ -789,7 +827,8 @@ function make_Tables () {
             feltnavn text,
             indhold text,                           
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_receiving_list   (id serial NOT NULL, ## Ver 3.x: modtageliste ##
+  sql_creat('CREATE TABLE'.$if.' tblA_receiving_list '.
+				'  (id serial NOT NULL, ## Ver 3.x: modtageliste ##
             initdate date,
             modtagdate date,
             modtagnote text,
@@ -799,7 +838,8 @@ function make_Tables () {
             hvem text,
             tidspkt text, 
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_arrivals         (id serial NOT NULL, ## Ver 3.x: modtagelser ##
+  sql_creat('CREATE TABLE'.$if.' tblA_arrivals       '.
+				'  (id serial NOT NULL, ## Ver 3.x: modtagelser ##
             varenr text,
             beskrivelse text,
             leveres numeric(15,3),
@@ -809,39 +849,46 @@ function make_Tables () {
             vare_id integer,
             antal numeric(15,3),                                  
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pbs_customers    (id serial NOT NULL, ## Ver 3.x: pbs_kunder ##
+  sql_creat('CREATE TABLE'.$if.' tblA_pbs_customers  '.
+				'  (id serial NOT NULL, ## Ver 3.x: pbs_kunder ##
             konto_id integer,
             kontonr varchar(20),
             pbs_nr text,     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pbs_list         (id serial NOT NULL, ## Ver 3.x: pbs_liste ##
+  sql_creat('CREATE TABLE'.$if.' tblA_pbs_list       '.
+				'  (id serial NOT NULL, ## Ver 3.x: pbs_liste ##
             liste_date date,
             afsendt varchar(8),                   
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pbs_orders       (id serial NOT NULL, ## Ver 3.x: pbs_ordrer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_pbs_orders     '.
+				'  (id serial NOT NULL, ## Ver 3.x: pbs_ordrer ##
             liste_id integer,
             ordre_id integer,                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pos_payments     (id serial NOT NULL, ## Ver 3.x: pos_betalinger ##
+  sql_creat('CREATE TABLE'.$if.' tblA_pos_payments   '.
+				'  (id serial NOT NULL, ## Ver 3.x: pos_betalinger ##
             ordre_id integer,
             betalingstype varchar(40),
             amount numeric(15,3),
-            valuta varchar(3),
+            valutakode varchar(3),
             valutakurs numeric(15,3),                             
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  //    sql_creat('CREATE INDEX ix_pos_betalinger_ordre_id      ON tblA_pos_payments   (ordre_id)'     ,__FILE__, __LINE__);
-  //    sql_creat('CREATE INDEX ix_pos_betalinger_betalingstype ON tblA_pos_payments   (betalingstype)',__FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pbs_lines        (id serial NOT NULL, ## Ver 3.x: pbs_linjer ##
+  #    sql_creat('CREATE INDEX ix_pos_betalinger_ordre_id      ON tblA_pos_payments   (ordre_id)'     ,__FILE__, __LINE__);
+  #    sql_creat('CREATE INDEX ix_pos_betalinger_betalingstype ON tblA_pos_payments   (betalingstype)',__FILE__, __LINE__);
+  sql_creat('CREATE TABLE'.$if.' tblA_pbs_lines      '.
+				'  (id serial NOT NULL, ## Ver 3.x: pbs_linjer ##
             liste_id integer,
             linje text,                          
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_budget           (id serial NOT NULL, ## Ver 3.x: budget ##
+  sql_creat('CREATE TABLE'.$if.' tblA_budget         '.
+				'  (id serial NOT NULL, ## Ver 3.x: budget ##
             regnaar integer,
             md integer, 
             kontonr numeric(15,0),
             amount numeric(15,0),           
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_discount         (id serial NOT NULL, ## Ver 3.x: rabat ##
+  sql_creat('CREATE TABLE'.$if.' tblA_discount       '.
+				'  (id serial NOT NULL, ## Ver 3.x: rabat ##
             rabat numeric(6,2),
             debitorart varchar(2),
             debitor int,
@@ -849,7 +896,8 @@ function make_Tables () {
             vare int,
             rabatart varchar(6),      
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_pos_buttons      (id serial NOT NULL, ## Ver 3.x: pos_buttons ##
+  sql_creat('CREATE TABLE'.$if.' tblA_pos_buttons    '.
+				'  (id serial NOT NULL, ## Ver 3.x: pos_buttons ##
             menu_id integer,
             col numeric(2,0),
             row numeric(2,0),
@@ -860,7 +908,8 @@ function make_Tables () {
             funktion numeric(1,0),
             color varchar(6),                                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_regulation       (id serial NOT NULL, ## Ver 3.x: regulering ##
+  sql_creat('CREATE TABLE'.$if.' tblA_regulation     '.
+				'  (id serial NOT NULL, ## Ver 3.x: regulering ##
             vare_id integer, 
             variant_id integer,
             lager integer,
@@ -876,12 +925,14 @@ function make_Tables () {
             konto_id integer,
             ordre_id integer,
             vare_id integer)', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_cost_prices      (id serial NOT NULL, ## Ver 3.x: kostpriser ##
+  sql_creat('CREATE TABLE'.$if.' tblA_cost_prices    '.
+				'  (id serial NOT NULL, ## Ver 3.x: kostpriser ##
             vare_id integer,
             transdate date,
             kostpris numeric(15,3),                               
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_cases            (id serial NOT NULL, ## Ver 3.x: sager ##
+  sql_creat('CREATE TABLE'.$if.' tblA_cases          '.
+				'  (id serial NOT NULL, ## Ver 3.x: sager ##
             konto_id integer,
             firmanavn text,
             addr1 text,
@@ -914,7 +965,8 @@ function make_Tables () {
             beregner text,
             beregn_beskrivelse text,                              
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_appendix         (id serial NOT NULL, ## Ver 3.x: bilag ##
+  sql_creat('CREATE TABLE'.$if.' tblA_appendix       '.
+				'  (id serial NOT NULL, ## Ver 3.x: bilag ##
             navn text,
             beskrivelse text,
             datotid text,
@@ -926,7 +978,8 @@ function make_Tables () {
             filtype text,
             bilag_fase text,                                      
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_notes            (id serial NOT NULL, ## Ver 3.x: noter ##
+  sql_creat('CREATE TABLE'.$if.' tblA_notes          '.
+				'  (id serial NOT NULL, ## Ver 3.x: noter ##
             notat text,
             beskrivelse text,
             datotid text,
@@ -940,26 +993,30 @@ function make_Tables () {
             kategori text,
             nr numeric(15,0),                       
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_check_list       (id serial NOT NULL, ## Ver 3.x: tjekliste ##
+  sql_creat('CREATE TABLE'.$if.' tblA_check_list     '.
+				'  (id serial NOT NULL, ## Ver 3.x: tjekliste ##
             tjekpunkt text,
             fase numeric(15,3),
             assign_to text,
             assign_id integer,
             sagsnr text,                        
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_check_lists      (id serial NOT NULL, ## Ver 3.x: tjekpunkter ##
+  sql_creat('CREATE TABLE'.$if.' tblA_check_lists    '.
+				'  (id serial NOT NULL, ## Ver 3.x: tjekpunkter ##
             tjekliste_id integer,
             assign_id integer,
             status integer,
             status_tekst text,
             tjekskema_id integer,               
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_case_texts       (id serial NOT NULL, ## Ver 3.x: sagstekster ##
+  sql_creat('CREATE TABLE'.$if.' tblA_case_texts     '.
+				'  (id serial NOT NULL, ## Ver 3.x: sagstekster ##
             tekstnr numeric(15,0),
             beskrivelse text, 
             tekst text,   
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_salary           (id serial NOT NULL, ## Ver 3.x: loen ##
+  sql_creat('CREATE TABLE'.$if.' tblA_salary         '.
+				'  (id serial NOT NULL, ## Ver 3.x: loen ##
             nummer numeric(15,0),
             kategori integer,
             loendate date,
@@ -997,7 +1054,8 @@ function make_Tables () {
             feriefra text,
             ferietil text,             
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_salary_units     (id serial NOT NULL, ## Ver 3.x: loen_enheder ##
+  sql_creat('CREATE TABLE'.$if.' tblA_salary_units   '.
+				'  (id serial NOT NULL, ## Ver 3.x: loen_enheder ##
             loen_id integer,
             vare_id integer,
             op numeric(15,3),
@@ -1017,7 +1075,8 @@ function make_Tables () {
             ned_tag numeric(15,3),
             varenr text,                    
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_tasks            (id serial NOT NULL, ## Ver 3.x: opgaver ##
+  sql_creat('CREATE TABLE'.$if.' tblA_tasks          '.
+				'  (id serial NOT NULL, ## Ver 3.x: opgaver ##
             assign_id integer,
             assign_to text, 
             nr numeric(15,0),
@@ -1033,7 +1092,8 @@ function make_Tables () {
             opg_plantil text,
             opg_tilknyttil text,                 
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_check_scheme     (id serial NOT NULL, ## Ver 3.x: tjekskema ##
+  sql_creat('CREATE TABLE'.$if.' tblA_check_scheme   '.
+				'  (id serial NOT NULL, ## Ver 3.x: tjekskema ##
             tjekliste_id integer,
             datotid text,
             opg_art text,
@@ -1046,11 +1106,13 @@ function make_Tables () {
             opg_beskrivelse text,
             sjakid text,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_folder           (id serial NOT NULL, ## Ver 3.x: mappe ##
+  sql_creat('CREATE TABLE'.$if.' tblA_folder         '.
+				'  (id serial NOT NULL, ## Ver 3.x: mappe ##
             beskrivelse text,
             sort numeric(15,0),                  
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_folder_annex     (id serial NOT NULL, ## Ver 3.x: mappebilag ##
+  sql_creat('CREATE TABLE'.$if.' tblA_folder_annex   '.
+				'  (id serial NOT NULL, ## Ver 3.x: mappebilag ##
             navn text,
             beskrivelse text,
             datotid text,
@@ -1060,12 +1122,14 @@ function make_Tables () {
             filtype text,
             sort numeric(15,0),                      
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_employ_folder    (id serial NOT NULL, ## Ver 3.x: ansatmappe ##
+  sql_creat('CREATE TABLE'.$if.' tblA_employ_folder  '.
+				'  (id serial NOT NULL, ## Ver 3.x: ansatmappe ##
             beskrivelse text,
             ans_id int,
             sort numeric(15,0),       
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_employ_appendix  (id serial NOT NULL, ## Ver 3.x: ansatmappebilag ##
+  sql_creat('CREATE TABLE'.$if.' tblA_employ_appendix'.
+				'  (id serial NOT NULL, ## Ver 3.x: ansatmappebilag ##
             navn text,
             beskrivelse text,
             datotid text,
@@ -1075,23 +1139,28 @@ function make_Tables () {
             filtype text,
             sort numeric(15,0),                      
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_shop_adresses    (id serial NOT NULL, ## Ver 3.x: shop_adresser ##
+  sql_creat('CREATE TABLE'.$if.' tblA_shop_adresses  '.
+				'  (id serial NOT NULL, ## Ver 3.x: shop_adresser ##
             saldi_id integer,
             shop_id integer,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_shop_product     (id serial NOT NULL, ## Ver 3.x: shop_varer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_shop_product   '.
+				'  (id serial NOT NULL, ## Ver 3.x: shop_varer ##
             saldi_id integer,
             shop_id integer,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_shop_orders      (id serial NOT NULL, ## Ver 3.x: shop_ordrer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_shop_orders    '.
+				'  (id serial NOT NULL, ## Ver 3.x: shop_ordrer ##
             saldi_id integer,
             shop_id integer,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_variants         (id serial NOT NULL, ## Ver 3.x: varianter ##
+  sql_creat('CREATE TABLE'.$if.' tblA_variants       '.
+				'  (id serial NOT NULL, ## Ver 3.x: varianter ##
             beskrivelse text,
             shop_id integer,                     
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_variant_typer    (id serial NOT NULL, ## Ver 3.x: variant_typer ##
+  sql_creat('CREATE TABLE'.$if.' tblA_variant_typer  '.
+				'  (id serial NOT NULL, ## Ver 3.x: variant_typer ##
             variant_id integer,
             shop_id integer,
             beskrivelse text,  
@@ -1103,7 +1172,8 @@ function make_Tables () {
             variant_stregkode text,
             lager integer,                 
             PRIMARY KEY (id))', __FILE__, __LINE__);
-  sql_creat('CREATE TABLE'.$if.' tblA_product_offer    (id serial NOT NULL, ## Ver 3.x: varetilbud ##
+  sql_creat('CREATE TABLE'.$if.' tblA_product_offer  '.
+				'  (id serial NOT NULL, ## Ver 3.x: varetilbud ##
             vare_id integer,
             startdag numeric(15,0),
             slutdag numeric(15,0),
@@ -1204,7 +1274,7 @@ $adm_passhash= password_hash($adm_password,PASSWORD_BCRYPT );
       }
       sql_creat('INSERT INTO tblA_groups (beskrivelse,kode,kodenr,grp_art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) '.
                 'VALUES ("'.$ra_besk.'","'.'","1","RA","'.$startmd.'","'.$startaar.'","'.$slutmd.'","'.$slutaar.'","on","0","","","","","","","","")', __FILE__, __LINE__);
-      //  db_modify("insert into grupper (beskrivelse,kode,kodenr,art,box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) values ('$ra_besk','','1','RA','$startmd','$startaar','$slutmd','$slutaar','on','0','','','','','','','','')",__FILE__ . " linje " . __LINE__);
+      //  db_modify("insert into grupper (beskrivelse,kode,kodenr,art,    box1,box2,box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14) values ('$ra_besk','','1','RA','$startmd','$startaar','$slutmd','$slutaar','on','0','','','','','','','','')",__FILE__ . " linje " . __LINE__);
     } else echo ' Mislykket import af Grupper! ';
 
 ### Indlæs/Opret VARER:

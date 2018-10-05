@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/page_Layoutdemo.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/page_Layoutdemo.php';    $DocVer='5.0.0';    $DocRev='2018-05-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'DEMO af ny version af SALDI  ';                                      
  * Denne fil er oprettet af EV-soft  i 2016.
  *             ___   _   _    ___  _         
@@ -27,6 +27,7 @@
   $laast=NULL;
   $Ødebug= true;
   $pageTitl='DEMO af SALDI-€';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode, samt almen initiering
     include("../_base/out_vinduer.php");  # Sidens indholdserklæringer
     if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,$ModulNr,'Dette er DEMO-vinduet.');

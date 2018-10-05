@@ -1,5 +1,5 @@
-<?php   $DocFil= '../_base/page_Blindgyden.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $ModulNr=2;
-/* ## Formål: SALDI's Blindgyde                                        
+<?php   $DocFil= '../_base/page_Blindgyden.php';    $DocVer='5.0.0';    $DocRev='2018-09-23';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'SALDI's Blindgyde';
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -9,10 +9,11 @@
  *
  */
   $pageTitl='Blindgyde';
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); ## Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
     
-    Rude_Blindgyde();
+    Panl_Blindgyde();
     
 //  Til sidst indlæses java-scripter:   
   include("../_base/htm_pageFinalize.php"); ## Sidens afsluttende html-kode

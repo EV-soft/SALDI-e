@@ -109,14 +109,14 @@ Hav tålmodighed... <br>
 
 
 function phpscann($searchWord) {
-  echo '<br><b>'.$searchWord.'</b> <small>findes i filerne:</small> ';
+  echo '<br><b>'.$searchWord.'</b> <small>findes i htm,php-filerne:</small> ';
   $searchWord= strtolower($searchWord);
   $paths = glob('../../*/*.{htm,php}',GLOB_BRACE);
   foreach ($paths as $file) {
     if (strpos(' '.$file,'page_')) {
       $fileLines = file($file);
       foreach ($fileLines as $line_num => $line) {
-        if (strpos(' '.strtolower($line),$searchWord)) { echo ' ['.substr($file,6).'] '; break; } 
+        if (strpos(' '.strtolower($line),$searchWord)) { echo '<br> &nbsp; ['.substr($file,6).'] '; break; } 
     } } } //} } }
 }
   sort($Fnavne);

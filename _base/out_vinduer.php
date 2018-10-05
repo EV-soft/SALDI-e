@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/out_vinduer.php';    $DocVer='5.0.0';    $DocRev='2018-02-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/out_vinduer.php';    $DocVer='5.0.0';    $DocRev='2018-06-00';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Demonstrerer benyttelsen af out_-systemet, hvorledes vinduer opbygges af ruder.';
  * Denne fil er oprettet af EV-soft i 2016.
  *             ___   _   _    ___  _         
@@ -92,6 +92,31 @@ function vindue_setup () {
   NextSpalte();   Rude_DiverseMenu();
 }
 
+
+function Head_Navigation ($sideObjekt, $status, $goPrev, $goHome=true, $goUp, $goFind, $goNew, $goNext) { # Genvejsknapper på siders top.
+  global $ØProgRoot;
+  $sideObjekt= tolk($sideObjekt).'. ';
+  echo '<data-data-PanlHead>';
+  htm_Rude_Top($name='naviform',$capt='',$parms='',$icon='','panelWmax',__FUNCTION__);
+  echo '<div style="text-align: center" ><img src= '.$ØProgRoot.'_assets/images/saldi-e50x170.png " alt="Saldi Logo" style="width:170px;height:50px;"></div>';
+//  echo '<p align="center"><b>'.tolk('@Navigation:').'<b></p>';
+  echo '<p align="center">';  #<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
+  if ($goPrev)  iconKnap($faicon='fas fa-caret-square-left',    $title= tolk('@Vis forrige')  .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='f');
+  if ($goHome)  iconKnap($faicon='fas fa-home',                 $title= tolk('@Luk vinduet og gå til hoved-menu.'),$link='../_base/page_Hovedmenu.php'.$goBack,$akey='h');
+  if ($goUp  )  iconKnap($faicon='fas fa-caret-square-up',      $title= tolk('@Luk vinduet og gå et niveau op.')  ,$link= $goBack,                      $akey='l');
+  if ($goFind)  iconKnap($faicon='fas fa-search',               $title= tolk('@Søg en anden') .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='s');
+  if ($goNew )  iconKnap($faicon='fas fa-plus-square',          $title= tolk('@Opret ny')     .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='o');
+  if ($goNext)  iconKnap($faicon='fas fa-caret-square-right',   $title= tolk('@Vis næste')    .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='v');
+  if ($doUndo)  iconKnap($faicon='fas fa-undo',                 $title= tolk('@Fortryd')      .' '.$sideObjekt    ,$link='../_base/page_Blindgyden.php',$akey='u');
+  echo '</p>';
+//  if ($status) {
+//    $status= '<x1 style="font-weight:300; font-size:smaller"> - Status:<data-colrlabl> '.$status.'</data-colrlabl></x1>';
+//    echo '<p align="center">'.ucfirst($sideObjekt).$status.'</p> ';
+//  }
+  htm_RudeBund($pmpt='@Gem',$subm=false,$title='@Gem',$akey='');
+  echo '</data-data-PanlHead>';
+}
+
 function vindue_Ordreblanket($wide=false) {
   Head_Navigation(tolk('@Kunde ordre'), $status=tolk('@Ikke afsluttet. Kan stadig rettes.'), $goPrev=true, $goHome=true, $goUp=true, $goFind=true, $goNew=true, $goNext=true);  
   if ($wide==true) Rude_YdelserWide($Ordnr='1025',$fakt=false);
@@ -114,6 +139,17 @@ function vindue_Ordreblanket($wide=false) {
       Rude_Ydelser($fakt=false);
     }
   SpalteBund();
+}
+
+# PROGRAM-MODUL; "Navigation"
+// 2017-03-09 - Er kopieret til page_GitterMenu:
+# Kaldes fra:  [_base/page_Gittermenu.php] [_debitor/page_DebitorOrdre.php] [_debitor/page_Opretordre.php] [_debitor/page_Ordreliste.php] [_finans/page_Budget.php] [_finans/page_Kontrol.php] [_finans/page_Provisionsrapport.php] [_finans/page_Rapport-fin.php] [_finans/page_Regnskab.php] [_kreditor/page_Kreditor.php] [_kreditor/page_Ordreliste.php] [_lager/page_Varemodtagelse.php] [_lager/page_Varer.php] 
+function Rude_FootMenu($doPrint=true, $doErase=true, $doLookUp=true, $doAccept=true, $doExport=true, $doImport=true, $OpslLabl='') { ## out_ruderSekd.php
+  echo '<div class="clearWrap"/>';  echo '<PanlFoot>';
+    Foot_Links($maxi=true, '<a style="color:#900000" href="'.$link='http://www.ev-soft.dk/saldi-wiki/doku.php?id=saldi:manualen '.'" target="_blank">'.
+    '<u title="'.tolk('@Manual, tips og anden hjælp finder du på').$ØProgTitl.'-DokuWiki">SALDI-DokuWiki</u></a>',
+    $doPrint, $doErase, $doLookUp, $doAccept, $doExport, $doImport, $OpslLabl);
+  echo '</PanlFoot>';
 }
 
 function vindue_DivDemo() {

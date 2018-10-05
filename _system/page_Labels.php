@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Labels.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Labels.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Opsaetning af Labels';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -14,6 +14,7 @@
  */
 
 $pageTitl='Indstil: Labels';
+$GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
 include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
 if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
@@ -29,8 +30,8 @@ $demo= '<center>
 $lbltype= 'vare';
 
 ### VIS DATA:
-    SpalteTop(240); Rude_TilvalgsMenu();
-    NextSpalte();   Rude_Labels($lbltype,$demo);
+    SpalteTop(240);   Panl_TilvalgsMenu();
+    NextSpalte(640);  Panl_Labels($lbltype,$demo);
     SpalteBund();
 ### GEM DATA:
  

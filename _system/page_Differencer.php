@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Differencer.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Differencer.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Haandtering af ore differencer';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -14,13 +14,14 @@
  */
 
   $pageTitl='Øredifferencer';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240);   Rude_DiverseMenu();
-    NextSpalte();     Rude_Differencer();
+    SpalteTop(240);   Panl_DiverseMenu();
+    NextSpalte();     Panl_Differencer();
     SpalteBund();
 ### GEM DATA:
   

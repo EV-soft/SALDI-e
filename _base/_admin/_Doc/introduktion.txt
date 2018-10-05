@@ -1,0 +1,27 @@
+Introduktion til SALDI-€'s filsystem:
+Output til brugerens skærm, sker med out_-modulerne:
+  out_style.css.php     - Design af out_* elementers udseende.'
+  out_init.php          - Initiering af globalt benyttede konstanter og variabler
+  out_base.php          - Grundbibliotek for kontruktion af moduler, angaaende udskrivning til skaerm.
+  out_ruder.php         - Design af panelers layout. Ruder kaldes fra page_xxxx.php filer.
+ (out_vinduer.php       - demonstrerer kombinationer af out_ruder)
+  
+Dannelse af HTML-sider, sker med filerne:
+  htm_pageHead.php      - Indledende html for visning af et vindue, med bl.a. diverse includes.
+  page_xxxxxx.php       - Vis et adaptivt vindue, opbygget i spalter med paneler (ruder). (includerer htm_pageHead.php og htm_pageFoot.php)
+  htm_pageFoot.php      - Afsluttende html for visning af et vindue
+
+Forskellige biblioteker:
+  std_func.php          - Standard funktioner (som ikke er i efterfølgende filer)
+  str_func.php          - String funktioner
+  msg_lib.php           - Modal popup besked system (Fejl, Info, m.v.)
+  fil_func.php          - Læsning og skrivning til fil
+  dbi_func.php          - Læsning og skrivning til DataBase
+  
+Program specifikke rutiner:
+  connect.php           - Tilslutter en bruger til DataBasen efter login
+  
+  
+Special funktioner:  
+  modulscann.php        - Skanner hele projektet, og viser status for systemets kildefiler
+  frasescann.php        - Skanner hele projektet for fraser som skal oversættes til fremmedsprog

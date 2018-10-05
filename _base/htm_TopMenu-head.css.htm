@@ -1,4 +1,4 @@
-<?php $DocFil='../_base/htm_TopMenu-head.css.htm';    $DocVer='5.0.0';     $DocRev='2018-02-00';   $DocIni='evs';  $ModulNr=0;
+<?php $DocFil='../_base/htm_TopMenu-head.css.htm';    $DocVer='5.0.0';     $DocRev='2018-07-28';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: ' CSS Style-settings for TopMenu (i toppen af alle sider)';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -21,8 +21,9 @@
 --width128: 128px; /* var(--width128); */
 }
     
-div#container
+section#container
 {   width: 1200px;   position: relative;   margin: 0 auto 0 auto;   text-align: left;}
+
 #wb_TopMenu
 {   border: 0px #C0C0C0 solid;   background-color: transparent; }
 #wb_TopMenu ul
@@ -38,7 +39,7 @@ div#container
    background: -ms-linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
    background: linear-gradient(bottom,#3A3A3A 0%,#999999 100%);
    font-family: Arial;   font-weight: normal;   font-size: 11px;   font-style: normal;   text-decoration: none;
-   width: var(--width128);   height: 18px;   padding: 0px 5px 0px 5px;   vertical-align: middle;
+   width: var(--width128);   padding: 0px 5px 0px 5px;   vertical-align: middle;
    line-height: 18px;   text-align: center;
 }
 #wb_TopMenu aaa, #wb_TopMenu a:hover
@@ -54,7 +55,7 @@ div#container
    border: 2px #C0C0C0 solid;
 }
 #wb_TopMenu li.firstmain
-{   padding-left: 0px;  width: 50px;}
+{   padding-left: 0px;  width: 40px;}
 #wb_TopMenu li.lastmain
 {   padding-right: 0px;}
 #wb_TopMenu li:hover, #wb_TopMenu li a:hover
@@ -69,6 +70,11 @@ div#container
    background: -ms-linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
    background: linear-gradient(bottom,#C0C0C0 0%,#EEEEEE 100%);
 }
+#wb_TopMenu li.exit, li:hover
+{   padding-left: 8px;  width: 80px;
+    color: yellow;   background-color: white;
+}
+
 #wb_TopMenu ul ul
 {   position: absolute;   left: 0px;   top: 0px;   visibility: hidden;   width: var(--width120);   height: auto;
     border: none;   background-color: transparent;
@@ -121,13 +127,19 @@ div#container
 #wb_TopMenu ul :hover ul ul, #wb_TopMenu ul :hover ul :hover ul ul
 {   position: absolute;   left: 0px;   top: 0px;   visibility: hidden;}
 #wb_TopMenu ul :hover ul :hover ul, #wb_TopMenu ul :hover ul :hover ul :hover ul
-{   left: 140px;   top: 0px;   visibility: visible;}
+{   left: var(--width128);   top: 0px;   visibility: visible;}
 #wb_TopMenu ul :hover ul .firstitem:hover ul, #wb_TopMenu ul :hover ul :hover ul .firstitem:hover ul
 {   top: 0px;}
 #wb_TopMenu br
 {   clear: both;   font-size: 1px;   height: 0;   line-height: 0;}
 #wb_TopMenu
-{   position: absolute;   left: 0px;   top: 0px;   width: 994px;   height: 20px;   z-index: 0;}
+{   position: absolute;   left: 0px;   top: 0px;   width: 1000px;   height: 20px;   z-index: 0;}
+
+@media screen and (max-width: 640px) { 
+  #wb_TopMenu { width: 140px; } 
+  #container { height: 140px; } 
+}
+
 /* 
 #all ul:hover a, #.parent.siblings:hover {
 opacity: 0.5; visibility: visible;

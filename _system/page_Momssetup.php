@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Momssetup.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Momssetup.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Indstilling af MOMS ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -11,13 +11,14 @@
   global $debug;
   $debug= true;
   $pageTitl='Indstil: Moms';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(240); Rude_AdminMenu();
-    NextSpalte();   Rude_MomsSetup();
+    SpalteTop(240); Panl_AdminMenu();
+    NextSpalte(720);   Panl_MomsSetup();
     SpalteBund();
 ### GEM DATA:
  

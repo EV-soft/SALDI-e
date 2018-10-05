@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2018-02-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/str_func.php';   $DocVer='5.0.0';    $DocRev='2018-08-16';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Specielle string-funktioner';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -15,7 +15,7 @@
  */
 
 if (!function_exists('periodeoverskrifter')) {
-  function periodeoverskrifter ($periodeantal, $periode_aar, $periode_md, $periode_dag=1, $periode_laengde="regnskabsmaaned", $regnskabsaar="") {
+  function periodeoverskrifter ($periodeantal, $periode_aar, $periode_md, $periode_dag=1, $periode_laengde="regnskabsmaaned", $regnskabsaar="",$outFormat='2d',$colw='4%') {
 ## Periodelængder kan være dag, uge, maaned, regnskabsmaaned eller kvartal (eller blot det foerste bogstav)
     setlocale(LC_TIME, "da_DK","da","da_DK.utf8");
     $retur=array();
@@ -70,7 +70,7 @@ if (!function_exists('periodeoverskrifter')) {
           $periode_lang = ($z+1).". periode";
         }
       }
-      array_push($retur, ['@'.$periode_kort, '5%','','tal2d', 'right', '@'.$periode_lang,'']);
+      array_push($retur, ['@'.$periode_kort, $colw,'text',$outFormat, ['right','','font-style:italic; '], '@'.$periode_lang,'']);
     }
     return $retur; # array
   }

@@ -1,0 +1,15 @@
+Opstart af Saldi 3.x - Overblik:
+/index.php          - Starter install.php hvis ../includes/connect.php ikke findes.
+                      ellers - fortsættes med login: regnskab, brugernavn, password (lokale rutiner!)
+
+/index.html         - Starter index/index.php
+
+/index/install.php  - Forbinder til database, og opretter 6 overordnede "bruger-tabeller" og opretter ../includes/connect.php
+
+/index/index.php    - Login til et regnskab: Regnskab, brugernavn, password (lokale rutiner!)
+
+/index/login.php    - 
+
+/includes/login.php - Udgået?
+
+/login.php          - 

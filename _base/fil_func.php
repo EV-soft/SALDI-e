@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/fil_func.php';   $DocVer='5.0.0';    $DocRev='2018-07-00';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Grundbibliotek for fil-operationer ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -108,16 +108,17 @@ function ImportTabFile ($fn,$startLin=0,$charset='UTF-8') {
   $fp= fopen($fn,"r");
   if ($fp) {  $felter=array();  $skiller= chr(9);  $Lin=0;
     while (!feof($fp)) {
-      if ($linje= fgets($fp)) { $Lin++;
-        #+  Skal testes: if ($linje[0]==':') $startLin=$Lin+0; //  Kommentar-linie overspringes
-        if (strpos($linje,chr(9))==0) $skiller= '","';  //  csv
-        if (strpos($linje,'"'.chr(9).'"')!=0) $textsep='"'; else $textsep=' ';
-        if ($charset=='UTF-8') $linje= addslashes(utf8_encode($linje)); 
-        if (($Lin==1) and (substr($linje,0,1)=='#')) {} //  Feltnavne i 1. linie springes over
-        else { $LinFeltr= explode($skiller, $linje);   $rawFelt= array();
+      if ($txtline= fgets($fp)) { $Lin++;
+        if (strpos($txtline,chr(9))==0) $skiller= '","';  //  csv
+        if (strpos($txtline,'"'.chr(9).'"')!=0) $textsep='"'; else $textsep=' ';
+        if ($charset=='UTF-8') $txtline= addslashes(utf8_encode($txtline)); 
+        //  Kommentar-linie overspringes (:-tegnet angiver at efterfølgende er kommentarer, f.eks. felt-navne)
+        if ($txtline[0]==':') $startLin= $Lin+0; 
+        else 
+        { $LinFeltr= explode($skiller, $txtline);   $rawFelt= array();
             //  foreach ($LinFeltr as $felt)  array_push($rawFelt, trim(trim($felt,'"'),"'"));
             foreach ($LinFeltr as $felt)  array_push($rawFelt, trim($felt,$textsep));
-            if ($Lin>$startLin) array_push($felter, $rawFelt);
+            if ($Lin>=$startLin) array_push($felter, $rawFelt);
         }
       }
     } fclose($fp);
@@ -149,4 +150,32 @@ if (!function_exists('transaktion')) {
         mysql_query($qtext);
       else pg_query($qtext);
 	}
+}
+
+
+//  Dan filliste recursivt, og gem oplysninger i array
+function getFileList($dir, $recurse=false, $depth=false)
+{ $return = array();
+  if(substr($dir, -1) != "/") $dir .= "/";    // tilføj slash, hvis den mangler
+  $dirPtr = @dir($dir) or die('getFileList: Åbning af mappe '.$dir.' for læsning... ');    // opret pointer til mappen og læs fil-listen
+  while (false !== ($entry = $dirPtr->read())) {
+    if (($entry == ".") or ($entry == "..")) continue;  // overspring system dir
+    $de= $dir.$entry;
+    //  if ($entry[0] == ".") continue;                 // overspring hidden filer
+    //  if ($entry[0] == ".") echo '<br>Hidden: '.$de;
+    if (is_dir($de)) {
+      $return[] = array( "path" => $dir, "name" => $entry.'/',   "type" => filetype($de),   "size" => 0,    "lastmod" => filemtime($de) );
+      $mappe= $de.'/';
+      if ($recurse && is_readable($mappe))  {
+        if($depth === false) {
+          $return = array_merge($return, getFileList($mappe, true));
+        } elseif($depth > 0) {
+          $return = array_merge($return, getFileList($mappe, true, $depth-1));
+        }
+      }
+    } elseif (is_readable($de)) {
+      $return[] = array( "path" => $dir, "name" => $entry, "type" => mime_content_type($de), "size" => filesize($de), "lastmod" => filemtime($de) );
+    } else echo '<br>Overspring: '.$de;
+  } $dirPtr->close();
+  return $return;
 }

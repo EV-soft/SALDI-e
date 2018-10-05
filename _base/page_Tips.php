@@ -1,5 +1,5 @@
-<?php      $DocFil= '../_base/page_tips.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';
-/* FORMÅL:  Omtale af program nyheder
+<?php      $DocFil= '../_base/page_tips.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Omtale af program nyheder';
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -9,13 +9,14 @@
  */
 
   $pageTitl='Bruger tips';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(480);   Rude_TipsBrug();   
-    NextSpalte();     Rude_TipsBogh();
+    SpalteTop(480);   Panl_TipsBrug();   
+    NextSpalte();     Panl_TipsBogh();
     SpalteBund();
     
 ### GEM DATA:

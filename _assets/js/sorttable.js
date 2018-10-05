@@ -17,6 +17,9 @@
 
 
 var stIsIE = /*@cc_on!@*/false;
+var CharUp = '<font style="color:red; font-size:200%;">&nbsp;&#x21E7;</font>'; //  OP  EV-soft
+var CharDn = '<font style="color:red; font-size:200%;">&nbsp;&#x21E9;</font>'; //  NED  EV-soft
+var Dnxsign= '<font style="color:red; font-size:200%;">&nbsp;&#x21E9;</font>'; //  NED  EV-soft
 
 sorttable = {
   init: function() {
@@ -101,7 +104,7 @@ sorttable = {
             sortrevind = document.createElement('span');
             sortrevind.id = "sorttable_sortrevind";
          // sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;'; 
-            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '<font style="color:red; font-size:120%;">&#x21E7;</font>'; //  OP  EV-soft
+            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : CharUp; //  OP  EV-soft
             this.appendChild(sortrevind);
             return;
           }
@@ -115,7 +118,7 @@ sorttable = {
             sortfwdind = document.createElement('span');
             sortfwdind.id = "sorttable_sortfwdind";
         //  sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;'; 
-            sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '<font style="color:red; font-size:120%;">&#x21E9;</font>'; //  NED  EV-soft
+            sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : CharDn; //  NED  EV-soft
             this.appendChild(sortfwdind);
             return;
           }
@@ -137,7 +140,7 @@ sorttable = {
           sortfwdind = document.createElement('span');
           sortfwdind.id = "sorttable_sortfwdind";
       //  sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;'; 
-          sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '<font style="color:red; font-size:130%;">&nbsp;&#x21E9;</font>'; //  NED  EV-soft
+          sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : Dnxsign; //  NED  EV-soft
           this.appendChild(sortfwdind);
 
 	        // build an array to sort. This is a Schwartzian transform thing,
@@ -211,7 +214,8 @@ sorttable = {
     hasInputs = (typeof node.getElementsByTagName == 'function') &&
                  node.getElementsByTagName('input').length;
 
-    if (node.getAttribute("sorttable_customkey") != null) {
+    // if (node.getAttribute("sorttable_customkey") != null) {  EV-soft
+    if (node.nodeType == 1 && node.getAttribute("sorttable_customkey") != null) {
       return node.getAttribute("sorttable_customkey");
     }
     else if (typeof node.textContent != 'undefined' && !hasInputs) {

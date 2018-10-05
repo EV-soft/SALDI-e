@@ -1,5 +1,5 @@
-<?php      $DocFil= '../_base/page_News.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';
-/* FORMÅL:  Omtale af program nyheder
+<?php      $DocFil= '../_base/page_News.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';     $DocIni='evs';  $ModulNr=0;
+/* ## Purpose: 'Omtale af program nyheder';
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -9,12 +9,13 @@
  */
 
   $pageTitl='Nyheder';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
 
 ### VIS DATA:
-    SpalteTop(640);   Rude_News();
+    SpalteTop(640);   Panl_News();
     SpalteBund();
     
 ### GEM DATA:

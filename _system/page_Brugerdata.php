@@ -1,4 +1,4 @@
-<?php      $DocFil= '../_system/page_Brugerdata.php';    $DocVer='5.0.0';     $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php      $DocFil= '../_system/page_Brugerdata.php';    $DocVer='5.0.0';     $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Redigering af Brugerdata';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -16,9 +16,10 @@
   $pageTitl='Brugerdata';
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
     
-    Rude_Blindgyde(); 
+    Panl_Blindgyde(); 
 
   include("../_base/htm_pageFinalize.php"); # Sidens afsluttende html-kode
 ?>  

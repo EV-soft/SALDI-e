@@ -1,5 +1,5 @@
-<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=2;
-/* ## Purpose:'SALDI's (gamle) hovedmenu';
+<?php   $DocFil= '../_base/page_GitterMenu.php';    $DocVer='5.0.0';    $DocRev='2018-08-10';   $DocIni='evs';  $ModulNr=2;
+/* ## Purpose:'SALDI's (gamle) hovedmenu. Den vil udgaa og erstattes af Menu_Topdropdown i out_base.php';
  * Denne fil er oprettet af EV-soft i 2017.
  *
  *             ___   _   _    ___  _         
@@ -11,6 +11,7 @@
  *
  */
   $pageTitl='Hovedmenu';
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); ## Sidens indledende html-kode
   if ($GLOBALS['$Ødebug']) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
   include('../_system/page_Licens.php'); exit;
@@ -25,7 +26,7 @@ function Rude_HovedMenu (&$regnskab, &$vis_finans, &$vis_debitor, &$vis_kreditor
 global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogSprog, $Ødesigner;
 //  $ØprogSprog= $_SESSION['ØprogSprog'];
   $goBack= '';  # '?returside=../_base/menu.php';
-  echo '<PanlHead>';        
+  echo '<data-PanlHead>';        
   htm_Rude_Top($name='menuform',$capt='',$parms='',$icon='',$klasse='panelWmax',__FUNCTION__,'','');
   echo '<div style="text-align: center"><img src= "../_assets/images/saldi-e50x170.png" alt="Saldi Logo" height="50" width="170" ></div>';
   echo '<div class="panelTitl" max-width:400>'.ucfirst(tolk('@Regnskab:')).' '.Tolk($regnskab).'</div>';
@@ -64,9 +65,9 @@ global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogSprog, $Ødesigner;
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Vare modtagelse',  $link='../_lager/page_Varemodtagelse.php',   $title='@Gå til Vare modtagelse'    );
      /*  Vis altid: */  menuKnap($h='32',$w=$knapW, $label='@Indstillinger',    $link='../_system/page_Syssetup1.php',       $title='@Gå til menuen Indstillinger af: Regnskab og Program');
       htm_nl();   
-      if ($vis_finans)  menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_finans/page_Rapport.php',         $title='@Gå til Finans Rapporter'   );
-      if ($vis_debitor) menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_debitor/page_Rapport.php',        $title='@Gå til Debitor Rapporter'  );
-      if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_kreditor/page_Rapport.php',       $title='@Gå til Kreditor Rapporter' );
+      if ($vis_finans)  menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_finans/page_Rapport-fin.php',     $title='@Gå til Finans Rapporter'   );
+      if ($vis_debitor) menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_debitor/page_Rapport-deb.php',    $title='@Gå til Debitor Rapporter'  );
+      if ($vis_kreditor)menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_kreditor/page_Rapport-kred.php',  $title='@Gå til Kreditor Rapporter' );
       if ($vis_prodkt)  menuKnap($h='32',$w=$knapW, $label='',                  $link='../_base/page_Blindgyden.php',        $title='@Gå til ?'                  );
       if ($vis_lager)   menuKnap($h='32',$w=$knapW, $label='@Rapporter',        $link='../_lager/page_Beholdningsliste.php', $title='@Gå til Vare Rapporter'     );
                         menuKnap($h='32',$w=$knapW, $label='@Sikkerheds kopi',  $link='../_system/page_Backup.php',          $title='@Gem/Hent sikkerhedskopi'   );
@@ -81,7 +82,7 @@ global $Øcopydate, $Øcopyright, $Øprogvers, $ØprogSprog, $Ødesigner;
   echo '</p>';
   htm_RudeBund($pmpt=Tolk('@Gem'),$subm=false);
   Rude_FootMenu($doPrint=false, $doErase=false, $doLookUp=false, $doAccept=false, $doExport=false, $doImport=false, $OpslLabl='');
-  echo '</PanlHead>';
+  echo '</data-PanlHead>';
 }}
 
 if (!function_exists('Rude_FootMenu')){

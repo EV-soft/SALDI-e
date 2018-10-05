@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil0= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2018-09-30';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Initiering af globalt benyttede konstanter og variabler';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -37,7 +37,7 @@
   På grundlag af filens 2 første linier, kan der føres statisik/status på programmet.
 
 ### Om fejlfindings flaget Ødebug=true:
-1.  I rude_header's Titel tilføjes navnet på aktuel function
+1.  I Panl_header's Titel tilføjes navnet på aktuel function
 2.  Der sker logning med debug_log() af oplysning om PHP-filer, der indlæses
 3.  Ekstra logning i functioner, kan tilføjes med: [if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,__FUNCTION__.':3');]
 4.  Der indføjes ekstra <br> [dvl_pretty()] i HTML-kode, så list af siders kildekode, bliver lettere læsbar
@@ -56,7 +56,7 @@ Flaget sættes:
 ## Indlæsnings rækkefølge/afhængighed for includes:
 # ../_base/out_init.php    (1) - Initiering af globale variabler
 # ../_base/out_base.php    (1) - Output til skærm - Grundlæggende rutiner
-# ../_base/out_ruder.php   (1) - Output til skærm - Konstruktion af paneler
+# ../_base/out_panls.php   (1) - Output til skærm - Konstruktion af paneler
 # ../_base/out_vinduer.php (1) - Output til skærm - Eksempler på benyttelsen af flere paneler
 # ../_base/std_func.php    (1) - Diverse standard funktioner
 # ../_base/db_func.php     (1) - Diverse database funktioner (tidl: db_query.php)
@@ -73,12 +73,34 @@ Flaget sættes:
 //  if (session_status() == PHP_SESSION_NONE) { session_start(); }
 //  $_SESSION['sess_id']= session_id();
 
-global $ØTastkeys, $ØPanelIx, $ØPanelBgrd, $Øart, $blanket;
-$ØTastkeys= true;
+global $ØprogSprog, $DocNew, $ØTastkeys, $ØPanelIx, $ØPanelBgrd, $Øart, $blanket, $Øtema, $transArr;
+$ØTastkeys= false;
 $ØPanelIx= 0;
+$DocNew= '2016-00-00';
 
-if  (is_null($_SESSION['ØprogSprog']))  $_SESSION['ØprogSprog']= 'da';
+function DocAlder($DocRev,$DocFil='') { // find nyeste include-fil hvor DocAlder($DocRev) kaldes:  (Tester kun filer der indlæses ved kald til System\Om programmet!)
+  if ((strlen($DocRev)==10) and ($DocRev>$GLOBALS['DocNew'])) $GLOBALS['DocNew']= $DocRev;
+  //echo '<br>Læser fra: '.$DocFil;
+}
+DocAlder($DocRev,$DocFil0);
 
+function Stamp($pageTitl) {
+  $fp= fopen('../_temp/sys_access.log','a'); 
+    fwrite($fp,"\n".date("Y-m-d H:i:s").' --'.$Øbrugernavn.' ['.$_SERVER['REMOTE_ADDR'].'] "'.$pageTitl.'" '.$_SERVER['REQUEST_URI']);    
+  fclose($fp);
+}
+
+function SQLerror($errtxt) {
+  $fp= fopen('../_temp/sys_sqlerr.log','a'); 
+    fwrite($fp,"\n".date("Y-m-d H:i:s").' '.$_SERVER['REQUEST_URI'].' -- '.$errtxt);    
+  fclose($fp);
+}
+
+//if  (is_null($_SESSION['ØprogSprog']))  $_SESSION['ØprogSprog']= 'da';
+//if ($_SESSION['ØprogSprog']) $ØprogSprog= $_SESSION['ØprogSprog']; # Sprog i programfladen
+if (is_null($ØprogSprog))     $ØprogSprog= $_SESSION['ØprogSprog'];
+if (is_null($ØprogSprog))     $ØprogSprog= $GLOBAL['ØprogSprog'];
+  
 ### GLOBALE variabler ang. program-styring:     Bemærk benyttet prefix: $Ø blot for at tilkendegive at variablen benyttes på forskellige HTML-sider.
 if (is_null($Ødebug))         $Ødebug= false;       /* $Ødebug kan også tildeles værdi via URL-parameter: ?debug=true  Se: ../_base/htm_pagePrepare.php */ /* true: Aktivering af fejlfinding: FilLogning [debug_log()], Kilde-HTML med extra linieskift og stikord [dvl_pretty()] */
 if (is_null($ØprogSprog))     $ØprogSprog= 'da';    /* $ØprogSprog kan også tildeles værdi via URL-parameter: ?sprog=xx */      /* Initiering til dansk, hvis udefineret */
@@ -87,7 +109,9 @@ if (is_null($ØFullFilt))      $ØFullFilt= true;     /* Vis/Skjul fuld filter-f
 if (is_null($ØTastkeys))      $ØTastkeys= true;     /* Vis/Skjul tastatur genveje */
 if (is_null($ØRollTabl))      $ØRollTabl= true;     /* Benyt tabeller i mindre vindue med scroll */
 //if (is_null($ØprintLayout))   $ØprintLayout= false; /* Vis tabeller i fuld højde, så CTRL-P kan bruges */ // Skjul også: Hjælp og knapper ?
-if (is_null($ØRudeForm))      $ØRudeForm= true;     /* Opret form & Submit-knap i RudeTop/Bund  */
+if (is_null($ØPanlForm))      $ØPanlForm= true;     /* Opret form & Submit-knap i Panel-Top/Bund  */
+if (!isset($Øexec_path))      $Øexec_path="/usr/bin/";
+
 $_SESSION['ØRollTabl']= true; //  Svarer til $ØprintLayout= false
 
 ### GLOBALE konstanter:
@@ -119,24 +143,56 @@ if ($Øtema=='dark')
   }
 else      
   {$ØTitleColr= '#003366';   /* Mørkblå   */ 
-   $ØPanelBgrd= '#EFEFEF';   /* '#EFEFEF';   # Brækket Hvid Tema-light /* Lys baggrund for paneler (ruder). aktuel farve sættes i ../_base/out_style.css.php */
+   $ØPanelBgrd= '#EFEFEF';   /* '#EFEFEF';   # Brækket Hvid Tema-light /* Lys baggrund for paneler. aktuel farve sættes i ../_base/out_style.css.php */
    $ØTapetBgrd= '#FFE0C0';
    $ØBodyBcgrd= '#1978AB';   /* Panelers klap-sammen baggrund */
    $ØPageBcgrd= '#F4FFF4';   /* Side baggrunds farve (lysblå) F4FFF4  */
    $ØPageImage= '../_assets/images/paper_fibers.png';  /* Side baggrundsbillede  */
    $ØButtnText= '#000000';   /* Sort   */
 }
+$ØTapetBgrd= 'lightgray';
 //  #1978AB - Due-blå
 //  #1E91CF - Himmel-blå
 //  #F5F5F5 - Lys-grå
 
-$ØPanelBgrd= 'cyan';
+//$ØPanelBgrd= 'cyan';
 $temaer= [
   [0,'TitleColr', 'PanelBgrd',' TapetBgrd', 'PageBcgrd',  'ButtnText',  'PageImage'],
   [1,'#6699CC',   '#FFEEDD',    '#EEEEEE',  '#112233',    '#000000',    '../_assets/images/stjerner.jpg'],      //  Dark
   [2,'#003366',   '#EFEFEF',    '#FFE0C0',  '#F4FFF4',    '#000000',    '../_assets/images/paper_fibers.png'],  //  Light
-  [3,'#FFFFFF',   '#1E91CF',    '#1978AB',  '#F5F5F5',    '#000000',    '../_assets/images/stjerner.jpg'],  //  Custom
+  [3,'#FFFFFF',   '#F2F5F7',    '#AED0EA',  '#DEEDF7',    '#222222',    '../_assets/images/paper_fibers.png'],  //  Blue-look
+  [4,'#FFFFFF',   '#1E91CF',    '#1978AB',  '#F5F5F5',    '#000000',    '../_assets/images/stjerner.jpg'],      //  Custom
 ];
+/*
+.ui-widget{font-family:Arial;font-size:13px;}
+.ui-widget{font-family:Arial;font-size:13px;}
+.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget button{font-family:Arial;font-size:13px;}
+.ui-widget-content{border:1px solid #DDDDDD;background-color: #F2F5F7;color:#362B36;}
+.ui-widget-content{border:1px solid #DDDDDD;background-color: #F2F5F7;color:#362B36;}
+.ui-widget-content a{color:#362B36;}
+.ui-widget-header{border:1px solid #AED0EA;background-color: #DEEDF7;color:#222222;font-weight:bold;}
+.ui-widget-header a{color:#222222;}
+
+Visnings-Objekter og deres egenskaber:
+Window: color  background
+Tapet:  color background  
+        Border
+        ICON color background  
+        Headertitle color background  
+Panel:  color background  
+        Border
+        ICON color background  
+        Headertitle color background  
+Knap:   color background  
+        Border
+        ICON color background  
+        Headertitle color background  
+
+
+
+*/
+// changeTema('3');
+
 function changeTema($ix='1') { global $ØTitleColr, $ØPanelBgrd, $ØTapetBgrd, $ØPageBcgrd, $ØButtnText, $ØPageImage;
   $ØTitleColr= $temaer[$ix][1];  $ØPanelBgrd= $temaer[$ix][2];  $ØTapetBgrd= $temaer[$ix][3];  
   $ØPageBcgrd= $temaer[$ix][4];  $ØButtnText= $temaer[$ix][5];  $ØPageImage= $temaer[$ix][6];
@@ -171,9 +227,9 @@ else $charset="ISO-8859-1";
  */
  
 $regnskab= '@CSS-demo';
-global $vis_finans, $vis_debitor, $vis_kreditor, $vis_prodkt, $vis_lager;
+global $Øvis_finans, $Øvis_debitor, $Øvis_kreditor, $Øvis_prodkt, $Øvis_lager;
 
-$vis_finans= true;    $vis_debitor= true;   $vis_kreditor= true;    $vis_prodkt= false;    $vis_lager= true;
+if ($Øvis_finans=== null)  {$Øvis_finans= true;    $Øvis_debitor= true;   $Øvis_kreditor= true;    $Øvis_prodkt= false;    $Øvis_lager= true;}
 
 $regnskab=''; $username=''; $userkode=''; 
 
@@ -196,8 +252,8 @@ function debug_log($arg1='',$arg2='',$arg3='',$arg4='',$arg5='') {  global $db, 
   if (!$db) $logPath= ''; else $logPath= $logPath.'/';
   $fp= fopen('../_temp/'.$logPath.'sys_debug.log','a'); 
   if ($arg4=='../_base/out_init.php')  
-    fwrite($fp,"\n:");  # Start på ny sekvens    Standard : $DocVer,  $DocRev,  $modulnr,  $DocFil, : $pageTitl
-  fwrite($fp,"\n-- ".$Øbrugernavn." ".date("Y-m-d H:i:s").' '.$arg1.' '.$arg2.' '.$arg3.' '.$arg4.' : '.$arg5);    
+    fwrite($fp,"\n:");  # Start på ny sekvens    Standard : $DocVer,  $DocRev,  $modulnr,  $DocFil, $pageTitl
+  fwrite($fp,"\n".date("Y-m-d H:i:s").' '.'--'.$Øbrugernavn." ".$arg1.' '.$arg2.' '.$arg3.' '.$arg4.' : '.$arg5);    
   fclose($fp);
 }}
 
@@ -430,5 +486,135 @@ Skal med i sprog-databasen
 '@PASSIVER I ALT'
 '@Ukendte poster'
 '@Balancekontrol'
+
+
+Tekster angående formularer:
+'@$eget_firmanavn * $egen_addr1 * $eget_postnr $eget_bynavn * Danmark'
+'@$eget_firmanavn'
+'@CVR nr: $eget_cvrnr'
+'@DK-$eget_postnr $eget_bynavn'
+'@if($ordre_kontakt
+'@Tlf:. $egen_tlf'
+'@Fax: $egen_fax'
+'@Tilbud'
+'@$ordre_fakturanr'
+'@$ordre_kundeordnr
+'@$ordre_fakturadate'
+'@$ordre_ordrenr'
+'@$egen_addr2'
+'@$egen_addr1'
+'@LOGO'
+'@Nummer'
+'@Dato'
+'@Ordrenr'
+'@$eget_firmanavn * $egen_addr1 * $eget_postnr $eget_bynavn * Danmark'
+'@$eget_firmanavn'
+'@CVR nr: $eget_cvrnr'
+'@DK-$eget_postnr $eget_bynavn'
+'@if($ordre_kontakt
+'@Tlf:. $egen_tlf'
+'@Fax: $egen_fax'
+'@OrdrebekrÃ¦ftelse'
+'@$ordre_fakturanr'
+'@$ordre_kundeordnr
+'@$ordre_fakturadate'
+'@$ordre_ordrenr'
+'@$egen_addr2'
+'@$egen_addr1'
+'@LOGO'
+'@Nummer'
+'@Dato'
+'@Ordrenr'
+'@$eget_firmanavn * $egen_addr1 * $eget_postnr $eget_bynavn * Danmark'
+'@$eget_firmanavn'
+'@CVR nr: $eget_cvrnr'
+'@DK-$eget_postnr $eget_bynavn'
+'@if($ordre_kontakt
+'@Tlf:. $egen_tlf'
+'@Fax: $egen_fax'
+'@FÃ¸lgesedde'
+'@$ordre_fakturanr'
+'@$ordre_kundeordnr
+'@$ordre_fakturadate'
+'@$ordre_ordrenr'
+'@$egen_addr2'
+'@$egen_addr1'
+'@LOGO'
+'@Nummer'
+'@Dato'
+'@Ordrenr'
+'@$eget_firmanavn * $egen_addr1 * $eget_postnr $eget_bynavn * Danmark'
+'@$eget_firmanavn'
+'@CVR nr: $eget_cvrnr'
+'@DK-$eget_postnr $eget_bynavn'
+'@if($ordre_kontakt
+'@Tlf:. $egen_tlf'
+'@Fax: $egen_fax'
+'@Faktur'
+'@$egen_bank_reg $egen_bank_konto'
+'@$egen_bank_navn'
+'@Betales inden: $formular_forfaldsdato'
+'@$formular_moms'
+'@$formular_ialt'
+'@$ordre_postnr $ordre_bynavn'
+'@$ordre_firmanavn'
+'@$ordre_addr2
+'@$ordre_addr1'
+'@$ordre_fakturanr'
+'@$ordre_kundeordnr
+'@$ordre_fakturadate'
+'@$ordre_ordrenr'
+'@beskrivelse'
+'@$egen_addr2'
+'@$egen_addr1'
+'@varenr'
+'@posnr'
+'@@ant'
+'@LOGO'
+'@linjesum'
+'@pris'
+'@Varenummer'
+'@Pos.'
+'@Ant'
+'@Produkt beskrivelse'
+'@Ã  pris'
+'@BelÃ¸b u. moms'
+'@Side $formular_side'
+'@$formular_sum'
+'@$formular_transportsum'
+'@$ordre_momssats
+'@$ordre_betalingsbet $ordre_betalingsdage dage'
+'@Transport til side $formular_nextside'
+'@if($ordre_lev_addr1)Leveringsadresse'
+'@rabat'
+'@Rabat'
+'@Nummer'
+'@Dato'
+'@$ordre_lev_navn'
+'@$ordre_lev_addr1
+'@$ordre_lev_postnr $ordre_lev_bynavn
+'@Deres Ref.'
+'@Ordrenr'
+'@varemomssats'
+'@Moms%'
+'@$eget_firmanavn * $egen_addr1 * $eget_postnr $eget_bynavn * Danmark'
+'@$eget_firmanavn'
+'@CVR nr: $eget_cvrnr'
+'@DK-$eget_postnr $eget_bynavn'
+'@if($ordre_kontakt
+'@Tlf:. $egen_tlf'
+'@Fax: $egen_fax'
+'@Kreditnot'
+'@$ordre_fakturanr'
+'@$ordre_kundeordnr
+'@$ordre_fakturadate'
+'@$ordre_ordrenr'
+'@$egen_addr2'
+'@$egen_addr1'
+'@LOGO'
+'@Nummer'
+'@Dato'
+'@Ordrenr'
+
  */
 ?>

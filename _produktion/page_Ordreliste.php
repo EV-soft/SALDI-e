@@ -1,5 +1,5 @@
-<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=0;
-/*  Formål:  Se Produktions ordrer
+<?php      $DocFil= '../_produktion/page_Ordreliste.php';   $DocVer='5.0.0';    $DocRev='2018-06-00';     $DocIni='evs';  $ModulNr=0;
+/*  ## Purpose: 'Se Produktions ordrer';
  *             ___   _   _    ___  _         
  *            / __| / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -9,6 +9,7 @@
  *
  */
   $pageTitl='Produktions ordrer';
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
     
 ### INDLÆS DATA:

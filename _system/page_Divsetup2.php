@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_system/page_Divsetup2.php';    $DocVer='5.0.0';    $DocRev='2018-03-00';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_system/page_Divsetup2.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: '2. Indstilling af regnskabskonto';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -10,6 +10,7 @@
  */
 #  global $debug;  $debug= true;
   $pageTitl='Diverse indstillings menu';
+  $GLOBALS["ØProgModu"]= ['sekd']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
     
@@ -20,8 +21,8 @@
     }
 
 ### VIS DATA:
-    SpalteTop(240);    Rude_DiverseMenu();
-    NextSpalte();      Rude_Kontoindstilling($regnskabnavn, $servport, $usernavn, $usercode, $protokol);
+    SpalteTop(240);    Panl_DiverseMenu();
+    NextSpalte();      Panl_Kontoindstilling($regnskabnavn, $servport, $usernavn, $usercode, $protokol);
     SpalteBund();
     
 ### GEM DATA:

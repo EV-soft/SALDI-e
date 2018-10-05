@@ -1,5 +1,5 @@
-<?php $DocFil= '../_base/_admin/page_Admin.php';   $DocVer='5.0.0';    $DocRev='2018-03-00';     $DocIni='evs';  $ModulNr=100;
-/* Formål:  Vis administrators indstillings muligheder.
+<?php $DocFil= '../_base/_admin/page_Admin.php';   $DocVer='5.0.0';    $DocRev='2018-09-23';     $DocIni='evs';  $ModulNr=100;
+/* ## Purpose: 'Vis administrators indstillings muligheder.';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
  *            \__ \/ ^ \| |__| |) | |__/ -_)
@@ -16,6 +16,7 @@
 
   $pageTitl= 'Administrationsmenu';     
   set_include_path( '..' . DIRECTORY_SEPARATOR . '_base');
+  $GLOBALS["ØProgModu"]= ['comm']; ## prim eller/og sekd og comm
   include("../../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$modulnr,$DocFil,$pageTitl);
 ### INDLÆS DATA:
@@ -25,11 +26,11 @@
 ### VIS DATA:
 
   SpalteTop(960);   
-  Rude_AdminMenu();
-//-  Rude_DebtOrdrer($TablData);  # Demo! array(['Ordrenr.','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],... []); "ordrenr,ordredate,levdate,kontonr,firmanavn,ref,sum"
-//Rude_YdelserTabl($Ordnr='',$data,$fakt=false,'&nbsp;'.tolk('@Ordre nr <b>1250</b> Ordre dato:<b> 2017-03-16').
+  Panl_AdminMenu();
+//-  Panl_DebtOrdrer($TablData);  # Demo! array(['Ordrenr.','Ordredato','Levdato','Kontonr.','Firmanavn','Sælger','Ordresum'],... []); "ordrenr,ordredate,levdate,kontonr,firmanavn,ref,sum"
+//Panl_YdelserTabl($Ordnr='',$data,$fakt=false,'&nbsp;'.tolk('@Ordre nr <b>1250</b> Ordre dato:<b> 2017-03-16').
 //    'Lev. dato:<b>2017-03-22</b> - Konto nr:<b>201703</b> Firma navn:<b>Danosoft</b> Sælger:<b>Rup' );
-//  Rude_FootMenu();
+//  Panl_FootMenu();
   SpalteBund();
   
 ### GEM DATA:
