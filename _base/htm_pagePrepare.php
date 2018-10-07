@@ -1,4 +1,4 @@
-<?php $DocFil= '../_base/htm_pagePrepare.php';   $DocVer='5.0.0';    $DocRev='2018-09-30';   $DocIni='evs';  $ModulNr=0; //  Gl. navn: htm_pageHead.php ?
+<?php $DocFil= '../_base/htm_pagePrepare.php';   $DocVer='5.0.0';    $DocRev='2018-10-07';   $DocIni='evs';  $ModulNr=0; //  Gl. navn: htm_pageHead.php ?
 // ## Purpose: 'Denne fil klargoer en side med initiering af php-filer og indledende HTML-kode.';
   date_default_timezone_set('Europe/Copenhagen');
   session_start();                  #+  Nødvendig for bevarelse af overordnede værdier, på tværs af html-sider
@@ -97,6 +97,7 @@ $Ødebug= false;
 //  echo "\n<head>";
   echo '  <meta charset="UTF-8">';
   echo '  <meta name="viewport" content="width=device-width, initial-scale=1">';    dvl_ekko('htm_pagePrepare  3 ');
+  echo '  <meta name="robots" content="Noindex, Nofollow">';                        //  Afvisning af robot-skanning
   echo '  <title>'.$pageTitl.'</title>';                                            dvl_pretty('htm_pagePrepare');
   echo '  <link rel="stylesheet" type="text/css" href= "'.$ØProgRoot.$_base.'out_style.css.php" />';         //  emne="out_modulers style" /* _base/ */
   echo '  <link rel="stylesheet" type="text/css" href= "'.$ØProgRoot.$_base.'msg_lib.css.php" />';
@@ -149,8 +150,9 @@ $Ødebug= false;
   
 ### Benyt URL-parameter variabler: (ØprogSprog har højere prioritet, end brugervalg!)
   #+    
-  $str= $_GET['sprog'];   if ($str) $ØprogSprog= $str; 
   $str= $_GET['debug'];   if ($str) $Ødebug= $str;
+  $str= $_GET['sprog'];   if ($str) $ØprogSprog= $str; 
+  $str= $_GET['lng'];     if ($str) $ØprogSprog= $str; 
   $str= $_GET['job'];     if ($str) $Øjob= $str;
   $str= $_GET['chg'];     if ($str) $chg= $str;
 

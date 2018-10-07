@@ -1,4 +1,4 @@
-<?php   $DocFil0= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2018-09-30';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil0= '../_base/out_init.php';    $DocVer='5.0.0';    $DocRev='2018-10-06';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Initiering af globalt benyttede konstanter og variabler';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 

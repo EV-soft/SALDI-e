@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/out_panls.php';   $DocVer='5.0.0';    $DocRev='2018-09-30';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/out_panls.php';   $DocVer='5.0.0';    $DocRev='2018-10-06';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Design af panelers layout. Redigerings-fil';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -1689,6 +1689,9 @@ function Panl_YdelserTabl($Ordrnr,$data,$fakt,$TopLine) {  ## out_PanlsPrim.php
   Panl_Levering($navn= 'Andersine', $addr= 'Redekasse 12', $sted= 'Ved Lunden', $ponr= '1234', $by= 'Fuglebjerg', $land= 'Eventyrland', 
                             $telf= '045 87654321', $email= 'andersine@and.dk', $forsend= 'Fragt: DSV', $noter= 'Afleveres ved bredden!', $afsendt= '', $levdato='',$xx='',$xx='');
   SpalteBund();
+  htm_Panl_Top($name='ydelform',$capt=tolk('@Varer/Ydelser:'),$parms='page_Blindgyden.php',
+               $icon='fas fa-shopping-cart','panelW100',__FUNCTION__);
+  //htm_Caption('@Varer/Ydelser:');  htm_sp(2);
   htm_Caption($TopLine);
   htm_Table(
     $TblCapt= array( #['0:Label',   '1:Width',    '2:Type',    '3:OutFormat', '4:horJust',      '5:Tip',    '6:placeholder', '7:Content';],... // Gl: 0:Label 1:width 2:align 3:Type 4:title 5:Content
@@ -1704,7 +1707,7 @@ function Panl_YdelserTabl($Ordrnr,$data,$fakt,$TopLine) {  ## out_PanlsPrim.php
         ['@Moms%',        '5%','text', '',  ['center'],'@Moms pct.sats ','@Moms...'],
         ['@À pris',       '8%','text', '2d',['center'],'@Enhedspris ','@Pris...'],
         ['@Rabat%',       '8%','text', '1d',['right' ],'@Rabat procent','@Rabat...'],
-        ['@Ialt',         '8%','text', '2d',['right' ],'@Kalkuleret beløb for den aktuelle postering. ',''],
+        ['@Ialt',         '8%','show', '2d',['right' ],'@Kalkuleret beløb for den aktuelle postering. ',''],
         ['@Valuta',       '4%','text', '',  ['center'],'@Valutakode for den valuta, som er benyttet på specifikationen.','DKK'],
 //      ['@Forfald',      '9%','hidd', '',  ['center'],'@Beløbets forfalds dato','forf.dato'],
       ),
@@ -1733,20 +1736,23 @@ function Panl_YdelserTabl($Ordrnr,$data,$fakt,$TopLine) {  ## out_PanlsPrim.php
     $CalledFrom= __FUNCTION__
   );
   foreach ($data as $dat) $total= $total+$dat[8];   $moms= $total/100*25;   $netto= number_format((float)($total-$moms),2,',','.'); 
-  htm_FrstFelt('00%');  
-  htm_NextFelt('02%; text-align:right ');  htm_Caption('@Status: ');
-  htm_NextFelt('15%');  htm_nl(); htm_CheckFlt($type='checkbox', $name='fakt', $valu= $fakt, $labl='@Er Faktureret og låst', $titl='@Når ordren er faktureret, afmærkes feltet automatisk',$revi=false);
+  htm_FrstFelt('02%; text-align:right ');  htm_Caption('@Status: ');
+  htm_NextFelt('18%');  htm_nl(); htm_CheckFlt($type='checkbox', $name='fakt', $valu= $fakt, $labl='@Er Faktureret og låst', $titl='@Når ordren er faktureret, afmærkes feltet automatisk',$revi=false);
   htm_NextFelt('05%');  //  Dækningsbidrag: 3.400,00 	Dækningsgrad: 100,00 htm_DataFelt($label,$data,$algn='left')
-  htm_NextFelt('35%');  htm_DataFelt('@Dækningsbidrag: ',$netto); htm_sp(2); htm_DataFelt('@Dækningsgrad: ','100%');
-  htm_NextFelt('08%; text-align:right ');  htm_Caption('@Aktuel total: ');
-  htm_NextFelt('08%');  htm_CombFelt($type='tal2dc', $name='total', $valu= $total, $labl='@Total',   $titl='@Beregnet sum af alle posteringers ialt beløb', $revi=false);
+  //  htm_NextFelt('35%');  htm_DataFelt('@Dækningsbidrag: ',$netto); htm_sp(2); htm_DataFelt('@Dækningsgrad: ','100%');
+  htm_NextFelt('12%');  htm_CombFelt($type='tal2d',  $name='bidrag', $valu= $bidrag=$netto, $labl='@Dækningsbidrag',  $titl='@Beregnet beløb', $revi=false);
+  htm_NextFelt('03%');
+  htm_NextFelt('12%');  htm_CombFelt($type='tal0%',  $name='daekng', $valu= $daekng='100%', $labl='@Dækningsgrad',    $titl='@Beregnet pct.', $revi=false);
   htm_NextFelt('05%');
-  htm_NextFelt('07%; text-align:right ');  htm_Caption('@Deri moms: ');
+  htm_NextFelt('10%; text-align:right ');  htm_Caption('@Moms: ');
   htm_NextFelt('10%');  htm_CombFelt($type='tal2dc', $name='moms', $valu= $moms, $labl='@Moms',   $titl='@Beregnet sum af alle posteringers moms beløb', $revi=false);
+  htm_NextFelt('08%; text-align:right ');  htm_Caption('@Total: ');
+  htm_NextFelt('08%');  htm_CombFelt($type='tal2dc', $name='total', $valu= $total, $labl='@Total',   $titl='@Beregnet sum af alle posteringers ialt beløb', $revi=false,$rows='2',$width='',$step='',$more=' style="font-weight:700;" ');
   htm_NextFelt('02%');
   htm_LastFelt();
   htm_Plaintxt(tolk('@TIP angående Beløbsrabat:').'&nbsp;');  
   htm_Plaintxt('@Angiv en mindre enhedspris, og 0% rabat, så beregnes en %-rabat svarende til pris-rabatten.');
+  htm_PanlBund($pmpt='@Gem',$subm=true);
   htm_KnapGrup('@Dine muligheder:',true,true);
     textKnap($label='@Kopier',  $title='@Kopiér til ny ordre-forslag, med samme indhold.', $link='../_base/page_Blindgyden.php');
     textKnap($label='@Udskriv', $title='@Åbn et PDF-dokument med faktura, som kan gemmes eller viderebehandles på anden vis.', $link='../_base/page_Blindgyden.php');
@@ -1757,7 +1763,7 @@ function Panl_YdelserTabl($Ordrnr,$data,$fakt,$TopLine) {  ## out_PanlsPrim.php
                       tolk('@Eksempelvis hvis kun en enkelt faktureret vare skal krediteres.'), $link='../_base/page_Blindgyden.php');
   htm_KnapGrup('@Dine muligheder:',false);
   
-  htm_PanlBund($pmpt='@Gem',$subm=true);
+  htm_PanlBund($pmpt='@Gem',$subm=false);
 }
 
 ######### :DEBITOR:
@@ -7594,7 +7600,7 @@ function Panl_Printlayout($filDATA=[],$width=210, $height=297) {    ## out_Panls
 ######### :SYSTEM:
 # Kaldes fra:  [_system/page_Licens.php] 
 function Panl_Omprogram()   ## out_PanlsSekd.php
-{ global $ØProgTitl, $Øprogvers, $DocRev, $Øcopydate, $Øcopyright, $Ødesigner;
+{ global $Ødb_Link, $ØProgTitl, $Øprogvers, $DocRev, $Øcopydate, $Øcopyright, $Ødesigner;
   htm_Panl_Top($name= 'omprog',$capt= '@Om SALDI-<small>€</small>:',$parms='page_Blindgyden.php',$icon='fas fa-pen-square','panelW480',__FUNCTION__);
   htm_Caption('@Status:');                   htm_nl();
   echo tolk('@Programmet er en videreudvikling af SALDI - det frie, danske økonomisystem, fra Danosoft / saldi.dk.').str_nl(2);
@@ -7625,9 +7631,14 @@ function Panl_Omprogram()   ## out_PanlsSekd.php
   echo tolk('@PHP-version: ').phpversion().' ';                htm_nl();
 
 //$Ødb_Link= dbi_connect('localhost','SaldiAdm','SaldiPas','saldi_prog');
-  if (phpversion()!='7.2.8')
-    echo tolk('@Database-version: ').mysqli_get_server_info(dbi_connect('localhost','SaldiAdm','SaldiPas','saldi_prog'));   
-    echo tolk('@Database-version: ').mysqli_get_server_info(dbi_connect('mysql46.unoeuro.com','ev_soft_dk','M4d73anU8j','ev_soft_dk_db3'));   
+  if (file_exists('./../---Private/serverFacts.inf'))    include('./../---Private/serverFacts.inf'); 
+  $Ødb_Link= dbi_connect($db_host, $db_bruger, $db_password, $db_navn,$port='3306',__FILE__, __LINE__);
+  echo tolk('@Database-version: ').mysqli_get_server_info($Ødb_Link);
+  #-  if (phpversion()!='7.2.10') //  Skal i stedet benytte: if (file_exists('./../---Private/serverFacts.inf'))    include($MyPrivate);  
+  #-  
+  #-    echo tolk('@Database-version: ').mysqli_get_server_info(dbi_connect('localhost','SaldiAdm','SaldiPas','saldi_prog'));   
+  #-  else
+  #-    echo tolk('@Database-version: ').mysqli_get_server_info(dbi_connect('mysql46.unoeuro.com','ev_soft_dk','M4d73anU8j','ev_soft_dk_db3'));   
   htm_nl();
   echo tolk('@Zend engine version: ') . zend_version();        htm_nl();
   echo tolk('@Apache-version: ').$_SERVER['SERVER_SOFTWARE'];  htm_nl();  //  apache_get_version()

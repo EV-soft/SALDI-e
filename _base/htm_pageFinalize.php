@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/htm_pageFinalize.php';   $DocVer='5.0.0';    $DocRev='2018-09-20';   $DocIni='evs';  $ModulNr=0; //  Gl. navn: htm_pageFoot.php ?
+<?php   $DocFil= '../_base/htm_pageFinalize.php';   $DocVer='5.0.0';    $DocRev='2018-10-06';   $DocIni='evs';  $ModulNr=0; //  Gl. navn: htm_pageFoot.php ?
 /* ## Purpose: 'Denne fil faerdiggoer en side, som er paabegyndt med ../_base/htm_pagePrepare.php';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -21,7 +21,9 @@ global $Ødb_Link, $Øprogvers, $DocRev;
     $php= substr($url,strpos($url,'page_'));
     $txt= str_replace('php','txt',substr($php,0,strpos($php.'?','?')));
     htm_nl(2);
+    // if (ikke print-sider)
     Panl_PageComments(' Side-titel: '.$Caller.' - URL: '.$url.' Vers: '.$Øprogvers.' - Fil: '.$txt);
+    // else knap(Luk print-side)
   }
 #+
   include 'matomo.php';

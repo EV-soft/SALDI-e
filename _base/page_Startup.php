@@ -1,4 +1,4 @@
-<?php   $DocFil='../_base/page_Startup.php';    $DocVer='5.0.0';    $DocRev='2018-09-20';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil='../_base/page_Startup.php';    $DocVer='5.0.0';    $DocRev='2018-10-07';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Idriftsaetning af database og system-admin, eller blot logind';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -20,7 +20,7 @@
     $GLOBALS["ØProgModu"]= ['prim']; ## prim eller/og sekd og comm
   include("../_base/htm_pagePrepare.php"); # Sidens indledende html-kode
     if ($GLOBALS["debug"]) debug_log($DocVer,$DocRev,$ModulNr,$DocFil,$pageTitl);
-    global $Øprogvers, $Øsaldihost;
+    global $Øprogvers, $Øsaldihost, $Ødb_Link;
     
 ### INDLÆS DATA:
     $db_type= strtolower('MySQL');

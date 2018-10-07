@@ -1,4 +1,4 @@
-<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-09-21';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
+<?php $DocFil= '../_base/out_style.css.php';    $DocVer='5.0.0';     $DocRev='2018-10-06';      $DocIni='evs';  $ModulNr=0;   header("Content-type: text/css"); 
 /* ## Purpose: 'Design af out_* elementers udseende.';  */
   if ($GLOBALS["Ødebug"]) debug_log($DocVer,$DocRev,$DocFil,'','');
   global $ØPanelBgrd, $ØTapetBgrd, $ØPageBcgrd; 

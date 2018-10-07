@@ -1,4 +1,4 @@
-<?php   $DocFil1='../_base/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2018-09-30';     $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil1='../_base/out_base.php';    $DocVer1='5.0.0';    $DocRev1='2018-10-06';     $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Grundbibliotek for kontruktion af moduler, angaaende udskrivning til skaerm. ';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -194,6 +194,9 @@ function htm_CombFelt($type='',$name='',$valu='',$labl='',$titl='',$revi=true,$r
     case 'tal2dc'  : echo $LBinput.'"text" '.$more.' '.$lhAlign.'center;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format((float)$valu,2,',','.').'"  '.
                     $eventInvalid.' '.$aktiv.$plh.$patt1.$name.'">'.$LablTip.'</label> </span>'; break; 
                     /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ","-tegn */
+    case 'tal0%'   : echo $LBinput.'"text" '.$more.' '.$lhAlign.'center;" width="'.$width.'" id="'.$name.'" name="'.$name.'" value="'.number_format((float)$valu,0,',','.').'%"  '.
+                    $eventInvalid.' '.$aktiv.$plh.$patt1.$name.'">'.$LablTip.'</label> </span>'; break; 
+                    
     case 'number'  : echo '<span class="lablInput"> <input type="number" '.$more.' lang="en" '.$lhAlign.'right;" width="'.$width.'px" step="'.$step.'" id="'.$name.
                     '" name="'.$name.'" value="'.$valu.'" '.$eventInvalid.' '.$aktiv.$plh.$patt2.$name.'">'.$LablTip.'</label> </span>';  break; 
                     # Beløb og % - venstreplaceret /* lang="en" for at tillade "."-tegn som decimal adskiller, foruden dansk ,-tegn */
@@ -377,7 +380,7 @@ function textKnap ($label='',$title='',$link='',$akey='',$more='', $ToolClass='t
   else {$txtclr= $ØButtnText; $note='';};
   if (($label=='@Retur til hovedmenu')) $txtclr= 'white';
   dvl_pretty('textKnap');
-  $result= '<div class="tooltip" style= "margin:1px 5px; padding:2px 6px; border:2px; box-shadow: 2px 2px 4px #888888; '.$more.'"> '. //  knap
+  $result= '<div class="tooltip" style= "margin:1px 5px; padding:2px 6px; border:2px; box-shadow: 2px 2px 4px #888888; '.$more.'"> '.   //  knap
            '<a href="'.$link.'" accesskey="'.$akey.'"> '.                                                                               //  link
            '<span class="'.$ToolClass.'">'.tolk($title).$key.$note.'</span> '.                                                          //  tip
            '<span style= "white-space:nowrap; color:'.$txtclr.'; display:inline;">'. ucfirst(tolk($label)).$genv.'</span></a></div>';   //  label
@@ -645,6 +648,7 @@ function htm_Table(
             Lbl_Tip($Pref[0],$Pref[5],'SO',$h='0px').' </th>';
   }  $kNo= -1;
   if ($valgbar) echo  '<th class="filter-false sorter-false" > </th>';
+  // class="wide" Kolonner, som er smallere end indholdet, kan vises ved at klikke på feltet: http://jsfiddle.net/Mottie/mstoa6cm/
   foreach ($RowBody as $Body) { dvl_pretty(); 
    // if ($Body[4][4]==false) $colfilt= ' filter-false'; else $colfilt= ' ';
     if ($Body[8]==true) $selt= ' filter-select'; else $selt= ' ';  //  FIXIT: sortering af datofelter virker ikke!
@@ -678,8 +682,13 @@ function htm_Table(
       if (count($RowPref)>2) {$colsp= 'colspan="2"'; $n= 2; } else {$colsp= ''; $n= 1; }
       echo '  <td '.$colsp.'>'.tolk('@Opret ny:').'</td>';
       for ($x= $n+1; $x < count($RowPref)+count($RowBody)-$hiddcount; $x++) {echo '<td> </td>';}
-        echo '<td style="text-align:center;">'.textKnap($label='@Opret', 
-              $title= tolk('@Udfyld felterne herunder med data, før du klikker på Opret-knappen!'), $link='','','','tooltipNW').'</td>';
+        echo '<td style="text-align:center;">'.
+              //textKnap($label='@Opret', 
+              htm_AcceptKnap($labl='@Opret', 
+                $title=tolk('@Udfyld felterne herunder med data, før du klikker på Opret-knappen!'), $type='save', $form='', $width='', $akey='', $func='rtrn').
+              //  $title= tolk('@Udfyld felterne herunder med data, før du klikker på Opret-knappen!'), 
+              //  $link='','','','tooltipNW').
+              '</td>';
       for ($x= 1; $x <= count($RowSuff); $x++) {echo '<td style="width:'.$RowPref[1].';"> </td>';}
     echo ' </tr>';
     echo '  <tr>';
@@ -1103,7 +1112,7 @@ function PanelBetjening() { // Pt. ikke i brug
     execKnap($label='@Maksimer alle', $title='@Vis indhold i alle paneler',   $function='PanelMaximizeAll()');
 }
 
-function htm_AcceptKnap($labl='', $title='', $type='', $form='PanelForm', $width='', $akey='')   //  Afløser for htm_Accept
+function htm_AcceptKnap($labl='', $title='', $type='', $form='PanelForm', $width='', $akey='', $func='')   //  Afløser for htm_Accept
 //  Type: save, navi, erase, create, home
 {global $ØBtNavBgrd, $ØBtNavText, $ØBtSavBgrd, $ØBtSavText, $ØBtDelBgrd, $ØBtNewBgrd, $ØTextLight, $ØTextDark, $Ødimmed, $ØTastkeys;
   dvl_pretty('htm_AcceptKnap');
@@ -1125,17 +1134,19 @@ function htm_AcceptKnap($labl='', $title='', $type='', $form='PanelForm', $width
     default       : {$colors= ' background:'.$ØBtNavBgrd.'; color:'.$ØBtNavText.';'.$Ødimmed;} # naviger-knap: GRØN
   }
 ## Funktion:
-  echo '<span class="centrer" style="height:25px; ">'; 
+  $result= '<span class="centrer" style="height:25px; ">'; 
   if ($type=='home') 
     {textKnap($label='@Retur til hovedmenu',  $title='@Vend tilbage til programmets hovedmenu'.str_nl().tolk('@(overflødig knap, når topmenuen findes på siden!)'),
                       $link= '../_base/page_Hovedmenu.php', $akey='', $more= $colors);}
   else 
-    {echo '<button '.$form.' type= "submit" name="btn_'.$navn.'" id="btn_'.$navn.
+    {$result.= '<button '.$form.' type= "submit" name="btn_'.$navn.'" id="btn_'.$navn.
                       '" class="tooltip" style="margin: 1px 1px; padding: 1px 3px; height: 22px; '.$width.
                       $colors.'" accesskey="'.$akey.'"> '. ucfirst(tolk($labl)).
                       '<span class="tooltiptext">'.tolk($title).$keytip.'</span></button>';
     }
-  echo '</span>';
+  $result.= '</span>';
+  if ($func!='rtrn') echo $result;
+  else return $result;
 }
 
 function htm_Accept($labl='', $title='', $width='', $akey='', $form='PanelForm')   //  Default kan kun benyttes på PanelForm! (Panl_Top/Panl_Bund)
@@ -1276,7 +1287,7 @@ function Foot_Links ($maxi=false, $arg='', $doPrint, $doErase, $doLookUp, $doAcc
   htm_Panl_Top($name='linkform',$capt='',$parms='',$icon='','panelWmax',__FUNCTION__,'','');
     if (($maxi) and ($OpslLabl>'')) echo '<p align="center"><b>'.tolk('@Handling:').'<b></p>';
     echo '<p align="center">';  #<ic class="fa '.$icon.'" style="font-size:22px;color:green"></ic>
-    if ($doPrint)   iconKnap($faicon='fas fa-print',        $title= tolk('@Udskriv')  .' '.$sideObjekt,     $link='../_base/page_Blindgyden.php');
+    if ($doPrint)   iconKnap($faicon='fas fa-print',        $title= tolk('@Udskriv')      .' '.$sideObjekt, $link='../_base/page_Blindgyden.php');
     if ($doErase)   iconKnap($faicon='far fa-minus-square', $title= tolk('@Slet posten'),                   $link='../_base/page_Blindgyden.php'.$goBack);
     if ($doLookUp)  iconKnap($faicon='fas fa-search-plus',  $title= '? '.tolk($OpslLabl),                   $link='../_base/page_Blindgyden.php');
     if ($doAccept)  iconKnap($faicon='far fa-check-square', $title= tolk('@Godkend alt')  .' '.$sideObjekt, $link='../_base/page_Blindgyden.php');
@@ -1318,7 +1329,7 @@ function MenuGren($clas='',$href='#',$labl='',$titl='',$more='') {
   if ($href=='../_base/page_Blindgyden.php') {$blnd='<i style="font-color:gray;">'; $obs='<small> '.tolk('@påtænkt!').'</small>';} else {$blnd=''; $obs='';};
   if ($clas=='exit') /*(strpos($labl,'Log ud')>0)*/ {$bold='<span style="color:red; font-weight:600; left: -110px;">'; } else {$bold='';};
   if (strpos($href,'ttp' )>0) $targ='_blank'; else $targ='_self'; //  Test om http forekommer (externt/lokalt link?)
-  $link= 'href="'.$href.'" target="'.$targ.'" title="" data-tiptxt="'.tolk($titl).'" >'.$blnd.$bold.tolk($labl);
+  $link= 'href="'.$href.'" target="'.$targ.'" title="" data-tiptxt="'.tolk($titl).'" >'.$blnd.$bold.ucfirst(tolk($labl));
   if ($bold!='') {$link.= '</span>'.$obs;}
   if ($blnd!='') {$link.= '</i>'.$obs;} else {$link.= $obs;}
   echo "\n\n";
@@ -1762,7 +1773,8 @@ function OrdrStatu () {return( [
             ['@1: Ordrens tilbud er accepteret',  '1', '@Godkendt',''],
             ['@2: Ordrens ydelser er leveret',    '2', '@Leveret',''],
             ['@3: Ordrens er faktureret',         '3', '@Faktureret',''],
-            ['@4: Ordrens er betalt',             '4', '@Betalt','']
+            ['@4: Ordrens er betalt',             '4', '@Betalt',''],
+            ['@5: Ordren er annulleret',          '5', '@Annulleret','']
            ]  ); 
 }
 if ($valg=="tilbud") {$status="status = 0";}

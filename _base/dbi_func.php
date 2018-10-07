@@ -1,4 +1,4 @@
-<?php   $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';    $DocRev='2018-08-16';   $DocIni='evs';  $ModulNr=0;
+<?php   $DocFil= '../_base/dbi_func.php';    $DocVer='5.0.0';    $DocRev='2018-10-07';   $DocIni='evs';  $ModulNr=0;
 /* ## Purpose: 'Forbedrede DB-funktioner, kompatible med PHP7+';
  *             ___   _   _    ___  _         
  *            / __) / \ | |  |   \| |   ___ 
@@ -303,7 +303,7 @@ if (!function_exists('dbi_connect')) ##  $onFile og $onLine angår sporing af fe
     // Aktiver fejl-meldinger - Kun ved udvikling!
     // if ($Ødebug) {mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); error_reporting(E_ALL);  ini_set('display_errors',1); }
       if (function_exists('mysqli_connect')) {
-        $dbLink= mysqli_connect($sqhost, $squser, $sqpass, $sqdb, $port); 
+        $dbLink= mysqli_connect($sqhost, $squser, $sqpass, $sqdb, $port); //  Warning: mysqli_connect() [function.mysqli-connect]: (HY000/2002): No such file or directory in /var/www/ev-soft.dk/public_html/saldi-e/_base/dbi_func.php on line 306
         $Ødb_Problem= mysqli_connect_error();       // echo '<br>mysqli_connect_error('.$Ødb_Problem.')';
         // $dbLink->set_charset("utf8");
 #+        if ($Ødb_Encode=='UTF8') $names= 'utf8'; else $names= 'latin9'; mysqli_query($dbLink,'SET NAMES "'.$names.'"');
