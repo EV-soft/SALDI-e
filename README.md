@@ -1,3 +1,4 @@
+Forældet: se i stedet https://github.com/EV-soft/TinyCash - AI-assisteret udvikling helt fra bunden...
 # SALDI-€
 Moderniseret udgave af SALDI: <i>Responsive, CSS-baseret, PHP7-klar, blok-struktureret, øget sikkerhed og med sprogvalg.</i>
 
